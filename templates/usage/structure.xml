@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project title="API Documentation" version="2.9.1">
+  <partials/>
+  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="40310457eb9ecb15997883dd389f76b8" package="IrisnetAPIPlugin">
+    <docblock line="0">
+      <description></description>
+      <long-description></long-description>
+      <tag name="package" line="0" description="IrisnetAPIPlugin"/>
+    </docblock>
+    <namespace-alias name="Client">\GuzzleHttp\Client</namespace-alias>
+    <namespace-alias name="RulesController">\Inc\Base\RulesController</namespace-alias>
+    <namespace-alias name="ApiException">\OpenAPI\Client\ApiException</namespace-alias>
+    <namespace-alias name="IrisNet">\OpenAPI\Client\Model\IrisNet</namespace-alias>
+    <namespace-alias name="INParam">\OpenAPI\Client\Model\INParam</namespace-alias>
+    <namespace-alias name="INParams">\OpenAPI\Client\Model\INParams</namespace-alias>
+    <namespace-alias name="INDefault">\OpenAPI\Client\Model\INDefault</namespace-alias>
+    <namespace-alias name="AIOperationsApi">\OpenAPI\Client\Api\AIOperationsApi</namespace-alias>
+    <namespace-alias name="LicenseKeyOperationsApi">\OpenAPI\Client\Api\LicenseKeyOperationsApi</namespace-alias>
+    <class final="false" abstract="false" namespace="" line="19" package="IrisnetAPIPlugin">
+      <extends/>
+      <name>IrisnetAPIConnector</name>
+      <full_name>\IrisnetAPIConnector</full_name>
+      <docblock line="19">
+        <description>Helper class to connect to the irisnet API.</description>
+        <long-description></long-description>
+        <tag name="package" line="19" description="IrisnetAPIPlugin"/>
+      </docblock>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="29" package="IrisnetAPIPlugin">
+        <name>setRules</name>
+        <full_name>\IrisnetAPIConnector::setRules()</full_name>
+        <docblock line="29">
+          <description>Sets the rule set for the upcoming checks.</description>
+          <long-description></long-description>
+          <tag name="param" line="29" description="&lt;p&gt;the given name of the rule set.&lt;/p&gt;" type="string" variable="$rule">
+            <type>string</type>
+          </tag>
+          <tag name="throws" line="29" description="is thrown in case that the rule name could not be found or if the API request failes (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
+            <type>\IrisnetException</type>
+          </tag>
+          <tag name="return" line="29" description="TRUE if the rule set is successfully applied." type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$rule</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="57" package="IrisnetAPIPlugin">
+        <name>processImage</name>
+        <full_name>\IrisnetAPIConnector::processImage()</full_name>
+        <docblock line="57">
+          <description>Makes the API call to check the image for the specified rules.</description>
+          <long-description></long-description>
+          <tag name="param" line="57" description="&lt;p&gt;the name (including path) of the image that needs to be checked.&lt;/p&gt;" type="string" variable="$file">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="57" description="&lt;p&gt;Sets the response details. Use 1 (default) for minimum detail (better API performance), 2 for medium details and 3 for all details.&lt;/p&gt;" type="integer" variable="$detail">
+            <type>integer</type>
+          </tag>
+          <tag name="param" line="57" description="&lt;p&gt;the given name of the rule set. Ommit if the cost of the last set rule set should be determined.&lt;/p&gt;" type="string" variable="$rule">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="57" description="&lt;p&gt;the id of the license key to use. Ommit if the next available license key should be used.&lt;/p&gt;" type="integer" variable="$licenseId">
+            <type>integer</type>
+          </tag>
+          <tag name="throws" line="57" description="is thrown in case that the rule name could not be found, if the license id does not exist,&#10;if the license key is not active or out of credits, if the specified filename does not exist&#10;or if the API request failes (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
+            <type>\IrisnetException</type>
+          </tag>
+          <tag name="return" line="57" description="Contains information on the AI result from the source media check. See &lt;a href=&quot;https://www.irisnet.de/api/&quot;&gt;API page&lt;/a&gt; for more information" type="\OpenAPI\Client\Model\IrisNet">
+            <type>\OpenAPI\Client\Model\IrisNet</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$file</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$detail</name>
+          <default>1</default>
+          <type>integer</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$rule</name>
+          <default>null</default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$licenseId</name>
+          <default>null</default>
+          <type>integer</type>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="100" package="IrisnetAPIPlugin">
+        <name>getProcessedImage</name>
+        <full_name>\IrisnetAPIConnector::getProcessedImage()</full_name>
+        <docblock line="100">
+          <description>Downloads the modified image as specified by the rules parameters, if needed.</description>
+          <long-description></long-description>
+          <tag name="param" line="100" description="&lt;p&gt;the name of the file (without path) that should be downloaded. Is equal to the file name that was processed.&lt;/p&gt;" type="string" variable="$filename">
+            <type>string</type>
+          </tag>
+          <tag name="param" line="100" description="&lt;p&gt;the location of where to save the downloaded file&lt;/p&gt;" type="string" variable="$downloadPath">
+            <type>string</type>
+          </tag>
+          <tag name="throws" line="100" description="is thrown in case that the API request failes (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
+            <type>\IrisnetException</type>
+          </tag>
+          <tag name="return" line="100" description="returns FALSE in case that the file could not be saved at the specified location" type="boolean">
+            <type>boolean</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$filename</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$downloadPath</name>
+          <default></default>
+          <type>string</type>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
+    </parse_markers>
+  </file>
+  <package name="IrisnetAPIPlugin" full_name="IrisnetAPIPlugin"/>
+  <package name="global" full_name="global"/>
+  <namespace name="global" full_name="global"/>
+  <deprecated count="0"/>
+</project>

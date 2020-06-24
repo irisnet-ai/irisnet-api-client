@@ -1,0 +1,29 @@
+{
+    "name": "irisnet/irisnet-api-plugin",
+    "description": "Plugin to connect to the Irisnet API",
+    "type": "wordpress-plugin",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Irisnet",
+            "email": "info@irisnet.de"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.5",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "2.*"
+    },
+    "autoload": {
+        "psr-4": { 
+            "Inc\\": "./inc",
+            "OpenAPI\\Client\\" : "./ext/lib/" 
+        }
+    }
+}

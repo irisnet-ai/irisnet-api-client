@@ -1,0 +1,35 @@
+.rules-table,
+.license-table {
+	width: 100%;
+	border-spacing: 5px;
+	text-align: left;
+	table-layout: auto;
+
+	&,
+	& th,
+	& td {
+		border-bottom: 1px solid #f2f2f2;
+		border-collapse: collapse;
+		padding: 10px;
+	}
+
+	& th {
+		background-color: white;
+	}
+}
+
+.text-center {
+	text-align: center;
+}
+
+.positive, .negative {
+	font-weight: bolder;
+}
+
+.positive {
+	color: rgb(61, 184, 122);
+}
+
+.negative {
+	color: rgb(212, 66, 66);
+}

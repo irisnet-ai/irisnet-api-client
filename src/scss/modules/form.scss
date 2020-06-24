@@ -1,0 +1,25 @@
+form {
+	
+	&.inline-block {
+		display: inline-block;
+	}
+
+	.help-text {
+		font-style: italic;
+	}
+
+	fieldset {
+		.help-text {
+			margin-bottom: 30px;
+		}
+	}
+
+	.ui-toggle + fieldset {
+		margin-top: 30px;
+	}
+
+	.ui-toggle + .help-text {
+		margin-bottom: 30px;
+	}
+
+}

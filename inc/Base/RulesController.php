@@ -1,0 +1,275 @@
+<?php
+/**
+ * @package IrisnetAPIPlugin
+ */
+namespace Inc\Base;
+
+use Inc\Api\SettingsApi;
+use Inc\Base\BaseController;
+use Inc\Api\Callbacks\RulesCallbacks;
+use Inc\Api\Callbacks\AdminCallbacks;
+
+class RulesController extends BaseController
+{
+    private $settings;
+
+    private $callbacks;
+    private $rules_callbacks;
+
+    private $subpages = array();
+
+    private static $drawModeVars = array(
+        0 => 'none',
+        1 => 'frame + name',
+        2 => 'mask',
+        3 => 'blur'
+    );
+
+    private static $classObjects = array(
+        'face' => 'faces',
+        'child' => 'child faces',
+        'adult' => 'adult faces',
+        'senior' => 'senior faces',
+        'hand' => 'hands',
+        'breast' => 'breasts',
+        'vulva' => 'vulvae',
+        'penis' => 'penises',
+        'vagina' => 'vaginae',
+        'buttocks' => 'buttocks', 
+        'anus' => 'ani', 
+        'illegalSymbols' => 'illegal symbols'
+    );
+
+    public function register()
+    {
+        $this->settings = new SettingsApi();
+        $this->callbacks = new AdminCallbacks();
+        $this->rules_callbacks = new RulesCallbacks();
+
+        $this->setSubpages();
+        
+        $this->setSettings();
+        $this->setSections();
+        $this->setFields();
+
+        $this->settings->addSubPages($this->subpages)->register();
+    }
+
+    private function setSubpages()
+    {
+        $this->subpages = array(
+            array(
+                'parent_slug' => 'irisnet_dash',
+                'page_title' => 'Rules Management',
+                'menu_title' => 'Rules',
+                'capability' => 'manage_options',
+                'menu_slug' => 'irisnet_rules',
+                'callback' => array($this->callbacks, 'adminRules')
+            )
+        );
+    }
+
+    private function setSettings()
+    {
+        $args = array(
+            array(
+                'option_group' => 'irisnet_plugin_rules_settings',
+                'option_name' => 'irisnet_plugin_rules',
+                'callback' => array( $this->rules_callbacks, 'rulesSanitize' )
+            )
+        );
+
+        $this->settings->setSettings($args);
+    }
+
+    private function setSections()
+    {
+        $args = array(
+            array(
+                'id' => 'irisnet_rules_index',
+                'title' => 'Add/Edit Rule',
+                'callback' => array( $this->rules_callbacks, 'rulesSectionManager' ),
+                'page' => 'irisnet_rules'
+            )
+        );
+
+        $this->settings->setSections($args);
+    }
+
+    private function setFields()
+    {
+
+        $switch = array(
+            'callback' => array( $this->rules_callbacks, 'fieldsetSwitch' ),
+            'args' => array(
+                'class' => 'ui-toggle',
+                'label_for' => 'switch'
+            )
+        );
+
+        $defaultFields = array(
+            array(
+                'id' => 'thresh',
+                'callback' => array( $this->rules_callbacks, 'textField' ),
+                'args' => array(
+                    'option_name' => 'irisnet_plugin_rules',
+                    'type' => 'number',
+                    'step' => '.01',
+                    'min' => '0',
+                    'max' => '1',
+                    'placeholder' => 'eg. 0.75',
+                    'array' => 'rule_name',
+                    'description' => 'Threshold when an object can be recognized.'
+                )
+            ),
+            array(
+                'id' => 'grey',
+                'callback' => array( $this->rules_callbacks, 'textField' ),
+                'args' => array(
+                    'option_name' => 'irisnet_plugin_rules',
+                    'type' => 'number',
+                    'min' => '0',
+                    'max' => '255',
+                    'placeholder' => 'eg. 255',
+                    'array' => 'rule_name',
+                    'description' => 'A grey scale color to use for frame or masking. Is only applied on the output image.'
+                )
+            )
+        );
+
+        $paramFields = array(
+            array(
+                'id' => 'min',
+                'callback' => array( $this->rules_callbacks, 'textField' ),
+                'args' => array(
+                    'option_name' => 'irisnet_plugin_rules',
+                    'type' => 'number',
+                    'min' => '-1',
+                    'placeholder' => 'eg. 1',
+                    'array' => 'rule_name',
+                    'description' => 'Minimum amount of classification objects that should be recognized.'
+                )
+            ),
+            array(
+                'id' => 'max',
+                'callback' => array( $this->rules_callbacks, 'textField' ),
+                'args' => array(
+                    'option_name' => 'irisnet_plugin_rules',
+                    'type' => 'number',
+                    'min' => '-1',
+                    'placeholder' => 'eg. 5',
+                    'array' => 'rule_name',
+                    'description' => 'Maximum amount of classification objects that should be recognized.'
+                )
+            ),
+            array(
+                'id' => 'draw_mode',
+                'callback' => array( $this->rules_callbacks, 'selectField' ),
+                'args' => array(
+                    'option_name' => 'irisnet_plugin_rules',
+                    'select_options' => RulesController::$drawModeVars,
+                    'array' => 'rule_name',
+                    'description' => 'The draw mode that will be used for the output media. Is only applied on the output image.'
+                )
+            )
+        );
+        $paramFields = array_merge($paramFields, array($defaultFields[1]));
+
+        $classFields = array();
+        foreach (RulesController::$classObjects as $name => $plural) {
+            $classFields[] = array(
+                'id' => $name,
+                'title' => ucfirst($name) . ' Parameters',
+                'callback' => array( $this->rules_callbacks, 'fieldset' ),
+                'page' => 'irisnet_rules',
+                'section' => 'irisnet_rules_index',
+                'args' => array(
+                    'option_name' => 'irisnet_plugin_rules',
+                    'label_for' => $name,
+                    'description' => "The $name classification object parameters will apply to all recognized $plural.",
+                    'switch' => $switch,
+                    'fields' => $paramFields
+                )
+            );
+        }
+
+        $args = array(
+            array(
+                'id' => 'rule_name',
+                'title' => 'Rule Set Name',
+                'callback' => array( $this->rules_callbacks, 'textField' ),
+                'page' => 'irisnet_rules',
+                'section' => 'irisnet_rules_index',
+                'args' => array(
+                    'option_name' => 'irisnet_plugin_rules',
+                    'label_for' => 'rule_name',
+                    'required' => true,
+                    'placeholder' => 'eg. profile_picture',
+                    'array' => 'rule_name',
+                    'description' => 'Your custom name for the rule set.'
+                )
+            ),
+            array(
+                'id' => 'description',
+                'title' => 'Description',
+                'callback' => array( $this->rules_callbacks, 'textField' ),
+                'page' => 'irisnet_rules',
+                'section' => 'irisnet_rules_index',
+                'args' => array(
+                    'option_name' => 'irisnet_plugin_rules',
+                    'label_for' => 'description',
+                    'required' => true,
+                    'placeholder' => 'eg. Allow one person to appear in the picture.',
+                    'array' => 'rule_name',
+                    'description' => 'Describe the characteristics of the rule set.'
+                )
+            ),
+            array(
+                'id' => 'default',
+                'title' => 'Defaults',
+                'callback' => array( $this->rules_callbacks, 'fieldset' ),
+                'page' => 'irisnet_rules',
+                'section' => 'irisnet_rules_index',
+                'args' => array(
+                    'option_name' => 'irisnet_plugin_rules',
+                    'label_for' => 'default',
+                    'description' => 'Defines some overall default values if needed. Single parameters can be still overwritten by their respective attributes within the following rules.' .
+                        '<br>See INDefault Schema in <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further information.',
+                    'switch' => $switch,
+                    'fields' => $defaultFields
+                )
+            ),
+            array(
+                'id' => 'parameter_info_text',
+                'callback' => array( $this->rules_callbacks, 'infoText' ),
+                'page' => 'irisnet_rules',
+                'section' => 'irisnet_rules_index',
+                'args' => array(
+                    'description' => '<b>The following options represent the classification objects recognized by the irisnet AI. ' .
+                        'Each classification or their parameters within can be left off or empty. In that case default settings will applied.</b>' .
+                        '<br>See INParam Schema in <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further information ' .
+                        'on each classification object and their default settings.',
+                )
+            )
+        );
+        $args = array_merge($args, $classFields);
+
+        $this->settings->setFields($args);
+    }
+
+    /**
+     * Get the value of drawModeVars
+     */ 
+    public static function getDrawModeVars()
+    {
+        return RulesController::$drawModeVars;
+    }
+
+    /**
+     * Get the value of classObjects
+     */ 
+    public static function getClassObjects()
+    {
+        return RulesController::$classObjects;
+    }
+}
