@@ -6,6 +6,7 @@
 use \SplFileObject;
 use \GuzzleHttp\Client;
 use Inc\Base\RulesController;
+use \GuzzleHttp\Cookie\CookieJar;
 use \OpenAPI\Client\ApiException;
 use \OpenAPI\Client\Model\IrisNet;
 use \OpenAPI\Client\Model\INParam;
@@ -20,6 +21,8 @@ use \OpenAPI\Client\Api\LicenseKeyOperationsApi;
 class IrisnetAPIConnector
 {
 
+    private static $cookieJar;
+
     /**
      * Sets the rule set for the upcoming checks.
      *
@@ -33,7 +36,7 @@ class IrisnetAPIConnector
 
         try {
             $apiInstance = new AIOperationsApi(
-                new Client()
+                new Client(self::getClientConfig(true, true))
             );
 
             $apiInstance->setINParams($parameters);
@@ -80,7 +83,7 @@ class IrisnetAPIConnector
         }
 
         $apiInstance = new AIOperationsApi(
-            new Client()
+            new Client(self::getClientConfig(true))
         );
 
         try {
@@ -101,7 +104,7 @@ class IrisnetAPIConnector
     public static function getProcessedImage(string $filename, string $downloadPath) : bool {
         try {
             $apiInstance = new AIOperationsApi(
-                new Client()
+                new Client(self::getClientConfig(true))
             );
 
             $result = $apiInstance->downloadProcessed($filename);
@@ -129,7 +132,7 @@ class IrisnetAPIConnector
 
         try {
             $apiInstance = new LicenseKeyOperationsApi(
-                new Client()
+                new Client(self::getClientConfig(true))
             );
 
             return intval($apiInstance->getAICost());
@@ -308,5 +311,25 @@ class IrisnetAPIConnector
         $params->setInParam($paramArray);
 
         return $params;
+    }
+
+    private static function getClientConfig($withCookie = false, $clearOldCookie = false) : array {
+        if ($clearOldCookie && self::$cookieJar) {
+            self::$cookieJar->clear();
+        }
+
+        if (!self::$cookieJar && $withCookie) {
+            self::$cookieJar = new CookieJar();
+        }
+
+        $arr = array();
+
+        if ($withCookie && self::$cookieJar) {
+            $arr['cookies'] = self::$cookieJar;
+        }
+
+        // add further config args here
+
+        return $arr;
     }
 }

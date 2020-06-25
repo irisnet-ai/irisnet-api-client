@@ -7,6 +7,7 @@ namespace Inc\Api\Callbacks;
 use \Exception;
 use \GuzzleHttp\Client;
 use \IrisnetAPIConnector;
+use \GuzzleHttp\Cookie\CookieJar;
 use \OpenAPI\Client\ApiException;
 use \OpenAPI\Client\Api\AIOperationsApi;
 use \OpenAPI\Client\Api\LicenseKeyOperationsApi;
@@ -36,19 +37,28 @@ class RulesCallbacks
         
         // Determine the cost of the rule set
         try {
+            // create cookie jar to remain in the same session for both calls
+            $cookieJar = new CookieJar();
+
             $params = IrisnetAPIConnector::createParameterModel($input);
-            
+
             // set the parameters 
             $apiInstance = new AIOperationsApi(
-                new Client()
+                new Client([
+                    'cookies' => $cookieJar
+                ])
             );
             $apiInstance->setINParams($params);
 
             // check cost of rule set
             $apiInstance = new LicenseKeyOperationsApi(
-                new Client()
+                new Client([
+                    'cookies' => $cookieJar
+                ])
             );
             $input['cost'] = $apiInstance->getAICost();
+
+            $cookieJar->clear();
         } catch (ApiException $e) {
             add_settings_error('irisnet_plugin_rules', $e->getCode(), $e->getMessage());
         } catch (Exception $e) {
