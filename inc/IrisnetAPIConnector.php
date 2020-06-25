@@ -3,6 +3,7 @@
  * @package IrisnetAPIPlugin
  */
 
+use \SplFileObject;
 use \GuzzleHttp\Client;
 use Inc\Base\RulesController;
 use \OpenAPI\Client\ApiException;
@@ -38,7 +39,7 @@ class IrisnetAPIConnector
             $apiInstance->setINParams($parameters);
             return true;
         } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occoured while performing the API request '/v1/setParameters'. ApiResponse: " . json_decode($e->getResponseBody())->message, $e->getCode());
+            throw new IrisnetException("An Exception occoured while performing the API request '/v1/setParameters'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
     }
     
@@ -85,7 +86,7 @@ class IrisnetAPIConnector
         try {
             return $apiInstance->checkImage($file, $key, $detail);
         } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occoured while performing the API request '/v1/check-image'. ApiResponse: " . json_decode($e->getResponseBody())->message, $e->getCode());
+            throw new IrisnetException("An Exception occoured while performing the API request '/v1/check-image'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
     }
 
@@ -108,7 +109,7 @@ class IrisnetAPIConnector
             $img = file_get_contents($result);
             return !file_put_contents($downloadPath . $filename, $img) ? false : true;
         } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occoured while performing the API request '/v1/download'. ApiResponse: " . json_decode($e->getResponseBody())->message, $e->getCode());
+            throw new IrisnetException("An Exception occoured while performing the API request '/v1/download'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
     }
 
@@ -133,7 +134,7 @@ class IrisnetAPIConnector
 
             return intval($apiInstance->getAICost());
         } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occoured while performing the API request '/v1/cost'. ApiResponse: " . json_decode($e->getResponseBody())->message, $e->getCode());
+            throw new IrisnetException("An Exception occoured while performing the API request '/v1/cost'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
     }
 
@@ -174,7 +175,7 @@ class IrisnetAPIConnector
 
                 $refreshCount++;
             } catch (ApiException $e) {
-                add_settings_error('irisnet_connector', $e->getCode(), json_decode($e->getResponseBody())->message . ' License: ' . $license);
+                add_settings_error('irisnet_connector', $e->getCode(), $e->getMessage() . ' License: ' . $license);
             }
         }
 

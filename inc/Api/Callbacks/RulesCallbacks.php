@@ -50,7 +50,7 @@ class RulesCallbacks
             );
             $input['cost'] = $apiInstance->getAICost();
         } catch (ApiException $e) {
-            add_settings_error('irisnet_plugin_rules', $e->getCode(), json_decode($e->getResponseBody())->message);
+            add_settings_error('irisnet_plugin_rules', $e->getCode(), $e->getMessage());
         } catch (Exception $e) {
             add_settings_error('irisnet_plugin_rules', 500, $e->getMessage());
         }

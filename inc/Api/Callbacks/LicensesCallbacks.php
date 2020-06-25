@@ -56,7 +56,7 @@ class LicensesCallbacks
                 if ($result->getCreditsRemaining() <= 0)
                     unset($input['is_active']);
             } catch (ApiException $e) {
-                add_settings_error('irisnet_plugin_licenses', $e->getCode(), json_decode($e->getResponseBody())->message);
+                add_settings_error('irisnet_plugin_licenses', $e->getCode(), $e->getMessage());
                 return $output;
             }
         }
