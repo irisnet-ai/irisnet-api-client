@@ -153,7 +153,7 @@ class IrisnetAPIConnector
         $options = get_option('irisnet_plugin_licenses');
 
         $apiInstance = new LicenseKeyOperationsApi(
-            new Client()
+            new Client(self::getClientConfig())
         );
         
         $refreshCount = 0;
