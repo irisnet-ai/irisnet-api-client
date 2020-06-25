@@ -167,7 +167,7 @@ class RulesController extends BaseController
                 'callback' => array( $this->rules_callbacks, 'selectField' ),
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
-                    'select_options' => RulesController::$drawModeVars,
+                    'select_options' => self::$drawModeVars,
                     'array' => 'rule_name',
                     'description' => 'The draw mode that will be used for the output media. Is only applied on the output image.'
                 )
@@ -176,7 +176,7 @@ class RulesController extends BaseController
         $paramFields = array_merge($paramFields, array($defaultFields[1]));
 
         $classFields = array();
-        foreach (RulesController::$classObjects as $name => $plural) {
+        foreach (self::$classObjects as $name => $plural) {
             $classFields[] = array(
                 'id' => $name,
                 'title' => ucfirst($name) . ' Parameters',
@@ -262,7 +262,7 @@ class RulesController extends BaseController
      */ 
     public static function getDrawModeVars()
     {
-        return RulesController::$drawModeVars;
+        return self::$drawModeVars;
     }
 
     /**
@@ -270,6 +270,6 @@ class RulesController extends BaseController
      */ 
     public static function getClassObjects()
     {
-        return RulesController::$classObjects;
+        return self::$classObjects;
     }
 }

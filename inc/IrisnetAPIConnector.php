@@ -29,7 +29,7 @@ class IrisnetAPIConnector
      */
     public static function setRules(string $rule) : bool
     {
-        $parameters = IrisnetAPIConnector::createParameterModel($rule);
+        $parameters = self::createParameterModel($rule);
 
         try {
             $apiInstance = new AIOperationsApi(
@@ -62,7 +62,7 @@ class IrisnetAPIConnector
             throw new IrisnetException("The specified file does not exist. Filename: $file", 404);
         }
         
-        $usable = IrisnetAPIConnector::getUsableLicenses();
+        $usable = self::getUsableLicenses();
 
         if (empty($usable)) {
             throw new IrisnetException("No usable license keys found. Try adding new licenses or activate existing once.");
@@ -71,12 +71,12 @@ class IrisnetAPIConnector
         if ($licenseId === null) {
             $license = array_values($usable)[0];
         } else {
-            $license = IrisnetAPIConnector::getLicenseOption($licenseId, true);
+            $license = self::getLicenseOption($licenseId, true);
         }
         $key = $license['license'];
 
         if ($rule !== null) {
-            IrisnetAPIConnector::setRules($rule);
+            self::setRules($rule);
         }
 
         $apiInstance = new AIOperationsApi(
@@ -124,7 +124,7 @@ class IrisnetAPIConnector
     public static function getCost(string $rule = null) : int
     {
         if ($rule !== null) {
-            $parameters = IrisnetAPIConnector::setRules($rule);
+            $parameters = self::setRules($rule);
         }
 
         try {
@@ -194,7 +194,7 @@ class IrisnetAPIConnector
 
     private static function getUsableLicenses()
     {
-        $active = IrisnetAPIConnector::getActiveLicenses();
+        $active = self::getActiveLicenses();
 
         $usable = array();
         foreach ($active as $key => $value) {
