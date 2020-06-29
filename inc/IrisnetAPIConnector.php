@@ -96,20 +96,22 @@ class IrisnetAPIConnector
      * Downloads the modified image as specified by the rules parameters, if needed.
      *
      * @param string $filename the name of the file (without path) that should be downloaded. Is equal to the file name that was processed.
-     * @param string $downloadPath the location of where to save the downloaded file
+     * @param string $downloadPath the location (folder) of where to save the downloaded file. When omitted the return type is SplFileObject
      * @throws IrisnetException is thrown in case that the API request failes (will contain the status code and the message returned from the failed API request).
-     * @return boolean returns FALSE in case that the file could not be saved at the specified location
+     * @return boolean|\SplFileObject returns FALSE in case that the file could not be saved at the specified location
      */
-    public static function getProcessedImage(string $filename, string $downloadPath) : bool {
+    public static function getProcessedImage(string $filename, string $downloadPath = null) {
         try {
             $apiInstance = new AIOperationsApi(
                 new Client(self::getClientConfig(true))
             );
 
-            $result = $apiInstance->downloadProcessed($filename);
+            $file = $apiInstance->downloadProcessed($filename);
 
-            $img = file_get_contents($result);
-            return !file_put_contents($downloadPath . $filename, $img) ? false : true;
+            if ($downloadPath == null)
+                return $file;
+
+            return !file_put_contents($downloadPath . $filename, $file->fread($file->getSize())) ? false : true;
         } catch (ApiException $e) {
             throw new IrisnetException("An Exception occoured while performing the API request '/v1/download'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
