@@ -3,7 +3,6 @@
  * @package IrisnetAPIPlugin
  */
 
-use \SplFileObject;
 use \GuzzleHttp\Client;
 use Inc\Base\RulesController;
 use \GuzzleHttp\Cookie\CookieJar;
@@ -87,7 +86,7 @@ class IrisnetAPIConnector
         );
 
         try {
-            return $apiInstance->checkImage($key, $detail, new SplFileObject($file));
+            return $apiInstance->checkImage($key, $detail, new \SplFileObject($file));
         } catch (ApiException $e) {
             throw new IrisnetException("An Exception occoured while performing the API request '/v1/check-image'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
