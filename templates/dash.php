@@ -123,10 +123,6 @@ add_shortcode('show_image_if_compliant', 'check_compliant');
 	<pre class="prettyprint">
 function check_compliant($imageArray) {
 	
-	if (!session_id()) {
-		session_start();
-	}
-
 	// Set the rules outside of the loop
 	IrisnetAPIConnector::setRules('given_ruleset_name');
 	
