@@ -53,7 +53,7 @@ class LicensesCallbacks
                 $input['credits_used'] = $result->getCreditsUsed();
                 $input['total_credits'] = $result->getTotalCredits();
 
-                if ($result->getCreditsRemaining() <= 0)
+                if ($result->getTotalCredits() != 0 && $result->getCreditsUsed() == $result->getTotalCredits())
                     unset($input['is_active']);
             } catch (ApiException $e) {
                 add_settings_error('irisnet_plugin_licenses', $e->getCode(), $e->getMessage());

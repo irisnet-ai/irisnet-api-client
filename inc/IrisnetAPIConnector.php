@@ -172,7 +172,7 @@ class IrisnetAPIConnector
                 $options[$key]['credits_used'] = $result->getCreditsUsed();
                 $options[$key]['total_credits'] = $result->getTotalCredits();
     
-                if ($result->getCreditsUsed() == $result->getTotalCredits()) {
+                if ($result->getTotalCredits() != 0 && $result->getCreditsUsed() == $result->getTotalCredits()) {
                     unset($options[$key]['is_active']);
                     $deactivatedCount++;
                 }
