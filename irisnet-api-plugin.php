@@ -1,6 +1,6 @@
 <?php
 
-define('IRISNET_API_PLUGIN_VERSION', '1.1.0');
+define('IRISNET_API_PLUGIN_VERSION', '1.0.0');
 
 /**
  * @package IrisnetAPIPlugin
@@ -11,7 +11,7 @@ Plugin URI: https://www.irisnet.de/
 Description: Irisnet is a new tech startup, that specialies in the development of Artificial Intelligence (AI) systems based on neural networks for image-processing in realtime. This plugin facilitates the usage of the irisnet API. 
 Author: Irisnet
 Author URI: https://www.irisnet.de/
-Version: 1.1.0
+Version: 1.0.0
 License: GPLv3 or later
 */
 
