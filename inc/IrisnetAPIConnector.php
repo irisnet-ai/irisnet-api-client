@@ -202,7 +202,7 @@ class IrisnetAPIConnector
 
         $usable = array();
         foreach ($active as $key => $value) {
-            if ($value['credits_used'] < $value['total_credits']) {
+            if ($value['total_credits'] == 0 || $value['credits_used'] < $value['total_credits']) {
                 $usable[$key] = $value;
             }
         }
