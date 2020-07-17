@@ -117,9 +117,10 @@ class RulesController extends BaseController
                     'step' => '.01',
                     'min' => '0',
                     'max' => '1',
-                    'placeholder' => 'eg. 0.75',
+                    'placeholder' => 'e.g. 0.75',
                     'array' => 'rule_name',
-                    'description' => 'Threshold when an object can be recognized.'
+                    'description' => 'Threshold when an object can be recognized.',
+                    'tooltip' => 'Lowering the value will increase the probability of recognizing objects. Setting the value too low however, can cause false positives.'
                 )
             ),
             array(
@@ -130,9 +131,10 @@ class RulesController extends BaseController
                     'type' => 'number',
                     'min' => '0',
                     'max' => '255',
-                    'placeholder' => 'eg. 255',
+                    'placeholder' => 'e.g. 255',
                     'array' => 'rule_name',
-                    'description' => 'A grey scale color to use for frame or masking. Is only applied on the output image.'
+                    'description' => 'A grey scale color to use for frame or masking. Is only applied on the output image.',
+                    'tooltip' => '0 will represent black, while the maximum 255 will be white'
                 )
             )
         );
@@ -145,9 +147,10 @@ class RulesController extends BaseController
                     'option_name' => 'irisnet_plugin_rules',
                     'type' => 'number',
                     'min' => '-1',
-                    'placeholder' => 'eg. 1',
+                    'placeholder' => 'e.g. 0',
                     'array' => 'rule_name',
-                    'description' => 'Minimum amount of classification objects that should be recognized.'
+                    'description' => 'Minimum amount of classification objects that should be recognized.',
+                    'tooltip' => 'Define the minimum amount that sould be found of this object to pass the check. Use -1 to specifiy an infinite minimum.'
                 )
             ),
             array(
@@ -157,9 +160,10 @@ class RulesController extends BaseController
                     'option_name' => 'irisnet_plugin_rules',
                     'type' => 'number',
                     'min' => '-1',
-                    'placeholder' => 'eg. 5',
+                    'placeholder' => 'e.g. 5',
                     'array' => 'rule_name',
-                    'description' => 'Maximum amount of classification objects that should be recognized.'
+                    'description' => 'Maximum amount of classification objects that should be recognized.',
+                    'tooltip' => 'Define the maximum amount that sould be found of this object to pass the check. Use -1 to specifiy an infinite maximum.'
                 )
             ),
             array(
@@ -169,7 +173,8 @@ class RulesController extends BaseController
                     'option_name' => 'irisnet_plugin_rules',
                     'select_options' => self::$drawModeVars,
                     'array' => 'rule_name',
-                    'description' => 'The draw mode that will be used for the output media. Is only applied on the output image.'
+                    'description' => 'The draw mode that will be used for the output media.',
+                    'tooltip' => 'Is only applied on the output image.'
                 )
             )
         );
@@ -204,7 +209,7 @@ class RulesController extends BaseController
                     'option_name' => 'irisnet_plugin_rules',
                     'label_for' => 'rule_name',
                     'required' => true,
-                    'placeholder' => 'eg. profile_picture',
+                    'placeholder' => 'e.g. profile_picture',
                     'array' => 'rule_name',
                     'description' => 'Your custom name for the rule set.'
                 )
@@ -219,21 +224,21 @@ class RulesController extends BaseController
                     'option_name' => 'irisnet_plugin_rules',
                     'label_for' => 'description',
                     'required' => true,
-                    'placeholder' => 'eg. Allow one person to appear in the picture.',
+                    'placeholder' => 'e.g. Allow one person to appear in the picture.',
                     'array' => 'rule_name',
                     'description' => 'Describe the characteristics of the rule set.'
                 )
             ),
             array(
                 'id' => 'default',
-                'title' => 'Defaults',
+                'title' => 'Base parameters (Defaults)',
                 'callback' => array( $this->rules_callbacks, 'fieldset' ),
                 'page' => 'irisnet_rules',
                 'section' => 'irisnet_rules_index',
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
                     'label_for' => 'default',
-                    'description' => 'Defines some overall default values if needed. Single parameters can be still overwritten by their respective attributes within the following rules.' .
+                    'description' => 'Define base parameter settings that are valid for all of the classification objects. Single parameter settings can be still overwritten within each classification object if needed.' .
                         '<br>See INDefault Schema in <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further information.',
                     'switch' => $switch,
                     'fields' => $defaultFields
@@ -246,7 +251,7 @@ class RulesController extends BaseController
                 'section' => 'irisnet_rules_index',
                 'args' => array(
                     'description' => '<b>The following options represent the classification objects recognized by the irisnet AI. ' .
-                        'Each classification or their parameters within can be left off or empty. In that case default settings will applied.</b>' .
+                        'Each classification or their parameter settings within can be left off or empty. In that case default settings will applied.</b>' .
                         '<br>See INParam Schema in <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further information ' .
                         'on each classification object and their default settings.',
                 )

@@ -108,9 +108,15 @@ class RulesCallbacks
             }
         }
 
+        if (isset($args['tooltip'])) {
+            echo '<div class="tooltip">&#xFFFD;<span class="tooltiptext">' . $args['tooltip'] . '</span></div>&nbsp;';
+        }
+
         echo '<input type="' . $type . '" step="' . $step . '" ' . $min . ' ' . $max . ' class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" placeholder="' . $args['placeholder'] . '" ' . $required . ' ' . $readonly . '>';
         if (isset($args['description'])) {
             echo '<p class="help-text">' . $args['description'] . '</p>';
+        } else {
+            echo '<br/><br/>';
         }
     }
 
@@ -126,6 +132,10 @@ class RulesCallbacks
             $saved = isset($input[$_POST["edit_rule"]][$name]) ? $input[$_POST["edit_rule"]][$name] : '';
         }
 
+        if (isset($args['tooltip'])) {
+            echo '<div class="tooltip">&#xFFFD;<span class="tooltiptext">' . $args['tooltip'] . '</span></div>&nbsp;';
+        }
+
         echo '<select id="' . $name . '" name="' . $option_name . '[' . $name . ']" >';
         echo '<option value></option>';
         foreach ($select_options as $key => $option) {
@@ -135,6 +145,8 @@ class RulesCallbacks
         echo '</select>';
         if (isset($args['description'])) {
             echo '<p class="help-text">' . $args['description'] . '</p>';
+        } else {
+            echo '<br/><br/>';
         }
     }
 
