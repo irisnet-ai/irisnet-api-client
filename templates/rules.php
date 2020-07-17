@@ -14,21 +14,6 @@
 
 	<div class="tab-content">
 		<div id="tab-1" class="tab-pane <?php echo !isset($_POST["edit_rule"]) && !empty($options) ? 'active' : '' ?>">
-
-		<?php 
-			// echo '<pre>';
-			// var_dump(IrisnetAPIConnector::createParameterModel("dfgh"));
-			// echo IrisnetAPIConnector::createParameterModel("asd")->__toString();
-
-			// IrisnetAPIConnector::processImage('D:\Desktop\Tower Defense Kit (1.0)\preview.png');
-			// $result = IrisnetAPIConnector::getProcessedImage('preview.png', 'D:\\Desktop\\');
-			// var_dump($result);
-
-
-			// echo '</pre>';
-		?>
-		
-
 			<?php if (!empty($options)): ?>
 				<table class="rules-table panel">
 					<tr>
