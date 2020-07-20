@@ -146,11 +146,11 @@ class RulesController extends BaseController
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
                     'type' => 'number',
-                    'min' => '-1',
+                    'min' => '0',
                     'placeholder' => 'e.g. 0',
                     'array' => 'rule_name',
                     'description' => 'Minimum amount of classification objects that should be recognized.',
-                    'tooltip' => 'Define the minimum amount that sould be found of this object to pass the check. Use -1 to specifiy an infinite minimum.'
+                    'tooltip' => 'Define the minimum amount that sould be found of this object to pass the check.'
                 )
             ),
             array(
@@ -163,7 +163,7 @@ class RulesController extends BaseController
                     'placeholder' => 'e.g. 5',
                     'array' => 'rule_name',
                     'description' => 'Maximum amount of classification objects that should be recognized.',
-                    'tooltip' => 'Define the maximum amount that sould be found of this object to pass the check. Use -1 to specifiy an infinite maximum.'
+                    'tooltip' => 'Define the maximum amount that sould be found of this object to pass the check. Use -1 to ignore the maximum count'
                 )
             ),
             array(
