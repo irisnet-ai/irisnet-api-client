@@ -12,8 +12,8 @@ git clone http://bitbucket.minick.x/scm/ir/irisnet-api-plugin.git && \
 cd irisnet-api-plugin/ && \
 npm install && \
 composer install --no-dev && \
-rm -rf .git node_modules && \
-rm .gitignore composer.* gulpfile.js package* && \
+rm -rf .git node_modules src && \
+rm .gitignore composer.* gulpfile.js README.md package* && \
 cd ../ && \
 zip -r irisnet-api-plugin.zip irisnet-api-plugin && \
 rm -rf irisnet-api-plugin
