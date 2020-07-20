@@ -109,7 +109,7 @@ class RulesCallbacks
         }
 
         if (isset($args['tooltip'])) {
-            echo '<div class="tooltip">&#xFFFD;<span class="tooltiptext">' . $args['tooltip'] . '</span></div>&nbsp;';
+            echo '<div class="tooltip">&#9432;<span class="tooltiptext">' . $args['tooltip'] . '</span></div>&nbsp;';
         }
 
         echo '<input type="' . $type . '" step="' . $step . '" ' . $min . ' ' . $max . ' class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" placeholder="' . $args['placeholder'] . '" ' . $required . ' ' . $readonly . '>';
@@ -133,7 +133,7 @@ class RulesCallbacks
         }
 
         if (isset($args['tooltip'])) {
-            echo '<div class="tooltip">&#xFFFD;<span class="tooltiptext">' . $args['tooltip'] . '</span></div>&nbsp;';
+            echo '<div class="tooltip">&#9432;<span class="tooltiptext">' . $args['tooltip'] . '</span></div>&nbsp;';
         }
 
         echo '<select id="' . $name . '" name="' . $option_name . '[' . $name . ']" >';
