@@ -116,7 +116,7 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/octet-stream, application/xml, application/json
+- **Accept**: application/octet-stream
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints)
 [[Back to Model list]](../../README.md#documentation-for-models)
@@ -125,7 +125,7 @@ No authorization required
 
 ## setINDefine
 
-> setINDefine($in_define)
+> setINDefine($in_define_ai)
 
 Set the definitions of the pre-defined rule sets.
 
@@ -143,13 +143,13 @@ $apiInstance = new OpenAPI\Client\Api\AIOperationsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$in_define = <?xml version="1.0" encoding="UTF-8"?>
-<inDefine>
+$in_define_ai = <?xml version="1.0" encoding="UTF-8"?>
+<inDefineAI>
 	<inImage proto="checkNudity"/>
-</inDefine>; // \OpenAPI\Client\Model\INDefine | 
+</inDefineAI>; // \OpenAPI\Client\Model\INDefineAI | 
 
 try {
-    $apiInstance->setINDefine($in_define);
+    $apiInstance->setINDefine($in_define_ai);
 } catch (Exception $e) {
     echo 'Exception when calling AIOperationsApi->setINDefine: ', $e->getMessage(), PHP_EOL;
 }
@@ -161,7 +161,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **in_define** | [**\OpenAPI\Client\Model\INDefine**](../Model/INDefine.md)|  |
+ **in_define_ai** | [**\OpenAPI\Client\Model\INDefineAI**](../Model/INDefineAI.md)|  |
 
 ### Return type
 
@@ -205,9 +205,6 @@ $in_params = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <inParams>
 	<inDefault thresh="0.5" grey="127"/>
 	<inParam inClass="face" min="-1" max="-1" drawMode="0" grey="127"/>
-	<inParam inClass="child" min="-1" max="-1" drawMode="0" grey="127"/>
-	<inParam inClass="adult" min="-1" max="-1" drawMode="0" grey="127"/>
-	<inParam inClass="senior" min="-1" max="-1" drawMode="0" grey="127"/>
 	<inParam inClass="hand" min="-1" max="-1" drawMode="0" grey="127"/>
 	<inParam inClass="breast" min="0" max="0" drawMode="2" grey="127"/>
 	<inParam inClass="vulva" min="0" max="0" drawMode="2" grey="127"/>

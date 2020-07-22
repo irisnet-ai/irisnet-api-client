@@ -190,6 +190,8 @@ class INParam implements ModelInterface, ArrayAccess
     const IN_CLASS_VAGINA = 'vagina';
     const IN_CLASS_BUTTOCKS = 'buttocks';
     const IN_CLASS_ANUS = 'anus';
+    const IN_CLASS_NUDITY_CHECK = 'nudityCheck';
+    const IN_CLASS_AGE_VERIFICATION = 'ageVerification';
     const IN_CLASS_ILLEGAL_SYMBOLS = 'illegalSymbols';
     
 
@@ -213,6 +215,8 @@ class INParam implements ModelInterface, ArrayAccess
             self::IN_CLASS_VAGINA,
             self::IN_CLASS_BUTTOCKS,
             self::IN_CLASS_ANUS,
+            self::IN_CLASS_NUDITY_CHECK,
+            self::IN_CLASS_AGE_VERIFICATION,
             self::IN_CLASS_ILLEGAL_SYMBOLS,
         ];
     }
@@ -301,7 +305,7 @@ class INParam implements ModelInterface, ArrayAccess
     /**
      * Sets in_class
      *
-     * @param string|null $in_class The classification of the object, that the element refers to. Default parameter values are defined per classification object. The following list contains the default values for 'min', 'max' and 'drawMode' in order. * _face_ _(-1, -1, 0)_ - Classification for human faces. * _child_ _(-1, -1, 0)_ - Recognizes children's faces. Overwrites classification parameters of face. * _adult_ _(-1, -1, 0)_ - Recognizes faces of adults that are not considered seniors. Overwrites classification parameters of face. * _senior_ _(-1, -1, 0)_ - Recognizes faces of seniors. Overwrites classification parameters of face. * _hand_ _(-1, -1, 0)_ - Classification for recognizing hands. * _breast_ _(0, 0, 2)_ - Object that recognizes female breasts. * _vulva_ _(0, 0, 2)_ - Object that recognizes vulvae. * _penis_ _(0, 0, 2)_ - Object that recognizes penises. * _vagina_ _(0, 0, 2)_ - Object that recognizes vaginae. * _buttocks_ _(0, 0, 2)_ - Object that recognizes buttocks. * _anus_ _(0, 0, 2)_ - Object that recognizes ani. * _illegalSymbols_ _(0, 0, 1)_ - Classification for symbols that are not permitted in Germany.
+     * @param string|null $in_class The classification of the object, that the element refers to. Default parameter values are defined per classification object. The following list contains the default values for 'min', 'max' and 'drawMode' in order. * _face_ _(0, 3, 0)_ - Classification for human faces. * _child_ _(0, 0, 1)_ - Recognizes children's faces. Overwrites classification parameters of face. * _adult_ _(0, -1, 1)_ - Recognizes faces of adults that are not considered seniors. Overwrites classification parameters of face. * _senior_ _(0, -1, 1)_ - Recognizes faces of seniors. Overwrites classification parameters of face. * _hand_ _(0, -1, 0)_ - Classification for recognizing hands. * _breast_ _(0, 0, 2)_ - Object that recognizes female breasts. * _vulva_ _(0, 0, 2)_ - Object that recognizes vulvae. * _penis_ _(0, 0, 2)_ - Object that recognizes penises. * _vagina_ _(0, 0, 2)_ - Object that recognizes vaginae. * _buttocks_ _(0, 0, 2)_ - Object that recognizes buttocks. * _anus_ _(0, 0, 2)_ - Object that recognizes ani. * _illegalSymbols_ _(0, 0, 1)_ - Classification for symbols that are not permitted in Germany.
      *
      * @return $this
      */

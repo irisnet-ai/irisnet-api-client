@@ -97,7 +97,7 @@ Class | Method | HTTP request | Description
 
  - [Error](docs/Model/Error.md)
  - [INDefault](docs/Model/INDefault.md)
- - [INDefine](docs/Model/INDefine.md)
+ - [INDefineAI](docs/Model/INDefineAI.md)
  - [INImage](docs/Model/INImage.md)
  - [INObject](docs/Model/INObject.md)
  - [INParam](docs/Model/INParam.md)

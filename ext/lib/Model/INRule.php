@@ -174,43 +174,8 @@ class INRule implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
-    const IN_CLASS_FACE = 'face';
-    const IN_CLASS_CHILD = 'child';
-    const IN_CLASS_ADULT = 'adult';
-    const IN_CLASS_SENIOR = 'senior';
-    const IN_CLASS_HAND = 'hand';
-    const IN_CLASS_BREAST = 'breast';
-    const IN_CLASS_VULVA = 'vulva';
-    const IN_CLASS_PENIS = 'penis';
-    const IN_CLASS_VAGINA = 'vagina';
-    const IN_CLASS_BUTTOCKS = 'buttocks';
-    const IN_CLASS_ANUS = 'anus';
-    const IN_CLASS_ILLEGAL_SYMBOLS = 'illegalSymbols';
     
 
-    
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getInClassAllowableValues()
-    {
-        return [
-            self::IN_CLASS_FACE,
-            self::IN_CLASS_CHILD,
-            self::IN_CLASS_ADULT,
-            self::IN_CLASS_SENIOR,
-            self::IN_CLASS_HAND,
-            self::IN_CLASS_BREAST,
-            self::IN_CLASS_VULVA,
-            self::IN_CLASS_PENIS,
-            self::IN_CLASS_VAGINA,
-            self::IN_CLASS_BUTTOCKS,
-            self::IN_CLASS_ANUS,
-            self::IN_CLASS_ILLEGAL_SYMBOLS,
-        ];
-    }
     
 
     /**
@@ -243,14 +208,6 @@ class INRule implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        $allowedValues = $this->getInClassAllowableValues();
-        if (!is_null($this->container['in_class']) && !in_array($this->container['in_class'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'in_class', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
-
         return $invalidProperties;
     }
 
@@ -279,21 +236,12 @@ class INRule implements ModelInterface, ArrayAccess
     /**
      * Sets in_class
      *
-     * @param string|null $in_class The classification of the object, that the element refers to. Default parameter values are defined per classification object. The following list contains the default values for 'min', 'max' and 'drawMode' in order. * _face_ _(-1, -1, 0)_ - Classification for human faces. * _child_ _(-1, -1, 0)_ - Recognizes children's faces. Overwrites classification parameters of face. * _adult_ _(-1, -1, 0)_ - Recognizes faces of adults that are not considered seniors. Overwrites classification parameters of face. * _senior_ _(-1, -1, 0)_ - Recognizes faces of seniors. Overwrites classification parameters of face. * _hand_ _(-1, -1, 0)_ - Classification for recognizing hands. * _breast_ _(0, 0, 2)_ - Object that recognizes female breasts. * _vulva_ _(0, 0, 2)_ - Object that recognizes vulvae. * _penis_ _(0, 0, 2)_ - Object that recognizes penises. * _vagina_ _(0, 0, 2)_ - Object that recognizes vaginae. * _buttocks_ _(0, 0, 2)_ - Object that recognizes buttocks. * _anus_ _(0, 0, 2)_ - Object that recognizes ani. * _illegalSymbols_ _(0, 0, 1)_ - Classification for symbols that are not permitted in Germany.
+     * @param string|null $in_class The classification of the recognized object.
      *
      * @return $this
      */
     public function setInClass($in_class)
     {
-        $allowedValues = $this->getInClassAllowableValues();
-        if (!is_null($in_class) && !in_array($in_class, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'in_class', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
         $this->container['in_class'] = $in_class;
 
         return $this;

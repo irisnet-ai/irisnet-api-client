@@ -378,7 +378,7 @@ class LicenseKeyOperationsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\Error|\OpenAPI\Client\Model\LicenseInfo
+     * @return \OpenAPI\Client\Model\LicenseInfo|\OpenAPI\Client\Model\Error
      */
     public function getLicenseInfo($license_key)
     {
@@ -395,7 +395,7 @@ class LicenseKeyOperationsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\Error|\OpenAPI\Client\Model\LicenseInfo, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\LicenseInfo|\OpenAPI\Client\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function getLicenseInfoWithHttpInfo($license_key)
     {
@@ -431,18 +431,6 @@ class LicenseKeyOperationsApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 404:
-                    if ('\OpenAPI\Client\Model\Error' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\Error', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 200:
                     if ('\OpenAPI\Client\Model\LicenseInfo' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -452,6 +440,18 @@ class LicenseKeyOperationsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\LicenseInfo', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\OpenAPI\Client\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\Error', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -473,18 +473,18 @@ class LicenseKeyOperationsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\Error',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\OpenAPI\Client\Model\LicenseInfo',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\Error',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

@@ -1,6 +1,6 @@
 <?php
 /**
- * INDefine
+ * INDefineAI
  *
  * PHP version 5
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * INDefine Class Doc Comment
+ * INDefineAI Class Doc Comment
  *
  * @category Class
  * @description Can be used to set a multitude of pre-defined commonly used rules without the need of specifying each parameter set.
@@ -41,7 +41,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class INDefine implements ModelInterface, ArrayAccess
+class INDefineAI implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +50,7 @@ class INDefine implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'INDefine';
+    protected static $openAPIModelName = 'INDefineAI';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

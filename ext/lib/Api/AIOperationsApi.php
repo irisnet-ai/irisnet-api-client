@@ -126,7 +126,7 @@ class AIOperationsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\Error|\OpenAPI\Client\Model\IrisNet
+     * @return \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\Error
      */
     public function checkImage($license_key, $detail = 1, $file = null)
     {
@@ -145,7 +145,7 @@ class AIOperationsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\Error|\OpenAPI\Client\Model\IrisNet, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\Error, HTTP status code, HTTP response headers (array of strings)
      */
     public function checkImageWithHttpInfo($license_key, $detail = 1, $file = null)
     {
@@ -181,18 +181,6 @@ class AIOperationsApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 402:
-                    if ('\OpenAPI\Client\Model\Error' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\Error', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 200:
                     if ('\OpenAPI\Client\Model\IrisNet' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -202,6 +190,18 @@ class AIOperationsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\IrisNet', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 402:
+                    if ('\OpenAPI\Client\Model\Error' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\Error', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -223,18 +223,18 @@ class AIOperationsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 402:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\Error',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\OpenAPI\Client\Model\IrisNet',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\Error',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -443,7 +443,7 @@ class AIOperationsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject|\OpenAPI\Client\Model\Error
+     * @return \OpenAPI\Client\Model\Error|\SplFileObject
      */
     public function downloadProcessed($filename)
     {
@@ -460,7 +460,7 @@ class AIOperationsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject|\OpenAPI\Client\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\Error|\SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function downloadProcessedWithHttpInfo($filename)
     {
@@ -496,18 +496,6 @@ class AIOperationsApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 200:
-                    if ('\SplFileObject' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 404:
                     if ('\OpenAPI\Client\Model\Error' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -517,6 +505,18 @@ class AIOperationsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\Error', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 200:
+                    if ('\SplFileObject' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\SplFileObject', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -538,18 +538,18 @@ class AIOperationsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\SplFileObject',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\OpenAPI\Client\Model\Error',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -668,11 +668,11 @@ class AIOperationsApi
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/octet-stream', 'application/xml', 'application/json']
+                ['application/octet-stream']
             );
         } else {
             $headers = $this->headerSelector->selectHeaders(
-                ['application/octet-stream', 'application/xml', 'application/json'],
+                ['application/octet-stream'],
                 []
             );
         }
@@ -732,15 +732,15 @@ class AIOperationsApi
      *
      * Set the definitions of the pre-defined rule sets.
      *
-     * @param  \OpenAPI\Client\Model\INDefine $in_define in_define (required)
+     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai in_define_ai (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function setINDefine($in_define)
+    public function setINDefine($in_define_ai)
     {
-        $this->setINDefineWithHttpInfo($in_define);
+        $this->setINDefineWithHttpInfo($in_define_ai);
     }
 
     /**
@@ -748,15 +748,15 @@ class AIOperationsApi
      *
      * Set the definitions of the pre-defined rule sets.
      *
-     * @param  \OpenAPI\Client\Model\INDefine $in_define (required)
+     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
-    public function setINDefineWithHttpInfo($in_define)
+    public function setINDefineWithHttpInfo($in_define_ai)
     {
-        $request = $this->setINDefineRequest($in_define);
+        $request = $this->setINDefineRequest($in_define_ai);
 
         try {
             $options = $this->createHttpClientOption();
@@ -800,14 +800,14 @@ class AIOperationsApi
      *
      * Set the definitions of the pre-defined rule sets.
      *
-     * @param  \OpenAPI\Client\Model\INDefine $in_define (required)
+     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setINDefineAsync($in_define)
+    public function setINDefineAsync($in_define_ai)
     {
-        return $this->setINDefineAsyncWithHttpInfo($in_define)
+        return $this->setINDefineAsyncWithHttpInfo($in_define_ai)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -820,15 +820,15 @@ class AIOperationsApi
      *
      * Set the definitions of the pre-defined rule sets.
      *
-     * @param  \OpenAPI\Client\Model\INDefine $in_define (required)
+     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setINDefineAsyncWithHttpInfo($in_define)
+    public function setINDefineAsyncWithHttpInfo($in_define_ai)
     {
         $returnType = '';
-        $request = $this->setINDefineRequest($in_define);
+        $request = $this->setINDefineRequest($in_define_ai);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -856,17 +856,17 @@ class AIOperationsApi
     /**
      * Create request for operation 'setINDefine'
      *
-     * @param  \OpenAPI\Client\Model\INDefine $in_define (required)
+     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function setINDefineRequest($in_define)
+    protected function setINDefineRequest($in_define_ai)
     {
-        // verify the required parameter 'in_define' is set
-        if ($in_define === null || (is_array($in_define) && count($in_define) === 0)) {
+        // verify the required parameter 'in_define_ai' is set
+        if ($in_define_ai === null || (is_array($in_define_ai) && count($in_define_ai) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $in_define when calling setINDefine'
+                'Missing the required parameter $in_define_ai when calling setINDefine'
             );
         }
 
@@ -882,8 +882,8 @@ class AIOperationsApi
 
         // body params
         $_tempBody = null;
-        if (isset($in_define)) {
-            $_tempBody = $in_define;
+        if (isset($in_define_ai)) {
+            $_tempBody = $in_define_ai;
         }
 
         if ($multipart) {
