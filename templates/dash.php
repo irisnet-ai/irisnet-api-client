@@ -24,7 +24,7 @@
 					if (!isset($license['is_active']) || $license['is_active'] == false)
 						continue;
 					
-					$activeLicenses += 1;
+					$activeLicenses++;
 					
 					$totalCredits += $license['total_credits'];
 					$usedCredits +=  $license['credits_used'];
@@ -37,7 +37,7 @@
 				<div class="flex-item panel">
 					<h3>Credits</h3>
 					<div class="panel-body">
-						<p class="peak text-center"><?php echo $usedCredits ?> / <?php echo $totalCredits ?></p>
+						<p class="peak text-center"><?php echo $usedCredits ?> / <?php echo $activeLicenses > 0 && $totalCredits == 0 ? '&infin;' : $totalCredits ?></p>
 						<p class="text-center">Consumed credits out of total of active Licenses.</p>
 					</div>
 					<div class="panel-footer">
