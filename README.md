@@ -51,4 +51,4 @@ The `Example Usage` tab gives you some examples on how to integrate the ai predi
 The `Documentation` tab shows you the functionality that is added with this plugin. Use the documented mathod calls to add the functionality as required.
 
 ### Contributing
-If you want to contribute to our project or have an idea for improvement let us know. You can contact us on [www.irisnet.de](https://www.irisnet.de)
+If you want to contribute to our project or have an idea for improvement leave an improvement issue or contact us on [www.irisnet.de](https://www.irisnet.de).
