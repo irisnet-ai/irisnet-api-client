@@ -18,7 +18,7 @@ cd irisnet-api-plugin/ && \
 npm install && \
 composer install --no-dev && \
 rm -rf .git node_modules src && \
-rm .gitignore composer.* gulpfile.js README.md package* && \
+rm .gitignore composer.* gulpfile.js README.md build.xml phpcs.xml package* && \
 cd ../ && \
 zip -r irisnet-api-plugin.zip irisnet-api-plugin && \
 rm -rf irisnet-api-plugin
