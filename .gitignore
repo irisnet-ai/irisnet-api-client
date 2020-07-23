@@ -1,6 +1,7 @@
 .DS_Store
 Thumbs.db
 npm-debug.log
+/build
 /bower_components
 /node_modules
 /vendor
