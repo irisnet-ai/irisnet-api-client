@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Irisnet API Plugin" default="help" basedir=".">
+    <property name="src" value="./"/>
+    <property name="dest" value="${src}/build"/>
+    <property name="filename" value="irisnet-api-plugin"/>
+
+    <target name="package" description="Packages the Wordpress plugin.">
+        <delete dir="${dest}"/>
+        <mkdir dir="${dest}"/>
+
+        <zip
+            destfile="${dest}/${filename}.zip"
+            basedir="${src}">
+            <fileset dir=".">
+                <include name="assets/**"/>
+                <include name="ext/**"/>
+                <include name="inc/**"/>
+                <include name="templates/**"/>
+                <include name="index.php"/>
+                <include name="irisnet-api-plugin.php"/>
+                <include name="LICENSE"/>
+                <include name="readme.txt"/>
+                <include name="README.md"/>
+                <include name="uninstall.php"/>
+            </fileset>
+        </zip>
+    </target>
+</project>
