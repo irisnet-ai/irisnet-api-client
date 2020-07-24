@@ -40,10 +40,14 @@ window.addEventListener("load", function() {
 			// reset or delete values of all children input fields when hidden
 			if (elem.hasAttribute('hidden')) {
 				elem.childNodes.forEach(function(child) {
-					if (child.nodeName == "INPUT")
-						child.value = '';
-					else if(child.nodeName == "SELECT")
-						child.selectedIndex = -1;
+					if (child.classList.contains('input-option')) {
+						child.childNodes.forEach(function(c) {
+							if (c.nodeName == "INPUT")
+								c.value = '';
+							else if(c.nodeName == "SELECT")
+								c.selectedIndex = -1;
+						});
+					}
 				});
 			}
 

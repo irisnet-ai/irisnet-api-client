@@ -9,6 +9,25 @@ form {
 	}
 
 	fieldset {
+		h4 {
+			text-decoration: underline;
+			text-decoration-style: dashed;
+		}
+
+		&.compact {
+			max-width: 1000px;
+
+			.input-option {
+				display: inline-flex;
+				width: 380px;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: flex-start;
+				align-items: center;
+				margin-right: 10px;
+			}
+		}
+
 		.help-text {
 			margin-bottom: 30px;
 		}
@@ -22,4 +41,10 @@ form {
 		margin-bottom: 30px;
 	}
 
+}
+
+@media screen and (max-width: 782px) {
+    form fieldset.compact .input-option {
+        width: inherit;
+    }
 }

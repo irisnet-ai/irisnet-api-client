@@ -273,6 +273,7 @@ class IrisnetAPIConnector
         // unset some variables that are not needed in this scope
         unset($option['rule_name']);
         unset($option['description']);
+        unset($option['cost']);
 
         // create INParams object
         $params = new INParams();
@@ -289,9 +290,14 @@ class IrisnetAPIConnector
         }
         $params->setInDefault($default);
 
+        // create a class object array
+        $classObjects = array();
+        foreach (array_values(RulesController::getClassObjectGroups()) as $group) {
+            $classObjects = array_merge($classObjects, array_keys($group));
+        }
+
         // create and fill INParam objects as needed
         $paramArray = array();
-        $classObjects = array_keys(RulesController::getClassObjects());
         foreach ($classObjects as $class) {
             $data = array();
             foreach ($option as $key => $value) {

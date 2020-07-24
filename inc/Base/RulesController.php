@@ -25,19 +25,25 @@ class RulesController extends BaseController
         3 => 'blur'
     );
 
-    private static $classObjects = array(
-        'face' => 'faces',
-        'child' => 'child faces',
-        'adult' => 'adult faces',
-        'senior' => 'senior faces',
-        'hand' => 'hands',
-        'breast' => 'breasts',
-        'vulva' => 'vulvae',
-        'penis' => 'penises',
-        'vagina' => 'vaginae',
-        'buttocks' => 'buttocks', 
-        'anus' => 'ani', 
-        'illegalSymbols' => 'illegal symbols'
+    private static $classObjectGroups = array(
+        'checkNudity' => array (
+            'face' => 'faces',
+            'hand' => 'hands',
+            'breast' => 'breasts',
+            'vulva' => 'vulvae',
+            'penis' => 'penises',
+            'vagina' => 'vaginae',
+            'buttocks' => 'buttocks', 
+            'anus' => 'ani', 
+        ),
+        'ageVerification' => array(
+            'child' => 'child faces',
+            'adult' => 'adult faces',
+            'senior' => 'senior faces',
+        ),
+        'illegalSymbols' => array (
+            'illegalSymbols' => 'illegal symbols'
+        )
     );
 
     public function register()
@@ -99,13 +105,14 @@ class RulesController extends BaseController
     private function setFields()
     {
 
-        $switch = array(
+        $s = array(
             'callback' => array( $this->rules_callbacks, 'fieldsetSwitch' ),
             'args' => array(
                 'class' => 'ui-toggle',
                 'label_for' => 'switch'
             )
         );
+        $switch = new \ArrayObject($s);
 
         $defaultFields = array(
             array(
@@ -180,20 +187,42 @@ class RulesController extends BaseController
         );
         $paramFields = array_merge($paramFields, array($defaultFields[1]));
 
-        $classFields = array();
-        foreach (self::$classObjects as $name => $plural) {
-            $classFields[] = array(
-                'id' => $name,
-                'title' => ucfirst($name) . ' Parameters',
+        $groupFields = array();
+        foreach (self::$classObjectGroups as $groupName => $classes) {
+            
+            $classFields = array();
+            foreach ($classes as $className => $plural) {
+                $classFields[] = array(
+                    'id' => $className,
+                    'callback' => array( $this->rules_callbacks, 'infoText' ),
+                    'page' => 'irisnet_rules',
+                    'section' => 'irisnet_rules_index',
+                    'args' => array(
+                        'option_name' => 'irisnet_plugin_rules',
+                        'title' => ucfirst($className). ' Parameters',
+                        'label_for' => $className,
+                        'description' => "The $className classification object parameters will apply to all recognized $plural.",
+                        'fields' => $paramFields
+                    )
+                );
+            }
+
+            $s = $switch->getArrayCopy();
+            $s['args']['option_name'] = 'irisnet_plugin_rules';
+            
+            $groupFields[] = array(
+                'id' => $groupName,
+                'title' => ucfirst($groupName),
                 'callback' => array( $this->rules_callbacks, 'fieldset' ),
                 'page' => 'irisnet_rules',
                 'section' => 'irisnet_rules_index',
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
-                    'label_for' => $name,
-                    'description' => "The $name classification object parameters will apply to all recognized $plural.",
-                    'switch' => $switch,
-                    'fields' => $paramFields
+                    'label_for' => $groupName,
+                    'switch' => $s,
+                    'fields' => $classFields,
+                    'extend_name' => false,
+                    'compact' => true
                 )
             );
         }
@@ -241,7 +270,8 @@ class RulesController extends BaseController
                     'description' => 'Define base parameter settings that are valid for all of the classification objects. Single parameter settings can be still overwritten within each classification object if needed.' .
                         '<br>See INDefault Schema in <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further information.',
                     'switch' => $switch,
-                    'fields' => $defaultFields
+                    'fields' => $defaultFields,
+                    'extend_name' => true
                 )
             ),
             array(
@@ -250,14 +280,14 @@ class RulesController extends BaseController
                 'page' => 'irisnet_rules',
                 'section' => 'irisnet_rules_index',
                 'args' => array(
-                    'description' => '<b>The following options represent the classification objects recognized by the irisnet AI. ' .
+                    'description' => '<b>The following options, within the toggle groups, represent the classification objects recognized by the irisnet AI. ' .
                         'Each classification or their parameter settings within can be left off or empty. In that case default settings will applied.</b>' .
                         '<br>See INParam Schema in <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further information ' .
                         'on each classification object and their default settings.',
                 )
             )
         );
-        $args = array_merge($args, $classFields);
+        $args = array_merge($args, $groupFields);
 
         $this->settings->setFields($args);
     }
@@ -271,10 +301,10 @@ class RulesController extends BaseController
     }
 
     /**
-     * Get the value of classObjects
+     * Get the value of classObjectGroups
      */ 
-    public static function getClassObjects()
+    public static function getClassObjectGroups()
     {
-        return self::$classObjects;
+        return self::$classObjectGroups;
     }
 }

@@ -32,3 +32,9 @@
         visibility: visible;
     }
 }
+
+@media screen and (max-width: 782px) {
+    .tooltip {
+        display: none;
+    }
+}

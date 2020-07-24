@@ -108,6 +108,8 @@ class RulesCallbacks
             }
         }
 
+        echo '<div class="input-option">';
+
         if (isset($args['tooltip'])) {
             echo '<div class="tooltip">&#9432;<span class="tooltiptext">' . $args['tooltip'] . '</span></div>&nbsp;';
         }
@@ -115,9 +117,9 @@ class RulesCallbacks
         echo '<input type="' . $type . '" step="' . $step . '" ' . $min . ' ' . $max . ' class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" placeholder="' . $args['placeholder'] . '" ' . $required . ' ' . $readonly . '>';
         if (isset($args['description'])) {
             echo '<p class="help-text">' . $args['description'] . '</p>';
-        } else {
-            echo '<br/><br/>';
         }
+
+        echo '</div>';
     }
 
     public function selectField($args)
@@ -132,6 +134,8 @@ class RulesCallbacks
             $saved = isset($input[$_POST["edit_rule"]][$name]) ? $input[$_POST["edit_rule"]][$name] : '';
         }
 
+        echo '<div class="input-option">';
+
         if (isset($args['tooltip'])) {
             echo '<div class="tooltip">&#9432;<span class="tooltiptext">' . $args['tooltip'] . '</span></div>&nbsp;';
         }
@@ -145,14 +149,28 @@ class RulesCallbacks
         echo '</select>';
         if (isset($args['description'])) {
             echo '<p class="help-text">' . $args['description'] . '</p>';
-        } else {
-            echo '<br/><br/>';
         }
+
+        echo '</div>';
     }
 
     public function infoText($args)
     {
+        if (isset($args['title']))
+            echo '<h4>' . $args['title'] . '</h4>';
         echo '<p class="help-text">' . $args['description'] . '</p>';
+
+        if (isset($args['fields'])) 
+        {
+            $fields = $args['fields'];
+            $name = $args['label_for'];
+            foreach ($fields as $field) {    
+                $field['id'] = $name . '_' . $field['id'];
+                $field['args']['label_for'] = $field['id'];
+    
+                $field['callback']($field['args']);
+            }
+        }
     }
 
     public function fieldsetSwitch($args)
@@ -205,10 +223,16 @@ class RulesCallbacks
             $switch['callback']($switch['args']);
         }
 
-        echo '<fieldset name="' . $name . '" ' . ($hidden ? 'hidden' : '') . '>';
+        $class = '';
+        if (isset($args['compact']) && $args['compact'] === true) {
+            $class = 'class="compact"';
+        }
+
+        echo '<fieldset name="' . $name . '" ' . ($hidden ? 'hidden' : '') . ' ' . $class . '>';
 
         foreach ($fields as $field) {
-            $field['id'] = $name . '_' . $field['id'];
+            if (isset($args['extend_name']) && $args['extend_name'] === true)
+                $field['id'] = $name . '_' . $field['id'];
             $field['args']['label_for'] = $field['id'];
 
             $field['callback']($field['args']);
