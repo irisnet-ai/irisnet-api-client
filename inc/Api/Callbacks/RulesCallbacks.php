@@ -7,6 +7,7 @@ namespace Inc\Api\Callbacks;
 use \Exception;
 use \GuzzleHttp\Client;
 use \IrisnetAPIConnector;
+use Inc\Base\RulesController;
 use \GuzzleHttp\Cookie\CookieJar;
 use \OpenAPI\Client\ApiException;
 use \OpenAPI\Client\Api\AIOperationsApi;
@@ -202,12 +203,26 @@ class RulesCallbacks
         $hidden = true;
         if (isset($_POST["edit_rule"])) {
             $option = get_option($args['option_name']);
-
             $keys = array_keys($option[$_POST["edit_rule"]]);
-            foreach ($keys as $key) {
-                if (strpos($key, $name) === 0) {
-                    $hidden = false;
-                    break;
+
+            $groups = RulesController::getClassObjectGroups();
+            if (array_key_exists($name, $groups)) {
+                $classes = array_keys($groups[$name]);
+
+                foreach ($keys as $key) {
+                    foreach ($classes as $class) {
+                        if (strpos($key, $class) === 0) {
+                            $hidden = false;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                foreach ($keys as $key) {
+                    if (strpos($key, $name) === 0) {
+                        $hidden = false;
+                        break;
+                    }
                 }
             }
         }

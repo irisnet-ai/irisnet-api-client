@@ -26,7 +26,7 @@ class RulesController extends BaseController
     );
 
     private static $classObjectGroups = array(
-        'checkNudity' => array (
+        'BaseParameters' => array (
             'face' => 'faces',
             'hand' => 'hands',
             'breast' => 'breasts',
@@ -36,12 +36,12 @@ class RulesController extends BaseController
             'buttocks' => 'buttocks', 
             'anus' => 'ani', 
         ),
-        'ageVerification' => array(
+        'AgeVerification' => array(
             'child' => 'child faces',
             'adult' => 'adult faces',
             'senior' => 'senior faces',
         ),
-        'illegalSymbols' => array (
+        'IllegalSymbols' => array (
             'illegalSymbols' => 'illegal symbols'
         )
     );
@@ -105,14 +105,13 @@ class RulesController extends BaseController
     private function setFields()
     {
 
-        $s = array(
+        $switch = array(
             'callback' => array( $this->rules_callbacks, 'fieldsetSwitch' ),
             'args' => array(
                 'class' => 'ui-toggle',
                 'label_for' => 'switch'
             )
         );
-        $switch = new \ArrayObject($s);
 
         $defaultFields = array(
             array(
@@ -207,9 +206,6 @@ class RulesController extends BaseController
                 );
             }
 
-            $s = $switch->getArrayCopy();
-            $s['args']['option_name'] = 'irisnet_plugin_rules';
-            
             $groupFields[] = array(
                 'id' => $groupName,
                 'title' => ucfirst($groupName),
@@ -219,7 +215,7 @@ class RulesController extends BaseController
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
                     'label_for' => $groupName,
-                    'switch' => $s,
+                    'switch' => $switch,
                     'fields' => $classFields,
                     'extend_name' => false,
                     'compact' => true
@@ -260,7 +256,7 @@ class RulesController extends BaseController
             ),
             array(
                 'id' => 'default',
-                'title' => 'Base parameters (Defaults)',
+                'title' => 'Common settings (Defaults)',
                 'callback' => array( $this->rules_callbacks, 'fieldset' ),
                 'page' => 'irisnet_rules',
                 'section' => 'irisnet_rules_index',
