@@ -141,7 +141,7 @@ function triggerPlumber(src, url) {
   return gulp.src(src).pipe(plumber()).pipe(gulp.dest(url));
 }
 
-gulp.task("default", ["styles", "js", "generate-usage-documentation", "generate-index-php-in-sub-directories"], function () {
+gulp.task("default", ["styles", "js", "generate-usage-documentation"], function () {
   gulp
     .src(jsURL + "script.min.js")
     .pipe(notify({ message: "Assets Compiled!" }));
