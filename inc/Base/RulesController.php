@@ -26,7 +26,7 @@ class RulesController extends BaseController
     );
 
     private static $classObjectGroups = array(
-        'BaseParameters' => array (
+        'Base Parameters' => array (
             'face' => 'faces',
             'hand' => 'hands',
             'breast' => 'breasts',
@@ -36,12 +36,12 @@ class RulesController extends BaseController
             'buttocks' => 'buttocks', 
             'anus' => 'ani', 
         ),
-        'AgeVerification' => array(
+        'Age Verification' => array(
             'child' => 'child faces',
             'adult' => 'adult faces',
             'senior' => 'senior faces',
         ),
-        'IllegalSymbols' => array (
+        'Illegal Symbols' => array (
             'illegalSymbols' => 'illegal symbols'
         )
     );
@@ -206,15 +206,16 @@ class RulesController extends BaseController
                 );
             }
 
+            $groupId = lcfirst(str_replace(' ', '', $groupName));
             $groupFields[] = array(
-                'id' => $groupName,
+                'id' => $groupId,
                 'title' => ucfirst($groupName),
                 'callback' => array( $this->rules_callbacks, 'fieldset' ),
                 'page' => 'irisnet_rules',
                 'section' => 'irisnet_rules_index',
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
-                    'label_for' => $groupName,
+                    'label_for' => $groupId,
                     'switch' => $switch,
                     'fields' => $classFields,
                     'extend_name' => false,
