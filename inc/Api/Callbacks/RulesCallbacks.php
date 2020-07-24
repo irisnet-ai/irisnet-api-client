@@ -205,7 +205,11 @@ class RulesCallbacks
             $option = get_option($args['option_name']);
             $keys = array_keys($option[$_POST["edit_rule"]]);
 
-            $groups = RulesController::getClassObjectGroups();
+            $groups = array();
+            foreach(RulesController::getClassObjectGroups() as $groupName => $c) {
+                $groups[lcfirst(str_replace(' ', '', $groupName))] = $c;
+            }
+
             if (array_key_exists($name, $groups)) {
                 $classes = array_keys($groups[$name]);
 
