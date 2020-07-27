@@ -22,7 +22,9 @@ class RulesController extends BaseController
         0 => 'none',
         1 => 'frame + name',
         2 => 'mask',
-        3 => 'blur'
+        3 => 'mask + frame + name',
+        6 => 'blur',
+        7 => 'blur + frame + name'
     );
 
     private static $classObjectGroups = array(
