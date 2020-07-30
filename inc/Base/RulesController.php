@@ -110,6 +110,7 @@ class RulesController extends BaseController
         $switch = array(
             'callback' => array( $this->rules_callbacks, 'fieldsetSwitch' ),
             'args' => array(
+                'option_name' => 'irisnet_plugin_rules',
                 'class' => 'ui-toggle',
                 'label_for' => 'switch'
             )
@@ -127,8 +128,9 @@ class RulesController extends BaseController
                     'max' => '1',
                     'placeholder' => 'e.g. 0.75',
                     'array' => 'rule_name',
-                    'description' => 'Threshold when an object can be recognized.',
-                    'tooltip' => 'Lowering the value will increase the probability of recognizing objects. Setting the value too low however, can cause false positives.'
+                    'description' => 'The AI recognition level (expert setting)',
+                    'tooltip' => 'Lowering the value will increase the probability of recognizing objects (e.g. recognizing faces in poorly lit situations). Setting the value too low however, can cause the AI ' .
+                        'to see objects were there is similarity (e.g. confuse a dog face for a human face). Use this setting to fine tune the AI, depending on the images you are analyzing. In most cases the default (empty) is the right choice.'
                 )
             ),
             array(
@@ -147,52 +149,65 @@ class RulesController extends BaseController
             )
         );
 
-        $paramFields = array(
-            array(
-                'id' => 'min',
-                'callback' => array( $this->rules_callbacks, 'textField' ),
-                'args' => array(
-                    'option_name' => 'irisnet_plugin_rules',
-                    'type' => 'number',
-                    'min' => '0',
-                    'placeholder' => 'e.g. 0',
-                    'array' => 'rule_name',
-                    'description' => 'Minimum amount of classification objects that should be recognized.',
-                    'tooltip' => 'Define the minimum amount that sould be found of this object to pass the check.'
-                )
-            ),
-            array(
-                'id' => 'max',
-                'callback' => array( $this->rules_callbacks, 'textField' ),
-                'args' => array(
-                    'option_name' => 'irisnet_plugin_rules',
-                    'type' => 'number',
-                    'min' => '-1',
-                    'placeholder' => 'e.g. 5',
-                    'array' => 'rule_name',
-                    'description' => 'Maximum amount of classification objects that should be recognized.',
-                    'tooltip' => 'Define the maximum amount that sould be found of this object to pass the check. Use -1 to ignore the maximum count'
-                )
-            ),
-            array(
-                'id' => 'draw_mode',
-                'callback' => array( $this->rules_callbacks, 'selectField' ),
-                'args' => array(
-                    'option_name' => 'irisnet_plugin_rules',
-                    'select_options' => self::$drawModeVars,
-                    'array' => 'rule_name',
-                    'description' => 'The draw mode that will be used for the output media.',
-                    'tooltip' => 'Is only applied on the output image.'
-                )
-            )
-        );
-        $paramFields = array_merge($paramFields, array($defaultFields[1]));
-
         $groupFields = array();
         foreach (self::$classObjectGroups as $groupName => $classes) {
             
             $classFields = array();
             foreach ($classes as $className => $plural) {
+
+                $paramFields = array();
+                // we do not want the user to set min or max values for illegal symbols
+                if ($className !== 'illegalSymbols') {
+                    $paramFields = array(
+                        array(
+                            'id' => 'min',
+                            'callback' => array( $this->rules_callbacks, 'textField' ),
+                            'args' => array(
+                                'option_name' => 'irisnet_plugin_rules',
+                                'type' => 'number',
+                                'min' => '0',
+                                'placeholder' => 'e.g. 0',
+                                'array' => 'rule_name',
+                                'description' => "Minimum amount of $plural.",
+                                'tooltip' => "Define the minimum amount of $plural that sould be found to pass the check."
+                            )
+                        ),
+                        array(
+                            'id' => 'max',
+                            'callback' => array( $this->rules_callbacks, 'textField' ),
+                            'args' => array(
+                                'option_name' => 'irisnet_plugin_rules',
+                                'type' => 'number',
+                                'min' => '-1',
+                                'placeholder' => 'e.g. 5',
+                                'array' => 'rule_name',
+                                'description' => "Maximum amount of $plural.",
+                                'tooltip' => "Define the maximum amount of $plural that sould be found to pass the check. Use -1 to ignore the maximum count"
+                            )
+                        )
+                    );
+                }
+                $paramFields[] = array(
+                    'id' => 'draw_mode',
+                    'callback' => array( $this->rules_callbacks, 'selectField' ),
+                    'args' => array(
+                        'option_name' => 'irisnet_plugin_rules',
+                        'select_options' => self::$drawModeVars,
+                        'array' => 'rule_name',
+                        'description' => 'Define how the image will be censored.',
+                        'tooltip' => 'Is only applied on the output image.'
+                    )
+                );
+                $paramFields = array_merge($paramFields, array($defaultFields[1]));
+
+                
+                // we have different descriptions for cases were there is no min or max input fields
+                if ($className !== 'illegalSymbols') {
+                    $description = "Define how many $plural should be allowed (min/max values) on an image and what the censord image should look like (draw mode and color).";
+                } else {
+                    $description = "Define how the $plural should censord in the output image (draw mode and color).";
+                }
+
                 $classFields[] = array(
                     'id' => $className,
                     'callback' => array( $this->rules_callbacks, 'infoText' ),
@@ -202,7 +217,7 @@ class RulesController extends BaseController
                         'option_name' => 'irisnet_plugin_rules',
                         'title' => ucfirst($className). ' Parameters',
                         'label_for' => $className,
-                        'description' => "The $className classification object parameters will apply to all recognized $plural.",
+                        'description' => $description,
                         'fields' => $paramFields
                     )
                 );
@@ -266,7 +281,9 @@ class RulesController extends BaseController
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
                     'label_for' => 'default',
-                    'description' => 'Define base parameter settings that are valid for all of the classification objects. Single parameter settings can be still overwritten within each classification object if needed.' .
+                    'description' => 'Define base settings that are valid for all of the following parameters. ' .
+                        'Single parameter settings can be still overwritten within each object if needed. ' .
+                        'Leave this option off, if you don\'t want to fine tune the AI. ' .
                         '<br>See INDefault Schema in <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further information.',
                     'switch' => $switch,
                     'fields' => $defaultFields,
@@ -279,7 +296,7 @@ class RulesController extends BaseController
                 'page' => 'irisnet_rules',
                 'section' => 'irisnet_rules_index',
                 'args' => array(
-                    'description' => '<b>The following options, within the toggle groups, represent the classification objects recognized by the irisnet AI. ' .
+                    'description' => '<b>The following options, within the toggle groups, represent the classification objects (e.g. face, hand, child, breast) recognized by the irisnet AI. ' .
                         'Each classification or their parameter settings within can be left off or empty. In that case default settings will applied.</b>' .
                         '<br>See INParam Schema in <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further information ' .
                         'on each classification object and their default settings.',

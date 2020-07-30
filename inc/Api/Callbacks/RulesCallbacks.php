@@ -18,7 +18,7 @@ class RulesCallbacks
 
     public function rulesSectionManager()
     {
-        echo 'Create your custom rules. See the <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further details.';
+        echo 'Create your custom rules to describe what the AI should see as a violation of your guidelines. A rule is composed out of a set of settings for each classification object. A classification object is the single object that can be recognized by the AI (e.g. Face, Hand, Child, Breast etc.). See the <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further details.';
     }
 
     public function rulesSanitize($input)
@@ -103,6 +103,8 @@ class RulesCallbacks
         if (isset($_POST["edit_rule"])) {
             $input = get_option($option_name);
             $value = isset($input[$_POST["edit_rule"]][$name]) ? $input[$_POST["edit_rule"]][$name] : '';
+            if (isset($args['value']) && $value === '')
+                $value = $args['value'];
 
             if($name == $args['array']) {
                 $readonly = 'readonly';
@@ -111,12 +113,12 @@ class RulesCallbacks
 
         echo '<div class="input-option">';
 
-        if (isset($args['tooltip'])) {
+        if (isset($args['tooltip']) && $type !== 'hidden') {
             echo '<div class="tooltip">&#9432;<span class="tooltiptext">' . $args['tooltip'] . '</span></div>&nbsp;';
         }
 
         echo '<input type="' . $type . '" step="' . $step . '" ' . $min . ' ' . $max . ' class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" placeholder="' . $args['placeholder'] . '" ' . $required . ' ' . $readonly . '>';
-        if (isset($args['description'])) {
+        if (isset($args['description']) && $type !== 'hidden') {
             echo '<p class="help-text">' . $args['description'] . '</p>';
         }
 

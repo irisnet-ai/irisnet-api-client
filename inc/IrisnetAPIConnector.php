@@ -303,7 +303,15 @@ class IrisnetAPIConnector
             foreach ($option as $key => $value) {
                 $exploded = explode('_', $key, 2);
                 if ($exploded[0] === $class) {
-                    $data[$exploded[1]] = $value;
+                    // treat illegal symbols different then the rest, if the illegalSymbols switch is active.
+                    // The user should not have the option to choose min or max values, instead we set min=0
+                    // and max=0 for the user
+                    if ($exploded[0] === 'illegalSymbols' && ($exploded[1] === 'switch')) {
+                        $data['min'] = '0';
+                        $data['max'] = '0';
+                    } else {
+                        $data[$exploded[1]] = $value;
+                    }
                     unset($option[$key]);
                 }
             }
