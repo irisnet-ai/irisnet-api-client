@@ -37,7 +37,7 @@ To make use of the plugin you need to add a valid license key. From the `Irisnet
 >Or get a limited license for demonstrational or testing purposes: [free license key](https://www.irisnet.de/kasse?add-to-cart=26542)
 
 ### Rules
-Rules can be added in order to customize the the ai settings. Depending on your needs you might want to deny user uploads that contain nudity or illegal symbols. All this can be configured as one or more rule sets. Go to `Irisnet API -> Rules` and click to the `Add New Rule` tab. From here you can add a name (which can later be referenced) and a description. Follow the on screen instructions to setup your rule set for the ai to follow.
+Rules can be added in order to customize the the AI settings. Depending on your needs you might want to deny user uploads that contain nudity or illegal symbols. All this can be configured as one or more rule sets. Go to `Irisnet API -> Rules` and click to the `Add New Rule` tab. From here you can add a name (which can later be referenced) and a description. Follow the on screen instructions to setup your rule set for the AI to follow.
 
 Once saved, you are redirected to the list of all rules with name, description and cost (*learn more about cost [here](https://www.irisnet.de/prices/#faq)*). From here you can also `Edit` or `Delete` the listed rules. From the `Add New Rule` tab you can add further rules that can differ from each other, so that you can implement the different rules (by name) for any case that you need.
 
@@ -45,7 +45,7 @@ Once saved, you are redirected to the list of all rules with name, description a
 The dashboard gives you a quick overview on the currently used licenses and rules, as well as some quick links to related places.
 
 #### Example Usage
-The `Example Usage` tab gives you some examples on how to integrate the ai prediction to your WordPress site. Choose the one that best fits your case and then go from there.
+The `Example Usage` tab gives you some examples on how to integrate the AI prediction to your WordPress site. Choose the one that best fits your case and then go from there.
 
 #### Documentation
 The `Documentation` tab shows you the functionality that is added with this plugin. Use the documented mathod calls to add the functionality as required.
