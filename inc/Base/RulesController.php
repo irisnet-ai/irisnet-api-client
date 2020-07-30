@@ -130,7 +130,7 @@ class RulesController extends BaseController
                     'array' => 'rule_name',
                     'description' => 'The AI recognition level (expert setting)',
                     'tooltip' => 'Lowering the value will increase the probability of recognizing objects (e.g. recognizing faces in poorly lit situations). Setting the value too low however, can cause the AI ' .
-                        'to see objects were there is similarity (e.g. confuse a dog face for a human face). Use this setting to fine tune the AI, depending on the images you are analyzing. In most cases the default (empty) is the right choice.'
+                        'to see objects where there is similarity (e.g. confuse a dog face for a human face). Use this setting to fine tune the AI, depending on the images you are analyzing. In most cases the default (empty) is the right choice.'
                 )
             ),
             array(
