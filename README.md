@@ -48,7 +48,7 @@ The dashboard gives you a quick overview on the currently used licenses and rule
 The `Example Usage` tab gives you some examples on how to integrate the AI prediction to your WordPress site. Choose the one that best fits your case and then go from there.
 
 #### Documentation
-The `Documentation` tab shows you the functionality that is added with this plugin. Use the documented mathod calls to add the functionality as required.
+The `Documentation` tab shows you the functionality that is added with this plugin. Use the documented method calls to add the functionality as required.
 
 ### Contributing
 If you want to contribute to our project or have an idea for improvement leave an improvement issue or contact us on [www.irisnet.de](https://www.irisnet.de).
