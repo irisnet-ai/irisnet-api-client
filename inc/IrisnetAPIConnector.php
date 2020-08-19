@@ -283,7 +283,7 @@ class IrisnetAPIConnector
         $default = new INDefault();
         foreach ($keys as $key) {
             $exploded = explode('_', $key, 2);
-            if ($exploded[0] === 'default') {
+            if ($exploded[0] === 'default' && $exploded[1] !== 'switch') {
                 $default->{'set' . ucfirst($exploded[1])}($option[$key]);
                 unset($option[$key]);
             }
