@@ -16,7 +16,7 @@ class RulesController extends BaseController
     private $callbacks;
     private $rules_callbacks;
 
-    private $subpages = array();
+    private $subPages = array();
 
     private static $drawModeVars = array(
         0 => 'none',
@@ -54,18 +54,18 @@ class RulesController extends BaseController
         $this->callbacks = new AdminCallbacks();
         $this->rules_callbacks = new RulesCallbacks();
 
-        $this->setSubpages();
+        $this->setSubPages();
         
         $this->setSettings();
         $this->setSections();
         $this->setFields();
 
-        $this->settings->addSubPages($this->subpages)->register();
+        $this->settings->addSubPages($this->subPages)->register();
     }
 
-    private function setSubpages()
+    private function setSubPages()
     {
-        $this->subpages = array(
+        $this->subPages = array(
             array(
                 'parent_slug' => 'irisnet_dash',
                 'page_title' => 'Rules Management',
@@ -169,7 +169,7 @@ class RulesController extends BaseController
                                 'placeholder' => 'e.g. 0',
                                 'array' => 'rule_name',
                                 'description' => "Minimum amount of $plural.",
-                                'tooltip' => "Define the minimum amount of $plural that sould be found to pass the check."
+                                'tooltip' => "Define the minimum amount of $plural that should be found to pass the check."
                             )
                         ),
                         array(
@@ -182,7 +182,7 @@ class RulesController extends BaseController
                                 'placeholder' => 'e.g. 5',
                                 'array' => 'rule_name',
                                 'description' => "Maximum amount of $plural.",
-                                'tooltip' => "Define the maximum amount of $plural that sould be found to pass the check. Use -1 to ignore the maximum count"
+                                'tooltip' => "Define the maximum amount of $plural that should be found to pass the check. Use -1 to ignore the maximum count"
                             )
                         )
                     );
