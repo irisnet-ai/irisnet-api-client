@@ -26,7 +26,7 @@ class IrisnetAPIConnector
      * Sets the rule set for the upcoming checks.
      *
      * @param string $rule the given name of the rule set.
-     * @throws IrisnetException is thrown in case that the rule name could not be found or if the API request failes (will contain the status code and the message returned from the failed API request).
+     * @throws IrisnetException is thrown in case that the rule name could not be found or if the API request fails (will contain the status code and the message returned from the failed API request).
      * @return boolean TRUE if the rule set is successfully applied.
      */
     public static function setRules(string $rule) : bool
@@ -41,7 +41,7 @@ class IrisnetAPIConnector
             $apiInstance->setINParams($parameters);
             return true;
         } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occoured while performing the API request '/v1/setParameters'. ApiResponse: " . $e->getMessage(), $e->getCode());
+            throw new IrisnetException("An Exception occurred while performing the API request '/v1/setParameters'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
     }
     
@@ -50,11 +50,11 @@ class IrisnetAPIConnector
      *
      * @param string $file the name (including path) of the image that needs to be checked.
      * @param integer $detail Sets the response details. Use 1 (default) for minimum detail (better API performance), 2 for medium details and 3 for all details.
-     * @param string $rule the given name of the rule set. Ommit if the cost of the last set rule set should be determined.
-     * @param integer $licenseId the id of the license key to use. Ommit if the next available license key should be used.
+     * @param string $rule the given name of the rule set. Omit if the cost of the last set rule set should be determined.
+     * @param integer $licenseId the id of the license key to use. Omit if the next available license key should be used.
      * @throws IrisnetException is thrown in case that the rule name could not be found, if the license id does not exist, 
      * if the license key is not active or out of credits, if the specified filename does not exist 
-     * or if the API request failes (will contain the status code and the message returned from the failed API request).
+     * or if the API request fails (will contain the status code and the message returned from the failed API request).
      * @return IrisNet Contains information on the AI result from the source media check. See <a href="https://www.irisnet.de/api/">API page</a> for more information
      */
     public static function processImage(string $file, int $detail = 1, string $rule = null, int $licenseId = null) : IrisNet
@@ -88,7 +88,7 @@ class IrisnetAPIConnector
         try {
             return $apiInstance->checkImage($key, $detail, new \SplFileObject($file));
         } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occoured while performing the API request '/v1/check-image'. ApiResponse: " . $e->getMessage(), $e->getCode());
+            throw new IrisnetException("An Exception occurred while performing the API request '/v1/check-image'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
     }
 
@@ -97,7 +97,7 @@ class IrisnetAPIConnector
      *
      * @param string $filename the name of the file (without path) that should be downloaded. Is equal to the file name that was processed.
      * @param string $downloadPath the location (folder) of where to save the downloaded file. When omitted the return type is SplFileObject
-     * @throws IrisnetException is thrown in case that the API request failes (will contain the status code and the message returned from the failed API request).
+     * @throws IrisnetException is thrown in case that the API request fails (will contain the status code and the message returned from the failed API request).
      * @return boolean|\SplFileObject returns FALSE in case that the file could not be saved at the specified location
      */
     public static function getProcessedImage(string $filename, string $downloadPath = null) {
@@ -113,7 +113,7 @@ class IrisnetAPIConnector
 
             return !file_put_contents($downloadPath . $filename, $file->fread($file->getSize())) ? false : true;
         } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occoured while performing the API request '/v1/download'. ApiResponse: " . $e->getMessage(), $e->getCode());
+            throw new IrisnetException("An Exception occurred while performing the API request '/v1/download'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
     }
 
@@ -121,8 +121,8 @@ class IrisnetAPIConnector
      * Determines the cost in credits of the rule set.
      *
      * @ignore
-     * @param string $rule the given name of the rule set. Ommit if the cost of the last set rule set should be determined.
-     * @throws IrisnetException is thrown in case that the given rule name could not be found or if the API request failes (will contain the status code and the message returned from the failed API request).
+     * @param string $rule the given name of the rule set. Omit if the cost of the last set rule set should be determined.
+     * @throws IrisnetException is thrown in case that the given rule name could not be found or if the API request fails (will contain the status code and the message returned from the failed API request).
      * @return integer
      */
     public static function getCost(string $rule = null) : int
@@ -138,13 +138,13 @@ class IrisnetAPIConnector
 
             return intval($apiInstance->getAICost());
         } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occoured while performing the API request '/v1/cost'. ApiResponse: " . $e->getMessage(), $e->getCode());
+            throw new IrisnetException("An Exception occurred while performing the API request '/v1/cost'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
     }
 
     /**
      * Refreshes the credits stats of all active license keys.
-     * In case that the API request failes an error notification is displayed in the admin area.
+     * In case that the API request fails an error notification is displayed in the admin area.
      *
      * @ignore
      * @return void

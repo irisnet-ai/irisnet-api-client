@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="API Documentation" version="2.9.1">
   <partials/>
-  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="f191a2d7264b97adb3f1d39d379e0d1c" package="IrisnetAPIPlugin">
+  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="03ab592772a1b5a8db7e28141c597834" package="IrisnetAPIPlugin">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -35,7 +35,7 @@
           <tag name="param" line="32" description="&lt;p&gt;the given name of the rule set.&lt;/p&gt;" type="string" variable="$rule">
             <type>string</type>
           </tag>
-          <tag name="throws" line="32" description="is thrown in case that the rule name could not be found or if the API request failes (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
+          <tag name="throws" line="32" description="is thrown in case that the rule name could not be found or if the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
             <type>\IrisnetException</type>
           </tag>
           <tag name="return" line="32" description="TRUE if the rule set is successfully applied." type="boolean">
@@ -60,13 +60,13 @@
           <tag name="param" line="60" description="&lt;p&gt;Sets the response details. Use 1 (default) for minimum detail (better API performance), 2 for medium details and 3 for all details.&lt;/p&gt;" type="integer" variable="$detail">
             <type>integer</type>
           </tag>
-          <tag name="param" line="60" description="&lt;p&gt;the given name of the rule set. Ommit if the cost of the last set rule set should be determined.&lt;/p&gt;" type="string" variable="$rule">
+          <tag name="param" line="60" description="&lt;p&gt;the given name of the rule set. Omit if the cost of the last set rule set should be determined.&lt;/p&gt;" type="string" variable="$rule">
             <type>string</type>
           </tag>
-          <tag name="param" line="60" description="&lt;p&gt;the id of the license key to use. Ommit if the next available license key should be used.&lt;/p&gt;" type="integer" variable="$licenseId">
+          <tag name="param" line="60" description="&lt;p&gt;the id of the license key to use. Omit if the next available license key should be used.&lt;/p&gt;" type="integer" variable="$licenseId">
             <type>integer</type>
           </tag>
-          <tag name="throws" line="60" description="is thrown in case that the rule name could not be found, if the license id does not exist,&#10;if the license key is not active or out of credits, if the specified filename does not exist&#10;or if the API request failes (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
+          <tag name="throws" line="60" description="is thrown in case that the rule name could not be found, if the license id does not exist,&#10;if the license key is not active or out of credits, if the specified filename does not exist&#10;or if the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
             <type>\IrisnetException</type>
           </tag>
           <tag name="return" line="60" description="Contains information on the AI result from the source media check. See &lt;a href=&quot;https://www.irisnet.de/api/&quot;&gt;API page&lt;/a&gt; for more information" type="\OpenAPI\Client\Model\IrisNet">
@@ -106,7 +106,7 @@
           <tag name="param" line="103" description="&lt;p&gt;the location (folder) of where to save the downloaded file. When omitted the return type is SplFileObject&lt;/p&gt;" type="string" variable="$downloadPath">
             <type>string</type>
           </tag>
-          <tag name="throws" line="103" description="is thrown in case that the API request failes (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
+          <tag name="throws" line="103" description="is thrown in case that the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
             <type>\IrisnetException</type>
           </tag>
           <tag name="return" line="103" description="returns FALSE in case that the file could not be saved at the specified location" type="boolean|\SplFileObject">
