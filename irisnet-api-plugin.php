@@ -1,13 +1,13 @@
 <?php
 
-define('IRISNET_API_PLUGIN_VERSION', '1.0.1');
+define('IRISNET_API_CLIENT_VERSION', '1.0.1');
 
 /**
- * @package IrisnetAPIPlugin
+ * @package IrisnetAPIClient
  */
 /*
-Plugin Name: Irisnet API Plugin
-Plugin URI: https://github.com/irisnet-ai/irisnet-api-plugin
+Plugin Name: Irisnet API Client
+Plugin URI: https://github.com/irisnet-ai/irisnet-api-client
 Description: Irisnet is a new tech startup, that specializes in the development of Artificial Intelligence (AI) systems based on neural networks for image-processing in realtime. This plugin facilitates the usage of the irisnet API. 
 Author: Irisnet
 Author URI: https://www.irisnet.de/
@@ -39,20 +39,20 @@ if (file_exists(dirname(__FILE__) . '/vendor/autoload.php')) {
 /**
  * The code that runs during plugin activation
  */
-function activate_irisnet_api_plugin()
+function activate_irisnet_api_client()
 {
     Inc\Base\Activate::activate();
 }
-register_activation_hook(__FILE__, 'activate_irisnet_api_plugin');
+register_activation_hook(__FILE__, 'activate_irisnet_api_client');
 
 /**
  * The code that runs during plugin deactivation
  */
-function deactivate_irisnet_api_plugin()
+function deactivate_irisnet_api_client()
 {
     Inc\Base\Deactivate::deactivate();
 }
-register_deactivation_hook(__FILE__, 'deactivate_irisnet_api_plugin');
+register_deactivation_hook(__FILE__, 'deactivate_irisnet_api_client');
 
 if (class_exists('Inc\\Init')) {
     Inc\Init::register_services();

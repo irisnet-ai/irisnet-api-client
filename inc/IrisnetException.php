@@ -1,6 +1,6 @@
 <?php
 /**
- * @package IrisnetAPIPlugin
+ * @package IrisnetAPIClient
  */
 
 class IrisnetException extends \Exception

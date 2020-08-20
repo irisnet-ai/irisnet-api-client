@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="API Documentation" version="2.9.1">
   <partials/>
-  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="03ab592772a1b5a8db7e28141c597834" package="IrisnetAPIPlugin">
+  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="2ab94a1e0ef6d306c2ed53e8ef182116" package="IrisnetAPIClient">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
-      <tag name="package" line="0" description="IrisnetAPIPlugin"/>
+      <tag name="package" line="0" description="IrisnetAPIClient"/>
     </docblock>
     <namespace-alias name="Client">\GuzzleHttp\Client</namespace-alias>
     <namespace-alias name="RulesController">\Inc\Base\RulesController</namespace-alias>
@@ -17,16 +17,16 @@
     <namespace-alias name="INDefault">\OpenAPI\Client\Model\INDefault</namespace-alias>
     <namespace-alias name="AIOperationsApi">\OpenAPI\Client\Api\AIOperationsApi</namespace-alias>
     <namespace-alias name="LicenseKeyOperationsApi">\OpenAPI\Client\Api\LicenseKeyOperationsApi</namespace-alias>
-    <class final="false" abstract="false" namespace="" line="20" package="IrisnetAPIPlugin">
+    <class final="false" abstract="false" namespace="" line="20" package="IrisnetAPIClient">
       <extends/>
       <name>IrisnetAPIConnector</name>
       <full_name>\IrisnetAPIConnector</full_name>
       <docblock line="20">
         <description>Helper class to connect to the irisnet API.</description>
         <long-description></long-description>
-        <tag name="package" line="20" description="IrisnetAPIPlugin"/>
+        <tag name="package" line="20" description="IrisnetAPIClient"/>
       </docblock>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="32" package="IrisnetAPIPlugin">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="32" package="IrisnetAPIClient">
         <name>setRules</name>
         <full_name>\IrisnetAPIConnector::setRules()</full_name>
         <docblock line="32">
@@ -48,7 +48,7 @@
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="60" package="IrisnetAPIPlugin">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="60" package="IrisnetAPIClient">
         <name>processImage</name>
         <full_name>\IrisnetAPIConnector::processImage()</full_name>
         <docblock line="60">
@@ -94,7 +94,7 @@
           <type>integer</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="103" package="IrisnetAPIPlugin">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="103" package="IrisnetAPIClient">
         <name>getProcessedImage</name>
         <full_name>\IrisnetAPIConnector::getProcessedImage()</full_name>
         <docblock line="103">
@@ -130,7 +130,7 @@
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>
   </file>
-  <package name="IrisnetAPIPlugin" full_name="IrisnetAPIPlugin"/>
+  <package name="IrisnetAPIClient" full_name="IrisnetAPIClient"/>
   <package name="global" full_name="global"/>
   <namespace name="global" full_name="global"/>
   <deprecated count="0"/>

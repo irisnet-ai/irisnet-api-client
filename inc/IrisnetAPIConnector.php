@@ -1,6 +1,6 @@
 <?php
 /**
- * @package IrisnetAPIPlugin
+ * @package IrisnetAPIClient
  */
 
 use \GuzzleHttp\Client;

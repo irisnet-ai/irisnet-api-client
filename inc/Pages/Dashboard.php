@@ -1,6 +1,6 @@
 <?php
 /**
- * @package IrisnetAPIPlugin
+ * @package IrisnetAPIClient
  */
 namespace Inc\Pages;
 
@@ -31,7 +31,7 @@ class Dashboard extends BaseController
     {
         $this->pages = array(
             array(
-                'page_title' => 'Irisnet API Plugin',
+                'page_title' => 'Irisnet API Client',
                 'menu_title' => 'Irisnet API',
                 'capability' => 'manage_options',
                 'menu_slug' => 'irisnet_dash',

@@ -1,6 +1,6 @@
-# Irisnet API Plugin
+# Irisnet API Client
 
-The Irisnet API Plugin allows you to add AI functionality to WordPress, that can help you to block or blur user content in real-time.
+The Irisnet API Client allows you to add AI functionality to WordPress, that can help you to block or blur user content in real-time.
 
 <img alt="irisnet logo" src="https://www.irisnet.de/wp-content/uploads/2020/04/irisnet_logo.svg" width="40%">
 
@@ -13,21 +13,21 @@ Go to the releases section of the repository and download the most recent releas
 `npm`, `composer` and `git` are required to execute the following script from a unix based system.
 
 ```shell script
-git clone https://github.com/irisnet-ai/irisnet-api-plugin.git && \
-cd irisnet-api-plugin/ && \
+git clone https://github.com/irisnet-ai/irisnet-api-client.git && \
+cd irisnet-api-client/ && \
 npm install && \
 composer install --no-dev && \
 rm -rf `find . -type d -name ".git*"` node_modules src && \
 rm .gitignore composer.* gulpfile.js README.md build.xml phpcs.xml package* && \
 cd ../ && \
-zip -r irisnet-api-plugin.zip irisnet-api-plugin && \
-rm -rf irisnet-api-plugin
+zip -r irisnet-api-client.zip irisnet-api-client && \
+rm -rf irisnet-api-client
 ```
 
 The script above will create a WordPress ready install package in the directory you are currently in. Use this zip file to install the plugin as explained above.
 
 ## How to use
-From your WordPress admin panel go to `Plugins -> Installed Plugins` and scroll down the list until you find `Irisnet API Plugin`. You will need to activate the plugin to use it. Then click on Irisnet API in the left menu.
+From your WordPress admin panel go to `Plugins -> Installed Plugins` and scroll down the list until you find `Irisnet API Client`. You will need to activate the plugin to use it. Then click on Irisnet API in the left menu.
 
 ### Licenses
 To make use of the plugin you need to add a valid license key. From the `Irisnet Dashboard` click on `Manage Licenses` in the `Licenses` pane. From there go to the `Add New License` tab and enter the license key in the text box. Make sure to turn the `Active` switch on and save. 

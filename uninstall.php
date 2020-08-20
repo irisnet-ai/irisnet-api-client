@@ -3,7 +3,7 @@
 /**
  * Trigger this file on Plugin uninstall
  *
- * @package IrisnetAPIPlugin
+ * @package IrisnetAPIClient
  */
 
 defined('WP_UNINSTALL_PLUGIN') or die;

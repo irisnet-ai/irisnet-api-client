@@ -1,5 +1,5 @@
 {
-    "name": "irisnet/irisnet-api-plugin",
+    "name": "irisnet/irisnet-api-client",
     "description": "Plugin to connect to the Irisnet API",
     "type": "wordpress-plugin",
     "license": "GPL-3.0",
