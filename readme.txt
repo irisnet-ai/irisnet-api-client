@@ -1,6 +1,5 @@
 === Irisnet API Client ===
 Contributors: irisnet
-Donate link: https://www.irisnet.de
 Tags: ai, artificial intelligence, irisnet, porn blocker, youth protection, AI privacy protection, content moderation, moderation ai, image moderation, nudity blocker
 Requires at least: 5.1
 Requires PHP: 7.1
