@@ -26,7 +26,8 @@
 
 					<?php 
 						foreach ($options as $name => $option) {
-							$description = isset($option['description']) ? $option['description'] : '';
+							$name = esc_attr($name);
+							$description = isset($option['description']) ? esc_attr($option['description']) : '';
 							$cost = isset($option['cost']) ? $option['cost'] : 'N/A';
 
 							echo "<tr>";

@@ -23,6 +23,16 @@ class LicensesCallbacks
             return $input;
         }
 
+        // Sanitize and validate user input
+        $input['license'] = str_replace('"', "", $input['license']);
+        $input['license'] = str_replace("'", "", $input['license']);
+        $args = array(
+            'license'   => FILTER_SANITIZE_STRING,
+            'is_active'    => FILTER_VALIDATE_BOOLEAN,
+            'id'     => FILTER_VALIDATE_INT
+        );
+        $input = filter_var_array($input, $args);
+
         $output = get_option('irisnet_plugin_licenses');
 
         // generate id from options count if no id is given
@@ -101,7 +111,7 @@ class LicensesCallbacks
 
         $value = '';
         if (isset($_POST["edit_license"])) {
-            $value = $_POST["edit_license"];
+            $value = esc_attr($_POST["edit_license"]);
         }
 
         echo '<input type="hidden" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" ' . $placeholder . '>';
@@ -115,7 +125,7 @@ class LicensesCallbacks
 
         if (isset($_POST["edit_license"])) {
             $input = get_option($option_name);
-            $value = $input[$_POST["edit_license"]][$name];
+            $value = esc_attr($input[$_POST["edit_license"]][$name]);
         }
 
         echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" placeholder="' . $args['placeholder'] . '" required>';

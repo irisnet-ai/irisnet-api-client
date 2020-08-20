@@ -26,6 +26,25 @@ class RulesCallbacks
         // Remove empty values
         $input = array_filter($input, 'strlen');
 
+        // Sanitize and validate user input
+        $input['rule_name'] = str_replace('"', "", $input['rule_name']);
+        $input['rule_name'] = str_replace("'", "", $input['rule_name']);
+        $input['rule_name'] = filter_var($input['rule_name'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+        $input['description'] = str_replace('"', "", $input['description']);
+        $input['description'] = str_replace("'", "", $input['description']);
+        $input['description'] = filter_var($input['description'], FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+        foreach($input as $key => $value) {
+            if ($key === 'rule_name' || $key === 'description') {
+                continue;
+            } else if (strpos($key, '_switch')) {
+                $input[$key] = filter_var($input[$key], FILTER_VALIDATE_BOOLEAN);
+            } else if (strpos($key, '_thresh')) {
+                $input[$key] = filter_var($input[$key], FILTER_VALIDATE_FLOAT);
+            } else {
+                $input[$key] = filter_var($input[$key], FILTER_VALIDATE_INT);
+            }
+        }
+
         // retrieve the options from the database
         $output = get_option('irisnet_plugin_rules');
 
@@ -102,7 +121,7 @@ class RulesCallbacks
         $readonly = '';
         if (isset($_POST["edit_rule"])) {
             $input = get_option($option_name);
-            $value = isset($input[$_POST["edit_rule"]][$name]) ? $input[$_POST["edit_rule"]][$name] : '';
+            $value = isset($input[$_POST["edit_rule"]][$name]) ? esc_attr($input[$_POST["edit_rule"]][$name]) : '';
             if (isset($args['value']) && $value === '')
                 $value = $args['value'];
 
@@ -134,7 +153,7 @@ class RulesCallbacks
         $saved = '';
         if (isset($_POST["edit_rule"])) {
             $input = get_option($option_name);
-            $saved = isset($input[$_POST["edit_rule"]][$name]) ? $input[$_POST["edit_rule"]][$name] : '';
+            $saved = isset($input[$_POST["edit_rule"]][$name]) ? esc_attr($input[$_POST["edit_rule"]][$name]) : '';
         }
 
         echo '<div class="input-option">';
@@ -216,6 +235,7 @@ class RulesCallbacks
                 $classes = array_keys($groups[$name]);
 
                 foreach ($keys as $key) {
+                    $key = esc_attr($key);
                     foreach ($classes as $class) {
                         if (strpos($key, $class) === 0) {
                             $hidden = false;
@@ -225,6 +245,7 @@ class RulesCallbacks
                 }
             } else {
                 foreach ($keys as $key) {
+                    $key = esc_attr($key);
                     if (strpos($key, $name) === 0) {
                         $hidden = false;
                         break;

@@ -26,6 +26,7 @@
 
 					<?php 
 						foreach ($options as $key => $option) {
+							$license = esc_attr($option['license']);
 							$is_active = isset($option['is_active']) ? "<span class='positive'>&#10004;</span>" : "<span class='negative'>&#10008;</span>";
 							$credits_info = 'N/A';
 							if (isset($option['credits_used'])) {
@@ -35,7 +36,7 @@
 
 							echo "<tr>";
 								echo "<td>{$key}</td>";
-								echo "<td>{$option['license']}</td>";
+								echo "<td>{$license}</td>";
 								echo "<td class=\"text-center\">{$credits_info}</td>";
 								echo "<td class=\"text-center\">{$is_active}</td>";
 								echo "<td class=\"text-center\">";
