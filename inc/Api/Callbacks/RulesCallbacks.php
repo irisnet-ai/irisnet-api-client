@@ -50,7 +50,7 @@ class RulesCallbacks
 
         // User requested removal of rule set
         if (isset($_POST["remove"])) {
-            unset($output[$_POST["remove"]]);
+            unset($output[sanitize_text_field($_POST["remove"])]);
 
             return $output;
         }
@@ -120,8 +120,8 @@ class RulesCallbacks
         $value = '';
         $readonly = '';
         if (isset($_POST["edit_rule"])) {
-            $input = get_option($option_name);
-            $value = isset($input[$_POST["edit_rule"]][$name]) ? $input[$_POST["edit_rule"]][$name] : '';
+            $option = get_option($option_name);
+            $value = isset($option[$_POST["edit_rule"]][$name]) ? $option[sanitize_text_field($_POST["edit_rule"])][$name] : '';
             if (isset($args['value']) && $value === '')
                 $value = $args['value'];
 
@@ -152,8 +152,8 @@ class RulesCallbacks
 
         $saved = '';
         if (isset($_POST["edit_rule"])) {
-            $input = get_option($option_name);
-            $saved = isset($input[$_POST["edit_rule"]][$name]) ? $input[$_POST["edit_rule"]][$name] : '';
+            $option = get_option($option_name);
+            $saved = isset($option[$_POST["edit_rule"]][$name]) ? $option[sanitize_text_field($_POST["edit_rule"])][$name] : '';
         }
 
         echo '<div class="input-option">';
@@ -224,7 +224,7 @@ class RulesCallbacks
         $hidden = true;
         if (isset($_POST["edit_rule"])) {
             $option = get_option($args['option_name']);
-            $keys = array_keys($option[$_POST["edit_rule"]]);
+            $keys = array_keys($option[sanitize_text_field($_POST["edit_rule"])]);
 
             $groups = array();
             foreach(RulesController::getClassObjectGroups() as $groupName => $c) {

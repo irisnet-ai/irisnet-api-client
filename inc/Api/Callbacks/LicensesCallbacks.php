@@ -46,7 +46,7 @@ class LicensesCallbacks
 
         // User requested removal of data set
         if (isset($_POST["remove"])) {
-            unset($output[$_POST["remove"]]);
+            unset($output[sanitize_text_field($_POST["remove"])]);
             return $output;
         }
             
@@ -125,7 +125,7 @@ class LicensesCallbacks
 
         if (isset($_POST["edit_license"])) {
             $option = get_option($option_name);
-            $value = $option[$_POST["edit_license"]][$name];
+            $value = $option[sanitize_text_field($_POST["edit_license"])][$name];
         }
 
         echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" placeholder="' . $args['placeholder'] . '" required>';
