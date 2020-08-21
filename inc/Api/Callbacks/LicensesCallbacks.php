@@ -111,7 +111,7 @@ class LicensesCallbacks
 
         $value = '';
         if (isset($_POST["edit_license"])) {
-            $value = esc_attr($_POST["edit_license"]);
+            $value = sanitize_text_field($_POST["edit_license"]);
         }
 
         echo '<input type="hidden" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" ' . $placeholder . '>';
@@ -125,7 +125,7 @@ class LicensesCallbacks
 
         if (isset($_POST["edit_license"])) {
             $input = get_option($option_name);
-            $value = esc_attr($input[$_POST["edit_license"]][$name]);
+            $value = $input($_POST["edit_license"]][$name];
         }
 
         echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" placeholder="' . $args['placeholder'] . '" required>';

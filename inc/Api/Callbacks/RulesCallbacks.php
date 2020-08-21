@@ -121,7 +121,7 @@ class RulesCallbacks
         $readonly = '';
         if (isset($_POST["edit_rule"])) {
             $input = get_option($option_name);
-            $value = isset($input[$_POST["edit_rule"]][$name]) ? esc_attr($input[$_POST["edit_rule"]][$name]) : '';
+            $value = isset($input[$_POST["edit_rule"]][$name]) ? $input[$_POST["edit_rule"]][$name] : '';
             if (isset($args['value']) && $value === '')
                 $value = $args['value'];
 
@@ -153,7 +153,7 @@ class RulesCallbacks
         $saved = '';
         if (isset($_POST["edit_rule"])) {
             $input = get_option($option_name);
-            $saved = isset($input[$_POST["edit_rule"]][$name]) ? esc_attr($input[$_POST["edit_rule"]][$name]) : '';
+            $saved = isset($input[$_POST["edit_rule"]][$name]) ? $input[$_POST["edit_rule"]][$name] : '';
         }
 
         echo '<div class="input-option">';
@@ -235,7 +235,6 @@ class RulesCallbacks
                 $classes = array_keys($groups[$name]);
 
                 foreach ($keys as $key) {
-                    $key = esc_attr($key);
                     foreach ($classes as $class) {
                         if (strpos($key, $class) === 0) {
                             $hidden = false;
@@ -245,7 +244,6 @@ class RulesCallbacks
                 }
             } else {
                 foreach ($keys as $key) {
-                    $key = esc_attr($key);
                     if (strpos($key, $name) === 0) {
                         $hidden = false;
                         break;
