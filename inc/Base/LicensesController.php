@@ -16,7 +16,7 @@ class LicensesController extends BaseController
     private $callbacks;
     private $licenses_callbacks;
 
-    private $subpages = array();
+    private $subPages = array();
     private $custom_post_types = array();
 
     public function register()
@@ -25,18 +25,18 @@ class LicensesController extends BaseController
         $this->callbacks = new AdminCallbacks();
         $this->licenses_callbacks = new LicensesCallbacks();
 
-        $this->setSubpages();
+        $this->setSubPages();
 
         $this->setSettings();
         $this->setSections();
         $this->setFields();
 
-        $this->settings->addSubPages($this->subpages)->register();
+        $this->settings->addSubPages($this->subPages)->register();
     }
 
-    private function setSubpages()
+    private function setSubPages()
     {
-        $this->subpages = array(
+        $this->subPages = array(
             array(
                 'parent_slug' => 'irisnet_dash',
                 'page_title' => 'Licenses Manager',

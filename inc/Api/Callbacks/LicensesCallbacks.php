@@ -124,8 +124,8 @@ class LicensesCallbacks
         $value = '';
 
         if (isset($_POST["edit_license"])) {
-            $input = get_option($option_name);
-            $value = $input[$_POST["edit_license"]][$name];
+            $option = get_option($option_name);
+            $value = $option[$_POST["edit_license"]][$name];
         }
 
         echo '<input type="text" class="regular-text" id="' . $name . '" name="' . $option_name . '[' . $name . ']" value="' . $value . '" placeholder="' . $args['placeholder'] . '" required>';
