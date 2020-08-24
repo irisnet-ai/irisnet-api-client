@@ -31,6 +31,13 @@ After that all of the user uploaded images can be blocked, if it does not adhere
 
 == How to Use ==
 
+= Licenses =
+
+To make use of the plugin you need to add a valid license key. From the Irisnet Dashboard click on Manage Licenses in the Licenses pane. From there go to the Add New License tab and enter the license key in the text box. Make sure to turn the Active switch on and save.
+> A license key can be obtained here: irisnet.de
+
+> Or get a limited license for demonstrational or testing purposes: free license key
+
 = Rules =
 
 Rules can be added in order to customize the the AI settings. Depending on your needs you might want to deny user uploads that contain nudity or illegal symbols. 
