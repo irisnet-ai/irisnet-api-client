@@ -75,6 +75,11 @@ However, the uploaded files are always session-bound and will be permanently del
 3. Rules
 4. Licenses
 
+== Upgrade Notice ==
+
+= 1.0 =
+First official release of the Irisnet API Client for WordPress
+
 == Changelog ==
 
 = 1.0.1 =
