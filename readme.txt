@@ -26,7 +26,7 @@ After that all of the user uploaded images can be blocked, if it does not adhere
 1. You can install this plugin from the WordPress Plugin Directory,
   or manually [download the plugin](https://github.com/irisnet-ai/irisnet-api-client/releases) and upload it through the 'Plugins > Add New' menu in WordPress
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Get a [free](https://www.irisnet.de/kasse?add-to-cart=26542) or paid API license key at https://www.irisnet.de/prices
+3. Get a [free](https://www.irisnet.de/kasse?add-to-cart=26542) or paid API license key at [www.irisnet.de/prices](https://www.irisnet.de/prices)
 4. From the 'Irisnet Dashboard' click on 'Manage Licenses' in the Licenses pane. From there go to the 'Add New License' tab and enter the license key in the text box. Make sure to turn the 'Active' switch on and save.
 
 == How to Use ==
@@ -34,9 +34,9 @@ After that all of the user uploaded images can be blocked, if it does not adhere
 = Licenses =
 
 To make use of the plugin you need to add a valid license key. From the Irisnet Dashboard click on Manage Licenses in the Licenses pane. From there go to the Add New License tab and enter the license key in the text box. Make sure to turn the Active switch on and save.
-> A license key can be obtained here: irisnet.de
+> A license key can be obtained here: [www.irisnet.de/prices](https://www.irisnet.de/prices)
 
-> Or get a limited license for demonstrational or testing purposes: free license key
+> Or get a limited license for demonstrational or testing purposes: [free license key](https://www.irisnet.de/kasse?add-to-cart=26542)
 
 = Rules =
 
