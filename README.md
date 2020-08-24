@@ -6,6 +6,12 @@ The Irisnet API Client allows you to add AI functionality to WordPress, that can
 
 ## How to Install
 
+### From the WordPress.org Plugin Directory
+
+The official Irisnet API Client for WordPress can be found here: https://wordpress.org/plugins/irisnet-api/
+
+Alternatively you can install the plugin from your WordPress instance. From your WordPress admin panel, go to `Plugins > Add New` and type `irisnet` in the `search plugins` text field. The Irisnet API Client will appear in the results. Click `install now` to install the plugin.
+
 ### From this repository
 Go to the releases section of the repository and download the most recent release. Then, from your WordPress admin panel, go to `Plugins > Add New` and click the `Upload Plugin` button at the top.
 
