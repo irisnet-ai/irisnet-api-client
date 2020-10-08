@@ -1,4 +1,4 @@
-=== Irisnet API Client ===
+=== Irisnet API Client - AI child protection plugin ===
 Contributors: irisnet
 Tags: ai, artificial intelligence, irisnet, porn blocker, youth protection, AI privacy protection, content moderation, moderation ai, image moderation, nudity blocker
 Requires at least: 5.1

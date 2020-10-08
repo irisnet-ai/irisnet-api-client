@@ -1,12 +1,12 @@
 <?php
 
-define('IRISNET_API_CLIENT_VERSION', '1.0.2');
+define('IRISNET_API_CLIENT_VERSION', '1.0.3');
 
 /**
  * @package IrisnetAPIClient
  */
 /*
-Plugin Name: Irisnet API Client
+Plugin Name: Irisnet API Client - AI child protection plugin
 Plugin URI: https://github.com/irisnet-ai/irisnet-api-client
 Description: Irisnet is a new tech startup, that specializes in the development of Artificial Intelligence (AI) systems based on neural networks for image-processing in realtime. This plugin facilitates the usage of the irisnet API. 
 Author: Irisnet
