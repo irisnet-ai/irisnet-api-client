@@ -31,6 +31,8 @@ class RulesController extends BaseController
         'Base Parameters' => array (
             'face' => 'faces',
             'hand' => 'hands',
+            'foot' => 'feet', 
+            'footwear' => 'shoes or similar footwear', 
             'breast' => 'breasts',
             'vulva' => 'vulvae',
             'penis' => 'penises',
@@ -38,10 +40,11 @@ class RulesController extends BaseController
             'buttocks' => 'buttocks', 
             'anus' => 'ani', 
         ),
-        'Age Verification' => array(
+        'Age Estimation' => array(
             'child' => 'child faces',
             'adult' => 'adult faces',
             'senior' => 'senior faces',
+            'pose' => 'poses (obstructed or looking to the side)',
         ),
         'Illegal Symbols' => array (
             'illegalSymbols' => 'illegal symbols'
