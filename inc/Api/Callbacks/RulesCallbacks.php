@@ -165,7 +165,7 @@ class RulesCallbacks
         echo '<select id="' . $name . '" name="' . $option_name . '[' . $name . ']" >';
         echo '<option value></option>';
         foreach ($select_options as $key => $option) {
-            echo '<option value="' . $key . '" ' . ($saved === strval($key) ? 'selected' : '') . '>' . $option . '</option>';
+            echo '<option value="' . $key . '" ' . ($saved === $key ? 'selected' : '') . '>' . $option . '</option>';
         }
 
         echo '</select>';
