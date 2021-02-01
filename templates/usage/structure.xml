@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="API Documentation" version="2.9.1">
   <partials/>
-  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="2ab94a1e0ef6d306c2ed53e8ef182116" package="IrisnetAPIClient">
+  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="7b3745caa57b9177b3bfb4a937ecf340" package="IrisnetAPIClient">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -15,30 +15,31 @@
     <namespace-alias name="INParam">\OpenAPI\Client\Model\INParam</namespace-alias>
     <namespace-alias name="INParams">\OpenAPI\Client\Model\INParams</namespace-alias>
     <namespace-alias name="INDefault">\OpenAPI\Client\Model\INDefault</namespace-alias>
-    <namespace-alias name="AIOperationsApi">\OpenAPI\Client\Api\AIOperationsApi</namespace-alias>
-    <namespace-alias name="LicenseKeyOperationsApi">\OpenAPI\Client\Api\LicenseKeyOperationsApi</namespace-alias>
-    <class final="false" abstract="false" namespace="" line="20" package="IrisnetAPIClient">
+    <namespace-alias name="EndpointsToSetupTheAIApi">\OpenAPI\Client\Api\EndpointsToSetupTheAIApi</namespace-alias>
+    <namespace-alias name="EndpointsForAIChecksApi">\OpenAPI\Client\Api\EndpointsForAIChecksApi</namespace-alias>
+    <namespace-alias name="MiscellaneousOperationsApi">\OpenAPI\Client\Api\MiscellaneousOperationsApi</namespace-alias>
+    <class final="false" abstract="false" namespace="" line="21" package="IrisnetAPIClient">
       <extends/>
       <name>IrisnetAPIConnector</name>
       <full_name>\IrisnetAPIConnector</full_name>
-      <docblock line="20">
+      <docblock line="21">
         <description>Helper class to connect to the irisnet API.</description>
         <long-description></long-description>
-        <tag name="package" line="20" description="IrisnetAPIClient"/>
+        <tag name="package" line="21" description="IrisnetAPIClient"/>
       </docblock>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="32" package="IrisnetAPIClient">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="33" package="IrisnetAPIClient">
         <name>setRules</name>
         <full_name>\IrisnetAPIConnector::setRules()</full_name>
-        <docblock line="32">
+        <docblock line="33">
           <description>Sets the rule set for the upcoming checks.</description>
           <long-description></long-description>
-          <tag name="param" line="32" description="&lt;p&gt;the given name of the rule set.&lt;/p&gt;" type="string" variable="$rule">
+          <tag name="param" line="33" description="&lt;p&gt;the given name of the rule set.&lt;/p&gt;" type="string" variable="$rule">
             <type>string</type>
           </tag>
-          <tag name="throws" line="32" description="is thrown in case that the rule name could not be found or if the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
+          <tag name="throws" line="33" description="is thrown in case that the rule name could not be found or if the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
             <type>\IrisnetException</type>
           </tag>
-          <tag name="return" line="32" description="TRUE if the rule set is successfully applied." type="boolean">
+          <tag name="return" line="33" description="TRUE if the rule set is successfully applied." type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
@@ -48,28 +49,28 @@
           <type>string</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="60" package="IrisnetAPIClient">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="61" package="IrisnetAPIClient">
         <name>processImage</name>
         <full_name>\IrisnetAPIConnector::processImage()</full_name>
-        <docblock line="60">
+        <docblock line="61">
           <description>Makes the API call to check the image for the specified rules.</description>
           <long-description></long-description>
-          <tag name="param" line="60" description="&lt;p&gt;the name (including path) of the image that needs to be checked.&lt;/p&gt;" type="string" variable="$file">
+          <tag name="param" line="61" description="&lt;p&gt;the name (including path) of the image that needs to be checked.&lt;/p&gt;" type="string" variable="$file">
             <type>string</type>
           </tag>
-          <tag name="param" line="60" description="&lt;p&gt;Sets the response details. Use 1 (default) for minimum detail (better API performance), 2 for medium details and 3 for all details.&lt;/p&gt;" type="integer" variable="$detail">
+          <tag name="param" line="61" description="&lt;p&gt;Sets the response details. Use 1 (default) for minimum detail (better API performance), 2 for medium details and 3 for all details.&lt;/p&gt;" type="integer" variable="$detail">
             <type>integer</type>
           </tag>
-          <tag name="param" line="60" description="&lt;p&gt;the given name of the rule set. Omit if the cost of the last set rule set should be determined.&lt;/p&gt;" type="string" variable="$rule">
+          <tag name="param" line="61" description="&lt;p&gt;the given name of the rule set. Omit if the cost of the last set rule set should be determined.&lt;/p&gt;" type="string" variable="$rule">
             <type>string</type>
           </tag>
-          <tag name="param" line="60" description="&lt;p&gt;the id of the license key to use. Omit if the next available license key should be used.&lt;/p&gt;" type="integer" variable="$licenseId">
+          <tag name="param" line="61" description="&lt;p&gt;the id of the license key to use. Omit if the next available license key should be used.&lt;/p&gt;" type="integer" variable="$licenseId">
             <type>integer</type>
           </tag>
-          <tag name="throws" line="60" description="is thrown in case that the rule name could not be found, if the license id does not exist,&#10;if the license key is not active or out of credits, if the specified filename does not exist&#10;or if the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
+          <tag name="throws" line="61" description="is thrown in case that the rule name could not be found, if the license id does not exist,&#10;if the license key is not active or out of credits, if the specified filename does not exist&#10;or if the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
             <type>\IrisnetException</type>
           </tag>
-          <tag name="return" line="60" description="Contains information on the AI result from the source media check. See &lt;a href=&quot;https://www.irisnet.de/api/&quot;&gt;API page&lt;/a&gt; for more information" type="\OpenAPI\Client\Model\IrisNet">
+          <tag name="return" line="61" description="Contains information on the AI result from the source media check. See &lt;a href=&quot;https://www.irisnet.de/api/&quot;&gt;API page&lt;/a&gt; for more information" type="\OpenAPI\Client\Model\IrisNet">
             <type>\OpenAPI\Client\Model\IrisNet</type>
           </tag>
         </docblock>
@@ -94,22 +95,22 @@
           <type>integer</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="103" package="IrisnetAPIClient">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="104" package="IrisnetAPIClient">
         <name>getProcessedImage</name>
         <full_name>\IrisnetAPIConnector::getProcessedImage()</full_name>
-        <docblock line="103">
+        <docblock line="104">
           <description>Downloads the modified image as specified by the rules parameters, if needed.</description>
           <long-description></long-description>
-          <tag name="param" line="103" description="&lt;p&gt;the name of the file (without path) that should be downloaded. Is equal to the file name that was processed.&lt;/p&gt;" type="string" variable="$filename">
+          <tag name="param" line="104" description="&lt;p&gt;the name of the file (without path) that should be downloaded. Is equal to the file name that was processed.&lt;/p&gt;" type="string" variable="$filename">
             <type>string</type>
           </tag>
-          <tag name="param" line="103" description="&lt;p&gt;the location (folder) of where to save the downloaded file. When omitted the return type is SplFileObject&lt;/p&gt;" type="string" variable="$downloadPath">
+          <tag name="param" line="104" description="&lt;p&gt;the location (folder) of where to save the downloaded file. When omitted the return type is SplFileObject&lt;/p&gt;" type="string" variable="$downloadPath">
             <type>string</type>
           </tag>
-          <tag name="throws" line="103" description="is thrown in case that the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
+          <tag name="throws" line="104" description="is thrown in case that the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
             <type>\IrisnetException</type>
           </tag>
-          <tag name="return" line="103" description="returns FALSE in case that the file could not be saved at the specified location" type="boolean|\SplFileObject">
+          <tag name="return" line="104" description="returns FALSE in case that the file could not be saved at the specified location" type="boolean|\SplFileObject">
             <type>boolean</type>
             <type>\SplFileObject</type>
           </tag>
