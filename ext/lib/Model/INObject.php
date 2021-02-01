@@ -13,7 +13,7 @@
 /**
  * Irisnet API
  *
- * Artificial Intelligence (AI) for image- and video-processing in realtime.
+ * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses.By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
  *
  * The version of the OpenAPI document: v1
  * 
@@ -59,10 +59,11 @@ class INObject implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'in_class' => 'string',
-        'y0' => 'float',
         'x0' => 'float',
+        'y0' => 'float',
         'width' => 'float',
-        'height' => 'float'
+        'height' => 'float',
+        'probability' => 'int'
     ];
 
     /**
@@ -72,10 +73,11 @@ class INObject implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'in_class' => null,
-        'y0' => 'float',
         'x0' => 'float',
+        'y0' => 'float',
         'width' => 'float',
-        'height' => 'float'
+        'height' => 'float',
+        'probability' => 'int32'
     ];
 
     /**
@@ -106,10 +108,11 @@ class INObject implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'in_class' => 'inClass',
-        'y0' => 'y0',
         'x0' => 'x0',
+        'y0' => 'y0',
         'width' => 'width',
-        'height' => 'height'
+        'height' => 'height',
+        'probability' => 'probability'
     ];
 
     /**
@@ -119,10 +122,11 @@ class INObject implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'in_class' => 'setInClass',
-        'y0' => 'setY0',
         'x0' => 'setX0',
+        'y0' => 'setY0',
         'width' => 'setWidth',
-        'height' => 'setHeight'
+        'height' => 'setHeight',
+        'probability' => 'setProbability'
     ];
 
     /**
@@ -132,10 +136,11 @@ class INObject implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'in_class' => 'getInClass',
-        'y0' => 'getY0',
         'x0' => 'getX0',
+        'y0' => 'getY0',
         'width' => 'getWidth',
-        'height' => 'getHeight'
+        'height' => 'getHeight',
+        'probability' => 'getProbability'
     ];
 
     /**
@@ -199,10 +204,11 @@ class INObject implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['in_class'] = isset($data['in_class']) ? $data['in_class'] : null;
-        $this->container['y0'] = isset($data['y0']) ? $data['y0'] : null;
         $this->container['x0'] = isset($data['x0']) ? $data['x0'] : null;
+        $this->container['y0'] = isset($data['y0']) ? $data['y0'] : null;
         $this->container['width'] = isset($data['width']) ? $data['width'] : null;
         $this->container['height'] = isset($data['height']) ? $data['height'] : null;
+        $this->container['probability'] = isset($data['probability']) ? $data['probability'] : null;
     }
 
     /**
@@ -254,30 +260,6 @@ class INObject implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets y0
-     *
-     * @return float|null
-     */
-    public function getY0()
-    {
-        return $this->container['y0'];
-    }
-
-    /**
-     * Sets y0
-     *
-     * @param float|null $y0 The starting point of the rectangle in the horizontal (y) direction.
-     *
-     * @return $this
-     */
-    public function setY0($y0)
-    {
-        $this->container['y0'] = $y0;
-
-        return $this;
-    }
-
-    /**
      * Gets x0
      *
      * @return float|null
@@ -297,6 +279,30 @@ class INObject implements ModelInterface, ArrayAccess
     public function setX0($x0)
     {
         $this->container['x0'] = $x0;
+
+        return $this;
+    }
+
+    /**
+     * Gets y0
+     *
+     * @return float|null
+     */
+    public function getY0()
+    {
+        return $this->container['y0'];
+    }
+
+    /**
+     * Sets y0
+     *
+     * @param float|null $y0 The starting point of the rectangle in the horizontal (y) direction.
+     *
+     * @return $this
+     */
+    public function setY0($y0)
+    {
+        $this->container['y0'] = $y0;
 
         return $this;
     }
@@ -345,6 +351,30 @@ class INObject implements ModelInterface, ArrayAccess
     public function setHeight($height)
     {
         $this->container['height'] = $height;
+
+        return $this;
+    }
+
+    /**
+     * Gets probability
+     *
+     * @return int|null
+     */
+    public function getProbability()
+    {
+        return $this->container['probability'];
+    }
+
+    /**
+     * Sets probability
+     *
+     * @param int|null $probability The probability that the object found matches the classification.
+     *
+     * @return $this
+     */
+    public function setProbability($probability)
+    {
+        $this->container['probability'] = $probability;
 
         return $this;
     }

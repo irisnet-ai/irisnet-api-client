@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseKeyOperationsApi
+ * EndpointsForAIChecksApi
  * PHP version 5
  *
  * @category Class
@@ -12,7 +12,7 @@
 /**
  * Irisnet API
  *
- * Artificial Intelligence (AI) for image- and video-processing in realtime.
+ * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses.By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
  *
  * The version of the OpenAPI document: v1
  * 
@@ -40,14 +40,14 @@ use OpenAPI\Client\HeaderSelector;
 use OpenAPI\Client\ObjectSerializer;
 
 /**
- * LicenseKeyOperationsApi Class Doc Comment
+ * EndpointsForAIChecksApi Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class LicenseKeyOperationsApi
+class EndpointsForAIChecksApi
 {
     /**
      * @var ClientInterface
@@ -116,34 +116,40 @@ class LicenseKeyOperationsApi
     }
 
     /**
-     * Operation getAICost
+     * Operation checkImage
      *
-     * Get the cost of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
+     * Upload and check image against previously chosen configuration.
      *
+     * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  \SplFileObject $file file (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return int
+     * @return \OpenAPI\Client\Model\INError|\OpenAPI\Client\Model\IrisNet
      */
-    public function getAICost()
+    public function checkImage($license_key, $detail = 1, $file = null)
     {
-        list($response) = $this->getAICostWithHttpInfo();
+        list($response) = $this->checkImageWithHttpInfo($license_key, $detail, $file);
         return $response;
     }
 
     /**
-     * Operation getAICostWithHttpInfo
+     * Operation checkImageWithHttpInfo
      *
-     * Get the cost of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
+     * Upload and check image against previously chosen configuration.
      *
+     * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  \SplFileObject $file (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of int, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\INError|\OpenAPI\Client\Model\IrisNet, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getAICostWithHttpInfo()
+    public function checkImageWithHttpInfo($license_key, $detail = 1, $file = null)
     {
-        $request = $this->getAICostRequest();
+        $request = $this->checkImageRequest($license_key, $detail, $file);
 
         try {
             $options = $this->createHttpClientOption();
@@ -175,21 +181,33 @@ class LicenseKeyOperationsApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 200:
-                    if ('int' === '\SplFileObject') {
+                case 402:
+                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'int', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 200:
+                    if ('\OpenAPI\Client\Model\IrisNet' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\IrisNet', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'int';
+            $returnType = '\OpenAPI\Client\Model\IrisNet';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -205,10 +223,18 @@ class LicenseKeyOperationsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\INError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'int',
+                        '\OpenAPI\Client\Model\IrisNet',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -219,17 +245,20 @@ class LicenseKeyOperationsApi
     }
 
     /**
-     * Operation getAICostAsync
+     * Operation checkImageAsync
      *
-     * Get the cost of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
+     * Upload and check image against previously chosen configuration.
      *
+     * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  \SplFileObject $file (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAICostAsync()
+    public function checkImageAsync($license_key, $detail = 1, $file = null)
     {
-        return $this->getAICostAsyncWithHttpInfo()
+        return $this->checkImageAsyncWithHttpInfo($license_key, $detail, $file)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -238,18 +267,21 @@ class LicenseKeyOperationsApi
     }
 
     /**
-     * Operation getAICostAsyncWithHttpInfo
+     * Operation checkImageAsyncWithHttpInfo
      *
-     * Get the cost of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
+     * Upload and check image against previously chosen configuration.
      *
+     * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  \SplFileObject $file (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getAICostAsyncWithHttpInfo()
+    public function checkImageAsyncWithHttpInfo($license_key, $detail = 1, $file = null)
     {
-        $returnType = 'int';
-        $request = $this->getAICostRequest();
+        $returnType = '\OpenAPI\Client\Model\IrisNet';
+        $request = $this->checkImageRequest($license_key, $detail, $file);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -286,36 +318,69 @@ class LicenseKeyOperationsApi
     }
 
     /**
-     * Create request for operation 'getAICost'
+     * Create request for operation 'checkImage'
      *
+     * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  \SplFileObject $file (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getAICostRequest()
+    protected function checkImageRequest($license_key, $detail = 1, $file = null)
     {
+        // verify the required parameter 'license_key' is set
+        if ($license_key === null || (is_array($license_key) && count($license_key) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $license_key when calling checkImage'
+            );
+        }
 
-        $resourcePath = '/v1/cost';
+        $resourcePath = '/v1/check-image/{licenseKey}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        if ($detail !== null) {
+            if('form' === 'form' && is_array($detail)) {
+                foreach($detail as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['detail'] = $detail;
+            }
+        }
 
 
+        // path params
+        if ($license_key !== null) {
+            $resourcePath = str_replace(
+                '{' . 'licenseKey' . '}',
+                ObjectSerializer::toPathValue($license_key),
+                $resourcePath
+            );
+        }
 
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $formParams['file'] = \GuzzleHttp\Psr7\try_fopen(ObjectSerializer::toFormValue($file), 'rb');
+        }
         // body params
         $_tempBody = null;
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['*/*']
+                ['application/xml', 'application/json']
             );
         } else {
             $headers = $this->headerSelector->selectHeaders(
-                ['*/*'],
-                []
+                ['application/xml', 'application/json'],
+                ['multipart/form-data']
             );
         }
 
@@ -362,7 +427,7 @@ class LicenseKeyOperationsApi
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
         return new Request(
-            'GET',
+            'POST',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -370,36 +435,40 @@ class LicenseKeyOperationsApi
     }
 
     /**
-     * Operation getLicenseInfo
+     * Operation checkImageUrl
      *
-     * Get information from given license key.
+     * Check image url against previously chosen configuration.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
+     * @param  string $url url (required)
+     * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\LicenseInfo|\OpenAPI\Client\Model\Error
+     * @return \OpenAPI\Client\Model\INError|\OpenAPI\Client\Model\IrisNet
      */
-    public function getLicenseInfo($license_key)
+    public function checkImageUrl($url, $license_key, $detail = 1)
     {
-        list($response) = $this->getLicenseInfoWithHttpInfo($license_key);
+        list($response) = $this->checkImageUrlWithHttpInfo($url, $license_key, $detail);
         return $response;
     }
 
     /**
-     * Operation getLicenseInfoWithHttpInfo
+     * Operation checkImageUrlWithHttpInfo
      *
-     * Get information from given license key.
+     * Check image url against previously chosen configuration.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
+     * @param  string $url (required)
+     * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\LicenseInfo|\OpenAPI\Client\Model\Error, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\INError|\OpenAPI\Client\Model\IrisNet, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getLicenseInfoWithHttpInfo($license_key)
+    public function checkImageUrlWithHttpInfo($url, $license_key, $detail = 1)
     {
-        $request = $this->getLicenseInfoRequest($license_key);
+        $request = $this->checkImageUrlRequest($url, $license_key, $detail);
 
         try {
             $options = $this->createHttpClientOption();
@@ -431,33 +500,33 @@ class LicenseKeyOperationsApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 200:
-                    if ('\OpenAPI\Client\Model\LicenseInfo' === '\SplFileObject') {
+                case 402:
+                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\LicenseInfo', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 404:
-                    if ('\OpenAPI\Client\Model\Error' === '\SplFileObject') {
+                case 200:
+                    if ('\OpenAPI\Client\Model\IrisNet' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\Error', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\IrisNet', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\LicenseInfo';
+            $returnType = '\OpenAPI\Client\Model\IrisNet';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -473,18 +542,18 @@ class LicenseKeyOperationsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
+                case 402:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\LicenseInfo',
+                        '\OpenAPI\Client\Model\INError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
                     break;
-                case 404:
+                case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\Error',
+                        '\OpenAPI\Client\Model\IrisNet',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -495,18 +564,20 @@ class LicenseKeyOperationsApi
     }
 
     /**
-     * Operation getLicenseInfoAsync
+     * Operation checkImageUrlAsync
      *
-     * Get information from given license key.
+     * Check image url against previously chosen configuration.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
+     * @param  string $url (required)
+     * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getLicenseInfoAsync($license_key)
+    public function checkImageUrlAsync($url, $license_key, $detail = 1)
     {
-        return $this->getLicenseInfoAsyncWithHttpInfo($license_key)
+        return $this->checkImageUrlAsyncWithHttpInfo($url, $license_key, $detail)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -515,19 +586,21 @@ class LicenseKeyOperationsApi
     }
 
     /**
-     * Operation getLicenseInfoAsyncWithHttpInfo
+     * Operation checkImageUrlAsyncWithHttpInfo
      *
-     * Get information from given license key.
+     * Check image url against previously chosen configuration.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
+     * @param  string $url (required)
+     * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getLicenseInfoAsyncWithHttpInfo($license_key)
+    public function checkImageUrlAsyncWithHttpInfo($url, $license_key, $detail = 1)
     {
-        $returnType = '\OpenAPI\Client\Model\LicenseInfo';
-        $request = $this->getLicenseInfoRequest($license_key);
+        $returnType = '\OpenAPI\Client\Model\IrisNet';
+        $request = $this->checkImageUrlRequest($url, $license_key, $detail);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -564,29 +637,59 @@ class LicenseKeyOperationsApi
     }
 
     /**
-     * Create request for operation 'getLicenseInfo'
+     * Create request for operation 'checkImageUrl'
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
+     * @param  string $url (required)
+     * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function getLicenseInfoRequest($license_key)
+    protected function checkImageUrlRequest($url, $license_key, $detail = 1)
     {
+        // verify the required parameter 'url' is set
+        if ($url === null || (is_array($url) && count($url) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $url when calling checkImageUrl'
+            );
+        }
         // verify the required parameter 'license_key' is set
         if ($license_key === null || (is_array($license_key) && count($license_key) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $license_key when calling getLicenseInfo'
+                'Missing the required parameter $license_key when calling checkImageUrl'
             );
         }
 
-        $resourcePath = '/v1/info/{licenseKey}';
+        $resourcePath = '/v1/check-url/{licenseKey}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
         $httpBody = '';
         $multipart = false;
 
+        // query params
+        if ($url !== null) {
+            if('form' === 'form' && is_array($url)) {
+                foreach($url as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['url'] = $url;
+            }
+        }
+        // query params
+        if ($detail !== null) {
+            if('form' === 'form' && is_array($detail)) {
+                foreach($detail as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['detail'] = $detail;
+            }
+        }
 
 
         // path params
@@ -655,7 +758,7 @@ class LicenseKeyOperationsApi
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
         return new Request(
-            'GET',
+            'POST',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

@@ -13,7 +13,7 @@
 /**
  * Irisnet API
  *
- * Artificial Intelligence (AI) for image- and video-processing in realtime.
+ * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses.By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
  *
  * The version of the OpenAPI document: v1
  * 
@@ -36,7 +36,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * INParam Class Doc Comment
  *
  * @category Class
- * @description A single parameter set for describing the behaviour of the AI, when confronted with the specified object classification. Each object has custom parameters that are set if these are empty.
+ * @description A single parameter set for one object, for example face, describing the behaviour of the AI. Each object has default parameters that are set if these are empty.
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
@@ -183,6 +183,7 @@ class INParam implements ModelInterface, ArrayAccess
     const IN_CLASS_CHILD = 'child';
     const IN_CLASS_ADULT = 'adult';
     const IN_CLASS_SENIOR = 'senior';
+    const IN_CLASS_POSE = 'pose';
     const IN_CLASS_HAND = 'hand';
     const IN_CLASS_BREAST = 'breast';
     const IN_CLASS_VULVA = 'vulva';
@@ -190,8 +191,14 @@ class INParam implements ModelInterface, ArrayAccess
     const IN_CLASS_VAGINA = 'vagina';
     const IN_CLASS_BUTTOCKS = 'buttocks';
     const IN_CLASS_ANUS = 'anus';
+    const IN_CLASS_TOY = 'toy';
+    const IN_CLASS_ORAL = 'oral';
+    const IN_CLASS_PENETRATION = 'penetration';
+    const IN_CLASS_FOOT = 'foot';
+    const IN_CLASS_FOOTWEAR = 'footwear';
     const IN_CLASS_NUDITY_CHECK = 'nudityCheck';
     const IN_CLASS_AGE_VERIFICATION = 'ageVerification';
+    const IN_CLASS_AGE_ESTIMATION = 'ageEstimation';
     const IN_CLASS_ILLEGAL_SYMBOLS = 'illegalSymbols';
     
 
@@ -208,6 +215,7 @@ class INParam implements ModelInterface, ArrayAccess
             self::IN_CLASS_CHILD,
             self::IN_CLASS_ADULT,
             self::IN_CLASS_SENIOR,
+            self::IN_CLASS_POSE,
             self::IN_CLASS_HAND,
             self::IN_CLASS_BREAST,
             self::IN_CLASS_VULVA,
@@ -215,8 +223,14 @@ class INParam implements ModelInterface, ArrayAccess
             self::IN_CLASS_VAGINA,
             self::IN_CLASS_BUTTOCKS,
             self::IN_CLASS_ANUS,
+            self::IN_CLASS_TOY,
+            self::IN_CLASS_ORAL,
+            self::IN_CLASS_PENETRATION,
+            self::IN_CLASS_FOOT,
+            self::IN_CLASS_FOOTWEAR,
             self::IN_CLASS_NUDITY_CHECK,
             self::IN_CLASS_AGE_VERIFICATION,
+            self::IN_CLASS_AGE_ESTIMATION,
             self::IN_CLASS_ILLEGAL_SYMBOLS,
         ];
     }
@@ -261,8 +275,8 @@ class INParam implements ModelInterface, ArrayAccess
             );
         }
 
-        if (!is_null($this->container['draw_mode']) && ($this->container['draw_mode'] > 3)) {
-            $invalidProperties[] = "invalid value for 'draw_mode', must be smaller than or equal to 3.";
+        if (!is_null($this->container['draw_mode']) && ($this->container['draw_mode'] > 7)) {
+            $invalidProperties[] = "invalid value for 'draw_mode', must be smaller than or equal to 7.";
         }
 
         if (!is_null($this->container['draw_mode']) && ($this->container['draw_mode'] < 0)) {
@@ -305,7 +319,7 @@ class INParam implements ModelInterface, ArrayAccess
     /**
      * Sets in_class
      *
-     * @param string|null $in_class The classification of the object, that the element refers to. Default parameter values are defined per classification object. The following list contains the default values for 'min', 'max' and 'drawMode' in order. * _face_ _(0, 3, 0)_ - Classification for human faces. * _child_ _(0, 0, 1)_ - Recognizes children's faces. Overwrites classification parameters of face. * _adult_ _(0, -1, 1)_ - Recognizes faces of adults that are not considered seniors. Overwrites classification parameters of face. * _senior_ _(0, -1, 1)_ - Recognizes faces of seniors. Overwrites classification parameters of face. * _hand_ _(0, -1, 0)_ - Classification for recognizing hands. * _breast_ _(0, 0, 2)_ - Object that recognizes female breasts. * _vulva_ _(0, 0, 2)_ - Object that recognizes vulvae. * _penis_ _(0, 0, 2)_ - Object that recognizes penises. * _vagina_ _(0, 0, 2)_ - Object that recognizes vaginae. * _buttocks_ _(0, 0, 2)_ - Object that recognizes buttocks. * _anus_ _(0, 0, 2)_ - Object that recognizes ani. * _illegalSymbols_ _(0, 0, 1)_ - Classification for symbols that are not permitted in Germany.
+     * @param string|null $in_class The classification of the object, that the element refers to. Default parameter values are defined per classification object. The following list contains the default values for 'min', 'max' and 'drawMode' in order.  * _face_ _(1, 3, 0)_ - Classification for human faces. * _child_ _(0, 0, 1)_ - Recognizes children's faces. Overwrites classification parameters of face. * _adult_ _(0, -1, 1)_ - Recognizes faces of adults that are not considered seniors. Overwrites classification parameters of face. * _senior_ _(0, -1, 1)_ - Recognizes faces of seniors. Overwrites classification parameters of face. * _pose_ _(0, 0, 1)_ - The age can not be estimated, due to a pose that hides facial features. * _hand_ _(0, -1, 0)_ - Classification for recognizing hands. * _foot_ _(0, -1, 0)_ - Classification for recognizing feet. * _footwear_ _(0, -1, 0)_ - Classification for recognizing footwear. * _breast_ _(0, 0, 2)_ - Object that recognizes female breasts. * _vulva_ _(0, 0, 2)_ - Object that recognizes vulvae. * _penis_ _(0, 0, 2)_ - Object that recognizes penises. * _vagina_ _(0, 0, 2)_ - Object that recognizes vaginae. * _buttocks_ _(0, 0, 2)_ - Object that recognizes buttocks. * _anus_ _(0, 0, 2)_ - Object that recognizes ani. * _toy_ _(0, 0, 2)_ - Object that recognizes sex toys. * _oral_ _(0, 0, 2)_ - Object that recognizes oral sex. * _penetration_ _(0, 0, 2)_ - Object that recognizes a sexual penetration penetration. * _illegalSymbols_ _(0, 0, 1)_ - Classification for symbols that are not permitted in Germany.  _Please be aware that the default values can be subject to change. This is due to the difficulty of recognizing certain objects e.g. objects that are classified as toy._
      *
      * @return $this
      */
@@ -386,15 +400,15 @@ class INParam implements ModelInterface, ArrayAccess
     /**
      * Sets draw_mode
      *
-     * @param int|null $draw_mode The draw mode that will be used for the output media. '0' will draw nothing, '1' will draw a frame with class name surrounding the object, '2' will draw a filled rectangle that will mask the object and '3' will blur the object.
+     * @param int|null $draw_mode The draw mode that will be used for the creating the media.  * _0_ - will draw nothing, * _1_ - will draw a frame with class name surrounding the object, * _2_ - will draw a filled rectangle that will mask the object, * _3_ - is a combination between _1_ and _2_ (frame/name + mask), * _6_ - will blur the object and * _7_ - is a combination between _1_ and _6_ (frame/name + blur).
      *
      * @return $this
      */
     public function setDrawMode($draw_mode)
     {
 
-        if (!is_null($draw_mode) && ($draw_mode > 3)) {
-            throw new \InvalidArgumentException('invalid value for $draw_mode when calling INParam., must be smaller than or equal to 3.');
+        if (!is_null($draw_mode) && ($draw_mode > 7)) {
+            throw new \InvalidArgumentException('invalid value for $draw_mode when calling INParam., must be smaller than or equal to 7.');
         }
         if (!is_null($draw_mode) && ($draw_mode < 0)) {
             throw new \InvalidArgumentException('invalid value for $draw_mode when calling INParam., must be bigger than or equal to 0.');
@@ -418,7 +432,7 @@ class INParam implements ModelInterface, ArrayAccess
     /**
      * Sets grey
      *
-     * @param int|null $grey A grey scale color to use for frame or masking. '0' will represent black, while the maximum '255' will be white.
+     * @param int|null $grey A grey scale color to use for masking. '0' will represent black, while the maximum '255' will be white.
      *
      * @return $this
      */

@@ -13,7 +13,7 @@
 /**
  * Irisnet API
  *
- * Artificial Intelligence (AI) for image- and video-processing in realtime.
+ * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses.By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
  *
  * The version of the OpenAPI document: v1
  * 
@@ -60,8 +60,8 @@ class IrisNet implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'rules_broken' => 'int',
         'help_suggested' => 'int',
-        'getn_objects' => 'int',
         'getn_classes' => 'int',
+        'getn_objects' => 'int',
         'in_rule' => '\OpenAPI\Client\Model\INRule[]',
         'in_object' => '\OpenAPI\Client\Model\INObject[]'
     ];
@@ -74,8 +74,8 @@ class IrisNet implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'rules_broken' => 'int32',
         'help_suggested' => 'int32',
-        'getn_objects' => 'int32',
         'getn_classes' => 'int32',
+        'getn_objects' => 'int32',
         'in_rule' => null,
         'in_object' => null
     ];
@@ -109,8 +109,8 @@ class IrisNet implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'rules_broken' => 'rulesBroken',
         'help_suggested' => 'helpSuggested',
-        'getn_objects' => 'getnObjects',
         'getn_classes' => 'getnClasses',
+        'getn_objects' => 'getnObjects',
         'in_rule' => 'inRule',
         'in_object' => 'inObject'
     ];
@@ -123,8 +123,8 @@ class IrisNet implements ModelInterface, ArrayAccess
     protected static $setters = [
         'rules_broken' => 'setRulesBroken',
         'help_suggested' => 'setHelpSuggested',
-        'getn_objects' => 'setGetnObjects',
         'getn_classes' => 'setGetnClasses',
+        'getn_objects' => 'setGetnObjects',
         'in_rule' => 'setInRule',
         'in_object' => 'setInObject'
     ];
@@ -137,8 +137,8 @@ class IrisNet implements ModelInterface, ArrayAccess
     protected static $getters = [
         'rules_broken' => 'getRulesBroken',
         'help_suggested' => 'getHelpSuggested',
-        'getn_objects' => 'getGetnObjects',
         'getn_classes' => 'getGetnClasses',
+        'getn_objects' => 'getGetnObjects',
         'in_rule' => 'getInRule',
         'in_object' => 'getInObject'
     ];
@@ -205,8 +205,8 @@ class IrisNet implements ModelInterface, ArrayAccess
     {
         $this->container['rules_broken'] = isset($data['rules_broken']) ? $data['rules_broken'] : null;
         $this->container['help_suggested'] = isset($data['help_suggested']) ? $data['help_suggested'] : null;
-        $this->container['getn_objects'] = isset($data['getn_objects']) ? $data['getn_objects'] : null;
         $this->container['getn_classes'] = isset($data['getn_classes']) ? $data['getn_classes'] : null;
+        $this->container['getn_objects'] = isset($data['getn_objects']) ? $data['getn_objects'] : null;
         $this->container['in_rule'] = isset($data['in_rule']) ? $data['in_rule'] : null;
         $this->container['in_object'] = isset($data['in_object']) ? $data['in_object'] : null;
     }
@@ -284,30 +284,6 @@ class IrisNet implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets getn_objects
-     *
-     * @return int|null
-     */
-    public function getGetnObjects()
-    {
-        return $this->container['getn_objects'];
-    }
-
-    /**
-     * Sets getn_objects
-     *
-     * @param int|null $getn_objects The amount of objects that were recognized on the source media.
-     *
-     * @return $this
-     */
-    public function setGetnObjects($getn_objects)
-    {
-        $this->container['getn_objects'] = $getn_objects;
-
-        return $this;
-    }
-
-    /**
      * Gets getn_classes
      *
      * @return int|null
@@ -327,6 +303,30 @@ class IrisNet implements ModelInterface, ArrayAccess
     public function setGetnClasses($getn_classes)
     {
         $this->container['getn_classes'] = $getn_classes;
+
+        return $this;
+    }
+
+    /**
+     * Gets getn_objects
+     *
+     * @return int|null
+     */
+    public function getGetnObjects()
+    {
+        return $this->container['getn_objects'];
+    }
+
+    /**
+     * Sets getn_objects
+     *
+     * @param int|null $getn_objects The amount of objects that were recognized on the source image.
+     *
+     * @return $this
+     */
+    public function setGetnObjects($getn_objects)
+    {
+        $this->container['getn_objects'] = $getn_objects;
 
         return $this;
     }
@@ -368,7 +368,7 @@ class IrisNet implements ModelInterface, ArrayAccess
     /**
      * Sets in_object
      *
-     * @param \OpenAPI\Client\Model\INObject[]|null $in_object A list of all instances of the classification objects found on the source media.
+     * @param \OpenAPI\Client\Model\INObject[]|null $in_object A list of all instances of the classification objects found on the source image.
      *
      * @return $this
      */

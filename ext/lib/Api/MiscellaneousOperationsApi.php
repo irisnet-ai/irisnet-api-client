@@ -1,6 +1,6 @@
 <?php
 /**
- * AIOperationsApi
+ * MiscellaneousOperationsApi
  * PHP version 5
  *
  * @category Class
@@ -12,7 +12,7 @@
 /**
  * Irisnet API
  *
- * Artificial Intelligence (AI) for image- and video-processing in realtime.
+ * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses.By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
  *
  * The version of the OpenAPI document: v1
  * 
@@ -40,14 +40,14 @@ use OpenAPI\Client\HeaderSelector;
 use OpenAPI\Client\ObjectSerializer;
 
 /**
- * AIOperationsApi Class Doc Comment
+ * MiscellaneousOperationsApi Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class AIOperationsApi
+class MiscellaneousOperationsApi
 {
     /**
      * @var ClientInterface
@@ -116,334 +116,15 @@ class AIOperationsApi
     }
 
     /**
-     * Operation checkImage
-     *
-     * Upload and check image against previously chosen configuration.
-     *
-     * @param  string $license_key License obtained from irisnet.de shop. (required)
-     * @param  int $detail Sets the response details. Use 1 for minimum detail (better API performance), 2 for medium details and 3 for all details. (optional, default to 1)
-     * @param  \SplFileObject $file file (optional)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\Error
-     */
-    public function checkImage($license_key, $detail = 1, $file = null)
-    {
-        list($response) = $this->checkImageWithHttpInfo($license_key, $detail, $file);
-        return $response;
-    }
-
-    /**
-     * Operation checkImageWithHttpInfo
-     *
-     * Upload and check image against previously chosen configuration.
-     *
-     * @param  string $license_key License obtained from irisnet.de shop. (required)
-     * @param  int $detail Sets the response details. Use 1 for minimum detail (better API performance), 2 for medium details and 3 for all details. (optional, default to 1)
-     * @param  \SplFileObject $file (optional)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\Error, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function checkImageWithHttpInfo($license_key, $detail = 1, $file = null)
-    {
-        $request = $this->checkImageRequest($license_key, $detail, $file);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            switch($statusCode) {
-                case 200:
-                    if ('\OpenAPI\Client\Model\IrisNet' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\IrisNet', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                case 402:
-                    if ('\OpenAPI\Client\Model\Error' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\Error', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = '\OpenAPI\Client\Model\IrisNet';
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = (string) $responseBody;
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\IrisNet',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 402:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\Error',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation checkImageAsync
-     *
-     * Upload and check image against previously chosen configuration.
-     *
-     * @param  string $license_key License obtained from irisnet.de shop. (required)
-     * @param  int $detail Sets the response details. Use 1 for minimum detail (better API performance), 2 for medium details and 3 for all details. (optional, default to 1)
-     * @param  \SplFileObject $file (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function checkImageAsync($license_key, $detail = 1, $file = null)
-    {
-        return $this->checkImageAsyncWithHttpInfo($license_key, $detail, $file)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation checkImageAsyncWithHttpInfo
-     *
-     * Upload and check image against previously chosen configuration.
-     *
-     * @param  string $license_key License obtained from irisnet.de shop. (required)
-     * @param  int $detail Sets the response details. Use 1 for minimum detail (better API performance), 2 for medium details and 3 for all details. (optional, default to 1)
-     * @param  \SplFileObject $file (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function checkImageAsyncWithHttpInfo($license_key, $detail = 1, $file = null)
-    {
-        $returnType = '\OpenAPI\Client\Model\IrisNet';
-        $request = $this->checkImageRequest($license_key, $detail, $file);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'checkImage'
-     *
-     * @param  string $license_key License obtained from irisnet.de shop. (required)
-     * @param  int $detail Sets the response details. Use 1 for minimum detail (better API performance), 2 for medium details and 3 for all details. (optional, default to 1)
-     * @param  \SplFileObject $file (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function checkImageRequest($license_key, $detail = 1, $file = null)
-    {
-        // verify the required parameter 'license_key' is set
-        if ($license_key === null || (is_array($license_key) && count($license_key) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $license_key when calling checkImage'
-            );
-        }
-
-        $resourcePath = '/v1/check-image/{licenseKey}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        if ($detail !== null) {
-            if('form' === 'form' && is_array($detail)) {
-                foreach($detail as $key => $value) {
-                    $queryParams[$key] = $value;
-                }
-            }
-            else {
-                $queryParams['detail'] = $detail;
-            }
-        }
-
-
-        // path params
-        if ($license_key !== null) {
-            $resourcePath = str_replace(
-                '{' . 'licenseKey' . '}',
-                ObjectSerializer::toPathValue($license_key),
-                $resourcePath
-            );
-        }
-
-        // form params
-        if ($file !== null) {
-            $multipart = true;
-            $formParams['file'] = \GuzzleHttp\Psr7\try_fopen(ObjectSerializer::toFormValue($file), 'rb');
-        }
-        // body params
-        $_tempBody = null;
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/xml', 'application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/xml', 'application/json'],
-                ['multipart/form-data']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($_tempBody));
-            } else {
-                $httpBody = $_tempBody;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'POST',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation downloadProcessed
      *
-     * Get the resulting image file.
+     * Get the resulting media file.
      *
      * @param  string $filename filename (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\Error|\SplFileObject
+     * @return \SplFileObject|\OpenAPI\Client\Model\INError
      */
     public function downloadProcessed($filename)
     {
@@ -454,13 +135,13 @@ class AIOperationsApi
     /**
      * Operation downloadProcessedWithHttpInfo
      *
-     * Get the resulting image file.
+     * Get the resulting media file.
      *
      * @param  string $filename (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\Error|\SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SplFileObject|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
     public function downloadProcessedWithHttpInfo($filename)
     {
@@ -496,18 +177,6 @@ class AIOperationsApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 404:
-                    if ('\OpenAPI\Client\Model\Error' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\Error', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 200:
                     if ('\SplFileObject' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -517,6 +186,18 @@ class AIOperationsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -538,18 +219,18 @@ class AIOperationsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\Error',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\INError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -562,7 +243,7 @@ class AIOperationsApi
     /**
      * Operation downloadProcessedAsync
      *
-     * Get the resulting image file.
+     * Get the resulting media file.
      *
      * @param  string $filename (required)
      *
@@ -582,7 +263,7 @@ class AIOperationsApi
     /**
      * Operation downloadProcessedAsyncWithHttpInfo
      *
-     * Get the resulting image file.
+     * Get the resulting media file.
      *
      * @param  string $filename (required)
      *
@@ -728,35 +409,34 @@ class AIOperationsApi
     }
 
     /**
-     * Operation setINDefine
+     * Operation getAICost
      *
-     * Set the definitions of the pre-defined rule sets.
+     * Get the cost per image check of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
      *
-     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai in_define_ai (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return void
+     * @return int|\OpenAPI\Client\Model\INError
      */
-    public function setINDefine($in_define_ai)
+    public function getAICost()
     {
-        $this->setINDefineWithHttpInfo($in_define_ai);
+        list($response) = $this->getAICostWithHttpInfo();
+        return $response;
     }
 
     /**
-     * Operation setINDefineWithHttpInfo
+     * Operation getAICostWithHttpInfo
      *
-     * Set the definitions of the pre-defined rule sets.
+     * Get the cost per image check of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
      *
-     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of int|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function setINDefineWithHttpInfo($in_define_ai)
+    public function getAICostWithHttpInfo()
     {
-        $request = $this->setINDefineRequest($in_define_ai);
+        $request = $this->getAICostRequest();
 
         try {
             $options = $this->createHttpClientOption();
@@ -786,28 +466,83 @@ class AIOperationsApi
                 );
             }
 
-            return [null, $statusCode, $response->getHeaders()];
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('int' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'int', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 429:
+                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = 'int';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'int',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 429:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\INError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation setINDefineAsync
+     * Operation getAICostAsync
      *
-     * Set the definitions of the pre-defined rule sets.
+     * Get the cost per image check of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
      *
-     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setINDefineAsync($in_define_ai)
+    public function getAICostAsync()
     {
-        return $this->setINDefineAsyncWithHttpInfo($in_define_ai)
+        return $this->getAICostAsyncWithHttpInfo()
             ->then(
                 function ($response) {
                     return $response[0];
@@ -816,25 +551,35 @@ class AIOperationsApi
     }
 
     /**
-     * Operation setINDefineAsyncWithHttpInfo
+     * Operation getAICostAsyncWithHttpInfo
      *
-     * Set the definitions of the pre-defined rule sets.
+     * Get the cost per image check of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
      *
-     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setINDefineAsyncWithHttpInfo($in_define_ai)
+    public function getAICostAsyncWithHttpInfo()
     {
-        $returnType = '';
-        $request = $this->setINDefineRequest($in_define_ai);
+        $returnType = 'int';
+        $request = $this->getAICostRequest();
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -854,23 +599,16 @@ class AIOperationsApi
     }
 
     /**
-     * Create request for operation 'setINDefine'
+     * Create request for operation 'getAICost'
      *
-     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function setINDefineRequest($in_define_ai)
+    protected function getAICostRequest()
     {
-        // verify the required parameter 'in_define_ai' is set
-        if ($in_define_ai === null || (is_array($in_define_ai) && count($in_define_ai) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $in_define_ai when calling setINDefine'
-            );
-        }
 
-        $resourcePath = '/v1/set-definition';
+        $resourcePath = '/v1/cost';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -882,18 +620,15 @@ class AIOperationsApi
 
         // body params
         $_tempBody = null;
-        if (isset($in_define_ai)) {
-            $_tempBody = $in_define_ai;
-        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
-                []
+                ['*/*']
             );
         } else {
             $headers = $this->headerSelector->selectHeaders(
-                [],
-                ['application/xml', 'application/json']
+                ['*/*'],
+                []
             );
         }
 
@@ -940,7 +675,7 @@ class AIOperationsApi
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
         return new Request(
-            'POST',
+            'GET',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
@@ -948,35 +683,36 @@ class AIOperationsApi
     }
 
     /**
-     * Operation setINParams
+     * Operation getLicenseInfo
      *
-     * Set the behaviour parameters of the single classifications.
+     * Get information from given license key.
      *
-     * @param  \OpenAPI\Client\Model\INParams $in_params in_params (required)
+     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return void
+     * @return \OpenAPI\Client\Model\LicenseInfo|\OpenAPI\Client\Model\INError
      */
-    public function setINParams($in_params)
+    public function getLicenseInfo($license_key)
     {
-        $this->setINParamsWithHttpInfo($in_params);
+        list($response) = $this->getLicenseInfoWithHttpInfo($license_key);
+        return $response;
     }
 
     /**
-     * Operation setINParamsWithHttpInfo
+     * Operation getLicenseInfoWithHttpInfo
      *
-     * Set the behaviour parameters of the single classifications.
+     * Get information from given license key.
      *
-     * @param  \OpenAPI\Client\Model\INParams $in_params (required)
+     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of null, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\LicenseInfo|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function setINParamsWithHttpInfo($in_params)
+    public function getLicenseInfoWithHttpInfo($license_key)
     {
-        $request = $this->setINParamsRequest($in_params);
+        $request = $this->getLicenseInfoRequest($license_key);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1006,28 +742,84 @@ class AIOperationsApi
                 );
             }
 
-            return [null, $statusCode, $response->getHeaders()];
+            $responseBody = $response->getBody();
+            switch($statusCode) {
+                case 200:
+                    if ('\OpenAPI\Client\Model\LicenseInfo' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\LicenseInfo', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\OpenAPI\Client\Model\LicenseInfo';
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = (string) $responseBody;
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\LicenseInfo',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\INError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
             }
             throw $e;
         }
     }
 
     /**
-     * Operation setINParamsAsync
+     * Operation getLicenseInfoAsync
      *
-     * Set the behaviour parameters of the single classifications.
+     * Get information from given license key.
      *
-     * @param  \OpenAPI\Client\Model\INParams $in_params (required)
+     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setINParamsAsync($in_params)
+    public function getLicenseInfoAsync($license_key)
     {
-        return $this->setINParamsAsyncWithHttpInfo($in_params)
+        return $this->getLicenseInfoAsyncWithHttpInfo($license_key)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1036,25 +828,36 @@ class AIOperationsApi
     }
 
     /**
-     * Operation setINParamsAsyncWithHttpInfo
+     * Operation getLicenseInfoAsyncWithHttpInfo
      *
-     * Set the behaviour parameters of the single classifications.
+     * Get information from given license key.
      *
-     * @param  \OpenAPI\Client\Model\INParams $in_params (required)
+     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function setINParamsAsyncWithHttpInfo($in_params)
+    public function getLicenseInfoAsyncWithHttpInfo($license_key)
     {
-        $returnType = '';
-        $request = $this->setINParamsRequest($in_params);
+        $returnType = '\OpenAPI\Client\Model\LicenseInfo';
+        $request = $this->getLicenseInfoRequest($license_key);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
                 function ($response) use ($returnType) {
-                    return [null, $response->getStatusCode(), $response->getHeaders()];
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 },
                 function ($exception) {
                     $response = $exception->getResponse();
@@ -1074,23 +877,23 @@ class AIOperationsApi
     }
 
     /**
-     * Create request for operation 'setINParams'
+     * Create request for operation 'getLicenseInfo'
      *
-     * @param  \OpenAPI\Client\Model\INParams $in_params (required)
+     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function setINParamsRequest($in_params)
+    protected function getLicenseInfoRequest($license_key)
     {
-        // verify the required parameter 'in_params' is set
-        if ($in_params === null || (is_array($in_params) && count($in_params) === 0)) {
+        // verify the required parameter 'license_key' is set
+        if ($license_key === null || (is_array($license_key) && count($license_key) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $in_params when calling setINParams'
+                'Missing the required parameter $license_key when calling getLicenseInfo'
             );
         }
 
-        $resourcePath = '/v1/set-parameters';
+        $resourcePath = '/v1/info/{licenseKey}';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -1099,21 +902,26 @@ class AIOperationsApi
 
 
 
+        // path params
+        if ($license_key !== null) {
+            $resourcePath = str_replace(
+                '{' . 'licenseKey' . '}',
+                ObjectSerializer::toPathValue($license_key),
+                $resourcePath
+            );
+        }
 
         // body params
         $_tempBody = null;
-        if (isset($in_params)) {
-            $_tempBody = $in_params;
-        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
-                []
+                ['application/xml', 'application/json']
             );
         } else {
             $headers = $this->headerSelector->selectHeaders(
-                [],
-                ['application/xml', 'application/json']
+                ['application/xml', 'application/json'],
+                []
             );
         }
 
@@ -1160,7 +968,7 @@ class AIOperationsApi
 
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
         return new Request(
-            'POST',
+            'GET',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody
