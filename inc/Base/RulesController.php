@@ -206,9 +206,9 @@ class RulesController extends BaseController
                 
                 // we have different descriptions for cases were there is no min or max input fields
                 if ($className !== 'illegalSymbols') {
-                    $description = "Define how many $plural should be allowed (min/max values) on an image and what the censord image should look like (draw mode and color).";
+                    $description = "Define how many $plural should be allowed (min/max values) on an image and what the censored image should look like (draw mode and color).";
                 } else {
-                    $description = "Define how the $plural should censord in the output image (draw mode and color).";
+                    $description = "Define how the $plural should censored in the output image (draw mode and color).";
                 }
 
                 $classFields[] = array(
