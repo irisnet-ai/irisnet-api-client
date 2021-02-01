@@ -6,7 +6,7 @@ namespace Inc\Api\Callbacks;
 
 use \GuzzleHttp\Client;
 use \OpenAPI\Client\ApiException;
-use \OpenAPI\Client\Api\LicenseKeyOperationsApi;
+use \OpenAPI\Client\Api\MiscellaneousOperationsApi;
 
 class LicensesCallbacks
 {
@@ -52,7 +52,7 @@ class LicensesCallbacks
             
         // Check the license api in case the user sets license to active
         if (isset($input['is_active'])) {
-            $apiInstance = new LicenseKeyOperationsApi(
+            $apiInstance = new MiscellaneousOperationsApi(
                 new Client()
             );
             $license_key = $input['license'];

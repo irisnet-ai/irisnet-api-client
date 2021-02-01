@@ -11,8 +11,9 @@ use \OpenAPI\Client\Model\IrisNet;
 use \OpenAPI\Client\Model\INParam;
 use \OpenAPI\Client\Model\INParams;
 use \OpenAPI\Client\Model\INDefault;
-use \OpenAPI\Client\Api\AIOperationsApi;
-use \OpenAPI\Client\Api\LicenseKeyOperationsApi;
+use \OpenAPI\Client\Api\EndpointsToSetupTheAIApi;
+use \OpenAPI\Client\Api\EndpointsForAIChecksApi;
+use \OpenAPI\Client\Api\MiscellaneousOperationsApi;
 
 /**
  * Helper class to connect to the irisnet API.
@@ -34,7 +35,7 @@ class IrisnetAPIConnector
         $parameters = self::createParameterModel($rule);
 
         try {
-            $apiInstance = new AIOperationsApi(
+            $apiInstance = new EndpointsToSetupTheAIApi(
                 new Client(self::getClientConfig(true, true))
             );
 
@@ -81,7 +82,7 @@ class IrisnetAPIConnector
             self::setRules($rule);
         }
 
-        $apiInstance = new AIOperationsApi(
+        $apiInstance = new EndpointsForAIChecksApi(
             new Client(self::getClientConfig(true))
         );
 
@@ -102,7 +103,7 @@ class IrisnetAPIConnector
      */
     public static function getProcessedImage(string $filename, string $downloadPath = null) {
         try {
-            $apiInstance = new AIOperationsApi(
+            $apiInstance = new MiscellaneousOperationsApi(
                 new Client(self::getClientConfig(true))
             );
 
@@ -132,7 +133,7 @@ class IrisnetAPIConnector
         }
 
         try {
-            $apiInstance = new LicenseKeyOperationsApi(
+            $apiInstance = new MiscellaneousOperationsApi(
                 new Client(self::getClientConfig(true))
             );
 
@@ -153,7 +154,7 @@ class IrisnetAPIConnector
     {
         $options = get_option('irisnet_plugin_licenses');
 
-        $apiInstance = new LicenseKeyOperationsApi(
+        $apiInstance = new MiscellaneousOperationsApi(
             new Client(self::getClientConfig())
         );
         

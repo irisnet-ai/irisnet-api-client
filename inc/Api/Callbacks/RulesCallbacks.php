@@ -10,8 +10,8 @@ use \IrisnetAPIConnector;
 use Inc\Base\RulesController;
 use \GuzzleHttp\Cookie\CookieJar;
 use \OpenAPI\Client\ApiException;
-use \OpenAPI\Client\Api\AIOperationsApi;
-use \OpenAPI\Client\Api\LicenseKeyOperationsApi;
+use \OpenAPI\Client\Api\EndpointsToSetupTheAIApi;
+use \OpenAPI\Client\Api\MiscellaneousOperationsApi;
 
 class RulesCallbacks
 {
@@ -63,7 +63,7 @@ class RulesCallbacks
             $params = IrisnetAPIConnector::createParameterModel($input);
 
             // set the parameters 
-            $apiInstance = new AIOperationsApi(
+            $apiInstance = new EndpointsToSetupTheAIApi(
                 new Client([
                     'cookies' => $cookieJar
                 ])
@@ -71,7 +71,7 @@ class RulesCallbacks
             $apiInstance->setINParams($params);
 
             // check cost of rule set
-            $apiInstance = new LicenseKeyOperationsApi(
+            $apiInstance = new MiscellaneousOperationsApi(
                 new Client([
                     'cookies' => $cookieJar
                 ])
