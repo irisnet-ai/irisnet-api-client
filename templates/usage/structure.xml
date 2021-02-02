@@ -70,7 +70,7 @@
           <tag name="throws" line="61" description="is thrown in case that the rule name could not be found, if the license id does not exist,&#10;if the license key is not active or out of credits, if the specified filename does not exist&#10;or if the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
             <type>\IrisnetException</type>
           </tag>
-          <tag name="return" line="61" description="Contains information on the AI result from the source media check. See &lt;a href=&quot;https://www.irisnet.de/api/&quot;&gt;API page&lt;/a&gt; for more information" type="\OpenAPI\Client\Model\IrisNet">
+          <tag name="return" line="61" description="Contains information on the AI result from the source media check. See &lt;a href=&quot;https://irisnet.de/api/&quot;&gt;API page&lt;/a&gt; for more information" type="\OpenAPI\Client\Model\IrisNet">
             <type>\OpenAPI\Client\Model\IrisNet</type>
           </tag>
         </docblock>

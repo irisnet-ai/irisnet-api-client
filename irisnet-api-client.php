@@ -10,7 +10,7 @@ Plugin Name: Irisnet API Client - AI child protection plugin
 Plugin URI: https://github.com/irisnet-ai/irisnet-api-client
 Description: Irisnet is a new tech startup, that specializes in the development of Artificial Intelligence (AI) systems based on neural networks for image-processing in realtime. This plugin facilitates the usage of the irisnet API. 
 Author: Irisnet
-Author URI: https://www.irisnet.de/
+Author URI: https://irisnet.de/
 Version: 1.1.3
 License: GPLv3 or later
 */

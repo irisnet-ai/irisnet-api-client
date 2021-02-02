@@ -287,7 +287,7 @@ class RulesController extends BaseController
                     'description' => 'Define base settings that are valid for all of the following parameters. ' .
                         'Single parameter settings can be still overwritten within each object if needed. ' .
                         'Leave this option off, if you don\'t want to fine tune the AI. ' .
-                        '<br>See INDefault Schema in <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further information.',
+                        '<br>See INDefault Schema in <a href="https://irisnet.de/api" target="_blank">API Documentation</a> for further information.',
                     'switch' => $switch,
                     'fields' => $defaultFields,
                     'extend_name' => true
@@ -301,7 +301,7 @@ class RulesController extends BaseController
                 'args' => array(
                     'description' => '<b>The following options, within the toggle groups, represent the classification objects (e.g. face, hand, child, breast) recognized by the irisnet AI. ' .
                         'Each classification or their parameter settings within can be left off or empty. In that case default settings will applied.</b>' .
-                        '<br>See INParam Schema in <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further information ' .
+                        '<br>See INParam Schema in <a href="https://irisnet.de/api" target="_blank">API Documentation</a> for further information ' .
                         'on each classification object and their default settings.',
                 )
             )

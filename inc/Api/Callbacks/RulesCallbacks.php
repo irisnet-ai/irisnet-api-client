@@ -18,7 +18,7 @@ class RulesCallbacks
 
     public function rulesSectionManager()
     {
-        echo 'Create your custom rules to describe what the AI should see as a violation of your guidelines. A rule is composed out of a set of settings for each classification object. A classification object is the single object that can be recognized by the AI (e.g. Face, Hand, Child, Breast etc.). See the <a href="https://www.irisnet.de/api" target="_blank">API Documentation</a> for further details.';
+        echo 'Create your custom rules to describe what the AI should see as a violation of your guidelines. A rule is composed out of a set of settings for each classification object. A classification object is the single object that can be recognized by the AI (e.g. Face, Hand, Child, Breast etc.). See the <a href="https://irisnet.de/api" target="_blank">API Documentation</a> for further details.';
     }
 
     public function rulesSanitize($input)
