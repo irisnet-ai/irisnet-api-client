@@ -84,10 +84,21 @@ However, the uploaded files are always session-bound and will be permanently del
 
 == Upgrade Notice ==
 
+= 1.1.3 =
+adjust rules for new classification objects
+
 = 1.0.2 =
 First official release of the Irisnet API Client for WordPress
 
 == Changelog ==
+
+= 1.1.3 =
+updated api
+fixed typos
+fixed missing selection after re-editing rule
+
+= 1.0.3 =
+Changed wordings
 
 = 1.0.2 =
 Initial release.
