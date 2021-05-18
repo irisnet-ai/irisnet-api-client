@@ -4,13 +4,13 @@
  */
 
 use \GuzzleHttp\Client;
-use Inc\Base\RulesController;
 use \GuzzleHttp\Cookie\CookieJar;
 use \OpenAPI\Client\ApiException;
 use \OpenAPI\Client\Model\IrisNet;
 use \OpenAPI\Client\Model\INParam;
 use \OpenAPI\Client\Model\INParams;
 use \OpenAPI\Client\Model\INDefault;
+use Inc\Instructions\RulesInstructions;
 use \OpenAPI\Client\Api\EndpointsToSetupTheAIApi;
 use \OpenAPI\Client\Api\EndpointsForAIChecksApi;
 use \OpenAPI\Client\Api\MiscellaneousOperationsApi;
@@ -293,13 +293,13 @@ class IrisnetAPIConnector
 
         // create a class object array
         $classObjects = array();
-        foreach (array_values(RulesController::getClassObjectGroups()) as $group) {
+        foreach (array_values(RulesInstructions::getClassObjectGroups()) as $group) {
             $classObjects = array_merge($classObjects, array_keys($group));
         }
 
         // create a class object array
         $groupObjects = array();
-        foreach (RulesController::getClassObjectGroups() as $key => $value) {
+        foreach (RulesInstructions::getClassObjectGroups() as $key => $value) {
             $group = array();
             foreach ($value as $className => $classOptions) {
                 if (!$classOptions['allowMinMax'])

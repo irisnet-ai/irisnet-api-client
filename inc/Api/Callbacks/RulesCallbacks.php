@@ -7,9 +7,9 @@ namespace Inc\Api\Callbacks;
 use \Exception;
 use \GuzzleHttp\Client;
 use \IrisnetAPIConnector;
-use Inc\Base\RulesController;
 use \GuzzleHttp\Cookie\CookieJar;
 use \OpenAPI\Client\ApiException;
+use Inc\Instructions\RulesInstructions;
 use \OpenAPI\Client\Api\EndpointsToSetupTheAIApi;
 use \OpenAPI\Client\Api\MiscellaneousOperationsApi;
 
@@ -66,7 +66,7 @@ class RulesCallbacks
 
         // Simplify objectGroups array
         $objectGroups = array();
-        foreach (RulesController::getClassObjectGroups() as $key => $value) {
+        foreach (RulesInstructions::getClassObjectGroups() as $key => $value) {
             foreach ($value as $paramKey => $ignore) {
                 $objectGroups[lcfirst(str_replace(' ', '', $key))][] = $paramKey;
             }
@@ -266,7 +266,7 @@ class RulesCallbacks
             $keys = array_keys($option[sanitize_text_field($_POST["edit_rule"])]);
 
             $groups = array();
-            foreach(RulesController::getClassObjectGroups() as $groupName => $c) {
+            foreach(RulesInstructions::getClassObjectGroups() as $groupName => $c) {
                 $groups[lcfirst(str_replace(' ', '', $groupName))] = $c;
             }
 
@@ -334,7 +334,7 @@ class RulesCallbacks
                 $keys = array_keys($option[sanitize_text_field($_POST["edit_rule"])]);
     
                 $groups = array();
-                foreach (RulesController::getClassObjectGroups() as $key => $value) {
+                foreach (RulesInstructions::getClassObjectGroups() as $key => $value) {
                     foreach ($value as $paramKey => $ignore) {
                         $groups[lcfirst(str_replace(' ', '', $key))][] = $paramKey;
                     }
