@@ -60,7 +60,7 @@ class RulesCallbacks
 
         // retrieve the options from the database
         $output = get_option('irisnet_plugin_rules');
-        
+
         // User requested removal of rule set
         if (isset($_POST["remove"])) {
             unset($output[sanitize_text_field($_POST["remove"])]);
@@ -146,8 +146,8 @@ class RulesCallbacks
         $value = '';
         $readonly = '';
         if (isset($_POST["edit_rule"])) {
-            $option = get_option($option_name);
-            $value = isset($option[$_POST["edit_rule"]][$name]) ? $option[sanitize_text_field($_POST["edit_rule"])][$name] : '';
+            $option = get_option($option_name)[sanitize_text_field($_POST["edit_rule"])];
+            $value = isset($option[$name]) ? $option[$name] : '';
             if (isset($args['value']) && $value === '')
                 $value = $args['value'];
 
@@ -178,8 +178,8 @@ class RulesCallbacks
 
         $saved = '';
         if (isset($_POST["edit_rule"])) {
-            $option = get_option($option_name);
-            $saved = isset($option[$_POST["edit_rule"]][$name]) ? $option[sanitize_text_field($_POST["edit_rule"])][$name] : '';
+            $option = get_option($option_name)[sanitize_text_field($_POST["edit_rule"])];
+            $saved = isset($option[$name]) ? $option[$name] : '';
         }
 
         echo '<div class="input-option">';
@@ -248,8 +248,8 @@ class RulesCallbacks
 
         $hidden = true;
         if (isset($_POST["edit_rule"])) {
-            $option = get_option($args['option_name']);
-            $keys = array_keys($option[sanitize_text_field($_POST["edit_rule"])]);
+            $option = get_option($args['option_name'])[sanitize_text_field($_POST["edit_rule"])];
+            $keys = array_keys($option);
 
             $groups = RulesHelper::getClassObjectGroups(true);
 
@@ -264,6 +264,10 @@ class RulesCallbacks
                         }
                     }
                 }
+
+                if ($hidden && array_key_exists($name . '_switch', $option))
+                    $hidden = false;
+
             } else {
                 foreach ($keys as $key) {
                     if (strpos($key, $name) === 0) {
@@ -320,8 +324,8 @@ class RulesCallbacks
             }
 
             if (isset($_POST["edit_rule"])) {
-                $option = get_option($args['option_name']);
-                $keys = array_keys($option[sanitize_text_field($_POST["edit_rule"])]);
+                $option = get_option($args['option_name'])[sanitize_text_field($_POST["edit_rule"])];
+                $keys = array_keys($option);
     
                 $groups = RulesHelper::getSimplifiedClassObjectArray();
                 $parentName = RulesHelper::findClassParent($name);
