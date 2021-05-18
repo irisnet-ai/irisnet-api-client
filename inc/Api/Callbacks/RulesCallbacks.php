@@ -20,6 +20,25 @@ class RulesCallbacks
     {
         echo 'Create your custom rules to describe what the AI should see as a violation of your guidelines. A rule is composed out of a set of settings for each classification object. A classification object is the single object that can be recognized by the AI (e.g. Face, Hand, Child, Breast etc.). See the <a href="https://irisnet.de/api" target="_blank">API Documentation</a> for further details.';
     }
+    
+    private function find_parent($array, $needle, $parent = null) {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $pass = $parent;
+                if (is_string($key)) {
+                    $pass = $key;
+                }
+                $found = $this->find_parent($value, $needle, $pass);
+                if ($found !== false) {
+                    return $found;
+                }
+            } else if ($value === $needle) {
+                return $parent;
+            }
+        }
+    
+        return false;
+    }
 
     public function rulesSanitize($input)
     {
@@ -42,6 +61,27 @@ class RulesCallbacks
                 $input[$key] = filter_var($input[$key], FILTER_VALIDATE_FLOAT);
             } else {
                 $input[$key] = filter_var($input[$key], FILTER_VALIDATE_INT);
+            }
+        }
+
+        // Simplify objectGroups array
+        $objectGroups = array();
+        foreach (RulesController::getClassObjectGroups() as $key => $value) {
+            foreach ($value as $paramKey => $ignore) {
+                $objectGroups[lcfirst(str_replace(' ', '', $key))][] = $paramKey;
+            }
+        }
+
+        // Remove hidden param switch from disabled object group
+        foreach ($input as $name => $value) {
+            if (strpos($name, '_param_switch') === false)
+                continue;
+
+            if ($value == 1) {
+                $paramName = explode('_', $name, 2)[0];
+                $parentName = $this->find_parent($objectGroups, $paramName);
+                if (!isset($input[$parentName . '_switch']) || $input[$parentName . '_switch'] != 1)
+                    unset($input[$name]);
             }
         }
 
@@ -185,7 +225,6 @@ class RulesCallbacks
         if (isset($args['fields'])) 
         {
             $fields = $args['fields'];
-            $name = $args['label_for'];
             foreach ($fields as $field) {    
                 $field['id'] = $name . '_' . $field['id'];
                 $field['args']['label_for'] = $field['id'];
@@ -279,5 +318,66 @@ class RulesCallbacks
         }
 
         echo '</fieldset>';
+    }
+
+    public function paramFieldset($args)
+    {
+        $name = $args['label_for'];
+        
+        if (isset($args['title']))
+            echo '<h4>' . $args['title'] . '</h4>';
+
+        if (isset($args['switch'])) {
+            $checked = false;
+            if (isset($_POST["edit_rule"])) {
+                $option = get_option($args['option_name']);
+                $keys = array_keys($option[sanitize_text_field($_POST["edit_rule"])]);
+    
+                $groups = array();
+                foreach (RulesController::getClassObjectGroups() as $key => $value) {
+                    foreach ($value as $paramKey => $ignore) {
+                        $groups[lcfirst(str_replace(' ', '', $key))][] = $paramKey;
+                    }
+                }
+                $parentName = $this->find_parent($groups, $name);
+
+                if (count($groups[$parentName]) === 1) {
+                    $checked = true;
+                } else {
+                    foreach ($keys as $key) {
+                        if (strpos($key, $name) === 0) {
+                            $checked = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            $switch = $args['switch'];
+            $switch['args']['label_for'] = $name . '_' . $switch['args']['label_for'];
+            $switch['args']['checked'] = $checked;
+            if (isset($args['description'])) {
+                $switch['args']['description'] = $args['description'];
+            }
+
+            $switch['callback']($switch['args']);
+        }
+
+        if (isset($args['fields'])) 
+        {
+            $hidden = isset($checked) ? !$checked : false;
+
+            echo '<fieldset name="' . $name . '" ' . ($hidden ? 'hidden' : '') . '>';
+           
+            $fields = $args['fields'];
+            foreach ($fields as $field) {    
+                $field['id'] = $name . '_' . $field['id'];
+                $field['args']['label_for'] = $field['id'];
+    
+                $field['callback']($field['args']);
+            }
+
+            echo '</fieldset>';
+        }
     }
 }

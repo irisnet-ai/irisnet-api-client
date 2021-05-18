@@ -31,6 +31,8 @@ window.addEventListener("load", function() {
 	fieldsetSwitches.forEach(function(child) {
 
 		var fieldsetName = child.id.slice(0, -7);
+		if (child.id.includes('_param_switch'))
+			fieldsetName = child.id.slice(0, -13);
 
 		child.addEventListener("click", function(event) {
 

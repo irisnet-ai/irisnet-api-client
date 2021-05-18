@@ -68,3 +68,12 @@ $off: #8c8c8c;
 div.ui-toggle {
 	@include ui-toggle(20px, $on, $off);
 }
+
+div.ui-toggle.inline {
+	@include ui-toggle(15px, $on, $off);
+	display: inline;
+}
+
+div.ui-toggle.hidden {
+	display: none !important;
+}

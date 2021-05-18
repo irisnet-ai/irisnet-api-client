@@ -29,26 +29,83 @@ class RulesController extends BaseController
 
     private static $classObjectGroups = array(
         'Base Parameters' => array (
-            'face' => 'faces',
-            'hand' => 'hands',
-            'foot' => 'feet', 
-            'footwear' => 'shoes or similar footwear', 
-            'breast' => 'breasts',
-            'vulva' => 'vulvae',
-            'penis' => 'penises',
-            'vagina' => 'vaginae',
-            'buttocks' => 'buttocks', 
-            'anus' => 'ani', 
+            'face' => array(
+                'plural' => 'many faces',
+                'allowMinMax' => true
+            ),
+            'hand' => array(
+                'plural' => 'many hands',
+                'allowMinMax' => true
+            ),
+            'foot' => array(
+                'plural' => 'many feet',
+                'allowMinMax' => true
+            ),
+            'footwear' => array(
+                'plural' => 'many shoes or similar footwear',
+                'allowMinMax' => true
+            ),
+            'breast' => array(
+                'plural' => 'many breasts',
+                'allowMinMax' => false
+            ),
+            'vulva' => array(
+                'plural' => 'many vulvae',
+                'allowMinMax' => false
+            ),
+            'penis' => array(
+                'plural' => 'many penises',
+                'allowMinMax' => false
+            ),
+            'vagina' => array(
+                'plural' => 'many vaginae',
+                'allowMinMax' => false
+            ),
+            'buttocks' => array(
+                'plural' => 'many buttocks', 
+                'allowMinMax' => false
+            ),
+            'anus' => array(
+                'plural' => 'many ani', 
+                'allowMinMax' => false
+            ),
+            'toy' => array(
+                'plural' => 'sex toys', 
+                'allowMinMax' => false
+            ),
+            'oral' => array(
+                'plural' => 'oral', 
+                'allowMinMax' => false
+            ),
+            'penetration' => array(
+                'plural' => 'penetrations', 
+                'allowMinMax' => false
+            ),
         ),
         'Age Estimation' => array(
-            'child' => 'child faces',
-            'adult' => 'adult faces',
-            'senior' => 'senior faces',
-            'pose' => 'poses (obstructed or looking to the side)',
+            'child' => array(
+                'plural' => 'child faces',
+                'allowMinMax' => false
+            ),
+            'adult' => array(
+                'plural' => 'adult faces',
+                'allowMinMax' => true
+            ),
+            'senior' => array(
+                'plural' => 'senior faces',
+                'allowMinMax' => true
+            ),
+            'pose' => array(
+                'plural' => 'poses (obstructed or looking to the side)',
+                'allowMinMax' => false
+            ),
         ),
-        'Illegal Symbols' => array (
-            'illegalSymbols' => 'illegal symbols'
-        )
+        'Illegal Symbols' => array(
+            'illegalSymbols' => array(
+                'plural' => 'illegal symbols',
+                'allowMinMax' => false
+            ),
+        ),
     );
 
     public function register()
@@ -119,6 +176,24 @@ class RulesController extends BaseController
             )
         );
 
+        $paramSwitch = array(
+            'callback' => array( $this->rules_callbacks, 'fieldsetSwitch' ),
+            'args' => array(
+                'option_name' => 'irisnet_plugin_rules',
+                'class' => 'ui-toggle inline',
+                'label_for' => 'param_switch'
+            )
+        );
+
+        $hiddenParamSwitch = array(
+            'callback' => array( $this->rules_callbacks, 'fieldsetSwitch' ),
+            'args' => array(
+                'option_name' => 'irisnet_plugin_rules',
+                'class' => 'ui-toggle inline hidden',
+                'label_for' => 'param_switch'
+            )
+        );
+
         $defaultFields = array(
             array(
                 'id' => 'thresh',
@@ -156,11 +231,16 @@ class RulesController extends BaseController
         foreach (self::$classObjectGroups as $groupName => $classes) {
             
             $classFields = array();
-            foreach ($classes as $className => $plural) {
+            foreach ($classes as $className => $classOptions) {
+                $plural = $classOptions['plural'];
+                $allowMinMax = $classOptions['allowMinMax'];
+                $lonelyClass = count($classes) === 1;
+                $showParamSwitch = !$allowMinMax && !$lonelyClass;
 
                 $paramFields = array();
-                // we do not want the user to set min or max values for illegal symbols
-                if ($className !== 'illegalSymbols') {
+
+                // we do not want the user to set min or max values for the classes contained in self::$noMinMaxClasses
+                if ($allowMinMax) {
                     $paramFields = array(
                         array(
                             'id' => 'min',
@@ -202,27 +282,34 @@ class RulesController extends BaseController
                     )
                 );
                 $paramFields = array_merge($paramFields, array($defaultFields[1]));
-
                 
                 // we have different descriptions for cases were there is no min or max input fields
-                if ($className !== 'illegalSymbols') {
-                    $description = "Define how many $plural should be allowed (min/max values) on an image and what the censored image should look like (draw mode and color).";
+                if ($allowMinMax) {
+                    $description = "Define how $plural should be allowed (min/max values) on an image and what the censored image should look like (draw mode and color).";
                 } else {
-                    $description = "Define how the $plural should censored in the output image (draw mode and color).";
+                    $description = "Define how $plural should censored in the output image (draw mode and color).";
                 }
+
+                $infoTextArgs = array(
+                    'option_name' => 'irisnet_plugin_rules',
+                    'title' => ucfirst($className). ' Parameters',
+                    'label_for' => $className,
+                    'description' => $description,
+                    'fields' => $paramFields,
+                );
+
+                if (!$allowMinMax && !$lonelyClass)
+                    $infoTextArgs = array_merge($infoTextArgs, array('switch' => $paramSwitch));
+                else if (!$allowMinMax && $lonelyClass)
+                    $infoTextArgs = array_merge($infoTextArgs, array('switch' => $hiddenParamSwitch));
+
 
                 $classFields[] = array(
                     'id' => $className,
-                    'callback' => array( $this->rules_callbacks, 'infoText' ),
+                    'callback' => array( $this->rules_callbacks, 'paramFieldset' ),
                     'page' => 'irisnet_rules',
                     'section' => 'irisnet_rules_index',
-                    'args' => array(
-                        'option_name' => 'irisnet_plugin_rules',
-                        'title' => ucfirst($className). ' Parameters',
-                        'label_for' => $className,
-                        'description' => $description,
-                        'fields' => $paramFields
-                    )
+                    'args' => $infoTextArgs
                 );
             }
 

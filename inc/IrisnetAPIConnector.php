@@ -297,17 +297,29 @@ class IrisnetAPIConnector
             $classObjects = array_merge($classObjects, array_keys($group));
         }
 
+        // create a class object array
+        $groupObjects = array();
+        foreach (RulesController::getClassObjectGroups() as $key => $value) {
+            $group = array();
+            foreach ($value as $className => $classOptions) {
+                if (!$classOptions['allowMinMax'])
+                    $group[] = $className;
+            }
+            $groupObjects[lcfirst(str_replace(' ', '', $key))] = $group;
+        }
+
         // create and fill INParam objects as needed
         $paramArray = array();
         foreach ($classObjects as $class) {
             $data = array();
             foreach ($option as $key => $value) {
                 $exploded = explode('_', $key, 2);
+                if (in_array($exploded[0], array_keys($groupObjects)) && $exploded[1] === 'switch') {
+                    continue;
+                }
+
                 if ($exploded[0] === $class) {
-                    // treat illegal symbols different then the rest, if the illegalSymbols switch is active.
-                    // The user should not have the option to choose min or max values, instead we set min=0
-                    // and max=0 for the user
-                    if ($exploded[0] === 'illegalSymbols' && ($exploded[1] === 'switch')) {
+                    if (in_array($exploded[0], array_values($classObjects)) && ($exploded[1] === 'param_switch')) {
                         $data['min'] = '0';
                         $data['max'] = '0';
                     } else {
@@ -316,11 +328,42 @@ class IrisnetAPIConnector
                     unset($option[$key]);
                 }
             }
-            
+
             if (!empty($data)) {
                 $data['in_class'] = $class;
                 $paramArray[] = new INParam($data);
             }
+        }
+
+        // Check paramArray for missing inParams from remaining groups within $option. 
+        // get all created param classes
+        $names = array();
+        foreach($paramArray as $param) {
+            $names[] = $param->getInClass();
+        };
+
+        // flatten groupObjects and find missing from paramArray
+        $res = array();
+        array_walk_recursive($groupObjects, function($v) use (&$res) { $res[] = $v; });
+        $missing = array_diff($res, $names);
+
+        // Create a new inParam for each class with param_switch that was not active: Use data max = -1; draw_mode = 0
+        $data = array();
+        foreach ($option as $key => $value) {
+            $groupName = explode('_', $key, 2)[0];
+
+            foreach ($missing as $c) {
+                if (!in_array($c, $groupObjects[$groupName]))
+                    continue;
+
+                $data['in_class'] = $c;
+                $data['max'] = -1;
+                $data['draw_mode'] = 0;
+            }
+        }
+
+        if (!empty($data)) {
+            $paramArray[] = new INParam($data);
         }
 
         // fill INParams object

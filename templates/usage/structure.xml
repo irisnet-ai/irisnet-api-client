@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="API Documentation" version="2.9.1">
   <partials/>
-  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="7b3745caa57b9177b3bfb4a937ecf340" package="IrisnetAPIClient">
+  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="0e6870e8fe7d76cb2a14b131219b8736" package="IrisnetAPIClient">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -70,7 +70,7 @@
           <tag name="throws" line="61" description="is thrown in case that the rule name could not be found, if the license id does not exist,&#10;if the license key is not active or out of credits, if the specified filename does not exist&#10;or if the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
             <type>\IrisnetException</type>
           </tag>
-          <tag name="return" line="61" description="Contains information on the AI result from the source media check. See &lt;a href=&quot;https://irisnet.de/api/&quot;&gt;API page&lt;/a&gt; for more information" type="\OpenAPI\Client\Model\IrisNet">
+          <tag name="return" line="61" description="Contains information on the AI result from the source media check. See &lt;a href=&quot;https://www.irisnet.de/api/&quot;&gt;API page&lt;/a&gt; for more information" type="\OpenAPI\Client\Model\IrisNet">
             <type>\OpenAPI\Client\Model\IrisNet</type>
           </tag>
         </docblock>
@@ -127,6 +127,9 @@
         </argument>
       </method>
     </class>
+    <markers>
+      <todo line="369">check paramArray for missing inParams from remaining groups within $option.</todo>
+    </markers>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>

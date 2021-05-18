@@ -10,8 +10,14 @@ form {
 
 	fieldset {
 		h4 {
+			display: inline;
+			margin-right: 20px;
 			text-decoration: underline;
 			text-decoration-style: dashed;
+
+			+ fieldset {			
+				margin-top: 20px;
+			}
 		}
 
 		&.compact {
