@@ -348,7 +348,6 @@ class IrisnetAPIConnector
         $missing = array_diff($res, $names);
 
         // Create a new inParam for each class with param_switch that was not active: Use data max = -1; draw_mode = 0
-        $data = array();
         foreach ($option as $key => $value) {
             $groupName = explode('_', $key, 2)[0];
 
@@ -356,16 +355,14 @@ class IrisnetAPIConnector
                 if (!in_array($c, $groupObjects[$groupName]))
                     continue;
 
-                $data['in_class'] = $c;
-                $data['max'] = -1;
-                $data['draw_mode'] = 0;
+                $paramArray[] = new INParam(array(
+                    'in_class' => $c,
+                    'max' => -1,
+                    'draw_mode' => 0
+                ));
             }
         }
-
-        if (!empty($data)) {
-            $paramArray[] = new INParam($data);
-        }
-
+        
         // fill INParams object
         $params->setInParam($paramArray);
 
