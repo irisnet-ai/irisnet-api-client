@@ -87,7 +87,7 @@ class IrisnetAPIConnector
         );
 
         try {
-            return $apiInstance->checkImage($key, $detail, new \SplFileObject($file));
+            return $apiInstance->checkImage($key, new \SplFileObject($file), $detail);
         } catch (ApiException $e) {
             throw new IrisnetException("An Exception occurred while performing the API request '/v1/check-image'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
