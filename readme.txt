@@ -92,9 +92,10 @@ First official release of the Irisnet API Client for WordPress
 
 == Changelog ==
 
-= 1.3.4 =
+= 1.4.5 =
 updated api
 simplified rules options
+fixed some issues
 
 = 1.1.4 =
 updated irisnet url
