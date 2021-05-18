@@ -312,6 +312,13 @@ class RulesCallbacks
 
         if (isset($args['switch'])) {
             $checked = false;
+
+            $groups = RulesHelper::getSimplifiedClassObjectArray();
+            $parentName = RulesHelper::findClassParent($name);
+            if (count($groups[$parentName]) === 1) {
+                $checked = true;
+            }
+
             if (isset($_POST["edit_rule"])) {
                 $option = get_option($args['option_name']);
                 $keys = array_keys($option[sanitize_text_field($_POST["edit_rule"])]);
@@ -319,14 +326,10 @@ class RulesCallbacks
                 $groups = RulesHelper::getSimplifiedClassObjectArray();
                 $parentName = RulesHelper::findClassParent($name);
 
-                if (count($groups[$parentName]) === 1) {
-                    $checked = true;
-                } else {
-                    foreach ($keys as $key) {
-                        if (strpos($key, $name) === 0) {
-                            $checked = true;
-                            break;
-                        }
+                foreach ($keys as $key) {
+                    if (strpos($key, $name) === 0) {
+                        $checked = true;
+                        break;
                     }
                 }
             }
