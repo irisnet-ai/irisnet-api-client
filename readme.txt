@@ -4,7 +4,7 @@ Tags: ai, artificial intelligence, irisnet, porn blocker, youth protection, AI p
 Requires at least: 5.1
 Requires PHP: 7.1
 Tested up to: 5.7.2
-Stable tag: 1.4.5
+Stable tag: 1.4.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -84,7 +84,7 @@ However, the uploaded files are always session-bound and will be permanently del
 
 == Upgrade Notice ==
 
-= 1.4.5 =
+= 1.4.6 =
 adjust rules for new classification objects and simplified view
 
 = 1.1.3 =
@@ -95,7 +95,7 @@ First official release of the Irisnet API Client for WordPress
 
 == Changelog ==
 
-= 1.4.5 =
+= 1.4.6 =
 updated api
 simplified rules options
 fixed some issues
