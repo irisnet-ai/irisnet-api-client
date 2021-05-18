@@ -2,9 +2,9 @@
 /**
  * @package IrisnetAPIClient
  */
-namespace Inc\Instructions;
+namespace Inc\Helper;
 
-class RulesInstructions
+class RulesHelper
 {
 
     private static $drawModeVars = array(
@@ -98,6 +98,37 @@ class RulesInstructions
     );
 
     /**
+     * Converts the ClassObjectGroups array to a two dimensional array
+     */ 
+    public static function getSimplifiedClassObjectArray()
+    {
+        $objectGroups = array();
+        foreach (self::$classObjectGroups as $key => $value) {
+            foreach ($value as $paramKey => $ignore) {
+                $objectGroups[self::getIdentifiableGroupKey($key)][] = $paramKey;
+            }
+        }
+        return $objectGroups;
+    }
+
+    /**
+     * Converts the ClassObjectGroups array to a two dimensional array
+     */ 
+    public static function findClassParent($paramName)
+    {
+        return self::find_parent(self::getSimplifiedClassObjectArray(), $paramName);
+    }
+
+    /**
+     * Converts a group key to an identifiable string 
+     * e.g. "Base Parameters" -> "baseParameters"
+     */ 
+    public static function getIdentifiableGroupKey($key)
+    {
+        return lcfirst(str_replace(' ', '', $key));
+    }
+
+    /**
      * Get the value of drawModeVars
      */ 
     public static function getDrawModeVars()
@@ -108,9 +139,36 @@ class RulesInstructions
     /**
      * Get the value of classObjectGroups
      */ 
-    public static function getClassObjectGroups()
+    public static function getClassObjectGroups($identifiable = false)
     {
-        return self::$classObjectGroups;
+        if (!$identifiable) {
+            return self::$classObjectGroups;
+        } else {
+            $groups = array();
+            foreach(self::$classObjectGroups as $groupName => $c) {
+                $groups[self::getIdentifiableGroupKey($groupName)] = $c;
+            }
+            return $groups;
+        }
+    }
+
+    private static function find_parent($array, $needle, $parent = null) {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
+                $pass = $parent;
+                if (is_string($key)) {
+                    $pass = $key;
+                }
+                $found = self::find_parent($value, $needle, $pass);
+                if ($found !== false) {
+                    return $found;
+                }
+            } else if ($value === $needle) {
+                return $parent;
+            }
+        }
+    
+        return false;
     }
 
 }

@@ -7,9 +7,9 @@ namespace Inc\Api\Callbacks;
 use \Exception;
 use \GuzzleHttp\Client;
 use \IrisnetAPIConnector;
+use Inc\Helper\RulesHelper;
 use \GuzzleHttp\Cookie\CookieJar;
 use \OpenAPI\Client\ApiException;
-use Inc\Instructions\RulesInstructions;
 use \OpenAPI\Client\Api\EndpointsToSetupTheAIApi;
 use \OpenAPI\Client\Api\MiscellaneousOperationsApi;
 
@@ -19,25 +19,6 @@ class RulesCallbacks
     public function rulesSectionManager()
     {
         echo 'Create your custom rules to describe what the AI should see as a violation of your guidelines. A rule is composed out of a set of settings for each classification object. A classification object is the single object that can be recognized by the AI (e.g. Face, Hand, Child, Breast etc.). See the <a href="https://irisnet.de/api" target="_blank">API Documentation</a> for further details.';
-    }
-    
-    private function find_parent($array, $needle, $parent = null) {
-        foreach ($array as $key => $value) {
-            if (is_array($value)) {
-                $pass = $parent;
-                if (is_string($key)) {
-                    $pass = $key;
-                }
-                $found = $this->find_parent($value, $needle, $pass);
-                if ($found !== false) {
-                    return $found;
-                }
-            } else if ($value === $needle) {
-                return $parent;
-            }
-        }
-    
-        return false;
     }
 
     public function rulesSanitize($input)
@@ -64,14 +45,6 @@ class RulesCallbacks
             }
         }
 
-        // Simplify objectGroups array
-        $objectGroups = array();
-        foreach (RulesInstructions::getClassObjectGroups() as $key => $value) {
-            foreach ($value as $paramKey => $ignore) {
-                $objectGroups[lcfirst(str_replace(' ', '', $key))][] = $paramKey;
-            }
-        }
-
         // Remove hidden param switch from disabled object group
         foreach ($input as $name => $value) {
             if (strpos($name, '_param_switch') === false)
@@ -79,7 +52,7 @@ class RulesCallbacks
 
             if ($value == 1) {
                 $paramName = explode('_', $name, 2)[0];
-                $parentName = $this->find_parent($objectGroups, $paramName);
+                $parentName = RulesHelper::findClassParent($paramName);
                 if (!isset($input[$parentName . '_switch']) || $input[$parentName . '_switch'] != 1)
                     unset($input[$name]);
             }
@@ -265,10 +238,7 @@ class RulesCallbacks
             $option = get_option($args['option_name']);
             $keys = array_keys($option[sanitize_text_field($_POST["edit_rule"])]);
 
-            $groups = array();
-            foreach(RulesInstructions::getClassObjectGroups() as $groupName => $c) {
-                $groups[lcfirst(str_replace(' ', '', $groupName))] = $c;
-            }
+            $groups = RulesHelper::getClassObjectGroups(true);
 
             if (array_key_exists($name, $groups)) {
                 $classes = array_keys($groups[$name]);
@@ -333,13 +303,8 @@ class RulesCallbacks
                 $option = get_option($args['option_name']);
                 $keys = array_keys($option[sanitize_text_field($_POST["edit_rule"])]);
     
-                $groups = array();
-                foreach (RulesInstructions::getClassObjectGroups() as $key => $value) {
-                    foreach ($value as $paramKey => $ignore) {
-                        $groups[lcfirst(str_replace(' ', '', $key))][] = $paramKey;
-                    }
-                }
-                $parentName = $this->find_parent($groups, $name);
+                $groups = RulesHelper::getSimplifiedClassObjectArray();
+                $parentName = RulesHelper::findClassParent($name);
 
                 if (count($groups[$parentName]) === 1) {
                     $checked = true;

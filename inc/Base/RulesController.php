@@ -5,10 +5,10 @@
 namespace Inc\Base;
 
 use Inc\Api\SettingsApi;
+use Inc\Helper\RulesHelper;
 use Inc\Base\BaseController;
 use Inc\Api\Callbacks\RulesCallbacks;
 use Inc\Api\Callbacks\AdminCallbacks;
-use Inc\Instructions\RulesInstructions;
 
 class RulesController extends BaseController
 {
@@ -139,7 +139,7 @@ class RulesController extends BaseController
         );
 
         $groupFields = array();
-        foreach (RulesInstructions::getClassObjectGroups() as $groupName => $classes) {
+        foreach (RulesHelper::getClassObjectGroups() as $groupName => $classes) {
             
             $classFields = array();
             foreach ($classes as $className => $classOptions) {
@@ -186,7 +186,7 @@ class RulesController extends BaseController
                     'callback' => array( $this->rules_callbacks, 'selectField' ),
                     'args' => array(
                         'option_name' => 'irisnet_plugin_rules',
-                        'select_options' => RulesInstructions::getDrawModeVars(),
+                        'select_options' => RulesHelper::getDrawModeVars(),
                         'array' => 'rule_name',
                         'description' => 'Define how the image will be censored.',
                         'tooltip' => 'Is only applied on the output image.'
@@ -224,7 +224,7 @@ class RulesController extends BaseController
                 );
             }
 
-            $groupId = lcfirst(str_replace(' ', '', $groupName));
+            $groupId = RulesHelper::getIdentifiableGroupKey($groupName);
             $groupFields[] = array(
                 'id' => $groupId,
                 'title' => ucfirst($groupName),
