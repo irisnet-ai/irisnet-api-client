@@ -198,7 +198,7 @@ class RulesController extends BaseController
                 if ($allowMinMax) {
                     $description = "Define how $plural should be allowed (min/max values) on an image and what the censored image should look like (draw mode and color).";
                 } else {
-                    $description = "Define how $plural should censored in the output image (draw mode and color).";
+                    $description = "Define how $plural should be censored in the output image (draw mode and color).";
                 }
 
                 $infoTextArgs = array(
