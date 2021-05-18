@@ -121,16 +121,16 @@ class EndpointsForAIChecksApi
      * Upload and check image against previously chosen configuration.
      *
      * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  \SplFileObject $file file (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
-     * @param  \SplFileObject $file file (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\INError|\OpenAPI\Client\Model\IrisNet
+     * @return \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\INError
      */
-    public function checkImage($license_key, $detail = 1, $file = null)
+    public function checkImage($license_key, $file, $detail = 1)
     {
-        list($response) = $this->checkImageWithHttpInfo($license_key, $detail, $file);
+        list($response) = $this->checkImageWithHttpInfo($license_key, $file, $detail);
         return $response;
     }
 
@@ -140,16 +140,16 @@ class EndpointsForAIChecksApi
      * Upload and check image against previously chosen configuration.
      *
      * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  \SplFileObject $file (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
-     * @param  \SplFileObject $file (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\INError|\OpenAPI\Client\Model\IrisNet, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function checkImageWithHttpInfo($license_key, $detail = 1, $file = null)
+    public function checkImageWithHttpInfo($license_key, $file, $detail = 1)
     {
-        $request = $this->checkImageRequest($license_key, $detail, $file);
+        $request = $this->checkImageRequest($license_key, $file, $detail);
 
         try {
             $options = $this->createHttpClientOption();
@@ -181,18 +181,6 @@ class EndpointsForAIChecksApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 402:
-                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 200:
                     if ('\OpenAPI\Client\Model\IrisNet' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -202,6 +190,18 @@ class EndpointsForAIChecksApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\IrisNet', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 402:
+                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -223,18 +223,18 @@ class EndpointsForAIChecksApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 402:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\INError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\OpenAPI\Client\Model\IrisNet',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\INError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -250,15 +250,15 @@ class EndpointsForAIChecksApi
      * Upload and check image against previously chosen configuration.
      *
      * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  \SplFileObject $file (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
-     * @param  \SplFileObject $file (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function checkImageAsync($license_key, $detail = 1, $file = null)
+    public function checkImageAsync($license_key, $file, $detail = 1)
     {
-        return $this->checkImageAsyncWithHttpInfo($license_key, $detail, $file)
+        return $this->checkImageAsyncWithHttpInfo($license_key, $file, $detail)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -272,16 +272,16 @@ class EndpointsForAIChecksApi
      * Upload and check image against previously chosen configuration.
      *
      * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  \SplFileObject $file (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
-     * @param  \SplFileObject $file (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function checkImageAsyncWithHttpInfo($license_key, $detail = 1, $file = null)
+    public function checkImageAsyncWithHttpInfo($license_key, $file, $detail = 1)
     {
         $returnType = '\OpenAPI\Client\Model\IrisNet';
-        $request = $this->checkImageRequest($license_key, $detail, $file);
+        $request = $this->checkImageRequest($license_key, $file, $detail);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -321,18 +321,24 @@ class EndpointsForAIChecksApi
      * Create request for operation 'checkImage'
      *
      * @param  string $license_key License obtained from irisnet.de shop. (required)
+     * @param  \SplFileObject $file (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
-     * @param  \SplFileObject $file (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function checkImageRequest($license_key, $detail = 1, $file = null)
+    protected function checkImageRequest($license_key, $file, $detail = 1)
     {
         // verify the required parameter 'license_key' is set
         if ($license_key === null || (is_array($license_key) && count($license_key) === 0)) {
             throw new \InvalidArgumentException(
                 'Missing the required parameter $license_key when calling checkImage'
+            );
+        }
+        // verify the required parameter 'file' is set
+        if ($file === null || (is_array($file) && count($file) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $file when calling checkImage'
             );
         }
 
@@ -445,7 +451,7 @@ class EndpointsForAIChecksApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\INError|\OpenAPI\Client\Model\IrisNet
+     * @return \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\INError
      */
     public function checkImageUrl($url, $license_key, $detail = 1)
     {
@@ -464,7 +470,7 @@ class EndpointsForAIChecksApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\INError|\OpenAPI\Client\Model\IrisNet, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
     public function checkImageUrlWithHttpInfo($url, $license_key, $detail = 1)
     {
@@ -500,18 +506,6 @@ class EndpointsForAIChecksApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 402:
-                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 200:
                     if ('\OpenAPI\Client\Model\IrisNet' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -521,6 +515,18 @@ class EndpointsForAIChecksApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\IrisNet', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 402:
+                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -542,18 +548,18 @@ class EndpointsForAIChecksApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 402:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\INError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\OpenAPI\Client\Model\IrisNet',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\INError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

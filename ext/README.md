@@ -73,11 +73,11 @@ $apiInstance = new OpenAPI\Client\Api\EndpointsForAIChecksApi(
     new GuzzleHttp\Client()
 );
 $license_key = 'license_key_example'; // string | License obtained from irisnet.de shop.
-$detail = 1; // int | Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information.
 $file = "/path/to/file.txt"; // \SplFileObject | 
+$detail = 1; // int | Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information.
 
 try {
-    $result = $apiInstance->checkImage($license_key, $detail, $file);
+    $result = $apiInstance->checkImage($license_key, $file, $detail);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling EndpointsForAIChecksApi->checkImage: ', $e->getMessage(), PHP_EOL;

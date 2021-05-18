@@ -33,6 +33,7 @@ $in_define_ai = <?xml version="1.0" encoding="UTF-8"?>
 <inDefineAI>
 	<inImage proto="nudityCheck"/>
 	<inImage proto="ageEstimation"/>
+	<inImage proto="textRecognition"/>
 	<inImage proto="illegalSymbols"/>
 </inDefineAI>; // \OpenAPI\Client\Model\INDefineAI | 
 

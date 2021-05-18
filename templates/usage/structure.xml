@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="API Documentation" version="2.9.1">
   <partials/>
-  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="0e6870e8fe7d76cb2a14b131219b8736" package="IrisnetAPIClient">
+  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="b61cad4fcf025f7f03f8aefef100a365" package="IrisnetAPIClient">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
       <tag name="package" line="0" description="IrisnetAPIClient"/>
     </docblock>
     <namespace-alias name="Client">\GuzzleHttp\Client</namespace-alias>
-    <namespace-alias name="RulesController">\Inc\Base\RulesController</namespace-alias>
+    <namespace-alias name="RulesHelper">\Inc\Helper\RulesHelper</namespace-alias>
     <namespace-alias name="CookieJar">\GuzzleHttp\Cookie\CookieJar</namespace-alias>
     <namespace-alias name="ApiException">\OpenAPI\Client\ApiException</namespace-alias>
     <namespace-alias name="IrisNet">\OpenAPI\Client\Model\IrisNet</namespace-alias>
@@ -127,9 +127,6 @@
         </argument>
       </method>
     </class>
-    <markers>
-      <todo line="369">check paramArray for missing inParams from remaining groups within $option.</todo>
-    </markers>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
     </parse_markers>

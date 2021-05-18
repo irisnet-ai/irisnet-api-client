@@ -189,6 +189,9 @@ class InlineObject implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['file'] === null) {
+            $invalidProperties[] = "'file' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -207,7 +210,7 @@ class InlineObject implements ModelInterface, ArrayAccess
     /**
      * Gets file
      *
-     * @return \SplFileObject|null
+     * @return \SplFileObject
      */
     public function getFile()
     {
@@ -217,7 +220,7 @@ class InlineObject implements ModelInterface, ArrayAccess
     /**
      * Sets file
      *
-     * @param \SplFileObject|null $file file
+     * @param \SplFileObject $file file
      *
      * @return $this
      */

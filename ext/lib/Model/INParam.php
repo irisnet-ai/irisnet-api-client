@@ -200,6 +200,7 @@ class INParam implements ModelInterface, ArrayAccess
     const IN_CLASS_AGE_VERIFICATION = 'ageVerification';
     const IN_CLASS_AGE_ESTIMATION = 'ageEstimation';
     const IN_CLASS_ILLEGAL_SYMBOLS = 'illegalSymbols';
+    const IN_CLASS_TEXT_RECOGNITION = 'textRecognition';
     
 
     
@@ -232,6 +233,7 @@ class INParam implements ModelInterface, ArrayAccess
             self::IN_CLASS_AGE_VERIFICATION,
             self::IN_CLASS_AGE_ESTIMATION,
             self::IN_CLASS_ILLEGAL_SYMBOLS,
+            self::IN_CLASS_TEXT_RECOGNITION,
         ];
     }
     
@@ -319,7 +321,7 @@ class INParam implements ModelInterface, ArrayAccess
     /**
      * Sets in_class
      *
-     * @param string|null $in_class The classification of the object, that the element refers to. Default parameter values are defined per classification object. The following list contains the default values for 'min', 'max' and 'drawMode' in order.  * _face_ _(1, 3, 0)_ - Classification for human faces. * _child_ _(0, 0, 1)_ - Recognizes children's faces. Overwrites classification parameters of face. * _adult_ _(0, -1, 1)_ - Recognizes faces of adults that are not considered seniors. Overwrites classification parameters of face. * _senior_ _(0, -1, 1)_ - Recognizes faces of seniors. Overwrites classification parameters of face. * _pose_ _(0, 0, 1)_ - The age can not be estimated, due to a pose that hides facial features. * _hand_ _(0, -1, 0)_ - Classification for recognizing hands. * _foot_ _(0, -1, 0)_ - Classification for recognizing feet. * _footwear_ _(0, -1, 0)_ - Classification for recognizing footwear. * _breast_ _(0, 0, 2)_ - Object that recognizes female breasts. * _vulva_ _(0, 0, 2)_ - Object that recognizes vulvae. * _penis_ _(0, 0, 2)_ - Object that recognizes penises. * _vagina_ _(0, 0, 2)_ - Object that recognizes vaginae. * _buttocks_ _(0, 0, 2)_ - Object that recognizes buttocks. * _anus_ _(0, 0, 2)_ - Object that recognizes ani. * _toy_ _(0, 0, 2)_ - Object that recognizes sex toys. * _oral_ _(0, 0, 2)_ - Object that recognizes oral sex. * _penetration_ _(0, 0, 2)_ - Object that recognizes a sexual penetration penetration. * _illegalSymbols_ _(0, 0, 1)_ - Classification for symbols that are not permitted in Germany.  _Please be aware that the default values can be subject to change. This is due to the difficulty of recognizing certain objects e.g. objects that are classified as toy._
+     * @param string|null $in_class The classification of the object, that the element refers to. Default parameter values are defined per classification object. The following list contains the default values for 'min', 'max' and 'drawMode' in order.  * _face_ _(1, 3, 0)_ - Classification for human faces. * _child_ _(0, 0, 1)_ - Recognizes children's faces. Overwrites classification parameters of face. * _adult_ _(0, -1, 1)_ - Recognizes faces of adults that are not considered seniors. Overwrites classification parameters of face. * _senior_ _(0, -1, 1)_ - Recognizes faces of seniors. Overwrites classification parameters of face. * _pose_ _(0, 0, 1)_ - The age can not be estimated, due to a pose that hides facial features. * _hand_ _(0, -1, 0)_ - Classification for recognizing hands. * _foot_ _(0, -1, 0)_ - Classification for recognizing feet. * _footwear_ _(0, -1, 0)_ - Classification for recognizing footwear. * _breast_ _(0, 0, 2)_ - Object that recognizes female breasts. * _vulva_ _(0, 0, 2)_ - Object that recognizes vulvae. * _penis_ _(0, 0, 2)_ - Object that recognizes penises. * _vagina_ _(0, 0, 2)_ - Object that recognizes vaginae. * _buttocks_ _(0, 0, 2)_ - Object that recognizes buttocks. * _anus_ _(0, 0, 2)_ - Object that recognizes ani. * _toy_ _(0, 0, 2)_ - Object that recognizes sex toys. * _oral_ _(0, 0, 2)_ - Object that recognizes oral sex. * _penetration_ _(0, 0, 2)_ - Object that recognizes a sexual penetration penetration. * _illegalSymbols_ _(0, 0, 1)_ - Classification for symbols that are not permitted in Germany.  * _textRecognition_ _(0, 3, 6)_ - Classification for recognizing text occurrences.  _Please be aware that the default values can be subject to change. This is due to the difficulty of recognizing certain objects e.g. objects that are classified as toy._
      *
      * @return $this
      */

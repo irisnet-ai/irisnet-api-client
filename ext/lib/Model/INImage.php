@@ -163,6 +163,7 @@ class INImage implements ModelInterface, ArrayAccess
     const PROTO_AGE_VERIFICATION = 'ageVerification';
     const PROTO_AGE_ESTIMATION = 'ageEstimation';
     const PROTO_ILLEGAL_SYMBOLS = 'illegalSymbols';
+    const PROTO_TEXT_RECOGNITION = 'textRecognition';
     
 
     
@@ -178,6 +179,7 @@ class INImage implements ModelInterface, ArrayAccess
             self::PROTO_AGE_VERIFICATION,
             self::PROTO_AGE_ESTIMATION,
             self::PROTO_ILLEGAL_SYMBOLS,
+            self::PROTO_TEXT_RECOGNITION,
         ];
     }
     
@@ -245,7 +247,7 @@ class INImage implements ModelInterface, ArrayAccess
     /**
      * Sets proto
      *
-     * @param string|null $proto Name of commonly used rule sets (prototypes). That can be used to speed up the setup process. * _nudityCheck_ - Commonly used prototype to check for nudity. * _ageVerification_ - Deprecated see 'ageEstimation'. * _ageEstimation_ - Checks if there are children, adults or seniors recognizable. This is intended to be a suggestion to help you implement further steps. * _illegalSymbols_ - Checks for symbols that are not permitted in Germany.
+     * @param string|null $proto Name of commonly used rule sets (prototypes). That can be used to speed up the setup process. * _nudityCheck_ - Commonly used prototype to check for nudity. * _ageVerification_ - Deprecated see 'ageEstimation'. * _ageEstimation_ - Checks if there are children, adults or seniors recognizable. This is intended to be a suggestion to help you implement further steps. * _illegalSymbols_ - Checks for symbols that are not permitted in Germany. * _textRecognition_ - Checks for text occurrences.
      *
      * @return $this
      */

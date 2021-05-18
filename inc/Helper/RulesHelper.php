@@ -89,6 +89,12 @@ class RulesHelper
                 'allowMinMax' => false
             ),
         ),
+        'Text Recognition' => array(
+            'textRecognition' => array(
+                'plural' => 'letters',
+                'allowMinMax' => true
+            ),
+        ),
         'Illegal Symbols' => array(
             'illegalSymbols' => array(
                 'plural' => 'illegal symbols',
