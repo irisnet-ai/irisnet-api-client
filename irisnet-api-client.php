@@ -1,6 +1,6 @@
 <?php
 
-define('IRISNET_API_CLIENT_VERSION', '1.1.4');
+define('IRISNET_API_CLIENT_VERSION', '1.4.5');
 
 /**
  * @package IrisnetAPIClient

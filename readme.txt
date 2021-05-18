@@ -3,8 +3,8 @@ Contributors: irisnet
 Tags: ai, artificial intelligence, irisnet, porn blocker, youth protection, AI privacy protection, content moderation, moderation ai, image moderation, nudity blocker
 Requires at least: 5.1
 Requires PHP: 7.1
-Tested up to: 5.6.0
-Stable tag: 1.1.4
+Tested up to: 5.7.2
+Stable tag: 1.4.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -83,6 +83,9 @@ However, the uploaded files are always session-bound and will be permanently del
 4. Licenses
 
 == Upgrade Notice ==
+
+= 1.4.5 =
+adjust rules for new classification objects and simplified view
 
 = 1.1.3 =
 adjust rules for new classification objects
