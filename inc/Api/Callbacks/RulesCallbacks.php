@@ -58,27 +58,27 @@ class RulesCallbacks
             }
         }
 
-        // do not allow saving if there are no rules activated
-        $inputCopy = $input;
-        unset($inputCopy['rule_name']);
-        unset($inputCopy['description']);
-        $inputCopy = array_filter($inputCopy, function($key) {
-            return strpos($key, 'default_') !== 0;
-        }, ARRAY_FILTER_USE_KEY);
-
-        if (count($inputCopy) === 0) {
-            add_settings_error('irisnet_plugin_rules', 3000, "No rules set. Please turn on at least one classification group.");
-            return array();
-        }
-
         // retrieve the options from the database
         $output = get_option('irisnet_plugin_rules');
-
+        
         // User requested removal of rule set
         if (isset($_POST["remove"])) {
             unset($output[sanitize_text_field($_POST["remove"])]);
 
             return $output;
+        } else {
+            // do not allow saving if there are no rules activated
+            $inputCopy = $input;
+            unset($inputCopy['rule_name']);
+            unset($inputCopy['description']);
+            $inputCopy = array_filter($inputCopy, function($key) {
+                return strpos($key, 'default_') !== 0;
+            }, ARRAY_FILTER_USE_KEY);
+    
+            if (count($inputCopy) === 0) {
+                add_settings_error('irisnet_plugin_rules', 3000, "No rules set. Please turn on at least one classification group.");
+                return $output;
+            }
         }
         
         // Determine the cost of the rule set
