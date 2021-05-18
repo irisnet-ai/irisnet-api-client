@@ -35,31 +35,31 @@ class RulesHelper
                 'allowMinMax' => true
             ),
             'breast' => array(
-                'plural' => 'many breasts',
+                'plural' => 'breasts',
                 'allowMinMax' => false
             ),
             'vulva' => array(
-                'plural' => 'many vulvae',
+                'plural' => 'vulvae',
                 'allowMinMax' => false
             ),
             'penis' => array(
-                'plural' => 'many penises',
+                'plural' => 'penises',
                 'allowMinMax' => false
             ),
             'vagina' => array(
-                'plural' => 'many vaginae',
+                'plural' => 'vaginae',
                 'allowMinMax' => false
             ),
             'buttocks' => array(
-                'plural' => 'many buttocks', 
+                'plural' => 'buttocks', 
                 'allowMinMax' => false
             ),
             'anus' => array(
-                'plural' => 'many ani', 
+                'plural' => 'ani', 
                 'allowMinMax' => false
             ),
             'toy' => array(
-                'plural' => 'sex toys', 
+                'plural' => 'toys', 
                 'allowMinMax' => false
             ),
             'oral' => array(
