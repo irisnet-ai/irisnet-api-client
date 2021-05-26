@@ -36,7 +36,7 @@ class Dashboard extends BaseController
                 'capability' => 'manage_options',
                 'menu_slug' => 'irisnet_dash',
                 'callback' => array($this->callbacks, 'adminDashboard'),
-                'icon_url' => $this->plugin_url . 'assets/irisnet_icon_f1f2f3.svg',
+                'icon_url' => 'data:image/svg+xml;base64,' . base64_encode(file_get_contents($this->plugin_url . 'assets/irisnet_icon.svg')),
                 'position' => 100
             )
         );
