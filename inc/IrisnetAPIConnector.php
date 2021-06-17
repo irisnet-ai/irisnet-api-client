@@ -49,7 +49,7 @@ class IrisnetAPIConnector
     /**
      * Makes the API call to check the image for the specified rules.
      *
-     * @param string $file the name (including path) of the image that needs to be checked.
+     * @param string $file the name (including path) of the image or url of an image that needs to be checked. 
      * @param integer $detail Sets the response details. Use 1 (default) for minimum detail (better API performance), 2 for medium details and 3 for all details.
      * @param string $rule the given name of the rule set. Omit if the cost of the last set rule set should be determined.
      * @param integer $licenseId the id of the license key to use. Omit if the next available license key should be used.
@@ -61,7 +61,9 @@ class IrisnetAPIConnector
     public static function processImage(string $file, int $detail = 1, string $rule = null, int $licenseId = null) : IrisNet
     {
 
-        if (!file_exists($file)) {
+        $isUrl = filter_var($file, FILTER_VALIDATE_URL);
+
+        if (!$isUrl && !file_exists($file)) {
             throw new IrisnetException("The specified file does not exist. Filename: $file", 404);
         }
         
@@ -87,9 +89,12 @@ class IrisnetAPIConnector
         );
 
         try {
-            return $apiInstance->checkImage($key, new \SplFileObject($file), $detail);
+            if (!$isUrl)
+                return $apiInstance->checkImage($key, new \SplFileObject($file), $detail);
+
+            return $apiInstance->checkImageUrl($file, $key, $detail);
         } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occurred while performing the API request '/v1/check-image'. ApiResponse: " . $e->getMessage(), $e->getCode());
+            throw new IrisnetException("An Exception occurred while performing the API request '/v1/check-image' or '/v1/check-url'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
     }
 
