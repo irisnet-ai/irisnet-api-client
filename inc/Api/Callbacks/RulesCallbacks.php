@@ -45,17 +45,17 @@ class RulesCallbacks
             }
         }
 
-        // Remove hidden param switch from disabled object group
-        foreach ($input as $name => $value) {
-            if (strpos($name, '_param_switch') === false)
-                continue;
+        // unset params were the parent switch is turned off
+        $names = array_keys($input);
+        foreach ($names as $name) {
+            $paramName = explode('_', $name, 2)[0];
+            $parentName = RulesHelper::findClassParent($paramName);
 
-            if ($value == 1) {
-                $paramName = explode('_', $name, 2)[0];
-                $parentName = RulesHelper::findClassParent($paramName);
-                if (!isset($input[$parentName . '_switch']) || $input[$parentName . '_switch'] != 1)
-                    unset($input[$name]);
-            }
+            if (empty($parentName))
+                continue;
+            
+            if (!isset($input[$parentName . '_switch']) || $input[$parentName . '_switch'] != 1)
+                unset($input[$name]);
         }
 
         // retrieve the options from the database

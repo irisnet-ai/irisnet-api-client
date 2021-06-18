@@ -211,7 +211,7 @@ class RulesController extends BaseController
 
                 if (!$allowMinMax && !$lonelyClass)
                     $infoTextArgs = array_merge($infoTextArgs, array('switch' => $paramSwitch));
-                else if (!$allowMinMax && $lonelyClass)
+                else if ($lonelyClass)
                     $infoTextArgs = array_merge($infoTextArgs, array('switch' => $hiddenParamSwitch));
 
 

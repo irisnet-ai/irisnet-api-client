@@ -302,7 +302,7 @@ class IrisnetAPIConnector
             $classObjects = array_merge($classObjects, array_keys($group));
         }
 
-        // create a class object array
+        // create a group object array
         $groupObjects = array();
         foreach (RulesHelper::getClassObjectGroups(true) as $key => $value) {
             $group = array();
