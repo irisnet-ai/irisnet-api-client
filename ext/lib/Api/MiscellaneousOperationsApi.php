@@ -687,7 +687,7 @@ class MiscellaneousOperationsApi
      *
      * Get information from given license key.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
+     * @param  string $license_key License obtained from the https://www.irisnet.de/subscribe shop. (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -704,7 +704,7 @@ class MiscellaneousOperationsApi
      *
      * Get information from given license key.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
+     * @param  string $license_key License obtained from the https://www.irisnet.de/subscribe shop. (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
@@ -812,7 +812,7 @@ class MiscellaneousOperationsApi
      *
      * Get information from given license key.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
+     * @param  string $license_key License obtained from the https://www.irisnet.de/subscribe shop. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -832,7 +832,7 @@ class MiscellaneousOperationsApi
      *
      * Get information from given license key.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
+     * @param  string $license_key License obtained from the https://www.irisnet.de/subscribe shop. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -879,7 +879,7 @@ class MiscellaneousOperationsApi
     /**
      * Create request for operation 'getLicenseInfo'
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/prices shop. (required)
+     * @param  string $license_key License obtained from the https://www.irisnet.de/subscribe shop. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request

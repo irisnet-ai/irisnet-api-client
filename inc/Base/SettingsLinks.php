@@ -17,7 +17,7 @@ class SettingsLinks extends BaseController
     {
         $settings_link = '<a href="admin.php?page=irisnet_dash">Settings</a>';
         $api_link = '<a href="https://irisnet.de/api/">API</a>';
-        $buy_link = '<a href="https://irisnet.de/prices/">Buy Credits</a>';
+        $buy_link = '<a href="https://irisnet.de/subscribe/">Buy Credits</a>';
         $emoticon = '<span>&#128525;</span>';
         array_push($links, $settings_link, $api_link, $buy_link, $emoticon);
         return $links;

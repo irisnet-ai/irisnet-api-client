@@ -59,7 +59,7 @@
 					</div>
 					<div class="panel-footer">
 						<div class="text-center">
-							<a href="https://irisnet.de/prices/" class="button button-primary button-small">Buy a License</a>
+							<a href="https://irisnet.de/subscribe/" class="button button-primary button-small">Buy a License</a>
 							<a href="admin.php?page=irisnet_licenses" class="button button-secondary button-small">Manage Licenses</a>
 						</div>
 					</div>

@@ -4,7 +4,7 @@ Tags: ai, artificial intelligence, irisnet, porn blocker, youth protection, AI p
 Requires at least: 5.1
 Requires PHP: 7.1
 Tested up to: 5.8
-Stable tag: 1.5.8
+Stable tag: 1.5.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -26,7 +26,7 @@ After that all of the user uploaded images can be blocked, if it does not adhere
 1. You can install this plugin from the WordPress Plugin Directory,
   or manually [download the plugin](https://github.com/irisnet-ai/irisnet-api-client/releases) and upload it through the 'Plugins > Add New' menu in WordPress
 2. Activate the plugin through the 'Plugins' menu in WordPress
-3. Get a [free](https://irisnet.de/kasse?add-to-cart=26542) or paid API license key at [irisnet.de/prices](https://irisnet.de/prices)
+3. Get an API license key at [irisnet.de/subscribe](https://irisnet.de/subscribe)
 4. From the 'Irisnet Dashboard' click on 'Manage Licenses' in the Licenses pane. From there go to the 'Add New License' tab and enter the license key in the text box. Make sure to turn the 'Active' switch on and save.
 
 == How to Use ==
@@ -34,9 +34,7 @@ After that all of the user uploaded images can be blocked, if it does not adhere
 = Licenses =
 
 To make use of the plugin you need to add a valid license key. From the Irisnet Dashboard click on Manage Licenses in the Licenses pane. From there go to the Add New License tab and enter the license key in the text box. Make sure to turn the Active switch on and save.
-> A license key can be obtained here: [irisnet.de/prices](https://irisnet.de/prices)
-
-> Or get a limited license for demonstrational or testing purposes: [free license key](https://irisnet.de/kasse?add-to-cart=26542)
+> A license key can be obtained here: [irisnet.de/subscribe](https://irisnet.de/subscribe)
 
 = Rules =
 
@@ -94,6 +92,9 @@ adjust rules for new classification objects
 First official release of the Irisnet API Client for WordPress
 
 == Changelog ==
+
+= 1.5.9 =
+Updated shop link
 
 = 1.5.8 =
 WordPress compatibility

@@ -12,7 +12,7 @@ class LicensesCallbacks
 {
     public function licensesSectionManager()
     {
-        echo 'Add Irisnet Credits Licenses here. Go to <a href="https://irisnet.de/prices">irisnet.de</a> to obtain credits.';
+        echo 'Add Irisnet Credits Licenses here. Go to <a href="https://irisnet.de/subscribe">irisnet.de</a> to obtain credits.';
     }
 
     public function licensesSanitize($input)
