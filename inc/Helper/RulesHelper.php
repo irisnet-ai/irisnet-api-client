@@ -89,6 +89,48 @@ class RulesHelper
                 'allowMinMax' => false
             ),
         ),
+        'Attributes Check' => array(
+            'female' => array(
+                'plural' => 'women',
+                'allowMinMax' => true
+            ),
+            'male' => array(
+                'plural' => 'men',
+                'allowMinMax' => true
+            ),
+            'hair' => array(
+                'plural' => 'persons with hair',
+                'allowMinMax' => true
+            ),
+            'hairless' => array(
+                'plural' => 'hairless persons',
+                'allowMinMax' => true
+            ),
+            'beard' => array(
+                'plural' => 'persons with a beard',
+                'allowMinMax' => true
+            ),
+            'moustache' => array(
+                'plural' => 'persons with a moustache',
+                'allowMinMax' => true
+            ),
+            'headpiece' => array(
+                'plural' => 'persons with a hat',
+                'allowMinMax' => true
+            ),
+            'glasses' => array(
+                'plural' => 'persons with glasses',
+                'allowMinMax' => true
+            ),
+            'sunglasses' => array(
+                'plural' => 'persons with sunglasses',
+                'allowMinMax' => true
+            ),
+            'mask' => array(
+                'plural' => 'persons with a mask',
+                'allowMinMax' => true
+            ),
+        ),
         'Text Recognition' => array(
             'textRecognition' => array(
                 'plural' => 'letters',

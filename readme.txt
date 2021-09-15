@@ -82,6 +82,9 @@ However, the uploaded files are always session-bound and will be permanently del
 
 == Upgrade Notice ==
 
+= 1.6.10 =
+adjust rules for new classification objects (Attributes Check)
+
 = 1.4.6 =
 adjust rules for new classification objects and simplified view
 
@@ -92,6 +95,9 @@ adjust rules for new classification objects
 First official release of the Irisnet API Client for WordPress
 
 == Changelog ==
+
+= 1.6.10 =
+Added attributes check
 
 = 1.6.9 =
 Updated api backend
