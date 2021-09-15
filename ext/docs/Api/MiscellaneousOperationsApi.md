@@ -132,7 +132,7 @@ $apiInstance = new OpenAPI\Client\Api\MiscellaneousOperationsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$license_key = 'license_key_example'; // string | License obtained from the https://www.irisnet.de/subscribe shop.
+$license_key = 'license_key_example'; // string | License obtained from the https://irisnet.de/subscribe shop.
 
 try {
     $result = $apiInstance->getLicenseInfo($license_key);
@@ -148,7 +148,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **license_key** | **string**| License obtained from the https://www.irisnet.de/subscribe shop. |
+ **license_key** | **string**| License obtained from the https://irisnet.de/subscribe shop. |
 
 ### Return type
 

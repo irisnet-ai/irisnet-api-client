@@ -90,9 +90,9 @@ class IrisnetAPIConnector
 
         try {
             if (!$isUrl)
-                return $apiInstance->checkImage($key, new \SplFileObject($file), $detail);
+                return $apiInstance->checkImage($key, new \SplFileObject($file), $detail, true);
 
-            return $apiInstance->checkImageUrl($file, $key, $detail);
+            return $apiInstance->checkImageUrl($file, $key, $detail, true);
         } catch (ApiException $e) {
             throw new IrisnetException("An Exception occurred while performing the API request '/v1/check-image' or '/v1/check-url'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }

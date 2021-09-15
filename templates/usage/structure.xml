@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="API Documentation" version="2.9.1">
   <partials/>
-  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="b61cad4fcf025f7f03f8aefef100a365" package="IrisnetAPIClient">
+  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="893aa73c6d2d22661b4d5cb5b48da846" package="IrisnetAPIClient">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -55,7 +55,7 @@
         <docblock line="61">
           <description>Makes the API call to check the image for the specified rules.</description>
           <long-description></long-description>
-          <tag name="param" line="61" description="&lt;p&gt;the name (including path) of the image that needs to be checked.&lt;/p&gt;" type="string" variable="$file">
+          <tag name="param" line="61" description="&lt;p&gt;the name (including path) of the image or url of an image that needs to be checked.&lt;/p&gt;" type="string" variable="$file">
             <type>string</type>
           </tag>
           <tag name="param" line="61" description="&lt;p&gt;Sets the response details. Use 1 (default) for minimum detail (better API performance), 2 for medium details and 3 for all details.&lt;/p&gt;" type="integer" variable="$detail">
@@ -95,22 +95,22 @@
           <type>integer</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="104" package="IrisnetAPIClient">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="" line="109" package="IrisnetAPIClient">
         <name>getProcessedImage</name>
         <full_name>\IrisnetAPIConnector::getProcessedImage()</full_name>
-        <docblock line="104">
+        <docblock line="109">
           <description>Downloads the modified image as specified by the rules parameters, if needed.</description>
           <long-description></long-description>
-          <tag name="param" line="104" description="&lt;p&gt;the name of the file (without path) that should be downloaded. Is equal to the file name that was processed.&lt;/p&gt;" type="string" variable="$filename">
+          <tag name="param" line="109" description="&lt;p&gt;the name of the file (without path) that should be downloaded. Is equal to the file name that was processed.&lt;/p&gt;" type="string" variable="$filename">
             <type>string</type>
           </tag>
-          <tag name="param" line="104" description="&lt;p&gt;the location (folder) of where to save the downloaded file. When omitted the return type is SplFileObject&lt;/p&gt;" type="string" variable="$downloadPath">
+          <tag name="param" line="109" description="&lt;p&gt;the location (folder) of where to save the downloaded file. When omitted the return type is SplFileObject&lt;/p&gt;" type="string" variable="$downloadPath">
             <type>string</type>
           </tag>
-          <tag name="throws" line="104" description="is thrown in case that the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
+          <tag name="throws" line="109" description="is thrown in case that the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
             <type>\IrisnetException</type>
           </tag>
-          <tag name="return" line="104" description="returns FALSE in case that the file could not be saved at the specified location" type="boolean|\SplFileObject">
+          <tag name="return" line="109" description="returns FALSE in case that the file could not be saved at the specified location" type="boolean|\SplFileObject">
             <type>boolean</type>
             <type>\SplFileObject</type>
           </tag>

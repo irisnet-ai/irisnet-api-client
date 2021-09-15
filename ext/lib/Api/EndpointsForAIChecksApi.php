@@ -12,7 +12,7 @@
 /**
  * Irisnet API
  *
- * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses.By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
+ * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses. By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
  *
  * The version of the OpenAPI document: v1
  * 
@@ -123,14 +123,15 @@ class EndpointsForAIChecksApi
      * @param  string $license_key License obtained from irisnet.de shop. (required)
      * @param  \SplFileObject $file file (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  bool $image_encode Specifies whether or not to draw an output image that can be downloaded afterwards. (optional, default to false)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\INError
      */
-    public function checkImage($license_key, $file, $detail = 1)
+    public function checkImage($license_key, $file, $detail = 1, $image_encode = false)
     {
-        list($response) = $this->checkImageWithHttpInfo($license_key, $file, $detail);
+        list($response) = $this->checkImageWithHttpInfo($license_key, $file, $detail, $image_encode);
         return $response;
     }
 
@@ -142,14 +143,15 @@ class EndpointsForAIChecksApi
      * @param  string $license_key License obtained from irisnet.de shop. (required)
      * @param  \SplFileObject $file (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  bool $image_encode Specifies whether or not to draw an output image that can be downloaded afterwards. (optional, default to false)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function checkImageWithHttpInfo($license_key, $file, $detail = 1)
+    public function checkImageWithHttpInfo($license_key, $file, $detail = 1, $image_encode = false)
     {
-        $request = $this->checkImageRequest($license_key, $file, $detail);
+        $request = $this->checkImageRequest($license_key, $file, $detail, $image_encode);
 
         try {
             $options = $this->createHttpClientOption();
@@ -252,13 +254,14 @@ class EndpointsForAIChecksApi
      * @param  string $license_key License obtained from irisnet.de shop. (required)
      * @param  \SplFileObject $file (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  bool $image_encode Specifies whether or not to draw an output image that can be downloaded afterwards. (optional, default to false)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function checkImageAsync($license_key, $file, $detail = 1)
+    public function checkImageAsync($license_key, $file, $detail = 1, $image_encode = false)
     {
-        return $this->checkImageAsyncWithHttpInfo($license_key, $file, $detail)
+        return $this->checkImageAsyncWithHttpInfo($license_key, $file, $detail, $image_encode)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -274,14 +277,15 @@ class EndpointsForAIChecksApi
      * @param  string $license_key License obtained from irisnet.de shop. (required)
      * @param  \SplFileObject $file (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  bool $image_encode Specifies whether or not to draw an output image that can be downloaded afterwards. (optional, default to false)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function checkImageAsyncWithHttpInfo($license_key, $file, $detail = 1)
+    public function checkImageAsyncWithHttpInfo($license_key, $file, $detail = 1, $image_encode = false)
     {
         $returnType = '\OpenAPI\Client\Model\IrisNet';
-        $request = $this->checkImageRequest($license_key, $file, $detail);
+        $request = $this->checkImageRequest($license_key, $file, $detail, $image_encode);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -323,11 +327,12 @@ class EndpointsForAIChecksApi
      * @param  string $license_key License obtained from irisnet.de shop. (required)
      * @param  \SplFileObject $file (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  bool $image_encode Specifies whether or not to draw an output image that can be downloaded afterwards. (optional, default to false)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function checkImageRequest($license_key, $file, $detail = 1)
+    protected function checkImageRequest($license_key, $file, $detail = 1, $image_encode = false)
     {
         // verify the required parameter 'license_key' is set
         if ($license_key === null || (is_array($license_key) && count($license_key) === 0)) {
@@ -358,6 +363,17 @@ class EndpointsForAIChecksApi
             }
             else {
                 $queryParams['detail'] = $detail;
+            }
+        }
+        // query params
+        if ($image_encode !== null) {
+            if('form' === 'form' && is_array($image_encode)) {
+                foreach($image_encode as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['imageEncode'] = $image_encode;
             }
         }
 
@@ -448,14 +464,15 @@ class EndpointsForAIChecksApi
      * @param  string $url url (required)
      * @param  string $license_key License obtained from irisnet.de shop. (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  bool $image_encode Specifies whether or not to draw an output image that can be downloaded afterwards. (optional, default to false)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\INError
      */
-    public function checkImageUrl($url, $license_key, $detail = 1)
+    public function checkImageUrl($url, $license_key, $detail = 1, $image_encode = false)
     {
-        list($response) = $this->checkImageUrlWithHttpInfo($url, $license_key, $detail);
+        list($response) = $this->checkImageUrlWithHttpInfo($url, $license_key, $detail, $image_encode);
         return $response;
     }
 
@@ -467,14 +484,15 @@ class EndpointsForAIChecksApi
      * @param  string $url (required)
      * @param  string $license_key License obtained from irisnet.de shop. (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  bool $image_encode Specifies whether or not to draw an output image that can be downloaded afterwards. (optional, default to false)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \OpenAPI\Client\Model\IrisNet|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
-    public function checkImageUrlWithHttpInfo($url, $license_key, $detail = 1)
+    public function checkImageUrlWithHttpInfo($url, $license_key, $detail = 1, $image_encode = false)
     {
-        $request = $this->checkImageUrlRequest($url, $license_key, $detail);
+        $request = $this->checkImageUrlRequest($url, $license_key, $detail, $image_encode);
 
         try {
             $options = $this->createHttpClientOption();
@@ -577,13 +595,14 @@ class EndpointsForAIChecksApi
      * @param  string $url (required)
      * @param  string $license_key License obtained from irisnet.de shop. (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  bool $image_encode Specifies whether or not to draw an output image that can be downloaded afterwards. (optional, default to false)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function checkImageUrlAsync($url, $license_key, $detail = 1)
+    public function checkImageUrlAsync($url, $license_key, $detail = 1, $image_encode = false)
     {
-        return $this->checkImageUrlAsyncWithHttpInfo($url, $license_key, $detail)
+        return $this->checkImageUrlAsyncWithHttpInfo($url, $license_key, $detail, $image_encode)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -599,14 +618,15 @@ class EndpointsForAIChecksApi
      * @param  string $url (required)
      * @param  string $license_key License obtained from irisnet.de shop. (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  bool $image_encode Specifies whether or not to draw an output image that can be downloaded afterwards. (optional, default to false)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function checkImageUrlAsyncWithHttpInfo($url, $license_key, $detail = 1)
+    public function checkImageUrlAsyncWithHttpInfo($url, $license_key, $detail = 1, $image_encode = false)
     {
         $returnType = '\OpenAPI\Client\Model\IrisNet';
-        $request = $this->checkImageUrlRequest($url, $license_key, $detail);
+        $request = $this->checkImageUrlRequest($url, $license_key, $detail, $image_encode);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -648,11 +668,12 @@ class EndpointsForAIChecksApi
      * @param  string $url (required)
      * @param  string $license_key License obtained from irisnet.de shop. (required)
      * @param  int $detail Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. (optional, default to 1)
+     * @param  bool $image_encode Specifies whether or not to draw an output image that can be downloaded afterwards. (optional, default to false)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function checkImageUrlRequest($url, $license_key, $detail = 1)
+    protected function checkImageUrlRequest($url, $license_key, $detail = 1, $image_encode = false)
     {
         // verify the required parameter 'url' is set
         if ($url === null || (is_array($url) && count($url) === 0)) {
@@ -694,6 +715,17 @@ class EndpointsForAIChecksApi
             }
             else {
                 $queryParams['detail'] = $detail;
+            }
+        }
+        // query params
+        if ($image_encode !== null) {
+            if('form' === 'form' && is_array($image_encode)) {
+                foreach($image_encode as $key => $value) {
+                    $queryParams[$key] = $value;
+                }
+            }
+            else {
+                $queryParams['imageEncode'] = $image_encode;
             }
         }
 

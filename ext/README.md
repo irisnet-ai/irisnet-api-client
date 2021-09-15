@@ -5,7 +5,7 @@ Artificial Intelligence (AI) for image- and video-processing in realtime. This i
 Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API.
 The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.
 
-Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses.By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
+Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses. By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
 
 
 
@@ -75,9 +75,10 @@ $apiInstance = new OpenAPI\Client\Api\EndpointsForAIChecksApi(
 $license_key = 'license_key_example'; // string | License obtained from irisnet.de shop.
 $file = "/path/to/file.txt"; // \SplFileObject | 
 $detail = 1; // int | Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information.
+$image_encode = false; // bool | Specifies whether or not to draw an output image that can be downloaded afterwards.
 
 try {
-    $result = $apiInstance->checkImage($license_key, $file, $detail);
+    $result = $apiInstance->checkImage($license_key, $file, $detail, $image_encode);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling EndpointsForAIChecksApi->checkImage: ', $e->getMessage(), PHP_EOL;

@@ -13,7 +13,7 @@
 /**
  * Irisnet API
  *
- * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses.By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
+ * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses. By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
  *
  * The version of the OpenAPI document: v1
  * 
@@ -180,27 +180,38 @@ class INParam implements ModelInterface, ArrayAccess
     }
 
     const IN_CLASS_FACE = 'face';
-    const IN_CLASS_CHILD = 'child';
-    const IN_CLASS_ADULT = 'adult';
-    const IN_CLASS_SENIOR = 'senior';
-    const IN_CLASS_POSE = 'pose';
     const IN_CLASS_HAND = 'hand';
+    const IN_CLASS_FOOT = 'foot';
+    const IN_CLASS_FOOTWEAR = 'footwear';
     const IN_CLASS_BREAST = 'breast';
     const IN_CLASS_VULVA = 'vulva';
     const IN_CLASS_PENIS = 'penis';
     const IN_CLASS_VAGINA = 'vagina';
     const IN_CLASS_BUTTOCKS = 'buttocks';
     const IN_CLASS_ANUS = 'anus';
-    const IN_CLASS_TOY = 'toy';
     const IN_CLASS_ORAL = 'oral';
     const IN_CLASS_PENETRATION = 'penetration';
-    const IN_CLASS_FOOT = 'foot';
-    const IN_CLASS_FOOTWEAR = 'footwear';
+    const IN_CLASS_TOY = 'toy';
+    const IN_CLASS_CHILD = 'child';
+    const IN_CLASS_ADULT = 'adult';
+    const IN_CLASS_SENIOR = 'senior';
+    const IN_CLASS_POSE = 'pose';
+    const IN_CLASS_FEMALE = 'female';
+    const IN_CLASS_MALE = 'male';
+    const IN_CLASS_HAIR = 'hair';
+    const IN_CLASS_HAIRLESS = 'hairless';
+    const IN_CLASS_BEARD = 'beard';
+    const IN_CLASS_MOUSTACHE = 'moustache';
+    const IN_CLASS_HEADPIECE = 'headpiece';
+    const IN_CLASS_GLASSES = 'glasses';
+    const IN_CLASS_SUNGLASSES = 'sunglasses';
+    const IN_CLASS_MASK = 'mask';
     const IN_CLASS_NUDITY_CHECK = 'nudityCheck';
     const IN_CLASS_AGE_VERIFICATION = 'ageVerification';
     const IN_CLASS_AGE_ESTIMATION = 'ageEstimation';
     const IN_CLASS_ILLEGAL_SYMBOLS = 'illegalSymbols';
     const IN_CLASS_TEXT_RECOGNITION = 'textRecognition';
+    const IN_CLASS_ATTRIBUTES_CHECK = 'attributesCheck';
     
 
     
@@ -213,27 +224,38 @@ class INParam implements ModelInterface, ArrayAccess
     {
         return [
             self::IN_CLASS_FACE,
-            self::IN_CLASS_CHILD,
-            self::IN_CLASS_ADULT,
-            self::IN_CLASS_SENIOR,
-            self::IN_CLASS_POSE,
             self::IN_CLASS_HAND,
+            self::IN_CLASS_FOOT,
+            self::IN_CLASS_FOOTWEAR,
             self::IN_CLASS_BREAST,
             self::IN_CLASS_VULVA,
             self::IN_CLASS_PENIS,
             self::IN_CLASS_VAGINA,
             self::IN_CLASS_BUTTOCKS,
             self::IN_CLASS_ANUS,
-            self::IN_CLASS_TOY,
             self::IN_CLASS_ORAL,
             self::IN_CLASS_PENETRATION,
-            self::IN_CLASS_FOOT,
-            self::IN_CLASS_FOOTWEAR,
+            self::IN_CLASS_TOY,
+            self::IN_CLASS_CHILD,
+            self::IN_CLASS_ADULT,
+            self::IN_CLASS_SENIOR,
+            self::IN_CLASS_POSE,
+            self::IN_CLASS_FEMALE,
+            self::IN_CLASS_MALE,
+            self::IN_CLASS_HAIR,
+            self::IN_CLASS_HAIRLESS,
+            self::IN_CLASS_BEARD,
+            self::IN_CLASS_MOUSTACHE,
+            self::IN_CLASS_HEADPIECE,
+            self::IN_CLASS_GLASSES,
+            self::IN_CLASS_SUNGLASSES,
+            self::IN_CLASS_MASK,
             self::IN_CLASS_NUDITY_CHECK,
             self::IN_CLASS_AGE_VERIFICATION,
             self::IN_CLASS_AGE_ESTIMATION,
             self::IN_CLASS_ILLEGAL_SYMBOLS,
             self::IN_CLASS_TEXT_RECOGNITION,
+            self::IN_CLASS_ATTRIBUTES_CHECK,
         ];
     }
     
@@ -321,7 +343,7 @@ class INParam implements ModelInterface, ArrayAccess
     /**
      * Sets in_class
      *
-     * @param string|null $in_class The classification of the object, that the element refers to. Default parameter values are defined per classification object. The following list contains the default values for 'min', 'max' and 'drawMode' in order.  * _face_ _(1, 3, 0)_ - Classification for human faces. * _child_ _(0, 0, 1)_ - Recognizes children's faces. Overwrites classification parameters of face. * _adult_ _(0, -1, 1)_ - Recognizes faces of adults that are not considered seniors. Overwrites classification parameters of face. * _senior_ _(0, -1, 1)_ - Recognizes faces of seniors. Overwrites classification parameters of face. * _pose_ _(0, 0, 1)_ - The age can not be estimated, due to a pose that hides facial features. * _hand_ _(0, -1, 0)_ - Classification for recognizing hands. * _foot_ _(0, -1, 0)_ - Classification for recognizing feet. * _footwear_ _(0, -1, 0)_ - Classification for recognizing footwear. * _breast_ _(0, 0, 2)_ - Object that recognizes female breasts. * _vulva_ _(0, 0, 2)_ - Object that recognizes vulvae. * _penis_ _(0, 0, 2)_ - Object that recognizes penises. * _vagina_ _(0, 0, 2)_ - Object that recognizes vaginae. * _buttocks_ _(0, 0, 2)_ - Object that recognizes buttocks. * _anus_ _(0, 0, 2)_ - Object that recognizes ani. * _toy_ _(0, 0, 2)_ - Object that recognizes sex toys. * _oral_ _(0, 0, 2)_ - Object that recognizes oral sex. * _penetration_ _(0, 0, 2)_ - Object that recognizes a sexual penetration penetration. * _illegalSymbols_ _(0, 0, 1)_ - Classification for symbols that are not permitted in Germany.  * _textRecognition_ _(0, 3, 6)_ - Classification for recognizing text occurrences.  _Please be aware that the default values can be subject to change. This is due to the difficulty of recognizing certain objects e.g. objects that are classified as toy._
+     * @param string|null $in_class The classification of the object, that the element refers to. Default parameter values are defined per classification object. The following list contains the default values for 'min', 'max' and 'drawMode' in order.  * _face_ _(1, 3, 0)_ - Classification for human faces. * _child (*)_ _(0, 0, 6)_ - Recognizes children's faces. * _adult (*)_ _(0, -1, 0)_ - Recognizes faces of adults that are not considered seniors. * _senior (*)_ _(0, -1, 0)_ - Recognizes faces of seniors. * _pose_ _(0, 0, 0)_ - The age can not be estimated, due to a pose that hides facial features. * _female (*)_ _(0, -1, 0)_ - Recognizes female faces.  * _male (*)_ _(0, -1, 0)_ - Recognizes male faces.  * _hand_ _(0, -1, 0)_ - Classification for recognizing hands. * _foot_ _(0, -1, 0)_ - Classification for recognizing feet. * _footwear_ _(0, -1, 0)_ - Classification for recognizing footwear. * _hair_ _(0, -1, 0)_ - Classification for recognizing hair.  * _hairless_ _(0, -1, 0)_ - Classification for recognizing no hair.  * _beard_ _(0, -1, 0)_ - Classification for recognizing beards.  * _moustache_ _(0, -1, 0)_ - Classification for recognizing moustaches.  * _headpiece_ _(0, -1, 0)_ - Classification for recognizing headpieces.  * _glasses_ _(0, -1, 0)_ - Classification for recognizing glasses.  * _sunglasses_ _(0, -1, 0)_ - Classification for recognizing sunglasses.  * _mask_ _(0, -1, 0)_ - Classification for recognizing medical masks.  * _breast_ _(0, 0, 2)_ - Object that recognizes female breasts. * _vulva_ _(0, 0, 2)_ - Object that recognizes vulvae. * _penis_ _(0, 0, 2)_ - Object that recognizes penises. * _vagina_ _(0, 0, 2)_ - Object that recognizes vaginae. * _buttocks_ _(0, 0, 2)_ - Object that recognizes buttocks. * _anus_ _(0, 0, 2)_ - Object that recognizes ani. * _toy_ _(0, -1, 0)_ - Object that recognizes sex toys. * _oral_ _(0, 0, 2)_ - Object that recognizes oral sex. * _penetration_ _(0, 0, 2)_ - Object that recognizes a sexual penetration penetration. * _illegalSymbols_ _(0, 0, 1)_ - Classification for symbols that are not permitted in Germany.  * _textRecognition_ _(0, 6, 6)_ - Classification for recognizing text occurrences.  _Classification objects that are marked with (*) are sub-classifications of face. Both face and the marked classification are affected by the given parameter values._  _Please be aware that the default values can be subject to change. This is due to the difficulty of recognizing certain objects e.g. objects that are classified as toy._
      *
      * @return $this
      */

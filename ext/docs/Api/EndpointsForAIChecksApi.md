@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## checkImage
 
-> \OpenAPI\Client\Model\IrisNet checkImage($license_key, $file, $detail)
+> \OpenAPI\Client\Model\IrisNet checkImage($license_key, $file, $detail, $image_encode)
 
 Upload and check image against previously chosen configuration.
 
@@ -30,9 +30,10 @@ $apiInstance = new OpenAPI\Client\Api\EndpointsForAIChecksApi(
 $license_key = 'license_key_example'; // string | License obtained from irisnet.de shop.
 $file = "/path/to/file.txt"; // \SplFileObject | 
 $detail = 1; // int | Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information.
+$image_encode = false; // bool | Specifies whether or not to draw an output image that can be downloaded afterwards.
 
 try {
-    $result = $apiInstance->checkImage($license_key, $file, $detail);
+    $result = $apiInstance->checkImage($license_key, $file, $detail, $image_encode);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling EndpointsForAIChecksApi->checkImage: ', $e->getMessage(), PHP_EOL;
@@ -48,6 +49,7 @@ Name | Type | Description  | Notes
  **license_key** | **string**| License obtained from irisnet.de shop. |
  **file** | **\SplFileObject****\SplFileObject**|  |
  **detail** | **int**| Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. | [optional] [default to 1]
+ **image_encode** | **bool**| Specifies whether or not to draw an output image that can be downloaded afterwards. | [optional] [default to false]
 
 ### Return type
 
@@ -69,7 +71,7 @@ No authorization required
 
 ## checkImageUrl
 
-> \OpenAPI\Client\Model\IrisNet checkImageUrl($url, $license_key, $detail)
+> \OpenAPI\Client\Model\IrisNet checkImageUrl($url, $license_key, $detail, $image_encode)
 
 Check image url against previously chosen configuration.
 
@@ -88,9 +90,10 @@ $apiInstance = new OpenAPI\Client\Api\EndpointsForAIChecksApi(
 $url = 'url_example'; // string | 
 $license_key = 'license_key_example'; // string | License obtained from irisnet.de shop.
 $detail = 1; // int | Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information.
+$image_encode = false; // bool | Specifies whether or not to draw an output image that can be downloaded afterwards.
 
 try {
-    $result = $apiInstance->checkImageUrl($url, $license_key, $detail);
+    $result = $apiInstance->checkImageUrl($url, $license_key, $detail, $image_encode);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling EndpointsForAIChecksApi->checkImageUrl: ', $e->getMessage(), PHP_EOL;
@@ -106,6 +109,7 @@ Name | Type | Description  | Notes
  **url** | **string**|  |
  **license_key** | **string**| License obtained from irisnet.de shop. |
  **detail** | **int**| Sets the response details.  * _1_ - The response body informs you if the image is ok or not ok (better API performance) * _2_ - In addition the response body lists all broken rules. * _3_ - In addition to the first two options, this will show all objects with positional information. | [optional] [default to 1]
+ **image_encode** | **bool**| Specifies whether or not to draw an output image that can be downloaded afterwards. | [optional] [default to false]
 
 ### Return type
 

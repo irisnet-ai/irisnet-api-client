@@ -13,7 +13,7 @@
 /**
  * Irisnet API
  *
- * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses.By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
+ * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses. By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
  *
  * The version of the OpenAPI document: v1
  * 
@@ -61,6 +61,8 @@ class INObject implements ModelInterface, ArrayAccess
         'in_class' => 'string',
         'in_group' => 'string',
         'in_id' => 'string',
+        'color' => 'string',
+        'style' => 'string',
         'x0' => 'float',
         'y0' => 'float',
         'width' => 'float',
@@ -77,6 +79,8 @@ class INObject implements ModelInterface, ArrayAccess
         'in_class' => null,
         'in_group' => null,
         'in_id' => null,
+        'color' => null,
+        'style' => null,
         'x0' => 'float',
         'y0' => 'float',
         'width' => 'float',
@@ -114,6 +118,8 @@ class INObject implements ModelInterface, ArrayAccess
         'in_class' => 'inClass',
         'in_group' => 'inGroup',
         'in_id' => 'inId',
+        'color' => 'color',
+        'style' => 'style',
         'x0' => 'x0',
         'y0' => 'y0',
         'width' => 'width',
@@ -130,6 +136,8 @@ class INObject implements ModelInterface, ArrayAccess
         'in_class' => 'setInClass',
         'in_group' => 'setInGroup',
         'in_id' => 'setInId',
+        'color' => 'setColor',
+        'style' => 'setStyle',
         'x0' => 'setX0',
         'y0' => 'setY0',
         'width' => 'setWidth',
@@ -146,6 +154,8 @@ class INObject implements ModelInterface, ArrayAccess
         'in_class' => 'getInClass',
         'in_group' => 'getInGroup',
         'in_id' => 'getInId',
+        'color' => 'getColor',
+        'style' => 'getStyle',
         'x0' => 'getX0',
         'y0' => 'getY0',
         'width' => 'getWidth',
@@ -194,8 +204,46 @@ class INObject implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const COLOR_BLACK = 'black';
+    const COLOR_BROWN = 'brown';
+    const COLOR_BLONDE = 'blonde';
+    const COLOR_GREY = 'grey';
+    const COLOR_RED = 'red';
+    const COLOR_OTHER = 'other';
+    const STYLE_LONG_HAIRED = 'longHaired';
+    const STYLE_SHORT_HAIRED = 'shortHaired';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getColorAllowableValues()
+    {
+        return [
+            self::COLOR_BLACK,
+            self::COLOR_BROWN,
+            self::COLOR_BLONDE,
+            self::COLOR_GREY,
+            self::COLOR_RED,
+            self::COLOR_OTHER,
+        ];
+    }
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStyleAllowableValues()
+    {
+        return [
+            self::STYLE_LONG_HAIRED,
+            self::STYLE_SHORT_HAIRED,
+        ];
+    }
     
 
     /**
@@ -216,6 +264,8 @@ class INObject implements ModelInterface, ArrayAccess
         $this->container['in_class'] = isset($data['in_class']) ? $data['in_class'] : null;
         $this->container['in_group'] = isset($data['in_group']) ? $data['in_group'] : null;
         $this->container['in_id'] = isset($data['in_id']) ? $data['in_id'] : null;
+        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
+        $this->container['style'] = isset($data['style']) ? $data['style'] : null;
         $this->container['x0'] = isset($data['x0']) ? $data['x0'] : null;
         $this->container['y0'] = isset($data['y0']) ? $data['y0'] : null;
         $this->container['width'] = isset($data['width']) ? $data['width'] : null;
@@ -231,6 +281,22 @@ class INObject implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        $allowedValues = $this->getColorAllowableValues();
+        if (!is_null($this->container['color']) && !in_array($this->container['color'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'color', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getStyleAllowableValues();
+        if (!is_null($this->container['style']) && !in_array($this->container['style'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'style', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
 
         return $invalidProperties;
     }
@@ -315,6 +381,72 @@ class INObject implements ModelInterface, ArrayAccess
     public function setInId($in_id)
     {
         $this->container['in_id'] = $in_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets color
+     *
+     * @return string|null
+     */
+    public function getColor()
+    {
+        return $this->container['color'];
+    }
+
+    /**
+     * Sets color
+     *
+     * @param string|null $color The color of the object, e.g. the color of the hair. Is only available for certain classification objects. See list below:  * _hair_ - black, brown, blonde, grey, red, other
+     *
+     * @return $this
+     */
+    public function setColor($color)
+    {
+        $allowedValues = $this->getColorAllowableValues();
+        if (!is_null($color) && !in_array($color, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'color', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['color'] = $color;
+
+        return $this;
+    }
+
+    /**
+     * Gets style
+     *
+     * @return string|null
+     */
+    public function getStyle()
+    {
+        return $this->container['style'];
+    }
+
+    /**
+     * Sets style
+     *
+     * @param string|null $style The style attribute of the object, e.g. the style of the hair. Is only available for certain classification objects. See list below:  * _hair_ - longHaired, shortHaired
+     *
+     * @return $this
+     */
+    public function setStyle($style)
+    {
+        $allowedValues = $this->getStyleAllowableValues();
+        if (!is_null($style) && !in_array($style, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'style', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['style'] = $style;
 
         return $this;
     }

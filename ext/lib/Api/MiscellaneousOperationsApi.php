@@ -12,7 +12,7 @@
 /**
  * Irisnet API
  *
- * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses.By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
+ * Artificial Intelligence (AI) for image- and video-processing in realtime. This is an interactive documentation meant to give a place were you can quickly look up the endpoints and their schemas, while also giving you the option to try things out yourself.  Listed below you'll see the available endpoints of the API that can be expanded by clicking on it. Each expanded endpoint lists the request parameter (if available) and the request body (if available). The request body can list some example bodies and the schema, explaining each model in detail. Additionally you'll find a 'Try it out' button where you can type in your custom parameters and custom body and execute that against the API. The responses section in the expanded endpoint lists the possible responses with their corresponding status codes. If you've executed an API call it will also show you the response from the server.  Underneath the endpoints you'll find the model schemas. These are the models used for the requests and responses. By clicking on the right arrow you can expand the model and it will show you a description of the model and the model parameters. For nested models you can keep clicking the right arrow to reveal further details on it.
  *
  * The version of the OpenAPI document: v1
  * 
@@ -124,7 +124,7 @@ class MiscellaneousOperationsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\INError|\SplFileObject
+     * @return \SplFileObject|\OpenAPI\Client\Model\INError
      */
     public function downloadProcessed($filename)
     {
@@ -141,7 +141,7 @@ class MiscellaneousOperationsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\INError|\SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SplFileObject|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
     public function downloadProcessedWithHttpInfo($filename)
     {
@@ -177,18 +177,6 @@ class MiscellaneousOperationsApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 404:
-                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 200:
                     if ('\SplFileObject' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -198,6 +186,18 @@ class MiscellaneousOperationsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\SplFileObject', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -219,18 +219,18 @@ class MiscellaneousOperationsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\INError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\INError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -416,7 +416,7 @@ class MiscellaneousOperationsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return int|\OpenAPI\Client\Model\INError
+     * @return \OpenAPI\Client\Model\INError|int
      */
     public function getAICost()
     {
@@ -432,7 +432,7 @@ class MiscellaneousOperationsApi
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of int|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\INError|int, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAICostWithHttpInfo()
     {
@@ -468,18 +468,6 @@ class MiscellaneousOperationsApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 200:
-                    if ('int' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'int', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 429:
                     if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -489,6 +477,18 @@ class MiscellaneousOperationsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 200:
+                    if ('int' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, 'int', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -510,18 +510,18 @@ class MiscellaneousOperationsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'int',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\OpenAPI\Client\Model\INError',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        'int',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -687,11 +687,11 @@ class MiscellaneousOperationsApi
      *
      * Get information from given license key.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/subscribe shop. (required)
+     * @param  string $license_key License obtained from the https://irisnet.de/subscribe shop. (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\INError|\OpenAPI\Client\Model\LicenseInfo
+     * @return \OpenAPI\Client\Model\LicenseInfo|\OpenAPI\Client\Model\INError
      */
     public function getLicenseInfo($license_key)
     {
@@ -704,11 +704,11 @@ class MiscellaneousOperationsApi
      *
      * Get information from given license key.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/subscribe shop. (required)
+     * @param  string $license_key License obtained from the https://irisnet.de/subscribe shop. (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\INError|\OpenAPI\Client\Model\LicenseInfo, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\LicenseInfo|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getLicenseInfoWithHttpInfo($license_key)
     {
@@ -744,18 +744,6 @@ class MiscellaneousOperationsApi
 
             $responseBody = $response->getBody();
             switch($statusCode) {
-                case 404:
-                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = (string) $responseBody;
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 200:
                     if ('\OpenAPI\Client\Model\LicenseInfo' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
@@ -765,6 +753,18 @@ class MiscellaneousOperationsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\LicenseInfo', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = (string) $responseBody;
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -786,18 +786,18 @@ class MiscellaneousOperationsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 404:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\INError',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\OpenAPI\Client\Model\LicenseInfo',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\INError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -812,7 +812,7 @@ class MiscellaneousOperationsApi
      *
      * Get information from given license key.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/subscribe shop. (required)
+     * @param  string $license_key License obtained from the https://irisnet.de/subscribe shop. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -832,7 +832,7 @@ class MiscellaneousOperationsApi
      *
      * Get information from given license key.
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/subscribe shop. (required)
+     * @param  string $license_key License obtained from the https://irisnet.de/subscribe shop. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -879,7 +879,7 @@ class MiscellaneousOperationsApi
     /**
      * Create request for operation 'getLicenseInfo'
      *
-     * @param  string $license_key License obtained from the https://www.irisnet.de/subscribe shop. (required)
+     * @param  string $license_key License obtained from the https://irisnet.de/subscribe shop. (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
