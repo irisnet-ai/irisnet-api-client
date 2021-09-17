@@ -4,7 +4,7 @@ Tags: ai, artificial intelligence, irisnet, porn blocker, youth protection, AI p
 Requires at least: 5.1
 Requires PHP: 7.1
 Tested up to: 5.8
-Stable tag: 1.6.9
+Stable tag: 1.6.10
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
