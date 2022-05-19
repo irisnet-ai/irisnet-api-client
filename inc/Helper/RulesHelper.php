@@ -35,7 +35,11 @@ class RulesHelper
                 'allowMinMax' => true
             ),
             'breast' => array(
-                'plural' => 'breasts',
+                'plural' => 'female breasts',
+                'allowMinMax' => false
+            ),
+            'chest' => array(
+                'plural' => 'male breasts',
                 'allowMinMax' => false
             ),
             'vulva' => array(
@@ -129,6 +133,16 @@ class RulesHelper
             'mask' => array(
                 'plural' => 'persons with a mask',
                 'allowMinMax' => true
+            ),
+        ),
+        'Nipple Check' => array(
+            'noNipple' => array(
+                'plural' => 'female breasts without a visible nipple',
+                'allowMinMax' => false
+            ),
+            'hasNipple' => array(
+                'plural' => 'female breasts with a visible nipple',
+                'allowMinMax' => false
             ),
         ),
         'Text Recognition' => array(
