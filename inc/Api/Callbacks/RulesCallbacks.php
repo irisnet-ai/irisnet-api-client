@@ -204,6 +204,8 @@ class RulesCallbacks
 
     public function infoText($args)
     {
+        $name = $args['label_for'];
+
         if (isset($args['title']))
             echo '<h4>' . $args['title'] . '</h4>';
         echo '<p class="help-text">' . $args['description'] . '</p>';
