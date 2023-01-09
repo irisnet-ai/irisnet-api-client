@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace Irisnet\APIV1\Client\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \Irisnet\APIV1\Client\ObjectSerializer;
 
 /**
  * INDefineAI Class Doc Comment
  *
  * @category Class
  * @description Can be used to set a multitude of pre-defined commonly used rules without the need of specifying each parameter set.
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -58,7 +58,7 @@ class INDefineAI implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'in_image' => '\OpenAPI\Client\Model\INImage[]'
+        'in_image' => '\Irisnet\APIV1\Client\Model\INImage[]'
     ];
 
     /**
@@ -208,7 +208,7 @@ class INDefineAI implements ModelInterface, ArrayAccess
     /**
      * Gets in_image
      *
-     * @return \OpenAPI\Client\Model\INImage[]|null
+     * @return \Irisnet\APIV1\Client\Model\INImage[]|null
      */
     public function getInImage()
     {
@@ -218,7 +218,7 @@ class INDefineAI implements ModelInterface, ArrayAccess
     /**
      * Sets in_image
      *
-     * @param \OpenAPI\Client\Model\INImage[]|null $in_image Configures your detection. As there are literally hundreds of parameters, INDefine uses prototypes to get usefull behaviour. This includes a default setting for parameters and rules that should be applied to images. You can combine multiple detections by using more than 1 prototype
+     * @param \Irisnet\APIV1\Client\Model\INImage[]|null $in_image Configures your detection. As there are literally hundreds of parameters, INDefine uses prototypes to get usefull behaviour. This includes a default setting for parameters and rules that should be applied to images. You can combine multiple detections by using more than 1 prototype
      *
      * @return $this
      */

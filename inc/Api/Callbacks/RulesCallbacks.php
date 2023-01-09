@@ -9,9 +9,9 @@ use \GuzzleHttp\Client;
 use \IrisnetAPIConnector;
 use Inc\Helper\RulesHelper;
 use \GuzzleHttp\Cookie\CookieJar;
-use \OpenAPI\Client\ApiException;
-use \OpenAPI\Client\Api\EndpointsToSetupTheAIApi;
-use \OpenAPI\Client\Api\MiscellaneousOperationsApi;
+use \Irisnet\APIV1\Client\ApiException;
+use \Irisnet\APIV1\Client\Api\EndpointsToSetupTheAIApi;
+use \Irisnet\APIV1\Client\Api\MiscellaneousOperationsApi;
 
 class RulesCallbacks
 {

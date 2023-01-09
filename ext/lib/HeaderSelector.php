@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client;
+namespace Irisnet\APIV1\Client;
 
 use \Exception;
 
@@ -34,7 +34,7 @@ use \Exception;
  * ApiException Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */

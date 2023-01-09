@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Api;
+namespace Irisnet\APIV1\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -34,16 +34,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use OpenAPI\Client\ApiException;
-use OpenAPI\Client\Configuration;
-use OpenAPI\Client\HeaderSelector;
-use OpenAPI\Client\ObjectSerializer;
+use Irisnet\APIV1\Client\ApiException;
+use Irisnet\APIV1\Client\Configuration;
+use Irisnet\APIV1\Client\HeaderSelector;
+use Irisnet\APIV1\Client\ObjectSerializer;
 
 /**
  * MiscellaneousOperationsApi Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -122,9 +122,9 @@ class MiscellaneousOperationsApi
      *
      * @param  string $filename filename (required)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \Irisnet\APIV1\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject|\OpenAPI\Client\Model\INError
+     * @return \SplFileObject|\Irisnet\APIV1\Client\Model\INError
      */
     public function downloadProcessed($filename)
     {
@@ -139,9 +139,9 @@ class MiscellaneousOperationsApi
      *
      * @param  string $filename (required)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \Irisnet\APIV1\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SplFileObject|\Irisnet\APIV1\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
     public function downloadProcessedWithHttpInfo($filename)
     {
@@ -190,14 +190,14 @@ class MiscellaneousOperationsApi
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
+                    if ('\Irisnet\APIV1\Client\Model\INError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
+                        ObjectSerializer::deserialize($content, '\Irisnet\APIV1\Client\Model\INError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -230,7 +230,7 @@ class MiscellaneousOperationsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\INError',
+                        '\Irisnet\APIV1\Client\Model\INError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -414,9 +414,9 @@ class MiscellaneousOperationsApi
      * Get the cost per image check of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
      *
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \Irisnet\APIV1\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\INError|int
+     * @return \Irisnet\APIV1\Client\Model\INError|int
      */
     public function getAICost()
     {
@@ -430,9 +430,9 @@ class MiscellaneousOperationsApi
      * Get the cost per image check of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
      *
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \Irisnet\APIV1\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\INError|int, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Irisnet\APIV1\Client\Model\INError|int, HTTP status code, HTTP response headers (array of strings)
      */
     public function getAICostWithHttpInfo()
     {
@@ -469,14 +469,14 @@ class MiscellaneousOperationsApi
             $responseBody = $response->getBody();
             switch($statusCode) {
                 case 429:
-                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
+                    if ('\Irisnet\APIV1\Client\Model\INError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
+                        ObjectSerializer::deserialize($content, '\Irisnet\APIV1\Client\Model\INError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -513,7 +513,7 @@ class MiscellaneousOperationsApi
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\INError',
+                        '\Irisnet\APIV1\Client\Model\INError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -689,9 +689,9 @@ class MiscellaneousOperationsApi
      *
      * @param  string $license_key License obtained from the https://irisnet.de/subscribe shop. (required)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \Irisnet\APIV1\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\LicenseInfo|\OpenAPI\Client\Model\INError
+     * @return \Irisnet\APIV1\Client\Model\LicenseInfo|\Irisnet\APIV1\Client\Model\INError
      */
     public function getLicenseInfo($license_key)
     {
@@ -706,9 +706,9 @@ class MiscellaneousOperationsApi
      *
      * @param  string $license_key License obtained from the https://irisnet.de/subscribe shop. (required)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \Irisnet\APIV1\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\LicenseInfo|\OpenAPI\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Irisnet\APIV1\Client\Model\LicenseInfo|\Irisnet\APIV1\Client\Model\INError, HTTP status code, HTTP response headers (array of strings)
      */
     public function getLicenseInfoWithHttpInfo($license_key)
     {
@@ -745,32 +745,32 @@ class MiscellaneousOperationsApi
             $responseBody = $response->getBody();
             switch($statusCode) {
                 case 200:
-                    if ('\OpenAPI\Client\Model\LicenseInfo' === '\SplFileObject') {
+                    if ('\Irisnet\APIV1\Client\Model\LicenseInfo' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\LicenseInfo', []),
+                        ObjectSerializer::deserialize($content, '\Irisnet\APIV1\Client\Model\LicenseInfo', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\OpenAPI\Client\Model\INError' === '\SplFileObject') {
+                    if ('\Irisnet\APIV1\Client\Model\INError' === '\SplFileObject') {
                         $content = $responseBody; //stream goes to serializer
                     } else {
                         $content = (string) $responseBody;
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\INError', []),
+                        ObjectSerializer::deserialize($content, '\Irisnet\APIV1\Client\Model\INError', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\LicenseInfo';
+            $returnType = '\Irisnet\APIV1\Client\Model\LicenseInfo';
             $responseBody = $response->getBody();
             if ($returnType === '\SplFileObject') {
                 $content = $responseBody; //stream goes to serializer
@@ -789,7 +789,7 @@ class MiscellaneousOperationsApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\LicenseInfo',
+                        '\Irisnet\APIV1\Client\Model\LicenseInfo',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -797,7 +797,7 @@ class MiscellaneousOperationsApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\INError',
+                        '\Irisnet\APIV1\Client\Model\INError',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -839,7 +839,7 @@ class MiscellaneousOperationsApi
      */
     public function getLicenseInfoAsyncWithHttpInfo($license_key)
     {
-        $returnType = '\OpenAPI\Client\Model\LicenseInfo';
+        $returnType = '\Irisnet\APIV1\Client\Model\LicenseInfo';
         $request = $this->getLicenseInfoRequest($license_key);
 
         return $this->client

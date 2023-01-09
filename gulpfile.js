@@ -128,7 +128,7 @@ gulp.task("generate-php-api-client", function (cb) {
     { stdio: "inherit" }
   ).pipe(spawn(
     "node_modules/@openapitools/openapi-generator-cli/bin/openapi-generator",
-    ["generate", "-g", "php", "-i", openapiDefinitionUrl, "-o", openapiOutputDir],
+    ["generate", "-g", "php", "-i", openapiDefinitionUrl, "-o", openapiOutputDir, "--additional-properties", "invokerPackage=Irisnet\\APIV1\\Client"],
     { stdio: "inherit" }
   ));
   cmd.on("close", function (code) {

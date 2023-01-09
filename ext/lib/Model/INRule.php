@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace Irisnet\APIV1\Client\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \Irisnet\APIV1\Client\ObjectSerializer;
 
 /**
  * INRule Class Doc Comment
  *
  * @category Class
  * @description Describes the rules applied and the count of objects found for the given classification.
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */

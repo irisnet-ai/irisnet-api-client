@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace Irisnet\APIV1\Client\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \Irisnet\APIV1\Client\ObjectSerializer;
 
 /**
  * INImage Class Doc Comment
  *
  * @category Class
  * @description Configures your detection. As there are literally hundreds of parameters, INDefine uses prototypes to get usefull behaviour. This includes a default setting for parameters and rules that should be applied to images. You can combine multiple detections by using more than 1 prototype
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */

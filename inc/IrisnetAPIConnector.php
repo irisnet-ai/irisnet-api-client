@@ -6,14 +6,14 @@
 use \GuzzleHttp\Client;
 use Inc\Helper\RulesHelper;
 use \GuzzleHttp\Cookie\CookieJar;
-use \OpenAPI\Client\ApiException;
-use \OpenAPI\Client\Model\IrisNet;
-use \OpenAPI\Client\Model\INParam;
-use \OpenAPI\Client\Model\INParams;
-use \OpenAPI\Client\Model\INDefault;
-use \OpenAPI\Client\Api\EndpointsToSetupTheAIApi;
-use \OpenAPI\Client\Api\EndpointsForAIChecksApi;
-use \OpenAPI\Client\Api\MiscellaneousOperationsApi;
+use \Irisnet\APIV1\Client\ApiException;
+use \Irisnet\APIV1\Client\Model\IrisNet;
+use \Irisnet\APIV1\Client\Model\INParam;
+use \Irisnet\APIV1\Client\Model\INParams;
+use \Irisnet\APIV1\Client\Model\INDefault;
+use \Irisnet\APIV1\Client\Api\EndpointsToSetupTheAIApi;
+use \Irisnet\APIV1\Client\Api\EndpointsForAIChecksApi;
+use \Irisnet\APIV1\Client\Api\MiscellaneousOperationsApi;
 
 /**
  * Helper class to connect to the irisnet API.

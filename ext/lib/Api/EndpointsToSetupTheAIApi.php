@@ -4,7 +4,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,7 +26,7 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Api;
+namespace Irisnet\APIV1\Client\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -34,16 +34,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use OpenAPI\Client\ApiException;
-use OpenAPI\Client\Configuration;
-use OpenAPI\Client\HeaderSelector;
-use OpenAPI\Client\ObjectSerializer;
+use Irisnet\APIV1\Client\ApiException;
+use Irisnet\APIV1\Client\Configuration;
+use Irisnet\APIV1\Client\HeaderSelector;
+use Irisnet\APIV1\Client\ObjectSerializer;
 
 /**
  * EndpointsToSetupTheAIApi Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -120,9 +120,9 @@ class EndpointsToSetupTheAIApi
      *
      * Set definitions via pre-defined prototypes.
      *
-     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai in_define_ai (required)
+     * @param  \Irisnet\APIV1\Client\Model\INDefineAI $in_define_ai in_define_ai (required)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \Irisnet\APIV1\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -136,9 +136,9 @@ class EndpointsToSetupTheAIApi
      *
      * Set definitions via pre-defined prototypes.
      *
-     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
+     * @param  \Irisnet\APIV1\Client\Model\INDefineAI $in_define_ai (required)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \Irisnet\APIV1\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -188,7 +188,7 @@ class EndpointsToSetupTheAIApi
      *
      * Set definitions via pre-defined prototypes.
      *
-     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
+     * @param  \Irisnet\APIV1\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -208,7 +208,7 @@ class EndpointsToSetupTheAIApi
      *
      * Set definitions via pre-defined prototypes.
      *
-     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
+     * @param  \Irisnet\APIV1\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -244,7 +244,7 @@ class EndpointsToSetupTheAIApi
     /**
      * Create request for operation 'setINDefine'
      *
-     * @param  \OpenAPI\Client\Model\INDefineAI $in_define_ai (required)
+     * @param  \Irisnet\APIV1\Client\Model\INDefineAI $in_define_ai (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -340,9 +340,9 @@ class EndpointsToSetupTheAIApi
      *
      * Set the behaviour parameters for one object class.
      *
-     * @param  \OpenAPI\Client\Model\INParams $in_params in_params (required)
+     * @param  \Irisnet\APIV1\Client\Model\INParams $in_params in_params (required)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \Irisnet\APIV1\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return void
      */
@@ -356,9 +356,9 @@ class EndpointsToSetupTheAIApi
      *
      * Set the behaviour parameters for one object class.
      *
-     * @param  \OpenAPI\Client\Model\INParams $in_params (required)
+     * @param  \Irisnet\APIV1\Client\Model\INParams $in_params (required)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \Irisnet\APIV1\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of null, HTTP status code, HTTP response headers (array of strings)
      */
@@ -408,7 +408,7 @@ class EndpointsToSetupTheAIApi
      *
      * Set the behaviour parameters for one object class.
      *
-     * @param  \OpenAPI\Client\Model\INParams $in_params (required)
+     * @param  \Irisnet\APIV1\Client\Model\INParams $in_params (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -428,7 +428,7 @@ class EndpointsToSetupTheAIApi
      *
      * Set the behaviour parameters for one object class.
      *
-     * @param  \OpenAPI\Client\Model\INParams $in_params (required)
+     * @param  \Irisnet\APIV1\Client\Model\INParams $in_params (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -464,7 +464,7 @@ class EndpointsToSetupTheAIApi
     /**
      * Create request for operation 'setINParams'
      *
-     * @param  \OpenAPI\Client\Model\INParams $in_params (required)
+     * @param  \Irisnet\APIV1\Client\Model\INParams $in_params (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request

@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace Irisnet\APIV1\Client\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \Irisnet\APIV1\Client\ObjectSerializer;
 
 /**
  * INParams Class Doc Comment
  *
  * @category Class
  * @description A set of parameters/rules that describe how the AI should behave.
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -58,8 +58,8 @@ class INParams implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'in_default' => '\OpenAPI\Client\Model\INDefault',
-        'in_param' => '\OpenAPI\Client\Model\INParam[]'
+        'in_default' => '\Irisnet\APIV1\Client\Model\INDefault',
+        'in_param' => '\Irisnet\APIV1\Client\Model\INParam[]'
     ];
 
     /**
@@ -214,7 +214,7 @@ class INParams implements ModelInterface, ArrayAccess
     /**
      * Gets in_default
      *
-     * @return \OpenAPI\Client\Model\INDefault|null
+     * @return \Irisnet\APIV1\Client\Model\INDefault|null
      */
     public function getInDefault()
     {
@@ -224,7 +224,7 @@ class INParams implements ModelInterface, ArrayAccess
     /**
      * Sets in_default
      *
-     * @param \OpenAPI\Client\Model\INDefault|null $in_default in_default
+     * @param \Irisnet\APIV1\Client\Model\INDefault|null $in_default in_default
      *
      * @return $this
      */
@@ -238,7 +238,7 @@ class INParams implements ModelInterface, ArrayAccess
     /**
      * Gets in_param
      *
-     * @return \OpenAPI\Client\Model\INParam[]|null
+     * @return \Irisnet\APIV1\Client\Model\INParam[]|null
      */
     public function getInParam()
     {
@@ -248,7 +248,7 @@ class INParams implements ModelInterface, ArrayAccess
     /**
      * Sets in_param
      *
-     * @param \OpenAPI\Client\Model\INParam[]|null $in_param A list of parameter sets that describe the rules of the objects.
+     * @param \Irisnet\APIV1\Client\Model\INParam[]|null $in_param A list of parameter sets that describe the rules of the objects.
      *
      * @return $this
      */

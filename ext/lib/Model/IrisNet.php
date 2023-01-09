@@ -5,7 +5,7 @@
  * PHP version 5
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -27,17 +27,17 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace Irisnet\APIV1\Client\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \Irisnet\APIV1\Client\ObjectSerializer;
 
 /**
  * IrisNet Class Doc Comment
  *
  * @category Class
  * @description Contains information on the AI result from the source media check.
- * @package  OpenAPI\Client
+ * @package  Irisnet\APIV1\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -62,8 +62,8 @@ class IrisNet implements ModelInterface, ArrayAccess
         'help_suggested' => 'int',
         'getn_classes' => 'int',
         'getn_objects' => 'int',
-        'in_rule' => '\OpenAPI\Client\Model\INRule[]',
-        'in_object' => '\OpenAPI\Client\Model\INObject[]'
+        'in_rule' => '\Irisnet\APIV1\Client\Model\INRule[]',
+        'in_object' => '\Irisnet\APIV1\Client\Model\INObject[]'
     ];
 
     /**
@@ -334,7 +334,7 @@ class IrisNet implements ModelInterface, ArrayAccess
     /**
      * Gets in_rule
      *
-     * @return \OpenAPI\Client\Model\INRule[]|null
+     * @return \Irisnet\APIV1\Client\Model\INRule[]|null
      */
     public function getInRule()
     {
@@ -344,7 +344,7 @@ class IrisNet implements ModelInterface, ArrayAccess
     /**
      * Sets in_rule
      *
-     * @param \OpenAPI\Client\Model\INRule[]|null $in_rule This list contains one rule per classification. Rules for classification objects that were not found, are omitted.
+     * @param \Irisnet\APIV1\Client\Model\INRule[]|null $in_rule This list contains one rule per classification. Rules for classification objects that were not found, are omitted.
      *
      * @return $this
      */
@@ -358,7 +358,7 @@ class IrisNet implements ModelInterface, ArrayAccess
     /**
      * Gets in_object
      *
-     * @return \OpenAPI\Client\Model\INObject[]|null
+     * @return \Irisnet\APIV1\Client\Model\INObject[]|null
      */
     public function getInObject()
     {
@@ -368,7 +368,7 @@ class IrisNet implements ModelInterface, ArrayAccess
     /**
      * Sets in_object
      *
-     * @param \OpenAPI\Client\Model\INObject[]|null $in_object A list of all instances of the classification objects found on the source image.
+     * @param \Irisnet\APIV1\Client\Model\INObject[]|null $in_object A list of all instances of the classification objects found on the source image.
      *
      * @return $this
      */

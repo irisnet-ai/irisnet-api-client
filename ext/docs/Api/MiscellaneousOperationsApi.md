@@ -1,4 +1,4 @@
-# OpenAPI\Client\MiscellaneousOperationsApi
+# Irisnet\APIV1\Client\MiscellaneousOperationsApi
 
 All URIs are relative to *https://api.irisnet.de*
 
@@ -23,7 +23,7 @@ Get the resulting media file.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-$apiInstance = new OpenAPI\Client\Api\MiscellaneousOperationsApi(
+$apiInstance = new Irisnet\APIV1\Client\Api\MiscellaneousOperationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -77,7 +77,7 @@ Get the cost per image check of the previously set parameters. The cost of the c
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-$apiInstance = new OpenAPI\Client\Api\MiscellaneousOperationsApi(
+$apiInstance = new Irisnet\APIV1\Client\Api\MiscellaneousOperationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -116,7 +116,7 @@ No authorization required
 
 ## getLicenseInfo
 
-> \OpenAPI\Client\Model\LicenseInfo getLicenseInfo($license_key)
+> \Irisnet\APIV1\Client\Model\LicenseInfo getLicenseInfo($license_key)
 
 Get information from given license key.
 
@@ -127,7 +127,7 @@ Get information from given license key.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-$apiInstance = new OpenAPI\Client\Api\MiscellaneousOperationsApi(
+$apiInstance = new Irisnet\APIV1\Client\Api\MiscellaneousOperationsApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\OpenAPI\Client\Model\LicenseInfo**](../Model/LicenseInfo.md)
+[**\Irisnet\APIV1\Client\Model\LicenseInfo**](../Model/LicenseInfo.md)
 
 ### Authorization
 

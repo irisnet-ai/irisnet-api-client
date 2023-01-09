@@ -5,8 +5,8 @@
 namespace Inc\Api\Callbacks;
 
 use \GuzzleHttp\Client;
-use \OpenAPI\Client\ApiException;
-use \OpenAPI\Client\Api\MiscellaneousOperationsApi;
+use \Irisnet\APIV1\Client\ApiException;
+use \Irisnet\APIV1\Client\Api\MiscellaneousOperationsApi;
 
 class LicensesCallbacks
 {

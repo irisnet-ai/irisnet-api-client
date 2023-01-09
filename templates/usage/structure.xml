@@ -10,14 +10,14 @@
     <namespace-alias name="Client">\GuzzleHttp\Client</namespace-alias>
     <namespace-alias name="RulesHelper">\Inc\Helper\RulesHelper</namespace-alias>
     <namespace-alias name="CookieJar">\GuzzleHttp\Cookie\CookieJar</namespace-alias>
-    <namespace-alias name="ApiException">\OpenAPI\Client\ApiException</namespace-alias>
-    <namespace-alias name="IrisNet">\OpenAPI\Client\Model\IrisNet</namespace-alias>
-    <namespace-alias name="INParam">\OpenAPI\Client\Model\INParam</namespace-alias>
-    <namespace-alias name="INParams">\OpenAPI\Client\Model\INParams</namespace-alias>
-    <namespace-alias name="INDefault">\OpenAPI\Client\Model\INDefault</namespace-alias>
-    <namespace-alias name="EndpointsToSetupTheAIApi">\OpenAPI\Client\Api\EndpointsToSetupTheAIApi</namespace-alias>
-    <namespace-alias name="EndpointsForAIChecksApi">\OpenAPI\Client\Api\EndpointsForAIChecksApi</namespace-alias>
-    <namespace-alias name="MiscellaneousOperationsApi">\OpenAPI\Client\Api\MiscellaneousOperationsApi</namespace-alias>
+    <namespace-alias name="ApiException">\Irisnet\APIV1\Client\ApiException</namespace-alias>
+    <namespace-alias name="IrisNet">\Irisnet\APIV1\Client\Model\IrisNet</namespace-alias>
+    <namespace-alias name="INParam">\Irisnet\APIV1\Client\Model\INParam</namespace-alias>
+    <namespace-alias name="INParams">\Irisnet\APIV1\Client\Model\INParams</namespace-alias>
+    <namespace-alias name="INDefault">\Irisnet\APIV1\Client\Model\INDefault</namespace-alias>
+    <namespace-alias name="EndpointsToSetupTheAIApi">\Irisnet\APIV1\Client\Api\EndpointsToSetupTheAIApi</namespace-alias>
+    <namespace-alias name="EndpointsForAIChecksApi">\Irisnet\APIV1\Client\Api\EndpointsForAIChecksApi</namespace-alias>
+    <namespace-alias name="MiscellaneousOperationsApi">\Irisnet\APIV1\Client\Api\MiscellaneousOperationsApi</namespace-alias>
     <class final="false" abstract="false" namespace="" line="21" package="IrisnetAPIClient">
       <extends/>
       <name>IrisnetAPIConnector</name>
@@ -70,8 +70,8 @@
           <tag name="throws" line="61" description="is thrown in case that the rule name could not be found, if the license id does not exist,&#10;if the license key is not active or out of credits, if the specified filename does not exist&#10;or if the API request fails (will contain the status code and the message returned from the failed API request)." type="\IrisnetException">
             <type>\IrisnetException</type>
           </tag>
-          <tag name="return" line="61" description="Contains information on the AI result from the source media check. See &lt;a href=&quot;https://www.irisnet.de/api/&quot;&gt;API page&lt;/a&gt; for more information" type="\OpenAPI\Client\Model\IrisNet">
-            <type>\OpenAPI\Client\Model\IrisNet</type>
+          <tag name="return" line="61" description="Contains information on the AI result from the source media check. See &lt;a href=&quot;https://www.irisnet.de/api/&quot;&gt;API page&lt;/a&gt; for more information" type="\Irisnet\APIV1\Client\Model\IrisNet">
+            <type>\Irisnet\APIV1\Client\Model\IrisNet</type>
           </tag>
         </docblock>
         <argument line="0" by_reference="false">

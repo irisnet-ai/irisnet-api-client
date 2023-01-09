@@ -1,4 +1,4 @@
-# OpenAPI\Client\EndpointsToSetupTheAIApi
+# Irisnet\APIV1\Client\EndpointsToSetupTheAIApi
 
 All URIs are relative to *https://api.irisnet.de*
 
@@ -24,7 +24,7 @@ Each available prototype groups together a pre-defined set of parameters that wi
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-$apiInstance = new OpenAPI\Client\Api\EndpointsToSetupTheAIApi(
+$apiInstance = new Irisnet\APIV1\Client\Api\EndpointsToSetupTheAIApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -36,7 +36,7 @@ $in_define_ai = <?xml version="1.0" encoding="UTF-8"?>
 	<inImage proto="illegalSymbols"/>
 	<inImage proto="attributesCheck"/>
 	<inImage proto="textRecognition"/>
-</inDefineAI>; // \OpenAPI\Client\Model\INDefineAI | 
+</inDefineAI>; // \Irisnet\APIV1\Client\Model\INDefineAI | 
 
 try {
     $apiInstance->setINDefine($in_define_ai);
@@ -51,7 +51,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **in_define_ai** | [**\OpenAPI\Client\Model\INDefineAI**](../Model/INDefineAI.md)|  |
+ **in_define_ai** | [**\Irisnet\APIV1\Client\Model\INDefineAI**](../Model/INDefineAI.md)|  |
 
 ### Return type
 
@@ -86,7 +86,7 @@ Overwrites or extends the default configuration of the AI. By setting precise be
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-$apiInstance = new OpenAPI\Client\Api\EndpointsToSetupTheAIApi(
+$apiInstance = new Irisnet\APIV1\Client\Api\EndpointsToSetupTheAIApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -105,7 +105,7 @@ $in_params = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 	<inParam inClass="toy" min="0" max="0" drawMode="2" grey="127"/>
 	<inParam inClass="oral" min="0" max="0" drawMode="2" grey="127"/>
 	<inParam inClass="penetration" min="0" max="0" drawMode="2" grey="127"/>
-</inParams>; // \OpenAPI\Client\Model\INParams | 
+</inParams>; // \Irisnet\APIV1\Client\Model\INParams | 
 
 try {
     $apiInstance->setINParams($in_params);
@@ -120,7 +120,7 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **in_params** | [**\OpenAPI\Client\Model\INParams**](../Model/INParams.md)|  |
+ **in_params** | [**\Irisnet\APIV1\Client\Model\INParams**](../Model/INParams.md)|  |
 
 ### Return type
 

@@ -1,4 +1,4 @@
-# OpenAPI\Client\EndpointsForAIChecksApi
+# Irisnet\APIV1\Client\EndpointsForAIChecksApi
 
 All URIs are relative to *https://api.irisnet.de*
 
@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## checkImage
 
-> \OpenAPI\Client\Model\IrisNet checkImage($license_key, $file, $detail, $image_encode)
+> \Irisnet\APIV1\Client\Model\IrisNet checkImage($license_key, $file, $detail, $image_encode)
 
 Upload and check image against previously chosen configuration.
 
@@ -22,7 +22,7 @@ Upload and check image against previously chosen configuration.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-$apiInstance = new OpenAPI\Client\Api\EndpointsForAIChecksApi(
+$apiInstance = new Irisnet\APIV1\Client\Api\EndpointsForAIChecksApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -53,7 +53,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\OpenAPI\Client\Model\IrisNet**](../Model/IrisNet.md)
+[**\Irisnet\APIV1\Client\Model\IrisNet**](../Model/IrisNet.md)
 
 ### Authorization
 
@@ -71,7 +71,7 @@ No authorization required
 
 ## checkImageUrl
 
-> \OpenAPI\Client\Model\IrisNet checkImageUrl($url, $license_key, $detail, $image_encode)
+> \Irisnet\APIV1\Client\Model\IrisNet checkImageUrl($url, $license_key, $detail, $image_encode)
 
 Check image url against previously chosen configuration.
 
@@ -82,7 +82,7 @@ Check image url against previously chosen configuration.
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
-$apiInstance = new OpenAPI\Client\Api\EndpointsForAIChecksApi(
+$apiInstance = new Irisnet\APIV1\Client\Api\EndpointsForAIChecksApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
@@ -113,7 +113,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\OpenAPI\Client\Model\IrisNet**](../Model/IrisNet.md)
+[**\Irisnet\APIV1\Client\Model\IrisNet**](../Model/IrisNet.md)
 
 ### Authorization
 
