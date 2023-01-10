@@ -31,7 +31,7 @@
     "autoload": {
         "psr-4": { 
             "Inc\\": "./inc",
-            "OpenAPI\\Client\\" : "./ext/lib/" 
+            "Irisnet\\APIV1\\Client\\" : "./ext/lib/" 
         }
     }
 }
