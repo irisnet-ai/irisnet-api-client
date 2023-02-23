@@ -46,7 +46,7 @@ var docsInputFile = "inc/IrisnetAPIConnector.php";
 var docsOutputFolder = "templates/usage";
 var docsCacheFolder = ".cache";
 
-var openapiDefinitionUrl = "https://api.irisnet.de/open-api.yaml";
+var openapiDefinitionUrl = "https://api.irisnet.de/v1/open-api.yaml";
 var openapiOutputDir = "ext";
 
 var styleWatch = "src/scss/**/*.scss";
@@ -99,14 +99,20 @@ gulp.task("js", function () {
     .pipe(browserSync.stream());
 });
 
-gulp.task("generate-index-php-in-sub-directories", async function (cb) {
+gulp.task("generate-index-php-in-sub-directories", function (cb) {
+  var exitCode = 0;
   indexPhpDirectories.forEach(directory => {
     spawn(
       "find",
       [directory, "-type", "d", "-exec", "cp", "index.php", "{}", "\;"],
       { stdio: "inherit" }
-    );
+    ).on("close", function (code) {
+      if (code != 0)
+        exitCode = code;
+    });
   });
+  console.log("task finished with exit code " + exitCode);
+  cb(exitCode);
 });
 
 gulp.task("generate-usage-documentation", function (cb) {
@@ -122,18 +128,23 @@ gulp.task("generate-usage-documentation", function (cb) {
 });
 
 gulp.task("generate-php-api-client", function (cb) {
-  var cmd = spawn(
+  spawn(
     "find",
     [openapiOutputDir + '/.', "!", "-name", ".openapi-generator-ignore", /* "-type", "f",*/ "-exec", "rm", "-rf", "{}", "+"],
     { stdio: "inherit" }
-  ).pipe(spawn(
-    "node_modules/@openapitools/openapi-generator-cli/bin/openapi-generator",
-    ["generate", "-g", "php", "-i", openapiDefinitionUrl, "-o", openapiOutputDir, "--additional-properties", "invokerPackage=Irisnet\\APIV1\\Client"],
-    { stdio: "inherit" }
-  ));
-  cmd.on("close", function (code) {
-    console.log("openapi-generator exited with code " + code);
-    cb(code);
+  ).on("close", function (code) {
+    if (code != 1) {
+      console.log("Unexpected status code while removing als generated client: code " + code);
+      cb(code);
+    }
+    spawn(
+      "node_modules/@openapitools/openapi-generator-cli/bin/openapi-generator",
+      ["generate", "-g", "php", "-i", openapiDefinitionUrl, "-o", openapiOutputDir, "--skip-validate-spec", "--additional-properties", "invokerPackage=Irisnet\\APIV1\\Client"],
+      { stdio: "inherit" }
+    ).on("close", function (code) {
+      console.log("task exited with code " + code);
+      cb(code);
+    });
   });
 });
 
