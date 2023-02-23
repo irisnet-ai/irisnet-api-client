@@ -1,18 +1,18 @@
 # Irisnet\APIV1\Client\MiscellaneousOperationsApi
 
-All URIs are relative to *https://api.irisnet.de*
+All URIs are relative to *https://api.irisnet.de/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**downloadProcessed**](MiscellaneousOperationsApi.md#downloadProcessed) | **GET** /v1/download/{filename} | Get the resulting media file.
-[**getAICost**](MiscellaneousOperationsApi.md#getAICost) | **GET** /v1/cost | Get the cost per image check of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
-[**getLicenseInfo**](MiscellaneousOperationsApi.md#getLicenseInfo) | **GET** /v1/info/{licenseKey} | Get information from given license key.
+[**downloadProcessed**](MiscellaneousOperationsApi.md#downloadProcessed) | **GET** /download/{filename} | Get the resulting media file.
+[**getAICost**](MiscellaneousOperationsApi.md#getAICost) | **GET** /cost | Get the cost per image check of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
+[**getLicenseInfo**](MiscellaneousOperationsApi.md#getLicenseInfo) | **GET** /info/{licenseKey} | Get information from given license key.
 
 
 
 ## downloadProcessed
 
-> \SplFileObject downloadProcessed($filename)
+> \Irisnet\APIV1\Client\Model\Null downloadProcessed($filename)
 
 Get the resulting media file.
 
@@ -28,7 +28,7 @@ $apiInstance = new Irisnet\APIV1\Client\Api\MiscellaneousOperationsApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$filename = 'filename_example'; // string | 
+$filename = 'filename_example'; // string | Use the filename of the uploaded file or the filename portion of the URL.
 
 try {
     $result = $apiInstance->downloadProcessed($filename);
@@ -44,11 +44,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filename** | **string**|  |
+ **filename** | **string**| Use the filename of the uploaded file or the filename portion of the URL. |
 
 ### Return type
 
-[**\SplFileObject**](../Model/\SplFileObject.md)
+[**\Irisnet\APIV1\Client\Model\Null**](../Model/Null.md)
 
 ### Authorization
 

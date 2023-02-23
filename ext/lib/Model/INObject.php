@@ -61,6 +61,7 @@ class INObject implements ModelInterface, ArrayAccess
         'in_class' => 'string',
         'in_group' => 'string',
         'in_id' => 'string',
+        'content' => 'string',
         'color' => 'string',
         'style' => 'string',
         'x0' => 'float',
@@ -79,6 +80,7 @@ class INObject implements ModelInterface, ArrayAccess
         'in_class' => null,
         'in_group' => null,
         'in_id' => null,
+        'content' => null,
         'color' => null,
         'style' => null,
         'x0' => 'float',
@@ -118,6 +120,7 @@ class INObject implements ModelInterface, ArrayAccess
         'in_class' => 'inClass',
         'in_group' => 'inGroup',
         'in_id' => 'inId',
+        'content' => 'content',
         'color' => 'color',
         'style' => 'style',
         'x0' => 'x0',
@@ -136,6 +139,7 @@ class INObject implements ModelInterface, ArrayAccess
         'in_class' => 'setInClass',
         'in_group' => 'setInGroup',
         'in_id' => 'setInId',
+        'content' => 'setContent',
         'color' => 'setColor',
         'style' => 'setStyle',
         'x0' => 'setX0',
@@ -154,6 +158,7 @@ class INObject implements ModelInterface, ArrayAccess
         'in_class' => 'getInClass',
         'in_group' => 'getInGroup',
         'in_id' => 'getInId',
+        'content' => 'getContent',
         'color' => 'getColor',
         'style' => 'getStyle',
         'x0' => 'getX0',
@@ -264,6 +269,7 @@ class INObject implements ModelInterface, ArrayAccess
         $this->container['in_class'] = isset($data['in_class']) ? $data['in_class'] : null;
         $this->container['in_group'] = isset($data['in_group']) ? $data['in_group'] : null;
         $this->container['in_id'] = isset($data['in_id']) ? $data['in_id'] : null;
+        $this->container['content'] = isset($data['content']) ? $data['content'] : null;
         $this->container['color'] = isset($data['color']) ? $data['color'] : null;
         $this->container['style'] = isset($data['style']) ? $data['style'] : null;
         $this->container['x0'] = isset($data['x0']) ? $data['x0'] : null;
@@ -374,13 +380,37 @@ class INObject implements ModelInterface, ArrayAccess
     /**
      * Sets in_id
      *
-     * @param string|null $in_id The group of the classification.
+     * @param string|null $in_id The object id
      *
      * @return $this
      */
     public function setInId($in_id)
     {
         $this->container['in_id'] = $in_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets content
+     *
+     * @return string|null
+     */
+    public function getContent()
+    {
+        return $this->container['content'];
+    }
+
+    /**
+     * Sets content
+     *
+     * @param string|null $content The string content of the recognized text
+     *
+     * @return $this
+     */
+    public function setContent($content)
+    {
+        $this->container['content'] = $content;
 
         return $this;
     }
@@ -464,7 +494,7 @@ class INObject implements ModelInterface, ArrayAccess
     /**
      * Sets x0
      *
-     * @param float|null $x0 The starting point of the rectangle in the vertical (x) direction.
+     * @param float|null $x0 The center of the rectangle in the horizontal (x) direction.
      *
      * @return $this
      */
@@ -488,7 +518,7 @@ class INObject implements ModelInterface, ArrayAccess
     /**
      * Sets y0
      *
-     * @param float|null $y0 The starting point of the rectangle in the horizontal (y) direction.
+     * @param float|null $y0 The center of the rectangle in the vertical (y) direction.
      *
      * @return $this
      */
@@ -512,7 +542,7 @@ class INObject implements ModelInterface, ArrayAccess
     /**
      * Sets width
      *
-     * @param float|null $width The distance from the starting point (y0) to end the rectangle in the horizontal direction.
+     * @param float|null $width The total width of the rectangle in the horizontal (x) direction. Use _x0 - width / 2_ and _x0 + width / 2_ to get the left and right edges of the rectangle.
      *
      * @return $this
      */
@@ -536,7 +566,7 @@ class INObject implements ModelInterface, ArrayAccess
     /**
      * Sets height
      *
-     * @param float|null $height The distance from the starting point (x0) to end the rectangle in the vertical direction.
+     * @param float|null $height The total height of the rectangle in the vertical (y) direction. Use _y0 - height / 2_ and _y0 + height / 2_ to get the top and bottom edges of the rectangle.
      *
      * @return $this
      */

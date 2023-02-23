@@ -1,11 +1,11 @@
 # Irisnet\APIV1\Client\EndpointsToSetupTheAIApi
 
-All URIs are relative to *https://api.irisnet.de*
+All URIs are relative to *https://api.irisnet.de/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**setINDefine**](EndpointsToSetupTheAIApi.md#setINDefine) | **POST** /v1/set-definition | Set definitions via pre-defined prototypes.
-[**setINParams**](EndpointsToSetupTheAIApi.md#setINParams) | **POST** /v1/set-parameters | Set the behaviour parameters for one object class.
+[**setINDefine**](EndpointsToSetupTheAIApi.md#setINDefine) | **POST** /set-definition | Set definitions via pre-defined prototypes.
+[**setINParams**](EndpointsToSetupTheAIApi.md#setINParams) | **POST** /set-parameters | Set the behaviour parameters for one object class.
 
 
 
@@ -32,10 +32,6 @@ $apiInstance = new Irisnet\APIV1\Client\Api\EndpointsToSetupTheAIApi(
 $in_define_ai = <?xml version="1.0" encoding="UTF-8"?>
 <inDefineAI>
 	<inImage proto="nudityCheck"/>
-	<inImage proto="ageEstimation"/>
-	<inImage proto="illegalSymbols"/>
-	<inImage proto="attributesCheck"/>
-	<inImage proto="textRecognition"/>
 </inDefineAI>; // \Irisnet\APIV1\Client\Model\INDefineAI | 
 
 try {
@@ -77,7 +73,7 @@ No authorization required
 
 Set the behaviour parameters for one object class.
 
-Overwrites or extends the default configuration of the AI. By setting precise behaviour parameters, the AI can be fine tuned for specific use cases. To reset the parameters to their default values, make a post request to 'set-definition'.
+Overwrites or extends the default configuration of the AI. By setting precise behaviour parameters, the AI can be fine tuned for specific use cases. See inParam schema to learn more about the classification objects. To reset the parameters to their default values, make a post request to 'set-definition'.
 
 ### Example
 
@@ -91,20 +87,17 @@ $apiInstance = new Irisnet\APIV1\Client\Api\EndpointsToSetupTheAIApi(
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$in_params = <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+$in_params = <?xml version="1.0" encoding="UTF-8"?>
 <inParams>
-	<inDefault thresh="0.5" grey="127"/>
-	<inParam inClass="face" min="-1" max="-1" drawMode="0" grey="127"/>
-	<inParam inClass="hand" min="-1" max="-1" drawMode="0" grey="127"/>
-	<inParam inClass="breast" min="0" max="0" drawMode="2" grey="127"/>
-	<inParam inClass="vulva" min="0" max="0" drawMode="2" grey="127"/>
-	<inParam inClass="penis" min="0" max="0" drawMode="2" grey="127"/>
-	<inParam inClass="vagina" min="0" max="0" drawMode="2" grey="127"/>
-	<inParam inClass="buttocks" min="0" max="0" drawMode="2" grey="127"/>
-	<inParam inClass="anus" min="0" max="0" drawMode="2" grey="127"/>
-	<inParam inClass="toy" min="0" max="0" drawMode="2" grey="127"/>
-	<inParam inClass="oral" min="0" max="0" drawMode="2" grey="127"/>
-	<inParam inClass="penetration" min="0" max="0" drawMode="2" grey="127"/>
+	<inParam inClass="breast" drawMode="3" />
+	<inParam inClass="vulva" drawMode="3" />
+	<inParam inClass="penis" drawMode="3" />
+	<inParam inClass="vagina" drawMode="3" />
+	<inParam inClass="buttocks" drawMode="3" />
+	<inParam inClass="anus" drawMode="3" />
+	<inParam inClass="toy" drawMode="3" />
+	<inParam inClass="oral" drawMode="3" />
+	<inParam inClass="penetration" drawMode="3" />
 </inParams>; // \Irisnet\APIV1\Client\Model\INParams | 
 
 try {

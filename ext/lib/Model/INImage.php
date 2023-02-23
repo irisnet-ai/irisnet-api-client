@@ -165,6 +165,10 @@ class INImage implements ModelInterface, ArrayAccess
     const PROTO_ILLEGAL_SYMBOLS = 'illegalSymbols';
     const PROTO_TEXT_RECOGNITION = 'textRecognition';
     const PROTO_ATTRIBUTES_CHECK = 'attributesCheck';
+    const PROTO_BODY_ATTRIBUTES = 'bodyAttributes';
+    const PROTO_VIOLENCE_CHECK = 'violenceCheck';
+    const PROTO_NIPPLE_CHECK = 'nippleCheck';
+    const PROTO_UNWANTED_SUBSTANCES = 'unwantedSubstances';
     
 
     
@@ -182,6 +186,10 @@ class INImage implements ModelInterface, ArrayAccess
             self::PROTO_ILLEGAL_SYMBOLS,
             self::PROTO_TEXT_RECOGNITION,
             self::PROTO_ATTRIBUTES_CHECK,
+            self::PROTO_BODY_ATTRIBUTES,
+            self::PROTO_VIOLENCE_CHECK,
+            self::PROTO_NIPPLE_CHECK,
+            self::PROTO_UNWANTED_SUBSTANCES,
         ];
     }
     
@@ -249,7 +257,7 @@ class INImage implements ModelInterface, ArrayAccess
     /**
      * Sets proto
      *
-     * @param string|null $proto Name of commonly used rule sets (prototypes). That can be used to speed up the setup process. * _nudityCheck_ - Commonly used prototype to check for nudity. * _ageVerification_ - Deprecated see 'ageEstimation'. * _ageEstimation_ - Checks if there are children, adults or seniors recognizable. This is intended to be a suggestion to help you implement further steps. * _illegalSymbols_ - Checks for symbols that are not permitted in Germany. * _textRecognition_ - Checks for text occurrences. * _attributesCheck_ - Checks for attributes of a person (e.g. female, male, glasses, hair, etc).
+     * @param string|null $proto Name of commonly used rule sets (prototypes). That can be used to speed up the setup process. * _nudityCheck_ - Commonly used prototype to check for nudity. * _ageEstimation_ - Checks if there are children, adults or seniors recognizable. This is intended to be a suggestion to help you implement further steps. * _illegalSymbols_ - Checks for symbols that are not permitted in Germany. * _textRecognition_ - Checks for text occurrences. * _attributesCheck_ - Checks for attributes of a person (e.g. female, male, glasses, hair, etc). * _bodyAttributes_ - Checks for attributes of the persons body. * _nippleCheck_ - Check for determining if the object recognized as breast has a nipple. * _unwantedSubstances_ - Check for undesired or unwanted substances. * _violenceCheck_ - Checks for recognizing weapons, camouflage, etc.
      *
      * @return $this
      */

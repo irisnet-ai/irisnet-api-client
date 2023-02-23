@@ -61,8 +61,10 @@ class INParam implements ModelInterface, ArrayAccess
         'in_class' => 'string',
         'min' => 'int',
         'max' => 'int',
+        'severity' => 'int',
         'draw_mode' => 'int',
-        'grey' => 'int'
+        'grey' => 'int',
+        'scale' => 'float'
     ];
 
     /**
@@ -74,8 +76,10 @@ class INParam implements ModelInterface, ArrayAccess
         'in_class' => null,
         'min' => 'int32',
         'max' => 'int32',
+        'severity' => 'int32',
         'draw_mode' => 'int32',
-        'grey' => 'int32'
+        'grey' => 'int32',
+        'scale' => 'float'
     ];
 
     /**
@@ -108,8 +112,10 @@ class INParam implements ModelInterface, ArrayAccess
         'in_class' => 'inClass',
         'min' => 'min',
         'max' => 'max',
+        'severity' => 'severity',
         'draw_mode' => 'drawMode',
-        'grey' => 'grey'
+        'grey' => 'grey',
+        'scale' => 'scale'
     ];
 
     /**
@@ -121,8 +127,10 @@ class INParam implements ModelInterface, ArrayAccess
         'in_class' => 'setInClass',
         'min' => 'setMin',
         'max' => 'setMax',
+        'severity' => 'setSeverity',
         'draw_mode' => 'setDrawMode',
-        'grey' => 'setGrey'
+        'grey' => 'setGrey',
+        'scale' => 'setScale'
     ];
 
     /**
@@ -134,8 +142,10 @@ class INParam implements ModelInterface, ArrayAccess
         'in_class' => 'getInClass',
         'min' => 'getMin',
         'max' => 'getMax',
+        'severity' => 'getSeverity',
         'draw_mode' => 'getDrawMode',
-        'grey' => 'getGrey'
+        'grey' => 'getGrey',
+        'scale' => 'getScale'
     ];
 
     /**
@@ -183,6 +193,7 @@ class INParam implements ModelInterface, ArrayAccess
     const IN_CLASS_HAND = 'hand';
     const IN_CLASS_FOOT = 'foot';
     const IN_CLASS_FOOTWEAR = 'footwear';
+    const IN_CLASS_CHEST = 'chest';
     const IN_CLASS_BREAST = 'breast';
     const IN_CLASS_VULVA = 'vulva';
     const IN_CLASS_PENIS = 'penis';
@@ -206,12 +217,41 @@ class INParam implements ModelInterface, ArrayAccess
     const IN_CLASS_GLASSES = 'glasses';
     const IN_CLASS_SUNGLASSES = 'sunglasses';
     const IN_CLASS_MASK = 'mask';
+    const IN_CLASS_SLIM_SIZED = 'slimSized';
+    const IN_CLASS_REAL_SIZED = 'realSized';
+    const IN_CLASS_PLUS_SIZED = 'plusSized';
+    const IN_CLASS_NO_NIPPLE = 'noNipple';
+    const IN_CLASS_HAS_NIPPLE = 'hasNipple';
+    const IN_CLASS_BEER = 'beer';
+    const IN_CLASS_BEER_BOTTLE = 'beerBottle';
+    const IN_CLASS_BEER_CAN = 'beerCan';
+    const IN_CLASS_WINE = 'wine';
+    const IN_CLASS_WINE_BOTTLE = 'wineBottle';
+    const IN_CLASS_COCKTAIL = 'cocktail';
+    const IN_CLASS_ALCOHOL = 'alcohol';
+    const IN_CLASS_CANNABIS = 'cannabis';
+    const IN_CLASS_CIGARETTE = 'cigarette';
+    const IN_CLASS_COCAINE = 'cocaine';
+    const IN_CLASS_HEROINE = 'heroine';
+    const IN_CLASS_COFFEE = 'coffee';
+    const IN_CLASS_CAMOUFLAGE = 'camouflage';
+    const IN_CLASS_CLUB = 'club';
+    const IN_CLASS_KNIFE = 'knife';
+    const IN_CLASS_SWORD = 'sword';
+    const IN_CLASS_PISTOL = 'pistol';
+    const IN_CLASS_RIFLE = 'rifle';
+    const IN_CLASS_CANNON = 'cannon';
+    const IN_CLASS_FIRE = 'fire';
     const IN_CLASS_NUDITY_CHECK = 'nudityCheck';
     const IN_CLASS_AGE_VERIFICATION = 'ageVerification';
     const IN_CLASS_AGE_ESTIMATION = 'ageEstimation';
     const IN_CLASS_ILLEGAL_SYMBOLS = 'illegalSymbols';
     const IN_CLASS_TEXT_RECOGNITION = 'textRecognition';
     const IN_CLASS_ATTRIBUTES_CHECK = 'attributesCheck';
+    const IN_CLASS_BODY_ATTRIBUTES = 'bodyAttributes';
+    const IN_CLASS_UNWANTED_SUBSTANCES = 'unwantedSubstances';
+    const IN_CLASS_VIOLENCE_CHECK = 'violenceCheck';
+    const IN_CLASS_NIPPLE_CHECK = 'nippleCheck';
     
 
     
@@ -227,6 +267,7 @@ class INParam implements ModelInterface, ArrayAccess
             self::IN_CLASS_HAND,
             self::IN_CLASS_FOOT,
             self::IN_CLASS_FOOTWEAR,
+            self::IN_CLASS_CHEST,
             self::IN_CLASS_BREAST,
             self::IN_CLASS_VULVA,
             self::IN_CLASS_PENIS,
@@ -250,12 +291,41 @@ class INParam implements ModelInterface, ArrayAccess
             self::IN_CLASS_GLASSES,
             self::IN_CLASS_SUNGLASSES,
             self::IN_CLASS_MASK,
+            self::IN_CLASS_SLIM_SIZED,
+            self::IN_CLASS_REAL_SIZED,
+            self::IN_CLASS_PLUS_SIZED,
+            self::IN_CLASS_NO_NIPPLE,
+            self::IN_CLASS_HAS_NIPPLE,
+            self::IN_CLASS_BEER,
+            self::IN_CLASS_BEER_BOTTLE,
+            self::IN_CLASS_BEER_CAN,
+            self::IN_CLASS_WINE,
+            self::IN_CLASS_WINE_BOTTLE,
+            self::IN_CLASS_COCKTAIL,
+            self::IN_CLASS_ALCOHOL,
+            self::IN_CLASS_CANNABIS,
+            self::IN_CLASS_CIGARETTE,
+            self::IN_CLASS_COCAINE,
+            self::IN_CLASS_HEROINE,
+            self::IN_CLASS_COFFEE,
+            self::IN_CLASS_CAMOUFLAGE,
+            self::IN_CLASS_CLUB,
+            self::IN_CLASS_KNIFE,
+            self::IN_CLASS_SWORD,
+            self::IN_CLASS_PISTOL,
+            self::IN_CLASS_RIFLE,
+            self::IN_CLASS_CANNON,
+            self::IN_CLASS_FIRE,
             self::IN_CLASS_NUDITY_CHECK,
             self::IN_CLASS_AGE_VERIFICATION,
             self::IN_CLASS_AGE_ESTIMATION,
             self::IN_CLASS_ILLEGAL_SYMBOLS,
             self::IN_CLASS_TEXT_RECOGNITION,
             self::IN_CLASS_ATTRIBUTES_CHECK,
+            self::IN_CLASS_BODY_ATTRIBUTES,
+            self::IN_CLASS_UNWANTED_SUBSTANCES,
+            self::IN_CLASS_VIOLENCE_CHECK,
+            self::IN_CLASS_NIPPLE_CHECK,
         ];
     }
     
@@ -278,8 +348,10 @@ class INParam implements ModelInterface, ArrayAccess
         $this->container['in_class'] = isset($data['in_class']) ? $data['in_class'] : null;
         $this->container['min'] = isset($data['min']) ? $data['min'] : null;
         $this->container['max'] = isset($data['max']) ? $data['max'] : null;
+        $this->container['severity'] = isset($data['severity']) ? $data['severity'] : 100;
         $this->container['draw_mode'] = isset($data['draw_mode']) ? $data['draw_mode'] : null;
         $this->container['grey'] = isset($data['grey']) ? $data['grey'] : 127;
+        $this->container['scale'] = isset($data['scale']) ? $data['scale'] : 1.0;
     }
 
     /**
@@ -299,6 +371,14 @@ class INParam implements ModelInterface, ArrayAccess
             );
         }
 
+        if (!is_null($this->container['severity']) && ($this->container['severity'] > 1000)) {
+            $invalidProperties[] = "invalid value for 'severity', must be smaller than or equal to 1000.";
+        }
+
+        if (!is_null($this->container['severity']) && ($this->container['severity'] < 0)) {
+            $invalidProperties[] = "invalid value for 'severity', must be bigger than or equal to 0.";
+        }
+
         if (!is_null($this->container['draw_mode']) && ($this->container['draw_mode'] > 7)) {
             $invalidProperties[] = "invalid value for 'draw_mode', must be smaller than or equal to 7.";
         }
@@ -313,6 +393,14 @@ class INParam implements ModelInterface, ArrayAccess
 
         if (!is_null($this->container['grey']) && ($this->container['grey'] < 0)) {
             $invalidProperties[] = "invalid value for 'grey', must be bigger than or equal to 0.";
+        }
+
+        if (!is_null($this->container['scale']) && ($this->container['scale'] > 2.0)) {
+            $invalidProperties[] = "invalid value for 'scale', must be smaller than or equal to 2.0.";
+        }
+
+        if (!is_null($this->container['scale']) && ($this->container['scale'] < 0.5)) {
+            $invalidProperties[] = "invalid value for 'scale', must be bigger than or equal to 0.5.";
         }
 
         return $invalidProperties;
@@ -343,7 +431,7 @@ class INParam implements ModelInterface, ArrayAccess
     /**
      * Sets in_class
      *
-     * @param string|null $in_class The classification of the object, that the element refers to. Default parameter values are defined per classification object. The following list contains the default values for 'min', 'max' and 'drawMode' in order.  * _face_ _(1, 3, 0)_ - Classification for human faces. * _child (*)_ _(0, 0, 6)_ - Recognizes children's faces. * _adult (*)_ _(0, -1, 0)_ - Recognizes faces of adults that are not considered seniors. * _senior (*)_ _(0, -1, 0)_ - Recognizes faces of seniors. * _pose_ _(0, 0, 0)_ - The age can not be estimated, due to a pose that hides facial features. * _female (*)_ _(0, -1, 0)_ - Recognizes female faces.  * _male (*)_ _(0, -1, 0)_ - Recognizes male faces.  * _hand_ _(0, -1, 0)_ - Classification for recognizing hands. * _foot_ _(0, -1, 0)_ - Classification for recognizing feet. * _footwear_ _(0, -1, 0)_ - Classification for recognizing footwear. * _hair_ _(0, -1, 0)_ - Classification for recognizing hair.  * _hairless_ _(0, -1, 0)_ - Classification for recognizing no hair.  * _beard_ _(0, -1, 0)_ - Classification for recognizing beards.  * _moustache_ _(0, -1, 0)_ - Classification for recognizing moustaches.  * _headpiece_ _(0, -1, 0)_ - Classification for recognizing headpieces.  * _glasses_ _(0, -1, 0)_ - Classification for recognizing glasses.  * _sunglasses_ _(0, -1, 0)_ - Classification for recognizing sunglasses.  * _mask_ _(0, -1, 0)_ - Classification for recognizing medical masks.  * _breast_ _(0, 0, 2)_ - Object that recognizes female breasts. * _vulva_ _(0, 0, 2)_ - Object that recognizes vulvae. * _penis_ _(0, 0, 2)_ - Object that recognizes penises. * _vagina_ _(0, 0, 2)_ - Object that recognizes vaginae. * _buttocks_ _(0, 0, 2)_ - Object that recognizes buttocks. * _anus_ _(0, 0, 2)_ - Object that recognizes ani. * _toy_ _(0, -1, 0)_ - Object that recognizes sex toys. * _oral_ _(0, 0, 2)_ - Object that recognizes oral sex. * _penetration_ _(0, 0, 2)_ - Object that recognizes a sexual penetration penetration. * _illegalSymbols_ _(0, 0, 1)_ - Classification for symbols that are not permitted in Germany.  * _textRecognition_ _(0, 6, 6)_ - Classification for recognizing text occurrences.  _Classification objects that are marked with (*) are sub-classifications of face. Both face and the marked classification are affected by the given parameter values._  _Please be aware that the default values can be subject to change. This is due to the difficulty of recognizing certain objects e.g. objects that are classified as toy._
+     * @param string|null $in_class The classification of the object, that the element refers to. The following is a tree representation of the prototypes and their containing classifications. Default parameter values are defined per classification object. The default values of 'min', 'max' and 'drawMode' are witten after the name of the classification object in that order. Use the prototype names to set parameters to all of the containing classifications. ##### nudityCheck > _A prototype containing classifications for basic human attributes and sexual contents. This prototype and the containing classifications are activated by default_ * _face_ _(1, 3, 0)_ * _hand_ _(0, -1, 0)_ * _foot_ _(0, -1, 0)_ * _footwear_ _(0, -1, 0)_ * _chest_ _(0, -1, 0)_ * _breast_ _(0, 0, 2)_ * _vulva_ _(0, 0, 2)_ * _penis_ _(0, 0, 2)_ * _vagina_ _(0, 0, 2)_ * _buttocks_ _(0, 0, 2)_ * _anus_ _(0, 0, 2)_ * _toy_ _(0, -1, 0)_ * _oral_ _(0, 0, 2)_ * _penetration_ _(0, 0, 2)_ ##### ageEstimation > _Contains classification objects for estimating the age of a human face. This prototype activates nudityCheck_ * _child (*)_ _(0, 0, 6)_ * _adult (*)_ _(0, -1, 0)_ * _senior (*)_ _(0, -1, 0)_ * _pose_ _(0, 0, 0)_ - The age can not be estimated, due to a pose that hides facial features. ##### attributesCheck > _Contains classification objects for various attributes of the human face. This prototype activates nudityCheck_ * _female (*)_ _(0, -1, 0)_ * _male (*)_ _(0, -1, 0)_ * _hair_ _(0, -1, 0)_ * _hairless_ _(0, -1, 0)_ * _beard_ _(0, -1, 0)_ * _moustache_ _(0, -1, 0)_ * _headpiece_ _(0, -1, 0)_ * _glasses_ _(0, -1, 0)_ * _sunglasses_ _(0, -1, 0)_ * _mask_ _(0, -1, 0)_ * _slimSized (*)_ _(0, -1, 0)_ * _realSized (*)_ _(0, -1, 0)_ * _plusSized (*)_ _(0, -1, 0)_ ##### nippleCheck > _Contains classifications for determining if the object recognized as breast has a nipple. This prototype activates nudityCheck_ * _noNipple_ _(0, -1, 0)_ * _hasNipple_ _(0, 0, 0)_ ##### bodyAttributes > _Contains classification objects for determining the body size._ * _slimSized_ _(0, -1, 0)_ * _realSized_ _(0, -1, 0)_ * _plusSized_ _(0, -1, 0)_ ##### illegalSymbols > _Contains various classification objects of symbols that are prohibited in Germany (e.g. Hakenkreuz, SS, etc). These are grouped under a single name_ * _illegalSymbols_ _(0, 0, 1)_ ##### unwantedSubstances > _Contains classification objects for different substances._ * _beer (0, -1, 0)_ * _beerBottle_ _(0, -1, 0)_ * _beerCan_ _(0, -1, 0)_ * _wine_ _(0, -1, 0)_ * _wineBottle_ _(0, -1, 0)_ * _cocktail_ _(0, -1, 0)_ * _alcohol_ _(0, -1, 0)_ * _cannabis_ _(0, 0, 0)_ * _cigarette_ _(0, 0, 0)_ * _cocaine_ _(0, 0, 0)_ * _heroine_ _(0, 0, 0)_ * _coffee_ _(0, -1, 0)_ ##### violenceCheck > _Contains classification objects for violent items or acts._ * _camouflage_ _(0, -1, 0)_ * _club_ _(0, -1, 0)_ * _knife_ _(0, 0, 0)_ * _sword_ _(0, 0, 0)_ * _pistol_ _(0, 0, 0)_ * _rifle_ _(0, 0, 0)_ * _cannon_ _(0, 0, 0)_ * _fire_ _(0, -1, 0)_ ##### textRecognition > _Contains letters, numbers and some symbols (e.g. @, #, etc) as classification objects. These are grouped under a single name_ * _textRecognition_ _(0, 6, 6)_  _Classification objects that are marked with (*) are sub-classifications of face. Both face and the marked classification are affected by the given parameter values._  _Please be aware that the default values can be subject to change. This is due to the difficulty of recognizing certain objects e.g. objects that are classified as toy._
      *
      * @return $this
      */
@@ -412,6 +500,38 @@ class INParam implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets severity
+     *
+     * @return int|null
+     */
+    public function getSeverity()
+    {
+        return $this->container['severity'];
+    }
+
+    /**
+     * Sets severity
+     *
+     * @param int|null $severity Set a value to define the severity of a broken rule of the given classification object.
+     *
+     * @return $this
+     */
+    public function setSeverity($severity)
+    {
+
+        if (!is_null($severity) && ($severity > 1000)) {
+            throw new \InvalidArgumentException('invalid value for $severity when calling INParam., must be smaller than or equal to 1000.');
+        }
+        if (!is_null($severity) && ($severity < 0)) {
+            throw new \InvalidArgumentException('invalid value for $severity when calling INParam., must be bigger than or equal to 0.');
+        }
+
+        $this->container['severity'] = $severity;
+
+        return $this;
+    }
+
+    /**
      * Gets draw_mode
      *
      * @return int|null
@@ -471,6 +591,38 @@ class INParam implements ModelInterface, ArrayAccess
         }
 
         $this->container['grey'] = $grey;
+
+        return $this;
+    }
+
+    /**
+     * Gets scale
+     *
+     * @return float|null
+     */
+    public function getScale()
+    {
+        return $this->container['scale'];
+    }
+
+    /**
+     * Sets scale
+     *
+     * @param float|null $scale Scale of the draw rectangle around the classification object. Specify a value to increase or decrease the size of the border.
+     *
+     * @return $this
+     */
+    public function setScale($scale)
+    {
+
+        if (!is_null($scale) && ($scale > 2.0)) {
+            throw new \InvalidArgumentException('invalid value for $scale when calling INParam., must be smaller than or equal to 2.0.');
+        }
+        if (!is_null($scale) && ($scale < 0.5)) {
+            throw new \InvalidArgumentException('invalid value for $scale when calling INParam., must be bigger than or equal to 0.5.');
+        }
+
+        $this->container['scale'] = $scale;
 
         return $this;
     }
