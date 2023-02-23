@@ -134,6 +134,18 @@ class RulesHelper
                 'plural' => 'persons with a mask',
                 'allowMinMax' => true
             ),
+            'slimSized' => array(
+                'plural' => 'slimSized faces',
+                'allowMinMax' => false
+            ),
+            'realSized' => array(
+                'plural' => 'realSized faces',
+                'allowMinMax' => false
+            ),
+            'plusSized' => array(
+                'plural' => 'plusSized faces',
+                'allowMinMax' => false
+            ),
         ),
         'Nipple Check' => array(
             'noNipple' => array(
@@ -145,16 +157,114 @@ class RulesHelper
                 'allowMinMax' => false
             ),
         ),
-        'Text Recognition' => array(
-            'textRecognition' => array(
-                'plural' => 'letters',
-                'allowMinMax' => true
+        'Body Attributes' => array(
+            'slimSized' => array(
+                'plural' => 'slimSized bodies',
+                'allowMinMax' => false
+            ),
+            'realSized' => array(
+                'plural' => 'realSized bodies',
+                'allowMinMax' => false
+            ),
+            'plusSized' => array(
+                'plural' => 'plusSized bodies',
+                'allowMinMax' => false
             ),
         ),
         'Illegal Symbols' => array(
             'illegalSymbols' => array(
                 'plural' => 'illegal symbols',
                 'allowMinMax' => false
+            ),
+        ),
+        'Unwanted Substances' => array(
+            'beer' => array(
+                'plural' => 'beers',
+                'allowMinMax' => false
+            ),
+            'beerBottle' => array(
+                'plural' => 'bottles of beer',
+                'allowMinMax' => false
+            ),
+            'beerCan' => array(
+                'plural' => 'cans of beer',
+                'allowMinMax' => false
+            ),
+            'wine' => array(
+                'plural' => 'wine',
+                'allowMinMax' => false
+            ),
+            'wineBottle' => array(
+                'plural' => 'bottles of wine',
+                'allowMinMax' => false
+            ),
+            'cocktail' => array(
+                'plural' => 'cocktails',
+                'allowMinMax' => false
+            ),
+            'alcohol' => array(
+                'plural' => 'alcohol',
+                'allowMinMax' => false
+            ),
+            'cannabis' => array(
+                'plural' => 'cannabis',
+                'allowMinMax' => false
+            ),
+            'cigarette' => array(
+                'plural' => 'cigarettes',
+                'allowMinMax' => false
+            ),
+            'cocaine' => array(
+                'plural' => 'cocaine',
+                'allowMinMax' => false
+            ),
+            'heroine' => array(
+                'plural' => 'heroines',
+                'allowMinMax' => false
+            ),
+            'coffee' => array(
+                'plural' => 'coffees',
+                'allowMinMax' => false
+            ),
+        ),
+        'Violence Check' => array(
+            'camouflage' => array(
+                'plural' => 'camouflage',
+                'allowMinMax' => false
+            ),
+            'club' => array(
+                'plural' => 'clubs',
+                'allowMinMax' => false
+            ),
+            'knife' => array(
+                'plural' => 'knives',
+                'allowMinMax' => false
+            ),
+            'sword' => array(
+                'plural' => 'swords',
+                'allowMinMax' => false
+            ),
+            'pistol' => array(
+                'plural' => 'pistols',
+                'allowMinMax' => false
+            ),
+            'rifle' => array(
+                'plural' => 'rifles',
+                'allowMinMax' => false
+            ),
+            'cannon' => array(
+                'plural' => 'cannons',
+                'allowMinMax' => false
+            ),
+            'fire' => array(
+                'plural' => 'fire',
+                'allowMinMax' => false
+            ),
+        ),
+        'Text Recognition' => array(
+            'textRecognition' => array(
+                'plural' => 'letters',
+                'allowMinMax' => true
             ),
         ),
     );
