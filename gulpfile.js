@@ -99,7 +99,7 @@ gulp.task("js", function () {
     .pipe(browserSync.stream());
 });
 
-gulp.task("generate-index-php-in-sub-directories", function (cb) {
+gulp.task("generate-index-php-in-sub-directories", async function (cb) {
   indexPhpDirectories.forEach(directory => {
     spawn(
       "find",
@@ -141,13 +141,13 @@ function triggerPlumber(src, url) {
   return gulp.src(src).pipe(plumber()).pipe(gulp.dest(url));
 }
 
-gulp.task("default", ["styles", "js", "generate-usage-documentation"], function () {
+gulp.task("default", gulp.series("styles", "js", "generate-usage-documentation"), function () {
   gulp
     .src(jsURL + "script.min.js")
     .pipe(notify({ message: "Assets Compiled!" }));
 });
 
-gulp.task("watch", ["default", "browser-sync"], function () {
+gulp.task("watch", gulp.series("default", "browser-sync"), function () {
   gulp.watch(phpWatch, reload);
   gulp.watch(styleWatch, ["styles"]);
   gulp.watch(jsWatch, ["js", reload]);
