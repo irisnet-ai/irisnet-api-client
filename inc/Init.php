@@ -4,6 +4,8 @@
  */
 namespace Inc;
 
+use Inc\Helper\Migration;
+
 final class Init
 {
     /**
@@ -45,5 +47,31 @@ final class Init
     {
         $service = new $class();
         return $service;
+    }
+
+    /**
+     * Migration script.
+     */
+    public static function migrate()
+    {
+        $currentPluginVersion = get_option('irisnet_plugin_version');
+
+        if ($currentPluginVersion === false) {
+            return;
+        }
+
+        if ($currentPluginVersion != IRISNET_API_CLIENT_VERSION) {
+            if ($currentPluginVersion < IRISNET_API_CLIENT_VERSION) {
+                Migration::up($currentPluginVersion);
+
+                update_option('irisnet_plugin_version', IRISNET_API_CLIENT_VERSION);
+            }
+
+            if ($currentPluginVersion > IRISNET_API_CLIENT_VERSION) {
+                Migration::down($currentPluginVersion);
+
+                update_option('irisnet_plugin_version', IRISNET_API_CLIENT_VERSION);
+            }
+        }
     }
 }

@@ -12,6 +12,9 @@ class Activate
 
         $default = array();
 
+        // Plugin version is always updated
+        update_option('irisnet_plugin_version', IRISNET_API_CLIENT_VERSION);
+
         if (! get_option('irisnet_plugin_rules')) {
             update_option('irisnet_plugin_rules', $default);
         }

@@ -54,7 +54,17 @@ function deactivate_irisnet_api_client()
 }
 register_deactivation_hook(__FILE__, 'deactivate_irisnet_api_client');
 
+/**
+ * The code that runs during plugin deactivation
+ */
+function uninstall_irisnet_api_client()
+{
+    Inc\Base\Uninstall::uninstall();
+}
+register_uninstall_hook(__FILE__, 'uninstall_irisnet_api_client');
+
 if (class_exists('Inc\\Init')) {
+    Inc\Init::migrate();
     Inc\Init::register_services();
 }
 
