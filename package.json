@@ -4,7 +4,7 @@
   "description": "Plugin to connect to the Irisnet API",
   "author": "Irisnet <info@irisnet.de> (https://irisnet.de)",
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^1.0.13-4.3.1",
+    "@openapitools/openapi-generator-cli": "^2.4.13",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babelify": "^8.0.0",
