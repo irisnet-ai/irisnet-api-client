@@ -89,17 +89,17 @@ try {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://api.irisnet.de/v1*
+All URIs are relative to *https://api.irisnet.de*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*EndpointsForAIChecksApi* | [**checkImage**](docs/Api/EndpointsForAIChecksApi.md#checkimage) | **POST** /check-image/{licenseKey} | Upload and check image against previously chosen configuration.
-*EndpointsForAIChecksApi* | [**checkImageUrl**](docs/Api/EndpointsForAIChecksApi.md#checkimageurl) | **POST** /check-url/{licenseKey} | Check image url against previously chosen configuration.
-*EndpointsToSetupTheAIApi* | [**setINDefine**](docs/Api/EndpointsToSetupTheAIApi.md#setindefine) | **POST** /set-definition | Set definitions via pre-defined prototypes.
-*EndpointsToSetupTheAIApi* | [**setINParams**](docs/Api/EndpointsToSetupTheAIApi.md#setinparams) | **POST** /set-parameters | Set the behaviour parameters for one object class.
-*MiscellaneousOperationsApi* | [**downloadProcessed**](docs/Api/MiscellaneousOperationsApi.md#downloadprocessed) | **GET** /download/{filename} | Get the resulting media file.
-*MiscellaneousOperationsApi* | [**getAICost**](docs/Api/MiscellaneousOperationsApi.md#getaicost) | **GET** /cost | Get the cost per image check of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
-*MiscellaneousOperationsApi* | [**getLicenseInfo**](docs/Api/MiscellaneousOperationsApi.md#getlicenseinfo) | **GET** /info/{licenseKey} | Get information from given license key.
+*EndpointsForAIChecksApi* | [**checkImage**](docs/Api/EndpointsForAIChecksApi.md#checkimage) | **POST** /v1/check-image/{licenseKey} | Upload and check image against previously chosen configuration.
+*EndpointsForAIChecksApi* | [**checkImageUrl**](docs/Api/EndpointsForAIChecksApi.md#checkimageurl) | **POST** /v1/check-url/{licenseKey} | Check image url against previously chosen configuration.
+*EndpointsToSetupTheAIApi* | [**setINDefine**](docs/Api/EndpointsToSetupTheAIApi.md#setindefine) | **POST** /v1/set-definition | Set definitions via pre-defined prototypes.
+*EndpointsToSetupTheAIApi* | [**setINParams**](docs/Api/EndpointsToSetupTheAIApi.md#setinparams) | **POST** /v1/set-parameters | Set the behaviour parameters for one object class.
+*MiscellaneousOperationsApi* | [**downloadProcessed**](docs/Api/MiscellaneousOperationsApi.md#downloadprocessed) | **GET** /v1/download/{filename} | Get the resulting media file.
+*MiscellaneousOperationsApi* | [**getAICost**](docs/Api/MiscellaneousOperationsApi.md#getaicost) | **GET** /v1/cost | Get the cost per image check of the previously set parameters. The cost of the configuration is subtracted from the license key during each check.
+*MiscellaneousOperationsApi* | [**getLicenseInfo**](docs/Api/MiscellaneousOperationsApi.md#getlicenseinfo) | **GET** /v1/info/{licenseKey} | Get information from given license key.
 
 
 ## Documentation For Models

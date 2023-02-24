@@ -258,7 +258,7 @@ class EndpointsToSetupTheAIApi
             );
         }
 
-        $resourcePath = '/set-definition';
+        $resourcePath = '/v1/set-definition';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -478,7 +478,7 @@ class EndpointsToSetupTheAIApi
             );
         }
 
-        $resourcePath = '/set-parameters';
+        $resourcePath = '/v1/set-parameters';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];

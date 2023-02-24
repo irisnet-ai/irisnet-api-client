@@ -62,8 +62,7 @@ class INRule implements ModelInterface, ArrayAccess
         'in_group' => 'string',
         'found' => 'int',
         'min' => 'int',
-        'max' => 'int',
-        'severity' => 'int'
+        'max' => 'int'
     ];
 
     /**
@@ -76,8 +75,7 @@ class INRule implements ModelInterface, ArrayAccess
         'in_group' => null,
         'found' => 'int32',
         'min' => 'int32',
-        'max' => 'int32',
-        'severity' => 'int32'
+        'max' => 'int32'
     ];
 
     /**
@@ -111,8 +109,7 @@ class INRule implements ModelInterface, ArrayAccess
         'in_group' => 'inGroup',
         'found' => 'found',
         'min' => 'min',
-        'max' => 'max',
-        'severity' => 'severity'
+        'max' => 'max'
     ];
 
     /**
@@ -125,8 +122,7 @@ class INRule implements ModelInterface, ArrayAccess
         'in_group' => 'setInGroup',
         'found' => 'setFound',
         'min' => 'setMin',
-        'max' => 'setMax',
-        'severity' => 'setSeverity'
+        'max' => 'setMax'
     ];
 
     /**
@@ -139,8 +135,7 @@ class INRule implements ModelInterface, ArrayAccess
         'in_group' => 'getInGroup',
         'found' => 'getFound',
         'min' => 'getMin',
-        'max' => 'getMax',
-        'severity' => 'getSeverity'
+        'max' => 'getMax'
     ];
 
     /**
@@ -208,7 +203,6 @@ class INRule implements ModelInterface, ArrayAccess
         $this->container['found'] = isset($data['found']) ? $data['found'] : null;
         $this->container['min'] = isset($data['min']) ? $data['min'] : null;
         $this->container['max'] = isset($data['max']) ? $data['max'] : null;
-        $this->container['severity'] = isset($data['severity']) ? $data['severity'] : null;
     }
 
     /**
@@ -351,30 +345,6 @@ class INRule implements ModelInterface, ArrayAccess
     public function setMax($max)
     {
         $this->container['max'] = $max;
-
-        return $this;
-    }
-
-    /**
-     * Gets severity
-     *
-     * @return int|null
-     */
-    public function getSeverity()
-    {
-        return $this->container['severity'];
-    }
-
-    /**
-     * Sets severity
-     *
-     * @param int|null $severity The severity of the classification object set while configuring the AI.
-     *
-     * @return $this
-     */
-    public function setSeverity($severity)
-    {
-        $this->container['severity'] = $severity;
 
         return $this;
     }

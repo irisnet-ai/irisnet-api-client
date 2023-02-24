@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project title="API Documentation" version="2.9.1">
   <partials/>
-  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="9f13da73f48dfc1f93cb01fea5dc3972" package="IrisnetAPIClient">
+  <file path="IrisnetAPIConnector.php" generated-path="IrisnetAPIConnector.html" hash="893aa73c6d2d22661b4d5cb5b48da846" package="IrisnetAPIClient">
     <docblock line="0">
       <description></description>
       <long-description></long-description>

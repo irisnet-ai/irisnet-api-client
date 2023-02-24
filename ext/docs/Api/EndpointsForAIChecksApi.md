@@ -1,11 +1,11 @@
 # Irisnet\APIV1\Client\EndpointsForAIChecksApi
 
-All URIs are relative to *https://api.irisnet.de/v1*
+All URIs are relative to *https://api.irisnet.de*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**checkImage**](EndpointsForAIChecksApi.md#checkImage) | **POST** /check-image/{licenseKey} | Upload and check image against previously chosen configuration.
-[**checkImageUrl**](EndpointsForAIChecksApi.md#checkImageUrl) | **POST** /check-url/{licenseKey} | Check image url against previously chosen configuration.
+[**checkImage**](EndpointsForAIChecksApi.md#checkImage) | **POST** /v1/check-image/{licenseKey} | Upload and check image against previously chosen configuration.
+[**checkImageUrl**](EndpointsForAIChecksApi.md#checkImageUrl) | **POST** /v1/check-url/{licenseKey} | Check image url against previously chosen configuration.
 
 
 
