@@ -134,18 +134,18 @@ class RulesHelper
                 'plural' => 'persons with a mask',
                 'allowMinMax' => true
             ),
-            'slimSized' => array(
-                'plural' => 'slimSized faces',
-                'allowMinMax' => false
-            ),
-            'realSized' => array(
-                'plural' => 'realSized faces',
-                'allowMinMax' => false
-            ),
-            'plusSized' => array(
-                'plural' => 'plusSized faces',
-                'allowMinMax' => false
-            ),
+            // 'slimSized' => array(
+            //     'plural' => 'slimSized faces',
+            //     'allowMinMax' => false
+            // ),
+            // 'realSized' => array(
+            //     'plural' => 'realSized faces',
+            //     'allowMinMax' => false
+            // ),
+            // 'plusSized' => array(
+            //     'plural' => 'plusSized faces',
+            //     'allowMinMax' => false
+            // ),
         ),
         'Nipple Check' => array(
             'noNipple' => array(
@@ -157,20 +157,20 @@ class RulesHelper
                 'allowMinMax' => false
             ),
         ),
-        'Body Attributes' => array(
-            'slimSized' => array(
-                'plural' => 'slimSized bodies',
-                'allowMinMax' => false
-            ),
-            'realSized' => array(
-                'plural' => 'realSized bodies',
-                'allowMinMax' => false
-            ),
-            'plusSized' => array(
-                'plural' => 'plusSized bodies',
-                'allowMinMax' => false
-            ),
-        ),
+        // 'Body Attributes' => array(
+        //     'slimSized' => array(
+        //         'plural' => 'slimSized bodies',
+        //         'allowMinMax' => false
+        //     ),
+        //     'realSized' => array(
+        //         'plural' => 'realSized bodies',
+        //         'allowMinMax' => false
+        //     ),
+        //     'plusSized' => array(
+        //         'plural' => 'plusSized bodies',
+        //         'allowMinMax' => false
+        //     ),
+        // ),
         'Illegal Symbols' => array(
             'illegalSymbols' => array(
                 'plural' => 'illegal symbols',
