@@ -31,7 +31,8 @@
     "autoload": {
         "psr-4": { 
             "Inc\\": "./inc",
-            "Irisnet\\APIV1\\Client\\" : "./ext/lib/" 
+            "Migrations\\": "./migrations",
+            "Irisnet\\APIV2\\Client\\" : "./ext/lib/" 
         }
     }
 }

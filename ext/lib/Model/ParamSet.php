@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * ParamSet
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * ParamSet Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
+ * @description A set of parameters/rules that describe how the AI should behave.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class ParamSet implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'ParamSet';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'thresh' => 'float',
+        'grey' => 'int',
+        'min_duration' => 'int',
+        'abort_on_severity' => 'int',
+        'params' => '\Irisnet\APIV2\Client\Model\Param[]'
     ];
 
     /**
@@ -74,11 +74,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'thresh' => 'float',
+        'grey' => 'int32',
+        'min_duration' => 'int32',
+        'abort_on_severity' => 'int32',
+        'params' => null
     ];
 
     /**
@@ -87,11 +87,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'thresh' => false,
+		'grey' => false,
+		'min_duration' => false,
+		'abort_on_severity' => false,
+		'params' => false
     ];
 
     /**
@@ -180,11 +180,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'thresh' => 'thresh',
+        'grey' => 'grey',
+        'min_duration' => 'minDuration',
+        'abort_on_severity' => 'abortOnSeverity',
+        'params' => 'params'
     ];
 
     /**
@@ -193,11 +193,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'thresh' => 'setThresh',
+        'grey' => 'setGrey',
+        'min_duration' => 'setMinDuration',
+        'abort_on_severity' => 'setAbortOnSeverity',
+        'params' => 'setParams'
     ];
 
     /**
@@ -206,11 +206,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'thresh' => 'getThresh',
+        'grey' => 'getGrey',
+        'min_duration' => 'getMinDuration',
+        'abort_on_severity' => 'getAbortOnSeverity',
+        'params' => 'getParams'
     ];
 
     /**
@@ -270,11 +270,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('thresh', $data ?? [], 0.5);
+        $this->setIfExists('grey', $data ?? [], 127);
+        $this->setIfExists('min_duration', $data ?? [], 100);
+        $this->setIfExists('abort_on_severity', $data ?? [], -1);
+        $this->setIfExists('params', $data ?? [], null);
     }
 
     /**
@@ -304,6 +304,34 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if (!is_null($this->container['thresh']) && ($this->container['thresh'] > 1.0)) {
+            $invalidProperties[] = "invalid value for 'thresh', must be smaller than or equal to 1.0.";
+        }
+
+        if (!is_null($this->container['thresh']) && ($this->container['thresh'] < 0.0)) {
+            $invalidProperties[] = "invalid value for 'thresh', must be bigger than or equal to 0.0.";
+        }
+
+        if (!is_null($this->container['grey']) && ($this->container['grey'] > 255)) {
+            $invalidProperties[] = "invalid value for 'grey', must be smaller than or equal to 255.";
+        }
+
+        if (!is_null($this->container['grey']) && ($this->container['grey'] < 0)) {
+            $invalidProperties[] = "invalid value for 'grey', must be bigger than or equal to 0.";
+        }
+
+        if (!is_null($this->container['min_duration']) && ($this->container['min_duration'] > 250)) {
+            $invalidProperties[] = "invalid value for 'min_duration', must be smaller than or equal to 250.";
+        }
+
+        if (!is_null($this->container['min_duration']) && ($this->container['min_duration'] < 50)) {
+            $invalidProperties[] = "invalid value for 'min_duration', must be bigger than or equal to 50.";
+        }
+
+        if (!is_null($this->container['abort_on_severity']) && ($this->container['abort_on_severity'] < -1)) {
+            $invalidProperties[] = "invalid value for 'abort_on_severity', must be bigger than or equal to -1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -320,136 +348,165 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
+     * Gets thresh
+     *
+     * @return float|null
+     */
+    public function getThresh()
+    {
+        return $this->container['thresh'];
+    }
+
+    /**
+     * Sets thresh
+     *
+     * @param float|null $thresh Threshold when an object can be recognized. Lowering the value will increase the probability of recognizing objects. A threshold of 0.5 would mean, that 50% of an object like a face must be visible, to be detected.Setting the value too low however, can cause false positives.
+     *
+     * @return self
+     */
+    public function setThresh($thresh)
+    {
+        if (is_null($thresh)) {
+            throw new \InvalidArgumentException('non-nullable thresh cannot be null');
+        }
+
+        if (($thresh > 1.0)) {
+            throw new \InvalidArgumentException('invalid value for $thresh when calling ParamSet., must be smaller than or equal to 1.0.');
+        }
+        if (($thresh < 0.0)) {
+            throw new \InvalidArgumentException('invalid value for $thresh when calling ParamSet., must be bigger than or equal to 0.0.');
+        }
+
+        $this->container['thresh'] = $thresh;
+
+        return $this;
+    }
+
+    /**
+     * Gets grey
      *
      * @return int|null
      */
-    public function getCreditsUsed()
+    public function getGrey()
     {
-        return $this->container['credits_used'];
+        return $this->container['grey'];
     }
 
     /**
-     * Sets credits_used
+     * Sets grey
      *
-     * @param int|null $credits_used Credits used for the license key.
+     * @param int|null $grey A grey scale color to use for frame or masking. '0' will represent black, while the maximum '255' will be white.
      *
      * @return self
      */
-    public function setCreditsUsed($credits_used)
+    public function setGrey($grey)
     {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
+        if (is_null($grey)) {
+            throw new \InvalidArgumentException('non-nullable grey cannot be null');
         }
-        $this->container['credits_used'] = $credits_used;
+
+        if (($grey > 255)) {
+            throw new \InvalidArgumentException('invalid value for $grey when calling ParamSet., must be smaller than or equal to 255.');
+        }
+        if (($grey < 0)) {
+            throw new \InvalidArgumentException('invalid value for $grey when calling ParamSet., must be bigger than or equal to 0.');
+        }
+
+        $this->container['grey'] = $grey;
 
         return $this;
     }
 
     /**
-     * Gets credits_remaining
+     * Gets min_duration
      *
      * @return int|null
      */
-    public function getCreditsRemaining()
+    public function getMinDuration()
     {
-        return $this->container['credits_remaining'];
+        return $this->container['min_duration'];
     }
 
     /**
-     * Sets credits_remaining
+     * Sets min_duration
      *
-     * @param int|null $credits_remaining Credits remaining for the license key.
+     * @param int|null $min_duration Set the overall minimum duration in milliseconds for a rule to be broken in moving images.
      *
      * @return self
      */
-    public function setCreditsRemaining($credits_remaining)
+    public function setMinDuration($min_duration)
     {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
+        if (is_null($min_duration)) {
+            throw new \InvalidArgumentException('non-nullable min_duration cannot be null');
         }
-        $this->container['credits_remaining'] = $credits_remaining;
+
+        if (($min_duration > 250)) {
+            throw new \InvalidArgumentException('invalid value for $min_duration when calling ParamSet., must be smaller than or equal to 250.');
+        }
+        if (($min_duration < 50)) {
+            throw new \InvalidArgumentException('invalid value for $min_duration when calling ParamSet., must be bigger than or equal to 50.');
+        }
+
+        $this->container['min_duration'] = $min_duration;
 
         return $this;
     }
 
     /**
-     * Gets total_credits
+     * Gets abort_on_severity
      *
      * @return int|null
      */
-    public function getTotalCredits()
+    public function getAbortOnSeverity()
     {
-        return $this->container['total_credits'];
+        return $this->container['abort_on_severity'];
     }
 
     /**
-     * Sets total_credits
+     * Sets abort_on_severity
      *
-     * @param int|null $total_credits Total credits contained within the license key.
+     * @param int|null $abort_on_severity Set a severity on which to automatically stop the check operation. Works with moving images.Use '-1' to ignore this option.
      *
      * @return self
      */
-    public function setTotalCredits($total_credits)
+    public function setAbortOnSeverity($abort_on_severity)
     {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
+        if (is_null($abort_on_severity)) {
+            throw new \InvalidArgumentException('non-nullable abort_on_severity cannot be null');
         }
-        $this->container['total_credits'] = $total_credits;
+
+        if (($abort_on_severity < -1)) {
+            throw new \InvalidArgumentException('invalid value for $abort_on_severity when calling ParamSet., must be bigger than or equal to -1.');
+        }
+
+        $this->container['abort_on_severity'] = $abort_on_severity;
 
         return $this;
     }
 
     /**
-     * Gets license_key
+     * Gets params
      *
-     * @return string|null
+     * @return \Irisnet\APIV2\Client\Model\Param[]|null
      */
-    public function getLicenseKey()
+    public function getParams()
     {
-        return $this->container['license_key'];
+        return $this->container['params'];
     }
 
     /**
-     * Sets license_key
+     * Sets params
      *
-     * @param string|null $license_key The license key
+     * @param \Irisnet\APIV2\Client\Model\Param[]|null $params A list of parameter sets that describe the rules of the objects.
      *
      * @return self
      */
-    public function setLicenseKey($license_key)
+    public function setParams($params)
     {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+        if (is_null($params)) {
+            throw new \InvalidArgumentException('non-nullable params cannot be null');
         }
-        $this->container['license_key'] = $license_key;
-
-        return $this;
-    }
-
-    /**
-     * Gets privileges
-     *
-     * @return array<string,string>|null
-     */
-    public function getPrivileges()
-    {
-        return $this->container['privileges'];
-    }
-
-    /**
-     * Sets privileges
-     *
-     * @param array<string,string>|null $privileges A map of privileges
-     *
-     * @return self
-     */
-    public function setPrivileges($privileges)
-    {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
-        }
-        $this->container['privileges'] = $privileges;
+        $this->container['params'] = $params;
 
         return $this;
     }

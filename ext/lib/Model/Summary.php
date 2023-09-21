@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * Summary
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * Summary Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
+ * @description Summarizing the result of the AI.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class Summary implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'Summary';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'status' => 'string',
+        'broken_rules_count' => 'int',
+        'help_suggested' => 'int',
+        'severity' => 'int',
+        'credits_consumed' => 'int',
+        'tags' => 'string[]',
+        'reject_tags' => 'string[]',
+        'reject_reasons' => 'string[]'
     ];
 
     /**
@@ -74,11 +77,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'status' => null,
+        'broken_rules_count' => 'int32',
+        'help_suggested' => 'int32',
+        'severity' => 'int32',
+        'credits_consumed' => 'int32',
+        'tags' => null,
+        'reject_tags' => null,
+        'reject_reasons' => null
     ];
 
     /**
@@ -87,11 +93,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'status' => false,
+		'broken_rules_count' => false,
+		'help_suggested' => false,
+		'severity' => false,
+		'credits_consumed' => false,
+		'tags' => false,
+		'reject_tags' => false,
+		'reject_reasons' => false
     ];
 
     /**
@@ -180,11 +189,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'status' => 'status',
+        'broken_rules_count' => 'brokenRulesCount',
+        'help_suggested' => 'helpSuggested',
+        'severity' => 'severity',
+        'credits_consumed' => 'creditsConsumed',
+        'tags' => 'tags',
+        'reject_tags' => 'rejectTags',
+        'reject_reasons' => 'rejectReasons'
     ];
 
     /**
@@ -193,11 +205,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'status' => 'setStatus',
+        'broken_rules_count' => 'setBrokenRulesCount',
+        'help_suggested' => 'setHelpSuggested',
+        'severity' => 'setSeverity',
+        'credits_consumed' => 'setCreditsConsumed',
+        'tags' => 'setTags',
+        'reject_tags' => 'setRejectTags',
+        'reject_reasons' => 'setRejectReasons'
     ];
 
     /**
@@ -206,11 +221,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'status' => 'getStatus',
+        'broken_rules_count' => 'getBrokenRulesCount',
+        'help_suggested' => 'getHelpSuggested',
+        'severity' => 'getSeverity',
+        'credits_consumed' => 'getCreditsConsumed',
+        'tags' => 'getTags',
+        'reject_tags' => 'getRejectTags',
+        'reject_reasons' => 'getRejectReasons'
     ];
 
     /**
@@ -270,11 +288,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('status', $data ?? [], null);
+        $this->setIfExists('broken_rules_count', $data ?? [], null);
+        $this->setIfExists('help_suggested', $data ?? [], null);
+        $this->setIfExists('severity', $data ?? [], null);
+        $this->setIfExists('credits_consumed', $data ?? [], null);
+        $this->setIfExists('tags', $data ?? [], null);
+        $this->setIfExists('reject_tags', $data ?? [], null);
+        $this->setIfExists('reject_reasons', $data ?? [], null);
     }
 
     /**
@@ -320,136 +341,223 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
-     *
-     * @return int|null
-     */
-    public function getCreditsUsed()
-    {
-        return $this->container['credits_used'];
-    }
-
-    /**
-     * Sets credits_used
-     *
-     * @param int|null $credits_used Credits used for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsUsed($credits_used)
-    {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
-        }
-        $this->container['credits_used'] = $credits_used;
-
-        return $this;
-    }
-
-    /**
-     * Gets credits_remaining
-     *
-     * @return int|null
-     */
-    public function getCreditsRemaining()
-    {
-        return $this->container['credits_remaining'];
-    }
-
-    /**
-     * Sets credits_remaining
-     *
-     * @param int|null $credits_remaining Credits remaining for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsRemaining($credits_remaining)
-    {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
-        }
-        $this->container['credits_remaining'] = $credits_remaining;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_credits
-     *
-     * @return int|null
-     */
-    public function getTotalCredits()
-    {
-        return $this->container['total_credits'];
-    }
-
-    /**
-     * Sets total_credits
-     *
-     * @param int|null $total_credits Total credits contained within the license key.
-     *
-     * @return self
-     */
-    public function setTotalCredits($total_credits)
-    {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
-        }
-        $this->container['total_credits'] = $total_credits;
-
-        return $this;
-    }
-
-    /**
-     * Gets license_key
+     * Gets status
      *
      * @return string|null
      */
-    public function getLicenseKey()
+    public function getStatus()
     {
-        return $this->container['license_key'];
+        return $this->container['status'];
     }
 
     /**
-     * Sets license_key
+     * Sets status
      *
-     * @param string|null $license_key The license key
+     * @param string|null $status A simple status string that can be either _accept_ or _reject_.
      *
      * @return self
      */
-    public function setLicenseKey($license_key)
+    public function setStatus($status)
     {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+        if (is_null($status)) {
+            throw new \InvalidArgumentException('non-nullable status cannot be null');
         }
-        $this->container['license_key'] = $license_key;
+        $this->container['status'] = $status;
 
         return $this;
     }
 
     /**
-     * Gets privileges
+     * Gets broken_rules_count
      *
-     * @return array<string,string>|null
+     * @return int|null
      */
-    public function getPrivileges()
+    public function getBrokenRulesCount()
     {
-        return $this->container['privileges'];
+        return $this->container['broken_rules_count'];
     }
 
     /**
-     * Sets privileges
+     * Sets broken_rules_count
      *
-     * @param array<string,string>|null $privileges A map of privileges
+     * @param int|null $broken_rules_count The amount of broken rules that are contained in the source media.
      *
      * @return self
      */
-    public function setPrivileges($privileges)
+    public function setBrokenRulesCount($broken_rules_count)
     {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
+        if (is_null($broken_rules_count)) {
+            throw new \InvalidArgumentException('non-nullable broken_rules_count cannot be null');
         }
-        $this->container['privileges'] = $privileges;
+        $this->container['broken_rules_count'] = $broken_rules_count;
+
+        return $this;
+    }
+
+    /**
+     * Gets help_suggested
+     *
+     * @return int|null
+     */
+    public function getHelpSuggested()
+    {
+        return $this->container['help_suggested'];
+    }
+
+    /**
+     * Sets help_suggested
+     *
+     * @param int|null $help_suggested In cases where the AI is uncertain, this attribute is set (1), indication that it could be useful to double check the source media by a human.
+     *
+     * @return self
+     */
+    public function setHelpSuggested($help_suggested)
+    {
+        if (is_null($help_suggested)) {
+            throw new \InvalidArgumentException('non-nullable help_suggested cannot be null');
+        }
+        $this->container['help_suggested'] = $help_suggested;
+
+        return $this;
+    }
+
+    /**
+     * Gets severity
+     *
+     * @return int|null
+     */
+    public function getSeverity()
+    {
+        return $this->container['severity'];
+    }
+
+    /**
+     * Sets severity
+     *
+     * @param int|null $severity The highest severity value found amongst the broken rules.
+     *
+     * @return self
+     */
+    public function setSeverity($severity)
+    {
+        if (is_null($severity)) {
+            throw new \InvalidArgumentException('non-nullable severity cannot be null');
+        }
+        $this->container['severity'] = $severity;
+
+        return $this;
+    }
+
+    /**
+     * Gets credits_consumed
+     *
+     * @return int|null
+     */
+    public function getCreditsConsumed()
+    {
+        return $this->container['credits_consumed'];
+    }
+
+    /**
+     * Sets credits_consumed
+     *
+     * @param int|null $credits_consumed The amount of credits that was consumed for the check.
+     *
+     * @return self
+     */
+    public function setCreditsConsumed($credits_consumed)
+    {
+        if (is_null($credits_consumed)) {
+            throw new \InvalidArgumentException('non-nullable credits_consumed cannot be null');
+        }
+        $this->container['credits_consumed'] = $credits_consumed;
+
+        return $this;
+    }
+
+    /**
+     * Gets tags
+     *
+     * @return string[]|null
+     */
+    public function getTags()
+    {
+        return $this->container['tags'];
+    }
+
+    /**
+     * Sets tags
+     *
+     * @param string[]|null $tags A list of classification names that were found.
+     *
+     * @return self
+     */
+    public function setTags($tags)
+    {
+        if (is_null($tags)) {
+            throw new \InvalidArgumentException('non-nullable tags cannot be null');
+        }
+
+
+        $this->container['tags'] = $tags;
+
+        return $this;
+    }
+
+    /**
+     * Gets reject_tags
+     *
+     * @return string[]|null
+     */
+    public function getRejectTags()
+    {
+        return $this->container['reject_tags'];
+    }
+
+    /**
+     * Sets reject_tags
+     *
+     * @param string[]|null $reject_tags A list of classification names that caused a rule to be broken.
+     *
+     * @return self
+     */
+    public function setRejectTags($reject_tags)
+    {
+        if (is_null($reject_tags)) {
+            throw new \InvalidArgumentException('non-nullable reject_tags cannot be null');
+        }
+
+
+        $this->container['reject_tags'] = $reject_tags;
+
+        return $this;
+    }
+
+    /**
+     * Gets reject_reasons
+     *
+     * @return string[]|null
+     */
+    public function getRejectReasons()
+    {
+        return $this->container['reject_reasons'];
+    }
+
+    /**
+     * Sets reject_reasons
+     *
+     * @param string[]|null $reject_reasons The names of the classification groups that caused a rule to be broken.
+     *
+     * @return self
+     */
+    public function setRejectReasons($reject_reasons)
+    {
+        if (is_null($reject_reasons)) {
+            throw new \InvalidArgumentException('non-nullable reject_reasons cannot be null');
+        }
+
+
+        $this->container['reject_reasons'] = $reject_reasons;
 
         return $this;
     }

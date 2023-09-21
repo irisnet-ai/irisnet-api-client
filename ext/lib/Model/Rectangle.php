@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * Rectangle
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * Rectangle Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
+ * @description Describes the bounds of a rectangle starting from the center.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class Rectangle implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'Rectangle';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,10 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'x0' => 'float',
+        'y0' => 'float',
+        'width' => 'float',
+        'height' => 'float'
     ];
 
     /**
@@ -74,11 +73,10 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'x0' => 'float',
+        'y0' => 'float',
+        'width' => 'float',
+        'height' => 'float'
     ];
 
     /**
@@ -87,11 +85,10 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'x0' => false,
+		'y0' => false,
+		'width' => false,
+		'height' => false
     ];
 
     /**
@@ -180,11 +177,10 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'x0' => 'x0',
+        'y0' => 'y0',
+        'width' => 'width',
+        'height' => 'height'
     ];
 
     /**
@@ -193,11 +189,10 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'x0' => 'setX0',
+        'y0' => 'setY0',
+        'width' => 'setWidth',
+        'height' => 'setHeight'
     ];
 
     /**
@@ -206,11 +201,10 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'x0' => 'getX0',
+        'y0' => 'getY0',
+        'width' => 'getWidth',
+        'height' => 'getHeight'
     ];
 
     /**
@@ -270,11 +264,10 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('x0', $data ?? [], null);
+        $this->setIfExists('y0', $data ?? [], null);
+        $this->setIfExists('width', $data ?? [], null);
+        $this->setIfExists('height', $data ?? [], null);
     }
 
     /**
@@ -320,136 +313,109 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
+     * Gets x0
      *
-     * @return int|null
+     * @return float|null
      */
-    public function getCreditsUsed()
+    public function getX0()
     {
-        return $this->container['credits_used'];
+        return $this->container['x0'];
     }
 
     /**
-     * Sets credits_used
+     * Sets x0
      *
-     * @param int|null $credits_used Credits used for the license key.
+     * @param float|null $x0 The center of the rectangle in the horizontal (x) direction.
      *
      * @return self
      */
-    public function setCreditsUsed($credits_used)
+    public function setX0($x0)
     {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
+        if (is_null($x0)) {
+            throw new \InvalidArgumentException('non-nullable x0 cannot be null');
         }
-        $this->container['credits_used'] = $credits_used;
+        $this->container['x0'] = $x0;
 
         return $this;
     }
 
     /**
-     * Gets credits_remaining
+     * Gets y0
      *
-     * @return int|null
+     * @return float|null
      */
-    public function getCreditsRemaining()
+    public function getY0()
     {
-        return $this->container['credits_remaining'];
+        return $this->container['y0'];
     }
 
     /**
-     * Sets credits_remaining
+     * Sets y0
      *
-     * @param int|null $credits_remaining Credits remaining for the license key.
+     * @param float|null $y0 The center of the rectangle in the vertical (y) direction.
      *
      * @return self
      */
-    public function setCreditsRemaining($credits_remaining)
+    public function setY0($y0)
     {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
+        if (is_null($y0)) {
+            throw new \InvalidArgumentException('non-nullable y0 cannot be null');
         }
-        $this->container['credits_remaining'] = $credits_remaining;
+        $this->container['y0'] = $y0;
 
         return $this;
     }
 
     /**
-     * Gets total_credits
+     * Gets width
      *
-     * @return int|null
+     * @return float|null
      */
-    public function getTotalCredits()
+    public function getWidth()
     {
-        return $this->container['total_credits'];
+        return $this->container['width'];
     }
 
     /**
-     * Sets total_credits
+     * Sets width
      *
-     * @param int|null $total_credits Total credits contained within the license key.
+     * @param float|null $width The total width of the rectangle in the horizontal (x) direction. Use _x0 - width / 2_ and _x0 + width / 2_ to get the left and right edges of the rectangle.
      *
      * @return self
      */
-    public function setTotalCredits($total_credits)
+    public function setWidth($width)
     {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
+        if (is_null($width)) {
+            throw new \InvalidArgumentException('non-nullable width cannot be null');
         }
-        $this->container['total_credits'] = $total_credits;
+        $this->container['width'] = $width;
 
         return $this;
     }
 
     /**
-     * Gets license_key
+     * Gets height
      *
-     * @return string|null
+     * @return float|null
      */
-    public function getLicenseKey()
+    public function getHeight()
     {
-        return $this->container['license_key'];
+        return $this->container['height'];
     }
 
     /**
-     * Sets license_key
+     * Sets height
      *
-     * @param string|null $license_key The license key
+     * @param float|null $height The total height of the rectangle in the vertical (y) direction. Use _y0 - height / 2_ and _y0 + height / 2_ to get the top and bottom edges of the rectangle.
      *
      * @return self
      */
-    public function setLicenseKey($license_key)
+    public function setHeight($height)
     {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+        if (is_null($height)) {
+            throw new \InvalidArgumentException('non-nullable height cannot be null');
         }
-        $this->container['license_key'] = $license_key;
-
-        return $this;
-    }
-
-    /**
-     * Gets privileges
-     *
-     * @return array<string,string>|null
-     */
-    public function getPrivileges()
-    {
-        return $this->container['privileges'];
-    }
-
-    /**
-     * Sets privileges
-     *
-     * @param array<string,string>|null $privileges A map of privileges
-     *
-     * @return self
-     */
-    public function setPrivileges($privileges)
-    {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
-        }
-        $this->container['privileges'] = $privileges;
+        $this->container['height'] = $height;
 
         return $this;
     }

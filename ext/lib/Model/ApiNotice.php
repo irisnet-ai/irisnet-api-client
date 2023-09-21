@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * ApiNotice
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * ApiNotice Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class ApiNotice implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'ApiNotice';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +58,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'code' => 'int',
+        'level' => 'string',
+        'message' => 'string'
     ];
 
     /**
@@ -74,11 +71,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'code' => 'int32',
+        'level' => null,
+        'message' => null
     ];
 
     /**
@@ -87,11 +82,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'code' => false,
+		'level' => false,
+		'message' => false
     ];
 
     /**
@@ -180,11 +173,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'code' => 'code',
+        'level' => 'level',
+        'message' => 'message'
     ];
 
     /**
@@ -193,11 +184,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'code' => 'setCode',
+        'level' => 'setLevel',
+        'message' => 'setMessage'
     ];
 
     /**
@@ -206,11 +195,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'code' => 'getCode',
+        'level' => 'getLevel',
+        'message' => 'getMessage'
     ];
 
     /**
@@ -254,6 +241,23 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const LEVEL_INFO = 'INFO';
+    public const LEVEL_WARN = 'WARN';
+    public const LEVEL_ERROR = 'ERROR';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getLevelAllowableValues()
+    {
+        return [
+            self::LEVEL_INFO,
+            self::LEVEL_WARN,
+            self::LEVEL_ERROR,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -270,11 +274,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('code', $data ?? [], null);
+        $this->setIfExists('level', $data ?? [], null);
+        $this->setIfExists('message', $data ?? [], null);
     }
 
     /**
@@ -304,6 +306,15 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getLevelAllowableValues();
+        if (!is_null($this->container['level']) && !in_array($this->container['level'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'level', must be one of '%s'",
+                $this->container['level'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -320,136 +331,92 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
+     * Gets code
      *
      * @return int|null
      */
-    public function getCreditsUsed()
+    public function getCode()
     {
-        return $this->container['credits_used'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets credits_used
+     * Sets code
      *
-     * @param int|null $credits_used Credits used for the license key.
+     * @param int|null $code The status code of the response.
      *
      * @return self
      */
-    public function setCreditsUsed($credits_used)
+    public function setCode($code)
     {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
+        if (is_null($code)) {
+            throw new \InvalidArgumentException('non-nullable code cannot be null');
         }
-        $this->container['credits_used'] = $credits_used;
+        $this->container['code'] = $code;
 
         return $this;
     }
 
     /**
-     * Gets credits_remaining
-     *
-     * @return int|null
-     */
-    public function getCreditsRemaining()
-    {
-        return $this->container['credits_remaining'];
-    }
-
-    /**
-     * Sets credits_remaining
-     *
-     * @param int|null $credits_remaining Credits remaining for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsRemaining($credits_remaining)
-    {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
-        }
-        $this->container['credits_remaining'] = $credits_remaining;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_credits
-     *
-     * @return int|null
-     */
-    public function getTotalCredits()
-    {
-        return $this->container['total_credits'];
-    }
-
-    /**
-     * Sets total_credits
-     *
-     * @param int|null $total_credits Total credits contained within the license key.
-     *
-     * @return self
-     */
-    public function setTotalCredits($total_credits)
-    {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
-        }
-        $this->container['total_credits'] = $total_credits;
-
-        return $this;
-    }
-
-    /**
-     * Gets license_key
+     * Gets level
      *
      * @return string|null
      */
-    public function getLicenseKey()
+    public function getLevel()
     {
-        return $this->container['license_key'];
+        return $this->container['level'];
     }
 
     /**
-     * Sets license_key
+     * Sets level
      *
-     * @param string|null $license_key The license key
+     * @param string|null $level The severity level of the notice.
      *
      * @return self
      */
-    public function setLicenseKey($license_key)
+    public function setLevel($level)
     {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+        if (is_null($level)) {
+            throw new \InvalidArgumentException('non-nullable level cannot be null');
         }
-        $this->container['license_key'] = $license_key;
+        $allowedValues = $this->getLevelAllowableValues();
+        if (!in_array($level, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'level', must be one of '%s'",
+                    $level,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['level'] = $level;
 
         return $this;
     }
 
     /**
-     * Gets privileges
+     * Gets message
      *
-     * @return array<string,string>|null
+     * @return string|null
      */
-    public function getPrivileges()
+    public function getMessage()
     {
-        return $this->container['privileges'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets privileges
+     * Sets message
      *
-     * @param array<string,string>|null $privileges A map of privileges
+     * @param string|null $message A hopefully detailed message describing what went wrong.
      *
      * @return self
      */
-    public function setPrivileges($privileges)
+    public function setMessage($message)
     {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
+        if (is_null($message)) {
+            throw new \InvalidArgumentException('non-nullable message cannot be null');
         }
-        $this->container['privileges'] = $privileges;
+        $this->container['message'] = $message;
 
         return $this;
     }

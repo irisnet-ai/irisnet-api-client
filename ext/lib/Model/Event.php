@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * Event
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * Event Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
+ * @description Describes an event that lead to a broken rule.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class Event implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'Event';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'classification' => 'string',
+        'group' => 'string',
+        'start' => 'float',
+        'duration' => 'float',
+        'severity' => 'int'
     ];
 
     /**
@@ -74,11 +74,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'classification' => null,
+        'group' => null,
+        'start' => 'float',
+        'duration' => 'float',
+        'severity' => 'int32'
     ];
 
     /**
@@ -87,11 +87,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'classification' => false,
+		'group' => false,
+		'start' => false,
+		'duration' => false,
+		'severity' => false
     ];
 
     /**
@@ -180,11 +180,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'classification' => 'classification',
+        'group' => 'group',
+        'start' => 'start',
+        'duration' => 'duration',
+        'severity' => 'severity'
     ];
 
     /**
@@ -193,11 +193,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'classification' => 'setClassification',
+        'group' => 'setGroup',
+        'start' => 'setStart',
+        'duration' => 'setDuration',
+        'severity' => 'setSeverity'
     ];
 
     /**
@@ -206,11 +206,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'classification' => 'getClassification',
+        'group' => 'getGroup',
+        'start' => 'getStart',
+        'duration' => 'getDuration',
+        'severity' => 'getSeverity'
     ];
 
     /**
@@ -270,11 +270,11 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('classification', $data ?? [], null);
+        $this->setIfExists('group', $data ?? [], null);
+        $this->setIfExists('start', $data ?? [], null);
+        $this->setIfExists('duration', $data ?? [], null);
+        $this->setIfExists('severity', $data ?? [], null);
     }
 
     /**
@@ -320,136 +320,136 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
-     *
-     * @return int|null
-     */
-    public function getCreditsUsed()
-    {
-        return $this->container['credits_used'];
-    }
-
-    /**
-     * Sets credits_used
-     *
-     * @param int|null $credits_used Credits used for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsUsed($credits_used)
-    {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
-        }
-        $this->container['credits_used'] = $credits_used;
-
-        return $this;
-    }
-
-    /**
-     * Gets credits_remaining
-     *
-     * @return int|null
-     */
-    public function getCreditsRemaining()
-    {
-        return $this->container['credits_remaining'];
-    }
-
-    /**
-     * Sets credits_remaining
-     *
-     * @param int|null $credits_remaining Credits remaining for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsRemaining($credits_remaining)
-    {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
-        }
-        $this->container['credits_remaining'] = $credits_remaining;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_credits
-     *
-     * @return int|null
-     */
-    public function getTotalCredits()
-    {
-        return $this->container['total_credits'];
-    }
-
-    /**
-     * Sets total_credits
-     *
-     * @param int|null $total_credits Total credits contained within the license key.
-     *
-     * @return self
-     */
-    public function setTotalCredits($total_credits)
-    {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
-        }
-        $this->container['total_credits'] = $total_credits;
-
-        return $this;
-    }
-
-    /**
-     * Gets license_key
+     * Gets classification
      *
      * @return string|null
      */
-    public function getLicenseKey()
+    public function getClassification()
     {
-        return $this->container['license_key'];
+        return $this->container['classification'];
     }
 
     /**
-     * Sets license_key
+     * Sets classification
      *
-     * @param string|null $license_key The license key
+     * @param string|null $classification The classification of the recognized object.
      *
      * @return self
      */
-    public function setLicenseKey($license_key)
+    public function setClassification($classification)
     {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+        if (is_null($classification)) {
+            throw new \InvalidArgumentException('non-nullable classification cannot be null');
         }
-        $this->container['license_key'] = $license_key;
+        $this->container['classification'] = $classification;
 
         return $this;
     }
 
     /**
-     * Gets privileges
+     * Gets group
      *
-     * @return array<string,string>|null
+     * @return string|null
      */
-    public function getPrivileges()
+    public function getGroup()
     {
-        return $this->container['privileges'];
+        return $this->container['group'];
     }
 
     /**
-     * Sets privileges
+     * Sets group
      *
-     * @param array<string,string>|null $privileges A map of privileges
+     * @param string|null $group The group of the classification.
      *
      * @return self
      */
-    public function setPrivileges($privileges)
+    public function setGroup($group)
     {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
+        if (is_null($group)) {
+            throw new \InvalidArgumentException('non-nullable group cannot be null');
         }
-        $this->container['privileges'] = $privileges;
+        $this->container['group'] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Gets start
+     *
+     * @return float|null
+     */
+    public function getStart()
+    {
+        return $this->container['start'];
+    }
+
+    /**
+     * Sets start
+     *
+     * @param float|null $start The start in seconds where the classification object is found.
+     *
+     * @return self
+     */
+    public function setStart($start)
+    {
+        if (is_null($start)) {
+            throw new \InvalidArgumentException('non-nullable start cannot be null');
+        }
+        $this->container['start'] = $start;
+
+        return $this;
+    }
+
+    /**
+     * Gets duration
+     *
+     * @return float|null
+     */
+    public function getDuration()
+    {
+        return $this->container['duration'];
+    }
+
+    /**
+     * Sets duration
+     *
+     * @param float|null $duration The duration of the event in seconds until the classification object is no longer in frame. The current event is ongoing if the duration is not set.
+     *
+     * @return self
+     */
+    public function setDuration($duration)
+    {
+        if (is_null($duration)) {
+            throw new \InvalidArgumentException('non-nullable duration cannot be null');
+        }
+        $this->container['duration'] = $duration;
+
+        return $this;
+    }
+
+    /**
+     * Gets severity
+     *
+     * @return int|null
+     */
+    public function getSeverity()
+    {
+        return $this->container['severity'];
+    }
+
+    /**
+     * Sets severity
+     *
+     * @param int|null $severity The severity of the classification object set while configuring the AI.
+     *
+     * @return self
+     */
+    public function setSeverity($severity)
+    {
+        if (is_null($severity)) {
+            throw new \InvalidArgumentException('non-nullable severity cannot be null');
+        }
+        $this->container['severity'] = $severity;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * Config
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * Config Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
+ * @description Can be used to set a multitude of pre-defined commonly used rules without the need of specifying each parameter set.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class Config implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'Config';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,8 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'id' => 'string',
+        'prototypes' => 'string[]'
     ];
 
     /**
@@ -74,11 +71,8 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'id' => 'uuid',
+        'prototypes' => null
     ];
 
     /**
@@ -87,11 +81,8 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'id' => false,
+		'prototypes' => false
     ];
 
     /**
@@ -180,11 +171,8 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'id' => 'id',
+        'prototypes' => 'prototypes'
     ];
 
     /**
@@ -193,11 +181,8 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'id' => 'setId',
+        'prototypes' => 'setPrototypes'
     ];
 
     /**
@@ -206,11 +191,8 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'id' => 'getId',
+        'prototypes' => 'getPrototypes'
     ];
 
     /**
@@ -254,6 +236,37 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const PROTOTYPES_NUDITY_CHECK = 'nudityCheck';
+    public const PROTOTYPES_AGE_VERIFICATION = 'ageVerification';
+    public const PROTOTYPES_AGE_ESTIMATION = 'ageEstimation';
+    public const PROTOTYPES_ILLEGAL_SYMBOLS = 'illegalSymbols';
+    public const PROTOTYPES_TEXT_RECOGNITION = 'textRecognition';
+    public const PROTOTYPES_ATTRIBUTES_CHECK = 'attributesCheck';
+    public const PROTOTYPES_BODY_ATTRIBUTES = 'bodyAttributes';
+    public const PROTOTYPES_NIPPLE_CHECK = 'nippleCheck';
+    public const PROTOTYPES_UNWANTED_SUBSTANCES = 'unwantedSubstances';
+    public const PROTOTYPES_VIOLENCE_CHECK = 'violenceCheck';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getPrototypesAllowableValues()
+    {
+        return [
+            self::PROTOTYPES_NUDITY_CHECK,
+            self::PROTOTYPES_AGE_VERIFICATION,
+            self::PROTOTYPES_AGE_ESTIMATION,
+            self::PROTOTYPES_ILLEGAL_SYMBOLS,
+            self::PROTOTYPES_TEXT_RECOGNITION,
+            self::PROTOTYPES_ATTRIBUTES_CHECK,
+            self::PROTOTYPES_BODY_ATTRIBUTES,
+            self::PROTOTYPES_NIPPLE_CHECK,
+            self::PROTOTYPES_UNWANTED_SUBSTANCES,
+            self::PROTOTYPES_VIOLENCE_CHECK,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -270,11 +283,8 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('prototypes', $data ?? [], null);
     }
 
     /**
@@ -320,136 +330,66 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
-     *
-     * @return int|null
-     */
-    public function getCreditsUsed()
-    {
-        return $this->container['credits_used'];
-    }
-
-    /**
-     * Sets credits_used
-     *
-     * @param int|null $credits_used Credits used for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsUsed($credits_used)
-    {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
-        }
-        $this->container['credits_used'] = $credits_used;
-
-        return $this;
-    }
-
-    /**
-     * Gets credits_remaining
-     *
-     * @return int|null
-     */
-    public function getCreditsRemaining()
-    {
-        return $this->container['credits_remaining'];
-    }
-
-    /**
-     * Sets credits_remaining
-     *
-     * @param int|null $credits_remaining Credits remaining for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsRemaining($credits_remaining)
-    {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
-        }
-        $this->container['credits_remaining'] = $credits_remaining;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_credits
-     *
-     * @return int|null
-     */
-    public function getTotalCredits()
-    {
-        return $this->container['total_credits'];
-    }
-
-    /**
-     * Sets total_credits
-     *
-     * @param int|null $total_credits Total credits contained within the license key.
-     *
-     * @return self
-     */
-    public function setTotalCredits($total_credits)
-    {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
-        }
-        $this->container['total_credits'] = $total_credits;
-
-        return $this;
-    }
-
-    /**
-     * Gets license_key
+     * Gets id
      *
      * @return string|null
      */
-    public function getLicenseKey()
+    public function getId()
     {
-        return $this->container['license_key'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets license_key
+     * Sets id
      *
-     * @param string|null $license_key The license key
+     * @param string|null $id The unique identifier for the AI configuration. Use this for any check operation to tell the AI how to behave.
      *
      * @return self
      */
-    public function setLicenseKey($license_key)
+    public function setId($id)
     {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
         }
-        $this->container['license_key'] = $license_key;
+        $this->container['id'] = $id;
 
         return $this;
     }
 
     /**
-     * Gets privileges
+     * Gets prototypes
      *
-     * @return array<string,string>|null
+     * @return string[]|null
      */
-    public function getPrivileges()
+    public function getPrototypes()
     {
-        return $this->container['privileges'];
+        return $this->container['prototypes'];
     }
 
     /**
-     * Sets privileges
+     * Sets prototypes
      *
-     * @param array<string,string>|null $privileges A map of privileges
+     * @param string[]|null $prototypes Configures your detection. As there are literally hundreds of parameters, prototypes can be used to get useful behaviour. This includes a default setting for parameters and rules that should be applied to the check operations. You can use multiple prototypes for a single check operation.
      *
      * @return self
      */
-    public function setPrivileges($privileges)
+    public function setPrototypes($prototypes)
     {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
+        if (is_null($prototypes)) {
+            throw new \InvalidArgumentException('non-nullable prototypes cannot be null');
         }
-        $this->container['privileges'] = $privileges;
+        $allowedValues = $this->getPrototypesAllowableValues();
+        if (array_diff($prototypes, $allowedValues)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'prototypes', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+
+
+        $this->container['prototypes'] = $prototypes;
 
         return $this;
     }

@@ -46,7 +46,7 @@ var docsInputFile = "inc/IrisnetAPIConnector.php";
 var docsOutputFolder = "templates/usage";
 var docsCacheFolder = ".cache";
 
-var openapiDefinitionUrl = "https://api.irisnet.de/v1/open-api.yaml";
+var openapiDefinitionUrl = "https://api.irisnet.de/open-api.yaml";
 var openapiOutputDir = "ext";
 
 var styleWatch = "src/scss/**/*.scss";
@@ -138,7 +138,7 @@ gulp.task("generate-php-api-client", function (cb) {
     }
     spawn(
       "node_modules/.bin/openapi-generator-cli",
-      ["generate", "-g", "php", "-i", openapiDefinitionUrl, "-o", openapiOutputDir, "--additional-properties", "invokerPackage='Irisnet\\APIV1\\Client'"],
+      ["generate", "-g", "php", "-i", openapiDefinitionUrl, "-o", openapiOutputDir, "--additional-properties", "invokerPackage='Irisnet\\APIV2\\Client'"],
       { stdio: "inherit" }
     ).on("close", function (code) {
       console.log("task exited with code " + code);

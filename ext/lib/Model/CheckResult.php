@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * CheckResult
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * CheckResult Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
+ * @description The root object returned after a check operation.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class CheckResult implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'CheckResult';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,12 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'summary' => '\Irisnet\APIV2\Client\Model\Summary',
+        'encodings' => '\Irisnet\APIV2\Client\Model\Encoded[]',
+        'broken_rules' => '\Irisnet\APIV2\Client\Model\BrokenRule[]',
+        'detections' => '\Irisnet\APIV2\Client\Model\CheckResultDetectionsInner[]',
+        'events' => '\Irisnet\APIV2\Client\Model\Event[]',
+        'notifications' => '\Irisnet\APIV2\Client\Model\ApiNotice[]'
     ];
 
     /**
@@ -74,11 +75,12 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'summary' => null,
+        'encodings' => null,
+        'broken_rules' => null,
+        'detections' => null,
+        'events' => null,
+        'notifications' => null
     ];
 
     /**
@@ -87,11 +89,12 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'summary' => false,
+		'encodings' => false,
+		'broken_rules' => false,
+		'detections' => false,
+		'events' => false,
+		'notifications' => false
     ];
 
     /**
@@ -180,11 +183,12 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'summary' => 'summary',
+        'encodings' => 'encodings',
+        'broken_rules' => 'brokenRules',
+        'detections' => 'detections',
+        'events' => 'events',
+        'notifications' => 'notifications'
     ];
 
     /**
@@ -193,11 +197,12 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'summary' => 'setSummary',
+        'encodings' => 'setEncodings',
+        'broken_rules' => 'setBrokenRules',
+        'detections' => 'setDetections',
+        'events' => 'setEvents',
+        'notifications' => 'setNotifications'
     ];
 
     /**
@@ -206,11 +211,12 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'summary' => 'getSummary',
+        'encodings' => 'getEncodings',
+        'broken_rules' => 'getBrokenRules',
+        'detections' => 'getDetections',
+        'events' => 'getEvents',
+        'notifications' => 'getNotifications'
     ];
 
     /**
@@ -270,11 +276,12 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('summary', $data ?? [], null);
+        $this->setIfExists('encodings', $data ?? [], null);
+        $this->setIfExists('broken_rules', $data ?? [], null);
+        $this->setIfExists('detections', $data ?? [], null);
+        $this->setIfExists('events', $data ?? [], null);
+        $this->setIfExists('notifications', $data ?? [], null);
     }
 
     /**
@@ -320,136 +327,163 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
+     * Gets summary
      *
-     * @return int|null
+     * @return \Irisnet\APIV2\Client\Model\Summary|null
      */
-    public function getCreditsUsed()
+    public function getSummary()
     {
-        return $this->container['credits_used'];
+        return $this->container['summary'];
     }
 
     /**
-     * Sets credits_used
+     * Sets summary
      *
-     * @param int|null $credits_used Credits used for the license key.
+     * @param \Irisnet\APIV2\Client\Model\Summary|null $summary summary
      *
      * @return self
      */
-    public function setCreditsUsed($credits_used)
+    public function setSummary($summary)
     {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
+        if (is_null($summary)) {
+            throw new \InvalidArgumentException('non-nullable summary cannot be null');
         }
-        $this->container['credits_used'] = $credits_used;
+        $this->container['summary'] = $summary;
 
         return $this;
     }
 
     /**
-     * Gets credits_remaining
+     * Gets encodings
      *
-     * @return int|null
+     * @return \Irisnet\APIV2\Client\Model\Encoded[]|null
      */
-    public function getCreditsRemaining()
+    public function getEncodings()
     {
-        return $this->container['credits_remaining'];
+        return $this->container['encodings'];
     }
 
     /**
-     * Sets credits_remaining
+     * Sets encodings
      *
-     * @param int|null $credits_remaining Credits remaining for the license key.
+     * @param \Irisnet\APIV2\Client\Model\Encoded[]|null $encodings encodings
      *
      * @return self
      */
-    public function setCreditsRemaining($credits_remaining)
+    public function setEncodings($encodings)
     {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
+        if (is_null($encodings)) {
+            throw new \InvalidArgumentException('non-nullable encodings cannot be null');
         }
-        $this->container['credits_remaining'] = $credits_remaining;
+        $this->container['encodings'] = $encodings;
 
         return $this;
     }
 
     /**
-     * Gets total_credits
+     * Gets broken_rules
      *
-     * @return int|null
+     * @return \Irisnet\APIV2\Client\Model\BrokenRule[]|null
      */
-    public function getTotalCredits()
+    public function getBrokenRules()
     {
-        return $this->container['total_credits'];
+        return $this->container['broken_rules'];
     }
 
     /**
-     * Sets total_credits
+     * Sets broken_rules
      *
-     * @param int|null $total_credits Total credits contained within the license key.
+     * @param \Irisnet\APIV2\Client\Model\BrokenRule[]|null $broken_rules broken_rules
      *
      * @return self
      */
-    public function setTotalCredits($total_credits)
+    public function setBrokenRules($broken_rules)
     {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
+        if (is_null($broken_rules)) {
+            throw new \InvalidArgumentException('non-nullable broken_rules cannot be null');
         }
-        $this->container['total_credits'] = $total_credits;
+        $this->container['broken_rules'] = $broken_rules;
 
         return $this;
     }
 
     /**
-     * Gets license_key
+     * Gets detections
      *
-     * @return string|null
+     * @return \Irisnet\APIV2\Client\Model\CheckResultDetectionsInner[]|null
      */
-    public function getLicenseKey()
+    public function getDetections()
     {
-        return $this->container['license_key'];
+        return $this->container['detections'];
     }
 
     /**
-     * Sets license_key
+     * Sets detections
      *
-     * @param string|null $license_key The license key
+     * @param \Irisnet\APIV2\Client\Model\CheckResultDetectionsInner[]|null $detections detections
      *
      * @return self
      */
-    public function setLicenseKey($license_key)
+    public function setDetections($detections)
     {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+        if (is_null($detections)) {
+            throw new \InvalidArgumentException('non-nullable detections cannot be null');
         }
-        $this->container['license_key'] = $license_key;
+        $this->container['detections'] = $detections;
 
         return $this;
     }
 
     /**
-     * Gets privileges
+     * Gets events
      *
-     * @return array<string,string>|null
+     * @return \Irisnet\APIV2\Client\Model\Event[]|null
      */
-    public function getPrivileges()
+    public function getEvents()
     {
-        return $this->container['privileges'];
+        return $this->container['events'];
     }
 
     /**
-     * Sets privileges
+     * Sets events
      *
-     * @param array<string,string>|null $privileges A map of privileges
+     * @param \Irisnet\APIV2\Client\Model\Event[]|null $events events
      *
      * @return self
      */
-    public function setPrivileges($privileges)
+    public function setEvents($events)
     {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
+        if (is_null($events)) {
+            throw new \InvalidArgumentException('non-nullable events cannot be null');
         }
-        $this->container['privileges'] = $privileges;
+        $this->container['events'] = $events;
+
+        return $this;
+    }
+
+    /**
+     * Gets notifications
+     *
+     * @return \Irisnet\APIV2\Client\Model\ApiNotice[]|null
+     */
+    public function getNotifications()
+    {
+        return $this->container['notifications'];
+    }
+
+    /**
+     * Sets notifications
+     *
+     * @param \Irisnet\APIV2\Client\Model\ApiNotice[]|null $notifications notifications
+     *
+     * @return self
+     */
+    public function setNotifications($notifications)
+    {
+        if (is_null($notifications)) {
+            throw new \InvalidArgumentException('non-nullable notifications cannot be null');
+        }
+        $this->container['notifications'] = $notifications;
 
         return $this;
     }

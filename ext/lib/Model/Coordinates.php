@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * Coordinates
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * Coordinates Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
+ * @description Describes the position and bounds of the classification object.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class Coordinates implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'Coordinates';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'rectangles' => '\Irisnet\APIV2\Client\Model\Rectangle[]'
     ];
 
     /**
@@ -74,11 +70,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'rectangles' => null
     ];
 
     /**
@@ -87,11 +79,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'rectangles' => false
     ];
 
     /**
@@ -180,11 +168,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'rectangles' => 'rectangles'
     ];
 
     /**
@@ -193,11 +177,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'rectangles' => 'setRectangles'
     ];
 
     /**
@@ -206,11 +186,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'rectangles' => 'getRectangles'
     ];
 
     /**
@@ -270,11 +246,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('rectangles', $data ?? [], null);
     }
 
     /**
@@ -320,136 +292,28 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
+     * Gets rectangles
      *
-     * @return int|null
+     * @return \Irisnet\APIV2\Client\Model\Rectangle[]|null
      */
-    public function getCreditsUsed()
+    public function getRectangles()
     {
-        return $this->container['credits_used'];
+        return $this->container['rectangles'];
     }
 
     /**
-     * Sets credits_used
+     * Sets rectangles
      *
-     * @param int|null $credits_used Credits used for the license key.
+     * @param \Irisnet\APIV2\Client\Model\Rectangle[]|null $rectangles rectangles
      *
      * @return self
      */
-    public function setCreditsUsed($credits_used)
+    public function setRectangles($rectangles)
     {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
+        if (is_null($rectangles)) {
+            throw new \InvalidArgumentException('non-nullable rectangles cannot be null');
         }
-        $this->container['credits_used'] = $credits_used;
-
-        return $this;
-    }
-
-    /**
-     * Gets credits_remaining
-     *
-     * @return int|null
-     */
-    public function getCreditsRemaining()
-    {
-        return $this->container['credits_remaining'];
-    }
-
-    /**
-     * Sets credits_remaining
-     *
-     * @param int|null $credits_remaining Credits remaining for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsRemaining($credits_remaining)
-    {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
-        }
-        $this->container['credits_remaining'] = $credits_remaining;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_credits
-     *
-     * @return int|null
-     */
-    public function getTotalCredits()
-    {
-        return $this->container['total_credits'];
-    }
-
-    /**
-     * Sets total_credits
-     *
-     * @param int|null $total_credits Total credits contained within the license key.
-     *
-     * @return self
-     */
-    public function setTotalCredits($total_credits)
-    {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
-        }
-        $this->container['total_credits'] = $total_credits;
-
-        return $this;
-    }
-
-    /**
-     * Gets license_key
-     *
-     * @return string|null
-     */
-    public function getLicenseKey()
-    {
-        return $this->container['license_key'];
-    }
-
-    /**
-     * Sets license_key
-     *
-     * @param string|null $license_key The license key
-     *
-     * @return self
-     */
-    public function setLicenseKey($license_key)
-    {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
-        }
-        $this->container['license_key'] = $license_key;
-
-        return $this;
-    }
-
-    /**
-     * Gets privileges
-     *
-     * @return array<string,string>|null
-     */
-    public function getPrivileges()
-    {
-        return $this->container['privileges'];
-    }
-
-    /**
-     * Sets privileges
-     *
-     * @param array<string,string>|null $privileges A map of privileges
-     *
-     * @return self
-     */
-    public function setPrivileges($privileges)
-    {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
-        }
-        $this->container['privileges'] = $privileges;
+        $this->container['rectangles'] = $rectangles;
 
         return $this;
     }

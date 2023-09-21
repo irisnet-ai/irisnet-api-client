@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * Encoded
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * Encoded Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
+ * @description Contains the resulting media as base64 encoded string or an URL to download that media.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class Encoded implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'Encoded';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'name' => 'string',
+        'data' => '\SplFileObject',
+        'download_url' => 'string'
     ];
 
     /**
@@ -74,11 +72,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'name' => null,
+        'data' => 'binary',
+        'download_url' => null
     ];
 
     /**
@@ -87,11 +83,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'name' => false,
+		'data' => false,
+		'download_url' => false
     ];
 
     /**
@@ -180,11 +174,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'name' => 'name',
+        'data' => 'data',
+        'download_url' => 'downloadUrl'
     ];
 
     /**
@@ -193,11 +185,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'name' => 'setName',
+        'data' => 'setData',
+        'download_url' => 'setDownloadUrl'
     ];
 
     /**
@@ -206,11 +196,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'name' => 'getName',
+        'data' => 'getData',
+        'download_url' => 'getDownloadUrl'
     ];
 
     /**
@@ -270,11 +258,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('data', $data ?? [], null);
+        $this->setIfExists('download_url', $data ?? [], null);
     }
 
     /**
@@ -320,136 +306,84 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
+     * Gets name
      *
-     * @return int|null
+     * @return string|null
+     * @deprecated
      */
-    public function getCreditsUsed()
+    public function getName()
     {
-        return $this->container['credits_used'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets credits_used
+     * Sets name
      *
-     * @param int|null $credits_used Credits used for the license key.
+     * @param string|null $name <s>The original filename of the image or video.</s> Contains a randomly generated filename. <b>This property will be removed in future releases.</b>
      *
      * @return self
+     * @deprecated
      */
-    public function setCreditsUsed($credits_used)
+    public function setName($name)
     {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
         }
-        $this->container['credits_used'] = $credits_used;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets credits_remaining
+     * Gets data
      *
-     * @return int|null
+     * @return \SplFileObject|null
      */
-    public function getCreditsRemaining()
+    public function getData()
     {
-        return $this->container['credits_remaining'];
+        return $this->container['data'];
     }
 
     /**
-     * Sets credits_remaining
+     * Sets data
      *
-     * @param int|null $credits_remaining Credits remaining for the license key.
+     * @param \SplFileObject|null $data The encoded image in base64 format.
      *
      * @return self
      */
-    public function setCreditsRemaining($credits_remaining)
+    public function setData($data)
     {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
+        if (is_null($data)) {
+            throw new \InvalidArgumentException('non-nullable data cannot be null');
         }
-        $this->container['credits_remaining'] = $credits_remaining;
+        $this->container['data'] = $data;
 
         return $this;
     }
 
     /**
-     * Gets total_credits
-     *
-     * @return int|null
-     */
-    public function getTotalCredits()
-    {
-        return $this->container['total_credits'];
-    }
-
-    /**
-     * Sets total_credits
-     *
-     * @param int|null $total_credits Total credits contained within the license key.
-     *
-     * @return self
-     */
-    public function setTotalCredits($total_credits)
-    {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
-        }
-        $this->container['total_credits'] = $total_credits;
-
-        return $this;
-    }
-
-    /**
-     * Gets license_key
+     * Gets download_url
      *
      * @return string|null
      */
-    public function getLicenseKey()
+    public function getDownloadUrl()
     {
-        return $this->container['license_key'];
+        return $this->container['download_url'];
     }
 
     /**
-     * Sets license_key
+     * Sets download_url
      *
-     * @param string|null $license_key The license key
+     * @param string|null $download_url A one time URL to download the resulting video. The URL is only valid for 24 hours.
      *
      * @return self
      */
-    public function setLicenseKey($license_key)
+    public function setDownloadUrl($download_url)
     {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+        if (is_null($download_url)) {
+            throw new \InvalidArgumentException('non-nullable download_url cannot be null');
         }
-        $this->container['license_key'] = $license_key;
-
-        return $this;
-    }
-
-    /**
-     * Gets privileges
-     *
-     * @return array<string,string>|null
-     */
-    public function getPrivileges()
-    {
-        return $this->container['privileges'];
-    }
-
-    /**
-     * Sets privileges
-     *
-     * @param array<string,string>|null $privileges A map of privileges
-     *
-     * @return self
-     */
-    public function setPrivileges($privileges)
-    {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
-        }
-        $this->container['privileges'] = $privileges;
+        $this->container['download_url'] = $download_url;
 
         return $this;
     }

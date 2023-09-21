@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * CheckResultDetectionsInner
  *
  * PHP version 7.4
  *
@@ -33,16 +33,15 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * CheckResultDetectionsInner Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class CheckResultDetectionsInner implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +50,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'CheckResult_detections_inner';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +58,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'classification' => 'string',
+        'group' => 'string',
+        'id' => 'int',
+        'probability' => 'int',
+        'coordinates' => '\Irisnet\APIV2\Client\Model\Coordinates',
+        'type' => 'string',
+        'attributes' => '\Irisnet\APIV2\Client\Model\HairAttribute[]',
+        'sub_detections' => '\Irisnet\APIV2\Client\Model\BaseDetection[]'
     ];
 
     /**
@@ -74,11 +76,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'classification' => null,
+        'group' => null,
+        'id' => 'int32',
+        'probability' => 'int32',
+        'coordinates' => null,
+        'type' => null,
+        'attributes' => null,
+        'sub_detections' => null
     ];
 
     /**
@@ -87,11 +92,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'classification' => false,
+		'group' => false,
+		'id' => false,
+		'probability' => false,
+		'coordinates' => false,
+		'type' => false,
+		'attributes' => false,
+		'sub_detections' => false
     ];
 
     /**
@@ -180,11 +188,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'classification' => 'classification',
+        'group' => 'group',
+        'id' => 'id',
+        'probability' => 'probability',
+        'coordinates' => 'coordinates',
+        'type' => 'type',
+        'attributes' => 'attributes',
+        'sub_detections' => 'subDetections'
     ];
 
     /**
@@ -193,11 +204,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'classification' => 'setClassification',
+        'group' => 'setGroup',
+        'id' => 'setId',
+        'probability' => 'setProbability',
+        'coordinates' => 'setCoordinates',
+        'type' => 'setType',
+        'attributes' => 'setAttributes',
+        'sub_detections' => 'setSubDetections'
     ];
 
     /**
@@ -206,11 +220,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'classification' => 'getClassification',
+        'group' => 'getGroup',
+        'id' => 'getId',
+        'probability' => 'getProbability',
+        'coordinates' => 'getCoordinates',
+        'type' => 'getType',
+        'attributes' => 'getAttributes',
+        'sub_detections' => 'getSubDetections'
     ];
 
     /**
@@ -270,11 +287,14 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('classification', $data ?? [], null);
+        $this->setIfExists('group', $data ?? [], null);
+        $this->setIfExists('id', $data ?? [], null);
+        $this->setIfExists('probability', $data ?? [], null);
+        $this->setIfExists('coordinates', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('attributes', $data ?? [], null);
+        $this->setIfExists('sub_detections', $data ?? [], null);
     }
 
     /**
@@ -320,136 +340,217 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
-     *
-     * @return int|null
-     */
-    public function getCreditsUsed()
-    {
-        return $this->container['credits_used'];
-    }
-
-    /**
-     * Sets credits_used
-     *
-     * @param int|null $credits_used Credits used for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsUsed($credits_used)
-    {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
-        }
-        $this->container['credits_used'] = $credits_used;
-
-        return $this;
-    }
-
-    /**
-     * Gets credits_remaining
-     *
-     * @return int|null
-     */
-    public function getCreditsRemaining()
-    {
-        return $this->container['credits_remaining'];
-    }
-
-    /**
-     * Sets credits_remaining
-     *
-     * @param int|null $credits_remaining Credits remaining for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsRemaining($credits_remaining)
-    {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
-        }
-        $this->container['credits_remaining'] = $credits_remaining;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_credits
-     *
-     * @return int|null
-     */
-    public function getTotalCredits()
-    {
-        return $this->container['total_credits'];
-    }
-
-    /**
-     * Sets total_credits
-     *
-     * @param int|null $total_credits Total credits contained within the license key.
-     *
-     * @return self
-     */
-    public function setTotalCredits($total_credits)
-    {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
-        }
-        $this->container['total_credits'] = $total_credits;
-
-        return $this;
-    }
-
-    /**
-     * Gets license_key
+     * Gets classification
      *
      * @return string|null
      */
-    public function getLicenseKey()
+    public function getClassification()
     {
-        return $this->container['license_key'];
+        return $this->container['classification'];
     }
 
     /**
-     * Sets license_key
+     * Sets classification
      *
-     * @param string|null $license_key The license key
+     * @param string|null $classification The classification of the recognized object.
      *
      * @return self
      */
-    public function setLicenseKey($license_key)
+    public function setClassification($classification)
     {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+        if (is_null($classification)) {
+            throw new \InvalidArgumentException('non-nullable classification cannot be null');
         }
-        $this->container['license_key'] = $license_key;
+        $this->container['classification'] = $classification;
 
         return $this;
     }
 
     /**
-     * Gets privileges
+     * Gets group
      *
-     * @return array<string,string>|null
+     * @return string|null
      */
-    public function getPrivileges()
+    public function getGroup()
     {
-        return $this->container['privileges'];
+        return $this->container['group'];
     }
 
     /**
-     * Sets privileges
+     * Sets group
      *
-     * @param array<string,string>|null $privileges A map of privileges
+     * @param string|null $group The group of the classification.
      *
      * @return self
      */
-    public function setPrivileges($privileges)
+    public function setGroup($group)
     {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
+        if (is_null($group)) {
+            throw new \InvalidArgumentException('non-nullable group cannot be null');
         }
-        $this->container['privileges'] = $privileges;
+        $this->container['group'] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return int|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param int|null $id The id of the detection object.
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        if (is_null($id)) {
+            throw new \InvalidArgumentException('non-nullable id cannot be null');
+        }
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets probability
+     *
+     * @return int|null
+     */
+    public function getProbability()
+    {
+        return $this->container['probability'];
+    }
+
+    /**
+     * Sets probability
+     *
+     * @param int|null $probability The probability that the object found matches the classification.
+     *
+     * @return self
+     */
+    public function setProbability($probability)
+    {
+        if (is_null($probability)) {
+            throw new \InvalidArgumentException('non-nullable probability cannot be null');
+        }
+        $this->container['probability'] = $probability;
+
+        return $this;
+    }
+
+    /**
+     * Gets coordinates
+     *
+     * @return \Irisnet\APIV2\Client\Model\Coordinates|null
+     */
+    public function getCoordinates()
+    {
+        return $this->container['coordinates'];
+    }
+
+    /**
+     * Sets coordinates
+     *
+     * @param \Irisnet\APIV2\Client\Model\Coordinates|null $coordinates coordinates
+     *
+     * @return self
+     */
+    public function setCoordinates($coordinates)
+    {
+        if (is_null($coordinates)) {
+            throw new \InvalidArgumentException('non-nullable coordinates cannot be null');
+        }
+        $this->container['coordinates'] = $coordinates;
+
+        return $this;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return string|null
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string|null $type Used as a type discriminator for json to object conversion.
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets attributes
+     *
+     * @return \Irisnet\APIV2\Client\Model\HairAttribute[]|null
+     */
+    public function getAttributes()
+    {
+        return $this->container['attributes'];
+    }
+
+    /**
+     * Sets attributes
+     *
+     * @param \Irisnet\APIV2\Client\Model\HairAttribute[]|null $attributes Contains attributes for the _hair_ classification.
+     *
+     * @return self
+     */
+    public function setAttributes($attributes)
+    {
+        if (is_null($attributes)) {
+            throw new \InvalidArgumentException('non-nullable attributes cannot be null');
+        }
+        $this->container['attributes'] = $attributes;
+
+        return $this;
+    }
+
+    /**
+     * Gets sub_detections
+     *
+     * @return \Irisnet\APIV2\Client\Model\BaseDetection[]|null
+     */
+    public function getSubDetections()
+    {
+        return $this->container['sub_detections'];
+    }
+
+    /**
+     * Sets sub_detections
+     *
+     * @param \Irisnet\APIV2\Client\Model\BaseDetection[]|null $sub_detections A set of sub-detection that are particular to the _face_ detection. Mainly contains detections that were activated with the _attributesCheck_ prototype.
+     *
+     * @return self
+     */
+    public function setSubDetections($sub_detections)
+    {
+        if (is_null($sub_detections)) {
+            throw new \InvalidArgumentException('non-nullable sub_detections cannot be null');
+        }
+        $this->container['sub_detections'] = $sub_detections;
 
         return $this;
     }

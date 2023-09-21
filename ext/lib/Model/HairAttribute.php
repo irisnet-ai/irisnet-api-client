@@ -1,6 +1,6 @@
 <?php
 /**
- * LicenseInfo
+ * HairAttribute
  *
  * PHP version 7.4
  *
@@ -33,16 +33,16 @@ use \ArrayAccess;
 use \Irisnet\APIV2\Client\ObjectSerializer;
 
 /**
- * LicenseInfo Class Doc Comment
+ * HairAttribute Class Doc Comment
  *
  * @category Class
- * @description Describes the current balance of the given license key. A key has a certain amount of credits that can be used for any kind of AI recognition. The license key is invalid, when all of the credits have been used, the license was disabled or expired.
+ * @description Attributes qualifying the _hair_ classification.
  * @package  Irisnet\APIV2\Client
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
+class HairAttribute implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LicenseInfo';
+    protected static $openAPIModelName = 'HairAttribute';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,11 +59,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credits_used' => 'int',
-        'credits_remaining' => 'int',
-        'total_credits' => 'int',
-        'license_key' => 'string',
-        'privileges' => 'array<string,string>'
+        'type' => 'string',
+        'color' => 'string',
+        'style' => 'string'
     ];
 
     /**
@@ -74,11 +72,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credits_used' => 'int32',
-        'credits_remaining' => 'int32',
-        'total_credits' => 'int32',
-        'license_key' => null,
-        'privileges' => null
+        'type' => null,
+        'color' => null,
+        'style' => null
     ];
 
     /**
@@ -87,11 +83,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var boolean[]
       */
     protected static array $openAPINullables = [
-        'credits_used' => false,
-		'credits_remaining' => false,
-		'total_credits' => false,
-		'license_key' => false,
-		'privileges' => false
+        'type' => false,
+		'color' => false,
+		'style' => false
     ];
 
     /**
@@ -180,11 +174,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'credits_used' => 'creditsUsed',
-        'credits_remaining' => 'creditsRemaining',
-        'total_credits' => 'totalCredits',
-        'license_key' => 'licenseKey',
-        'privileges' => 'privileges'
+        'type' => 'type',
+        'color' => 'color',
+        'style' => 'style'
     ];
 
     /**
@@ -193,11 +185,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'credits_used' => 'setCreditsUsed',
-        'credits_remaining' => 'setCreditsRemaining',
-        'total_credits' => 'setTotalCredits',
-        'license_key' => 'setLicenseKey',
-        'privileges' => 'setPrivileges'
+        'type' => 'setType',
+        'color' => 'setColor',
+        'style' => 'setStyle'
     ];
 
     /**
@@ -206,11 +196,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'credits_used' => 'getCreditsUsed',
-        'credits_remaining' => 'getCreditsRemaining',
-        'total_credits' => 'getTotalCredits',
-        'license_key' => 'getLicenseKey',
-        'privileges' => 'getPrivileges'
+        'type' => 'getType',
+        'color' => 'getColor',
+        'style' => 'getStyle'
     ];
 
     /**
@@ -254,6 +242,44 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
         return self::$openAPIModelName;
     }
 
+    public const COLOR_BLACK = 'black';
+    public const COLOR_BROWN = 'brown';
+    public const COLOR_BLONDE = 'blonde';
+    public const COLOR_GREY = 'grey';
+    public const COLOR_RED = 'red';
+    public const COLOR_OTHER = 'other';
+    public const STYLE_LONG_HAIRED = 'longHaired';
+    public const STYLE_SHORT_HAIRED = 'shortHaired';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getColorAllowableValues()
+    {
+        return [
+            self::COLOR_BLACK,
+            self::COLOR_BROWN,
+            self::COLOR_BLONDE,
+            self::COLOR_GREY,
+            self::COLOR_RED,
+            self::COLOR_OTHER,
+        ];
+    }
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getStyleAllowableValues()
+    {
+        return [
+            self::STYLE_LONG_HAIRED,
+            self::STYLE_SHORT_HAIRED,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -270,11 +296,9 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->setIfExists('credits_used', $data ?? [], null);
-        $this->setIfExists('credits_remaining', $data ?? [], null);
-        $this->setIfExists('total_credits', $data ?? [], null);
-        $this->setIfExists('license_key', $data ?? [], null);
-        $this->setIfExists('privileges', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('color', $data ?? [], null);
+        $this->setIfExists('style', $data ?? [], null);
     }
 
     /**
@@ -304,6 +328,24 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        $allowedValues = $this->getColorAllowableValues();
+        if (!is_null($this->container['color']) && !in_array($this->container['color'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'color', must be one of '%s'",
+                $this->container['color'],
+                implode("', '", $allowedValues)
+            );
+        }
+
+        $allowedValues = $this->getStyleAllowableValues();
+        if (!is_null($this->container['style']) && !in_array($this->container['style'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'style', must be one of '%s'",
+                $this->container['style'],
+                implode("', '", $allowedValues)
+            );
+        }
+
         return $invalidProperties;
     }
 
@@ -320,136 +362,102 @@ class LicenseInfo implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets credits_used
-     *
-     * @return int|null
-     */
-    public function getCreditsUsed()
-    {
-        return $this->container['credits_used'];
-    }
-
-    /**
-     * Sets credits_used
-     *
-     * @param int|null $credits_used Credits used for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsUsed($credits_used)
-    {
-        if (is_null($credits_used)) {
-            throw new \InvalidArgumentException('non-nullable credits_used cannot be null');
-        }
-        $this->container['credits_used'] = $credits_used;
-
-        return $this;
-    }
-
-    /**
-     * Gets credits_remaining
-     *
-     * @return int|null
-     */
-    public function getCreditsRemaining()
-    {
-        return $this->container['credits_remaining'];
-    }
-
-    /**
-     * Sets credits_remaining
-     *
-     * @param int|null $credits_remaining Credits remaining for the license key.
-     *
-     * @return self
-     */
-    public function setCreditsRemaining($credits_remaining)
-    {
-        if (is_null($credits_remaining)) {
-            throw new \InvalidArgumentException('non-nullable credits_remaining cannot be null');
-        }
-        $this->container['credits_remaining'] = $credits_remaining;
-
-        return $this;
-    }
-
-    /**
-     * Gets total_credits
-     *
-     * @return int|null
-     */
-    public function getTotalCredits()
-    {
-        return $this->container['total_credits'];
-    }
-
-    /**
-     * Sets total_credits
-     *
-     * @param int|null $total_credits Total credits contained within the license key.
-     *
-     * @return self
-     */
-    public function setTotalCredits($total_credits)
-    {
-        if (is_null($total_credits)) {
-            throw new \InvalidArgumentException('non-nullable total_credits cannot be null');
-        }
-        $this->container['total_credits'] = $total_credits;
-
-        return $this;
-    }
-
-    /**
-     * Gets license_key
+     * Gets type
      *
      * @return string|null
      */
-    public function getLicenseKey()
+    public function getType()
     {
-        return $this->container['license_key'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets license_key
+     * Sets type
      *
-     * @param string|null $license_key The license key
+     * @param string|null $type Used as a type discriminator for json to object conversion.
      *
      * @return self
      */
-    public function setLicenseKey($license_key)
+    public function setType($type)
     {
-        if (is_null($license_key)) {
-            throw new \InvalidArgumentException('non-nullable license_key cannot be null');
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
         }
-        $this->container['license_key'] = $license_key;
+        $this->container['type'] = $type;
 
         return $this;
     }
 
     /**
-     * Gets privileges
+     * Gets color
      *
-     * @return array<string,string>|null
+     * @return string|null
      */
-    public function getPrivileges()
+    public function getColor()
     {
-        return $this->container['privileges'];
+        return $this->container['color'];
     }
 
     /**
-     * Sets privileges
+     * Sets color
      *
-     * @param array<string,string>|null $privileges A map of privileges
+     * @param string|null $color The color of the hair.
      *
      * @return self
      */
-    public function setPrivileges($privileges)
+    public function setColor($color)
     {
-        if (is_null($privileges)) {
-            throw new \InvalidArgumentException('non-nullable privileges cannot be null');
+        if (is_null($color)) {
+            throw new \InvalidArgumentException('non-nullable color cannot be null');
         }
-        $this->container['privileges'] = $privileges;
+        $allowedValues = $this->getColorAllowableValues();
+        if (!in_array($color, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'color', must be one of '%s'",
+                    $color,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['color'] = $color;
+
+        return $this;
+    }
+
+    /**
+     * Gets style
+     *
+     * @return string|null
+     */
+    public function getStyle()
+    {
+        return $this->container['style'];
+    }
+
+    /**
+     * Sets style
+     *
+     * @param string|null $style The hair style.
+     *
+     * @return self
+     */
+    public function setStyle($style)
+    {
+        if (is_null($style)) {
+            throw new \InvalidArgumentException('non-nullable style cannot be null');
+        }
+        $allowedValues = $this->getStyleAllowableValues();
+        if (!in_array($style, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'style', must be one of '%s'",
+                    $style,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['style'] = $style;
 
         return $this;
     }
