@@ -127,7 +127,7 @@ class ConfigurationManagementApi
     /**
      * @return Configuration
      */
-    public function getConfig()
+    public function getConfigModel()
     {
         return $this->config;
     }

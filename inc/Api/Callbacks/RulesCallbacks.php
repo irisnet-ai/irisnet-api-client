@@ -5,13 +5,12 @@
 namespace Inc\Api\Callbacks;
 
 use \Exception;
-use \GuzzleHttp\Client;
-use \IrisnetAPIConnector;
+use Inc\IrisnetAPIConnector;
 use Inc\Helper\RulesHelper;
-use \GuzzleHttp\Cookie\CookieJar;
-use \Irisnet\APIV1\Client\ApiException;
-use \Irisnet\APIV1\Client\Api\EndpointsToSetupTheAIApi;
-use \Irisnet\APIV1\Client\Api\MiscellaneousOperationsApi;
+use \Irisnet\APIV2\Client\Model\Param;
+use \Irisnet\APIV2\Client\ApiException;
+use \Irisnet\APIV2\Client\Model\Config;
+use \Irisnet\APIV2\Client\Model\ParamSet;
 
 class RulesCallbacks
 {
@@ -23,6 +22,23 @@ class RulesCallbacks
 
     public function rulesSanitize($input)
     {
+        // retrieve the options from the database
+        $output = get_option('irisnet_plugin_rules');
+        
+        // User requested removal of rule set
+        if (isset($_POST["remove"])) {
+            $delete = $output[sanitize_text_field($_POST["remove"])];
+
+            // delete old config through API
+            self::deleteConfig($delete, function($delete) use (&$output) {
+                // unset entry
+                unset($output[$delete['rule_name']]);
+            });            
+
+            return $output;
+        }
+
+
         // Remove empty values
         $input = array_filter($input, 'strlen');
 
@@ -58,74 +74,39 @@ class RulesCallbacks
                 unset($input[$name]);
         }
 
-        // retrieve the options from the database
-        $output = get_option('irisnet_plugin_rules');
+        // do not allow saving if there are no rules activated
+        $inputCopy = $input;
+        unset($inputCopy['rule_name']);
+        unset($inputCopy['description']);
+        $inputCopy = array_filter($inputCopy, function($key) {
+            return strpos($key, 'default_') !== 0;
+        }, ARRAY_FILTER_USE_KEY);
 
-        // User requested removal of rule set
-        if (isset($_POST["remove"])) {
-            unset($output[sanitize_text_field($_POST["remove"])]);
-
+        if (count($inputCopy) === 0) {
+            add_settings_error('irisnet_plugin_rules', 3000, "No rules set. Please turn on at least one classification group.");
             return $output;
-        } else {
-            // do not allow saving if there are no rules activated
-            $inputCopy = $input;
-            unset($inputCopy['rule_name']);
-            unset($inputCopy['description']);
-            $inputCopy = array_filter($inputCopy, function($key) {
-                return strpos($key, 'default_') !== 0;
-            }, ARRAY_FILTER_USE_KEY);
-    
-            if (count($inputCopy) === 0) {
-                add_settings_error('irisnet_plugin_rules', 3000, "No rules set. Please turn on at least one classification group.");
-                return $output;
-            }
         }
-        
-        // Determine the cost of the rule set
+
+        // create new config through API and save it to $newRule
+        $newRule['rule_name'] = $input['rule_name'];
+        $newRule['description'] = $input['description'];
         try {
-            // create cookie jar to remain in the same session for both calls
-            $cookieJar = new CookieJar();
-
-            $params = IrisnetAPIConnector::createParameterModel($input);
-
-            // set the parameters 
-            $apiInstance = new EndpointsToSetupTheAIApi(
-                new Client([
-                    'cookies' => $cookieJar
-                ])
-            );
-            $apiInstance->setINParams($params);
-
-            // check cost of rule set
-            $apiInstance = new MiscellaneousOperationsApi(
-                new Client([
-                    'cookies' => $cookieJar
-                ])
-            );
-            $input['cost'] = $apiInstance->getAICost();
-
-            $cookieJar->clear();
+            $newRule = array_merge($newRule, IrisnetAPIConnector::setConfig($input));
+            $newRule['cost'] = IrisnetAPIConnector::getCost($newRule['id'], $newRule['license']);
         } catch (ApiException $e) {
             add_settings_error('irisnet_plugin_rules', $e->getCode(), $e->getMessage());
+            return $output;
         } catch (Exception $e) {
             add_settings_error('irisnet_plugin_rules', 500, $e->getMessage());
-        }
-
-        // first entry
-        if (count($output) == 0) {
-            $output[$input['rule_name']] = $input;
-
             return $output;
         }
 
-        // overwrite entry if exists otherwise add new
-        foreach ($output as $key => $value) {
-            if ($input['rule_name'] === $key) {
-                $output[$key] = $input;
-            } else {
-                $output[$input['rule_name']] = $input;
-            }
+        // delete old config through API if it exists
+        if ( array_key_exists($newRule['rule_name'], $output) ) {
+            self::deleteConfig($output[$newRule['rule_name']], null);
         }
+        
+        $output[$newRule['rule_name']] = $newRule;
         
         return $output;
     }
@@ -147,7 +128,7 @@ class RulesCallbacks
         $readonly = '';
         if (isset($_POST["edit_rule"])) {
             $option = get_option($option_name)[sanitize_text_field($_POST["edit_rule"])];
-            $value = isset($option[$name]) ? $option[$name] : '';
+            $value = self::getValueFromOption($args['rule'], $name)?: '';
             if (isset($args['value']) && $value === '')
                 $value = $args['value'];
 
@@ -179,7 +160,7 @@ class RulesCallbacks
         $saved = '';
         if (isset($_POST["edit_rule"])) {
             $option = get_option($option_name)[sanitize_text_field($_POST["edit_rule"])];
-            $saved = isset($option[$name]) ? $option[$name] : '';
+            $saved = self::getValueFromOption($args['rule'], $name)?: '';
         }
 
         echo '<div class="input-option">';
@@ -251,33 +232,51 @@ class RulesCallbacks
         $hidden = true;
         if (isset($_POST["edit_rule"])) {
             $option = get_option($args['option_name'])[sanitize_text_field($_POST["edit_rule"])];
-            $keys = array_keys($option);
 
-            $groups = RulesHelper::getClassObjectGroups(true);
+            /** @var string[]|null $prototypes */
+            $prototypes = $args['rule']['prototypes']->getPrototypes();
 
-            if (array_key_exists($name, $groups)) {
-                $classes = array_keys($groups[$name]);
+            echo '<pre>';
+            // var_dump($args['rule']);
+            // var_dump($prototypes);
+            var_dump($name);
+            echo '</pre>';
 
-                foreach ($keys as $key) {
-                    foreach ($classes as $class) {
-                        if (strpos($key, $class) === 0) {
-                            $hidden = false;
-                            break;
-                        }
-                    }
-                }
+            // change prototype 'nudityCheck' to 'baseParameters' 
+            $prototypes = array_map(function($v) {
+                return $v === 'nudityCheck' ? 'baseParameters' : $v;
+            }, $prototypes);
 
-                if ($hidden && array_key_exists($name . '_switch', $option))
-                    $hidden = false;
+            $hidden = ! in_array($name, $prototypes);
 
-            } else {
-                foreach ($keys as $key) {
-                    if (strpos($key, $name) === 0) {
-                        $hidden = false;
-                        break;
-                    }
-                }
-            }
+
+            // $keys = array_keys($option);
+
+            // $groups = RulesHelper::getClassObjectGroups(true);
+
+            // if (array_key_exists($name, $groups)) {
+            //     $classes = array_keys($groups[$name]);
+
+            //     foreach ($keys as $key) {
+            //         foreach ($classes as $class) {
+            //             if (strpos($key, $class) === 0) {
+            //                 $hidden = false;
+            //                 break;
+            //             }
+            //         }
+            //     }
+
+            //     if ($hidden && array_key_exists($name . '_switch', $option))
+            //         $hidden = false;
+
+            // } else {
+            //     foreach ($keys as $key) {
+            //         if (strpos($key, $name) === 0) {
+            //             $hidden = false;
+            //             break;
+            //         }
+            //     }
+            // }
         }
 
         if (isset($args['switch'])) {
@@ -326,18 +325,32 @@ class RulesCallbacks
             }
 
             if (isset($_POST["edit_rule"])) {
-                $option = get_option($args['option_name'])[sanitize_text_field($_POST["edit_rule"])];
-                $keys = array_keys($option);
-    
-                $groups = RulesHelper::getSimplifiedClassObjectArray();
-                $parentName = RulesHelper::findClassParent($name);
+                /** @var string[] $paramNames */
+                $paramNames = array_map(function($p) {
+                    return $p->getClassification();
+                }, $args['rule']['paramSet']->getParams());
+                
+            
+                echo '<pre>';
+                // var_dump($args['rule']);
+                var_dump($paramNames);
+                var_dump($name);
+                echo '</pre>';
 
-                foreach ($keys as $key) {
-                    if (strpos($key, $name) === 0) {
-                        $checked = true;
-                        break;
-                    }
-                }
+                $checked = in_array($name, $paramNames);
+
+                // $option = get_option($args['option_name'])[sanitize_text_field($_POST["edit_rule"])];
+                // $keys = array_keys($option);
+    
+                // $groups = RulesHelper::getSimplifiedClassObjectArray();
+                // $parentName = RulesHelper::findClassParent($name);
+
+                // foreach ($keys as $key) {
+                //     if (strpos($key, $name) === 0) {
+                //         $checked = true;
+                //         break;
+                //     }
+                // }
             }
 
             $switch = $args['switch'];
@@ -365,6 +378,47 @@ class RulesCallbacks
             }
 
             echo '</fieldset>';
+        }
+    }
+
+    private static function getValueFromOption(array $rule, string $name) {
+        $value = null;
+        
+        if ( isset($rule['option'][$name]) )
+            return $rule['option'][$name];
+
+        /** @var ParamSet $params */
+        $params = $rule['paramSet'];
+        
+        list($class, $param) = explode('_', $name, 2);
+        $method = 'get' . str_replace('_', '', ucwords($param, '_'));
+        if ($class === 'default') {
+            $value = $params->{$method}();
+        } else {
+            foreach ($params->getParams() as $p) {
+                if ($p->getClassification() !== $class)
+                    continue;
+                $value = $p->{$method}();
+                break;
+            }
+        }
+
+        return $value;	
+    }
+
+    private function deleteConfig($rule, $func) : bool {
+        try {
+            if ( IrisnetAPIConnector::deleteConfig($rule['id'], $rule['license']) ) {
+                if ($func != null)
+                    $func($rule);
+                return true;
+            }
+        } catch (ApiException $e) {
+            add_settings_error('irisnet_plugin_rules', $e->getCode(), $e->getMessage());
+            return false;
+        } catch (Exception $e) {
+            add_settings_error('irisnet_plugin_rules', 500, $e->getMessage());
+            return false;
         }
     }
 }

@@ -7,6 +7,7 @@ namespace Inc\Base;
 use Inc\Api\SettingsApi;
 use Inc\Helper\RulesHelper;
 use Inc\Base\BaseController;
+use Inc\IrisnetAPIConnector;
 use Inc\Api\Callbacks\RulesCallbacks;
 use Inc\Api\Callbacks\AdminCallbacks;
 
@@ -17,6 +18,8 @@ class RulesController extends BaseController
     private $callbacks;
     private $rules_callbacks;
 
+    private $option;
+
     private $subPages = array();
 
     public function register()
@@ -24,6 +27,12 @@ class RulesController extends BaseController
         $this->settings = new SettingsApi();
         $this->callbacks = new AdminCallbacks();
         $this->rules_callbacks = new RulesCallbacks();
+
+        if ( isset($_POST["edit_rule"]) ) {
+            $ruleOption = get_option('irisnet_plugin_rules')[sanitize_text_field($_POST["edit_rule"])];
+            $this->option = IrisnetAPIConnector::getConfig($ruleOption['id'], $ruleOption['license']);
+            $this->option['option'] = $ruleOption;
+        }
 
         $this->setSubPages();
         
@@ -82,6 +91,7 @@ class RulesController extends BaseController
             'callback' => array( $this->rules_callbacks, 'fieldsetSwitch' ),
             'args' => array(
                 'option_name' => 'irisnet_plugin_rules',
+                'rule' => $this->option,
                 'class' => 'ui-toggle',
                 'label_for' => 'switch'
             )
@@ -91,6 +101,7 @@ class RulesController extends BaseController
             'callback' => array( $this->rules_callbacks, 'fieldsetSwitch' ),
             'args' => array(
                 'option_name' => 'irisnet_plugin_rules',
+                'rule' => $this->option,
                 'class' => 'ui-toggle inline',
                 'label_for' => 'param_switch'
             )
@@ -100,6 +111,7 @@ class RulesController extends BaseController
             'callback' => array( $this->rules_callbacks, 'fieldsetSwitch' ),
             'args' => array(
                 'option_name' => 'irisnet_plugin_rules',
+                'rule' => $this->option,
                 'class' => 'ui-toggle inline hidden',
                 'label_for' => 'param_switch'
             )
@@ -111,6 +123,7 @@ class RulesController extends BaseController
                 'callback' => array( $this->rules_callbacks, 'textField' ),
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
+                    'rule' => $this->option,
                     'type' => 'number',
                     'step' => '.01',
                     'min' => '0',
@@ -127,6 +140,7 @@ class RulesController extends BaseController
                 'callback' => array( $this->rules_callbacks, 'textField' ),
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
+                    'rule' => $this->option,
                     'type' => 'number',
                     'min' => '0',
                     'max' => '255',
@@ -158,6 +172,7 @@ class RulesController extends BaseController
                             'callback' => array( $this->rules_callbacks, 'textField' ),
                             'args' => array(
                                 'option_name' => 'irisnet_plugin_rules',
+                                'rule' => $this->option,
                                 'type' => 'number',
                                 'min' => '0',
                                 'placeholder' => 'e.g. 0',
@@ -171,6 +186,7 @@ class RulesController extends BaseController
                             'callback' => array( $this->rules_callbacks, 'textField' ),
                             'args' => array(
                                 'option_name' => 'irisnet_plugin_rules',
+                                'rule' => $this->option,
                                 'type' => 'number',
                                 'min' => '-1',
                                 'placeholder' => 'e.g. 5',
@@ -186,6 +202,7 @@ class RulesController extends BaseController
                     'callback' => array( $this->rules_callbacks, 'selectField' ),
                     'args' => array(
                         'option_name' => 'irisnet_plugin_rules',
+                        'rule' => $this->option,
                         'select_options' => RulesHelper::getDrawModeVars(),
                         'array' => 'rule_name',
                         'description' => 'Define how the image will be censored.',
@@ -203,6 +220,7 @@ class RulesController extends BaseController
 
                 $infoTextArgs = array(
                     'option_name' => 'irisnet_plugin_rules',
+                    'rule' => $this->option,
                     'title' => ucfirst($className). ' Parameters',
                     'label_for' => $className,
                     'description' => $description,
@@ -233,6 +251,7 @@ class RulesController extends BaseController
                 'section' => 'irisnet_rules_index',
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
+                    'rule' => $this->option,
                     'label_for' => $groupId,
                     'switch' => $switch,
                     'fields' => $classFields,
@@ -251,6 +270,7 @@ class RulesController extends BaseController
                 'section' => 'irisnet_rules_index',
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
+                    'rule' => $this->option,
                     'label_for' => 'rule_name',
                     'required' => true,
                     'placeholder' => 'e.g. profile_picture',
@@ -266,6 +286,7 @@ class RulesController extends BaseController
                 'section' => 'irisnet_rules_index',
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
+                    'rule' => $this->option,
                     'label_for' => 'description',
                     'required' => true,
                     'placeholder' => 'e.g. Allow one person to appear in the picture.',
@@ -281,6 +302,7 @@ class RulesController extends BaseController
                 'section' => 'irisnet_rules_index',
                 'args' => array(
                     'option_name' => 'irisnet_plugin_rules',
+                    'rule' => $this->option,
                     'label_for' => 'default',
                     'description' => 'Define base settings that are valid for all of the following parameters. ' .
                         'Single parameter settings can be still overwritten within each object if needed. ' .

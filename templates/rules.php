@@ -19,6 +19,7 @@
 					<tr>
 						<th>Name</th>
 						<th>Description</th>
+						<th>License Key</th>
 						<th class="text-center">Cost</th>
 						<th class="text-center">Actions</th>
 						
@@ -27,12 +28,16 @@
 					<?php 
 						foreach ($options as $name => $option) {
 							$name = esc_attr($name);
+							$id = $option['id'];
+							$license = $option['license'];
+							$license = substr($license, 0, 10) . '...' . substr($license, -10);
 							$description = isset($option['description']) ? esc_attr($option['description']) : '';
 							$cost = isset($option['cost']) ? $option['cost'] : 'N/A';
 
 							echo "<tr>";
-								echo "<td>{$name}</td>";
+								echo "<td><b>{$name}</b><br><small><em>ID: {$id}</em></small></td>";
 								echo "<td>{$description}</td>";
+								echo "<td>{$license}</td>";
 								echo "<td class=\"text-center\">{$cost}</td>";
 								echo "<td class=\"text-center\">";
 
