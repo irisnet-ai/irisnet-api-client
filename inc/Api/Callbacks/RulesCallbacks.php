@@ -185,14 +185,13 @@ class RulesCallbacks
 
     public function infoText($args)
     {
-        $name = $args['label_for'];
-
         if (isset($args['title']))
             echo '<h4>' . $args['title'] . '</h4>';
         echo '<p class="help-text">' . $args['description'] . '</p>';
 
         if (isset($args['fields'])) 
         {
+            $name = $args['label_for'];
             $fields = $args['fields'];
             foreach ($fields as $field) {    
                 $field['id'] = $name . '_' . $field['id'];
@@ -231,52 +230,25 @@ class RulesCallbacks
 
         $hidden = true;
         if (isset($_POST["edit_rule"])) {
-            $option = get_option($args['option_name'])[sanitize_text_field($_POST["edit_rule"])];
+            if ($name === 'default') {
+                $paramSet = $args['rule']['paramSet'];
 
-            /** @var string[]|null $prototypes */
-            $prototypes = $args['rule']['prototypes']->getPrototypes();
-
-            echo '<pre>';
-            // var_dump($args['rule']);
-            // var_dump($prototypes);
-            var_dump($name);
-            echo '</pre>';
-
-            // change prototype 'nudityCheck' to 'baseParameters' 
-            $prototypes = array_map(function($v) {
-                return $v === 'nudityCheck' ? 'baseParameters' : $v;
-            }, $prototypes);
-
-            $hidden = ! in_array($name, $prototypes);
-
-
-            // $keys = array_keys($option);
-
-            // $groups = RulesHelper::getClassObjectGroups(true);
-
-            // if (array_key_exists($name, $groups)) {
-            //     $classes = array_keys($groups[$name]);
-
-            //     foreach ($keys as $key) {
-            //         foreach ($classes as $class) {
-            //             if (strpos($key, $class) === 0) {
-            //                 $hidden = false;
-            //                 break;
-            //             }
-            //         }
-            //     }
-
-            //     if ($hidden && array_key_exists($name . '_switch', $option))
-            //         $hidden = false;
-
-            // } else {
-            //     foreach ($keys as $key) {
-            //         if (strpos($key, $name) === 0) {
-            //             $hidden = false;
-            //             break;
-            //         }
-            //     }
-            // }
+                array_walk($fields, function($v, $k) use (&$hidden, $paramSet) {
+                    $method = 'get' . ucfirst($v['id']);
+                    if ($paramSet->{$method}() != $v['args']['default'])
+                        $hidden = false;
+                });
+            } else {
+                /** @var string[]|null $prototypes */
+                $prototypes = $args['rule']['prototypes']->getPrototypes();
+    
+                // change prototype 'nudityCheck' to 'baseParameters' 
+                $prototypes = array_map(function($v) {
+                    return $v === 'nudityCheck' ? 'baseParameters' : $v;
+                }, $prototypes);
+    
+                $hidden = ! in_array($name, $prototypes);
+            }
         }
 
         if (isset($args['switch'])) {
@@ -329,28 +301,9 @@ class RulesCallbacks
                 $paramNames = array_map(function($p) {
                     return $p->getClassification();
                 }, $args['rule']['paramSet']->getParams());
-                
-            
-                echo '<pre>';
-                // var_dump($args['rule']);
-                var_dump($paramNames);
-                var_dump($name);
-                echo '</pre>';
 
-                $checked = in_array($name, $paramNames);
-
-                // $option = get_option($args['option_name'])[sanitize_text_field($_POST["edit_rule"])];
-                // $keys = array_keys($option);
-    
-                // $groups = RulesHelper::getSimplifiedClassObjectArray();
-                // $parentName = RulesHelper::findClassParent($name);
-
-                // foreach ($keys as $key) {
-                //     if (strpos($key, $name) === 0) {
-                //         $checked = true;
-                //         break;
-                //     }
-                // }
+                if ($checked === false)
+                    $checked = in_array($name, $paramNames);
             }
 
             $switch = $args['switch'];
