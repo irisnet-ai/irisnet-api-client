@@ -415,6 +415,7 @@ class IrisnetAPIConnector
         $parameters = array_diff($parameters, $prototypes);
 
         // change prototype 'baseParameters' to 'nudityCheck'
+        // keep for downward compatibility
         $prototypes = array_map(function($v) {
             return $v === 'baseParameters' ? 'nudityCheck' : $v;
         }, $prototypes);
@@ -441,14 +442,16 @@ class IrisnetAPIConnector
             return substr($v, 0, strpos($v, '_'));
         }, array_keys($rule)));
 
-        // remove prototype values from parameters
+        // filter prototypes used
         $prototypes = array_unique(array_map(function($v) {
             return RulesHelper::findClassParent($v);
         }, $parameters));
         $prototypes = array_filter($prototypes, function($v) {
             return $v !== false;
         });
-        $parameters = array_diff($parameters, $prototypes, array('baseParameters', 'default'));
+
+        // remove prototype values from parameters
+        $parameters = array_diff($parameters, $prototypes, array('baseParameters', 'default') /* keep 'baseParameters' for downward compatibility */);
 
         // remove elements ending with _switch from $options
         $rule = array_filter($rule, function($v, $k) {

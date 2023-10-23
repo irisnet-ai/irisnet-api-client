@@ -17,7 +17,7 @@ class RulesHelper
     );
 
     private static $classObjectGroups = array(
-        'Base Parameters' => array (
+        'Nudity Check' => array (
             'face' => array(
                 'plural' => 'many faces',
                 'allowMinMax' => true
@@ -293,7 +293,7 @@ class RulesHelper
 
     /**
      * Converts a group key to an identifiable string 
-     * e.g. "Base Parameters" -> "baseParameters"
+     * e.g. "Nudity Check" -> "nudityCheck"
      */ 
     public static function getIdentifiableGroupKey($key)
     {

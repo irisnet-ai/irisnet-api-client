@@ -240,13 +240,7 @@ class RulesCallbacks
                 });
             } else {
                 /** @var string[]|null $prototypes */
-                $prototypes = $args['rule']['prototypes']->getPrototypes();
-    
-                // change prototype 'nudityCheck' to 'baseParameters' 
-                $prototypes = array_map(function($v) {
-                    return $v === 'nudityCheck' ? 'baseParameters' : $v;
-                }, $prototypes);
-    
+                $prototypes = $args['rule']['prototypes']->getPrototypes();    
                 $hidden = ! in_array($name, $prototypes);
             }
         }
