@@ -45,14 +45,17 @@ class IrisnetAPIConnector
             $license = $licenses[0]['license'];
         }
 
+        /** @var Config $config */
+        $config = IrisnetAPIConnector::createConfigModel($rule);
+        
+        /** @var ParamSet $params */
+        $params = IrisnetAPIConnector::createParameterModel($rule);
+
         // Configure API key authorization: LICENSE-KEY
         $apiConfig = APIConfiguration::getDefaultConfiguration()->setApiKey('LICENSE-KEY', $license);
 
         $id = null;
         try {
-            /** @var Config $config */
-            $config = IrisnetAPIConnector::createConfigModel($rule);
-
             $apiInstance = new ConfigurationManagementApi(
                 null, // using default `GuzzleHttp\Client`
                 $apiConfig
@@ -70,9 +73,6 @@ class IrisnetAPIConnector
             throw new IrisnetException("The configuration could not be created. The API returned an empty id.");
             
         try {
-            /** @var ParamSet $params */
-            $params = IrisnetAPIConnector::createParameterModel($rule);
-
             $apiInstance = new DetailedConfigurationParametersApi(
                 null, // using default `GuzzleHttp\Client`
                 $apiConfig
@@ -396,29 +396,22 @@ class IrisnetAPIConnector
     {
         $rule = self::getRuleOption($rule);
 
-        // filter parameters used
-        $parameters = array_unique(array_map(function ($v) {
-            return substr($v, 0, strpos($v, '_'));
-        }, array_keys($rule)));
-
-        // filter prototypes used
-        $prototypes = array_unique(array_map(function($v) {
-            return RulesHelper::findClassParent($v);
-        }, $parameters));
-
-        // remove false values from prototypes
-        $prototypes = array_filter($prototypes, function($v) {
-            return $v !== false;
-        });
-
-        // remove prototype values from parameters
-        $parameters = array_diff($parameters, $prototypes);
+        // get all prototypes
+        $prototypes = array_keys(RulesHelper::getSimplifiedClassObjectArray());
 
         // change prototype 'baseParameters' to 'nudityCheck'
         // keep for downward compatibility
         $prototypes = array_map(function($v) {
             return $v === 'baseParameters' ? 'nudityCheck' : $v;
         }, $prototypes);
+
+        // filter parameters used
+        $parameters = array_unique(array_map(function ($v) {
+            return substr($v, 0, strpos($v, '_'));
+        }, array_keys($rule)));
+
+        // filter $prototypes for elements that are in both arrays
+        $prototypes = array_intersect($prototypes, $parameters);
 
         // return prototypes config
         return new Config(array('prototypes' => array_values($prototypes)));
@@ -437,20 +430,20 @@ class IrisnetAPIConnector
     {
         $rule = self::getRuleOption($rule);
 
+        // get all prototypes
+        $prototypes = array_keys(RulesHelper::getSimplifiedClassObjectArray());
+
+        // remove classification names that are also prototype names
+        $prototypes = array_filter($prototypes, function($v) {
+            return RulesHelper::findClassParent($v) === false;
+        });
+
         // filter parameters used
         $parameters = array_unique(array_map(function ($v) {
             return substr($v, 0, strpos($v, '_'));
         }, array_keys($rule)));
 
-        // filter prototypes used
-        $prototypes = array_unique(array_map(function($v) {
-            return RulesHelper::findClassParent($v);
-        }, $parameters));
-        $prototypes = array_filter($prototypes, function($v) {
-            return $v !== false;
-        });
-
-        // remove prototype values from parameters
+        // remove filtered prototype values from parameters
         $parameters = array_diff($parameters, $prototypes, array('baseParameters', 'default') /* keep 'baseParameters' for downward compatibility */);
 
         // remove elements ending with _switch from $options

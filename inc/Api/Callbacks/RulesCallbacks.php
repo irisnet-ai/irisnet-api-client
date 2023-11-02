@@ -343,13 +343,13 @@ class RulesCallbacks
             $value = $params->{$method}();
         } else {
             foreach ($params->getParams() as $p) {
-                if ($p->getClassification() !== $class)
+                if ($p->getClassification() !== $class )
                     continue;
                 $value = $p->{$method}();
                 break;
             }
         }
-
+        
         return $value;	
     }
 
