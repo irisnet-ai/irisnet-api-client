@@ -7,10 +7,6 @@ namespace Inc;
 
 use \GuzzleHttp\Client;
 use Inc\Helper\RulesHelper;
-
-
-
-
 use \Irisnet\APIV2\Client\Model\Pricing;
 use \Irisnet\APIV2\Client\ApiException;
 use \Irisnet\APIV2\Client\Configuration as APIConfiguration;

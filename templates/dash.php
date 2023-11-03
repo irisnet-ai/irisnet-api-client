@@ -13,7 +13,7 @@
 
 			<?php
 				if (isset($_POST["refresh_credits"]) && $_POST["refresh_credits"] === 'refresh') {
-					IrisnetAPIConnector::refreshCredits();
+					Inc\IrisnetAPIConnector::refreshCredits();
 				}
 
 				$licenses = get_option( 'irisnet_plugin_licenses' ) ?: array();

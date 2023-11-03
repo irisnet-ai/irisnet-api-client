@@ -4,6 +4,7 @@
  */
 namespace Inc\Api\Callbacks;
 
+use Inc\IrisnetAPIConnector;
 use Inc\Base\BaseController;
 
 class AdminCallbacks extends BaseController
