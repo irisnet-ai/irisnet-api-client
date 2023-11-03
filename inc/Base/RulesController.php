@@ -5,6 +5,7 @@
 namespace Inc\Base;
 
 use Inc\Api\SettingsApi;
+use Inc\IrisnetException;
 use Inc\Helper\RulesHelper;
 use Inc\Base\BaseController;
 use Inc\IrisnetAPIConnector;
@@ -29,9 +30,16 @@ class RulesController extends BaseController
         $this->rules_callbacks = new RulesCallbacks();
 
         if ( isset($_POST["edit_rule"]) ) {
-            $ruleOption = get_option('irisnet_plugin_rules')[sanitize_text_field($_POST["edit_rule"])];
-            $this->option = IrisnetAPIConnector::getConfig($ruleOption['id'], $ruleOption['license']);
-            $this->option['option'] = $ruleOption;
+            try {
+                $ruleOption = get_option('irisnet_plugin_rules')[sanitize_text_field($_POST["edit_rule"])];
+                $this->option = IrisnetAPIConnector::getConfig($ruleOption['id'], $ruleOption['license']);
+                $this->option['option'] = $ruleOption;
+            } catch (IrisnetException $e) {
+                $_POST["rule_error"] = $_POST["edit_rule"];
+                $_POST["rule_error_code"] = $e->getCode();
+                $_POST["rule_error_message"] = $e->getMessage();
+                unset($_POST["edit_rule"]);
+            }
         }
 
         $this->setSubPages();

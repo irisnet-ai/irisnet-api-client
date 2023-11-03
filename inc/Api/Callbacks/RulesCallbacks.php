@@ -5,6 +5,7 @@
 namespace Inc\Api\Callbacks;
 
 use \Exception;
+use Inc\IrisnetException;
 use Inc\IrisnetAPIConnector;
 use Inc\Helper\RulesHelper;
 use \Irisnet\APIV2\Client\Model\Param;
@@ -360,8 +361,12 @@ class RulesCallbacks
                     $func($rule);
                 return true;
             }
-        } catch (ApiException $e) {
+        } catch (IrisnetException $e) {
             add_settings_error('irisnet_plugin_rules', $e->getCode(), $e->getMessage());
+            if ($e->getCode() === 404 && str_contains($e->getMessage(), 'The configuration with the id')) {
+                if ($func != null)
+                    $func($rule);
+            }
             return false;
         } catch (Exception $e) {
             add_settings_error('irisnet_plugin_rules', 500, $e->getMessage());
