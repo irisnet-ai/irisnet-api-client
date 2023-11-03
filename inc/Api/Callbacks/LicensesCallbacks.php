@@ -5,8 +5,9 @@
 namespace Inc\Api\Callbacks;
 
 use \GuzzleHttp\Client;
-use \Irisnet\APIV1\Client\ApiException;
-use \Irisnet\APIV1\Client\Api\MiscellaneousOperationsApi;
+use \Irisnet\APIV2\Client\ApiException;
+use \Irisnet\APIV2\Client\Api\BalanceEndpointsApi;
+use \Irisnet\APIV2\Client\Configuration as APIConfiguration;
 
 class LicensesCallbacks
 {
@@ -23,6 +24,14 @@ class LicensesCallbacks
             return $input;
         }
 
+        $output = get_option('irisnet_plugin_licenses');
+
+        // User requested removal of data set
+        if (isset($_POST["remove"])) {
+            unset($output[sanitize_text_field($_POST["remove"])]);
+            return $output;
+        }
+
         // Sanitize and validate user input
         $input['license'] = str_replace('"', "", $input['license']);
         $input['license'] = str_replace("'", "", $input['license']);
@@ -33,32 +42,24 @@ class LicensesCallbacks
         );
         $input = filter_var_array($input, $args);
 
-        $output = get_option('irisnet_plugin_licenses');
-
         // generate id from options count if no id is given
         ksort($output);
         $licenseId = $input['id'];
         unset($input['id']);
         if (empty($licenseId)) {
-            $licenseId = end(array_keys($output)) + 1;
-            //$licenseId = array_key_last($output) + 1; // php >= 7.3
-        }
-
-        // User requested removal of data set
-        if (isset($_POST["remove"])) {
-            unset($output[sanitize_text_field($_POST["remove"])]);
-            return $output;
+            $licenseId = array_key_last($output) + 1; // php >= 7.3
         }
             
         // Check the license api in case the user sets license to active
         if (isset($input['is_active'])) {
-            $apiInstance = new MiscellaneousOperationsApi(
-                new Client()
+            $apiConfig = APIConfiguration::getDefaultConfiguration()->setApiKey('LICENSE-KEY', $input['license']);
+            $apiInstance = new BalanceEndpointsApi(
+                null, // using default `GuzzleHttp\Client`
+                $apiConfig
             );
-            $license_key = $input['license'];
             
             try {
-                $result = $apiInstance->getLicenseInfo($license_key);
+                $result = $apiInstance->getLicenseInfo();
 
                 $input['credits_used'] = $result->getCreditsUsed();
                 $input['total_credits'] = $result->getTotalCredits();
