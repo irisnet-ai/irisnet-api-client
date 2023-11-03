@@ -42,7 +42,7 @@ var jsSRC = "src/js/script.js";
 var jsURL = "./assets/";
 var jsOutput = "script.js";
 
-var docsInputFile = "inc/IrisnetAPIConnector.php";
+var docsInputFile = "inc/AI.php";
 var docsOutputFolder = "templates/usage";
 var docsCacheFolder = ".cache";
 

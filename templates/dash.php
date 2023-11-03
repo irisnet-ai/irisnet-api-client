@@ -81,7 +81,7 @@
 		</div>
 
 		<div id="tab-2" class="tab-pane">
-			<p>To make use of the irisnet API use the IrisnetAPIConnector helper class. The class can be called from any Wordpress- or plugin hook that fits your need. Go to Design -> Theme-Editor. Select your current Theme and use one of the following example snippets to get you started.</p>
+			<p>To make use of the irisnet API use the AI helper class. The class can be called from any Wordpress- or plugin hook that fits your need. Go to Design -> Theme-Editor. Select your current Theme and use one of the following example snippets to get you started.</p>
 			<p>The following examples are meant to get you started. We do not guarantee that these examples will work for you. In any case the examples listed below require you to make some changes to fit your case.</p>
 			
 			<div class="panel">
@@ -92,9 +92,9 @@ function check_compliant($atts, $content = null) {
 	$image_path = $atts['image'];
 
 	try {
-		// Check the image using the IrisnetAPIConnector class.
+		// Check the image using the AI class.
 		// See Documentation tab for more details.
-		$aiResult = IrisnetAPIConnector::checkImage($image_path, 'given_ruleset_name', 1);
+		$aiResult = AI::checkImage($image_path, 'given_ruleset_name', 1);
 	} catch(IrisnetException $e) {
 		// Check for possible errors according to the Documentation tab.
 	}
@@ -126,7 +126,7 @@ function check_compliant($imageArray) {
 	foreach($imageArray as $image) {
 		try {
 			// Call to checkImage function.
-			$aiResult = IrisnetAPIConnector::checkImage($image, 'given_ruleset_name');
+			$aiResult = AI::checkImage($image, 'given_ruleset_name');
 		} catch(IrisnetException $e) {
 			// Check for possible errors according to the Documentation tab.
 		}
@@ -158,9 +158,9 @@ function ai_image_check_after_submission( $entry, $form ) {
 	$image_path = str_replace($upload_url, $upload_path, $entry[ $id ]);
 	
 	try {
-		// Check the image using the IrisnetAPIConnector class.
+		// Check the image using the AI class.
 		// See Documentation tab for more details.
-		$aiResult = IrisnetAPIConnector::checkImage($image_path, 'given_ruleset_name');
+		$aiResult = AI::checkImage($image_path, 'given_ruleset_name');
 	} catch(IrisnetException $e) {
 		// Check for possible errors according to the Documentation tab.
 	}
