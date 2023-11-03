@@ -8,11 +8,13 @@ namespace Inc;
 use \GuzzleHttp\Client;
 use Inc\Helper\RulesHelper;
 use \Irisnet\APIV2\Client\Model\Pricing;
+use \Irisnet\APIV2\Client\Model\CheckResult;
 use \Irisnet\APIV2\Client\ApiException;
 use \Irisnet\APIV2\Client\Configuration as APIConfiguration;
 use \Irisnet\APIV2\Client\Api\ConfigurationManagementApi;
 use \Irisnet\APIV2\Client\Api\DetailedConfigurationParametersApi;
 use \Irisnet\APIV2\Client\Api\BalanceEndpointsApi;
+use \Irisnet\APIV2\Client\Api\AICheckOperationsApi;
 use \Irisnet\APIV2\Client\Model\LicenseInfo;
 use \Irisnet\APIV2\Client\Model\Config;
 use \Irisnet\APIV2\Client\Model\Param;
@@ -198,21 +200,27 @@ class IrisnetAPIConnector
      * Makes the API call to check the image for the specified rules.
      *
      * @param string $file the name (including path) of the image or url of an image that needs to be checked. 
+     * @param string $rule the given name of the rule set.
      * @param integer $detail Sets the response details. Use 1 (default) for minimum detail (better API performance), 2 for medium details and 3 for all details.
-     * @param string $rule the given name of the rule set. Omit if the cost of the last set rule set should be determined.
      * @param integer $licenseId the id of the license key to use. Omit if the next available license key should be used.
      * @throws IrisnetException is thrown in case that the rule name could not be found, if the license id does not exist, 
      * if the license key is not active or out of credits, if the specified filename does not exist 
      * or if the API request fails (will contain the status code and the message returned from the failed API request).
-     * @return IrisNet Contains information on the AI result from the source media check. See <a href="https://www.irisnet.de/api/">API page</a> for more information
+     * @return CheckResult Contains information on the AI result from the source media check. See <a href="https://www.irisnet.de/api/">API page</a> for more information
      */
-    public static function processImage(string $file, int $detail = 1, string $rule = null, int $licenseId = null) : IrisNet
+    public static function checkImage(string $file, string $rule, int $detail = 1, int $licenseId = null) : CheckResult
     {
 
         $isUrl = filter_var($file, FILTER_VALIDATE_URL);
 
         if (!$isUrl && !file_exists($file)) {
             throw new IrisnetException("The specified file does not exist. Filename: $file", 404);
+        }
+
+        if (!$isUrl) {
+            $type = pathinfo($file, PATHINFO_EXTENSION);
+            $data = file_get_contents($file);
+            $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
         }
         
         $usable = self::getUsableLicenses();
@@ -228,46 +236,21 @@ class IrisnetAPIConnector
         }
         $key = $license['license'];
 
-        if ($rule !== null) {
-            self::setRules($rule);
-        }
+        $rule = self::getRuleOption($rule);
+        $configId = $rule['id'];
 
-        $apiInstance = new EndpointsForAIChecksApi(
-            new Client(self::getClientConfig(true))
+        // Configure API key authorization: LICENSE-KEY
+        $apiConfig = APIConfiguration::getDefaultConfiguration()->setApiKey('LICENSE-KEY', $key);
+
+        $apiInstance = new AICheckOperationsApi(
+            null, // using default `GuzzleHttp\Client`
+            $apiConfig
         );
 
         try {
-            if (!$isUrl)
-                return $apiInstance->checkImage($key, new \SplFileObject($file), $detail, true);
-
-            return $apiInstance->checkImageUrl($file, $key, $detail, true);
+            return $apiInstance->checkImage($configId, null, isset($base64) ? $base64 : $file, $detail, true);
         } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occurred while performing the API request '/v1/check-image' or '/v1/check-url'. ApiResponse: " . $e->getMessage(), $e->getCode());
-        }
-    }
-
-    /**
-     * Downloads the modified image as specified by the rules parameters, if needed.
-     *
-     * @param string $filename the name of the file (without path) that should be downloaded. Is equal to the file name that was processed.
-     * @param string $downloadPath the location (folder) of where to save the downloaded file. When omitted the return type is SplFileObject
-     * @throws IrisnetException is thrown in case that the API request fails (will contain the status code and the message returned from the failed API request).
-     * @return boolean|\SplFileObject returns FALSE in case that the file could not be saved at the specified location
-     */
-    public static function getProcessedImage(string $filename, string $downloadPath = null) {
-        try {
-            $apiInstance = new MiscellaneousOperationsApi(
-                new Client(self::getClientConfig(true))
-            );
-
-            $file = $apiInstance->downloadProcessed($filename);
-
-            if ($downloadPath == null)
-                return $file;
-
-            return !file_put_contents($downloadPath . $filename, $file->fread($file->getSize())) ? false : true;
-        } catch (ApiException $e) {
-            throw new IrisnetException("An Exception occurred while performing the API request '/v1/download'. ApiResponse: " . $e->getMessage(), $e->getCode());
+            throw new IrisnetException("An Exception occurred while performing the API request '/v2/check-image/{configId}'. ApiResponse: " . $e->getMessage(), $e->getCode());
         }
     }
 
