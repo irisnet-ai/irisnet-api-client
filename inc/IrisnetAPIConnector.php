@@ -378,16 +378,19 @@ class IrisnetAPIConnector
         // get all prototypes
         $prototypes = array_keys(RulesHelper::getSimplifiedClassObjectArray());
 
+        // filter parameters used
+        $parameters = array_unique(array_map(function ($v) {
+            return substr($v, 0, strpos($v, '_'));
+        }, array_keys($rule)));
+
         // change prototype 'baseParameters' to 'nudityCheck'
         // keep for downward compatibility
         $prototypes = array_map(function($v) {
             return $v === 'baseParameters' ? 'nudityCheck' : $v;
         }, $prototypes);
-
-        // filter parameters used
-        $parameters = array_unique(array_map(function ($v) {
-            return substr($v, 0, strpos($v, '_'));
-        }, array_keys($rule)));
+        $parameters = array_map(function($v) {
+            return $v === 'baseParameters' ? 'nudityCheck' : $v;
+        }, $parameters);
 
         // filter $prototypes for elements that are in both arrays
         $prototypes = array_intersect($prototypes, $parameters);
