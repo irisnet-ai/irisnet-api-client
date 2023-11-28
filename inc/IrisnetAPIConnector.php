@@ -6,6 +6,7 @@
 namespace Inc;
 
 use \GuzzleHttp\Client;
+use \Exception;
 use Inc\Helper\RulesHelper;
 use \Irisnet\APIV2\Client\Model\Pricing;
 use \Irisnet\APIV2\Client\Model\CheckResult;
