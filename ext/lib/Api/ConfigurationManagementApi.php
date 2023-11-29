@@ -127,7 +127,7 @@ class ConfigurationManagementApi
     /**
      * @return Configuration
      */
-    public function getConfigModel()
+    public function getConfig_()
     {
         return $this->config;
     }
@@ -963,7 +963,7 @@ class ConfigurationManagementApi
      *
      * @throws \Irisnet\APIV2\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\Config|\Irisnet\APIV2\Client\Model\ApiNotice
+     * @return \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\Config
      */
     public function setConfig($config, string $contentType = self::contentTypes['setConfig'][0])
     {
@@ -981,7 +981,7 @@ class ConfigurationManagementApi
      *
      * @throws \Irisnet\APIV2\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\Config|\Irisnet\APIV2\Client\Model\ApiNotice, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\Config, HTTP status code, HTTP response headers (array of strings)
      */
     public function setConfigWithHttpInfo($config, string $contentType = self::contentTypes['setConfig'][0])
     {
@@ -1023,6 +1023,21 @@ class ConfigurationManagementApi
             }
 
             switch($statusCode) {
+                case 400:
+                    if ('\Irisnet\APIV2\Client\Model\ApiNotice' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Irisnet\APIV2\Client\Model\ApiNotice' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\ApiNotice', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
                 case 403:
                     if ('\Irisnet\APIV2\Client\Model\ApiNotice' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -1053,21 +1068,6 @@ class ConfigurationManagementApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 400:
-                    if ('\Irisnet\APIV2\Client\Model\ApiNotice' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Irisnet\APIV2\Client\Model\ApiNotice' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\ApiNotice', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
             }
 
             $returnType = '\Irisnet\APIV2\Client\Model\Config';
@@ -1088,6 +1088,14 @@ class ConfigurationManagementApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Irisnet\APIV2\Client\Model\ApiNotice',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
@@ -1100,14 +1108,6 @@ class ConfigurationManagementApi
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Irisnet\APIV2\Client\Model\Config',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-                case 400:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Irisnet\APIV2\Client\Model\ApiNotice',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

@@ -768,7 +768,7 @@ class BalanceEndpointsApi
      *
      * @throws \Irisnet\APIV2\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\Pricing|\Irisnet\APIV2\Client\Model\ApiNotice
+     * @return \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\Pricing
      */
     public function getVideoCost($config_id, $frames, string $contentType = self::contentTypes['getVideoCost'][0])
     {
@@ -787,7 +787,7 @@ class BalanceEndpointsApi
      *
      * @throws \Irisnet\APIV2\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\Pricing|\Irisnet\APIV2\Client\Model\ApiNotice, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\Pricing, HTTP status code, HTTP response headers (array of strings)
      */
     public function getVideoCostWithHttpInfo($config_id, $frames, string $contentType = self::contentTypes['getVideoCost'][0])
     {
@@ -844,21 +844,6 @@ class BalanceEndpointsApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 200:
-                    if ('\Irisnet\APIV2\Client\Model\Pricing' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Irisnet\APIV2\Client\Model\Pricing' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\Pricing', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 429:
                     if ('\Irisnet\APIV2\Client\Model\ApiNotice' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -871,6 +856,21 @@ class BalanceEndpointsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\ApiNotice', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 200:
+                    if ('\Irisnet\APIV2\Client\Model\Pricing' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Irisnet\APIV2\Client\Model\Pricing' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\Pricing', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -902,18 +902,18 @@ class BalanceEndpointsApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Irisnet\APIV2\Client\Model\Pricing',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 429:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Irisnet\APIV2\Client\Model\ApiNotice',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Irisnet\APIV2\Client\Model\Pricing',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);

@@ -754,7 +754,7 @@ class DetailedConfigurationParametersApi
             }
 
             switch($statusCode) {
-                case 404:
+                case 400:
                     if ('\Irisnet\APIV2\Client\Model\ApiNotice' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
@@ -769,7 +769,7 @@ class DetailedConfigurationParametersApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 400:
+                case 404:
                     if ('\Irisnet\APIV2\Client\Model\ApiNotice' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
@@ -819,7 +819,7 @@ class DetailedConfigurationParametersApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                case 404:
+                case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Irisnet\APIV2\Client\Model\ApiNotice',
@@ -827,7 +827,7 @@ class DetailedConfigurationParametersApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 400:
+                case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Irisnet\APIV2\Client\Model\ApiNotice',

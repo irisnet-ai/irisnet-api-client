@@ -330,6 +330,19 @@ class Param implements ModelInterface, ArrayAccess, \JsonSerializable
     public const CLASSIFICATION_RIFLE = 'rifle';
     public const CLASSIFICATION_CANNON = 'cannon';
     public const CLASSIFICATION_FIRE = 'fire';
+    public const CLASSIFICATION_HAND2MOUTH = 'hand2mouth';
+    public const CLASSIFICATION_POINT2NOSE = 'point2nose';
+    public const CLASSIFICATION_RELAXED = 'relaxed';
+    public const CLASSIFICATION_POINT2CHIN = 'point2chin';
+    public const CLASSIFICATION_HAND2CHEEK = 'hand2cheek';
+    public const CLASSIFICATION_EXCELLENT = 'excellent';
+    public const CLASSIFICATION_NICE = 'nice';
+    public const CLASSIFICATION_THINKING = 'thinking';
+    public const CLASSIFICATION_THUMB_UP = 'thumbUp';
+    public const CLASSIFICATION_VICTORY = 'victory';
+    public const CLASSIFICATION_LOOKOUT = 'lookout';
+    public const CLASSIFICATION_FINGER_UP = 'fingerUp';
+    public const CLASSIFICATION_MIDDLE_FINGER = 'middleFinger';
     public const CLASSIFICATION_NUDITY_CHECK = 'nudityCheck';
     public const CLASSIFICATION_AGE_VERIFICATION = 'ageVerification';
     public const CLASSIFICATION_AGE_ESTIMATION = 'ageEstimation';
@@ -340,6 +353,7 @@ class Param implements ModelInterface, ArrayAccess, \JsonSerializable
     public const CLASSIFICATION_NIPPLE_CHECK = 'nippleCheck';
     public const CLASSIFICATION_UNWANTED_SUBSTANCES = 'unwantedSubstances';
     public const CLASSIFICATION_VIOLENCE_CHECK = 'violenceCheck';
+    public const CLASSIFICATION_SELFIE_CHECK = 'selfieCheck';
 
     /**
      * Gets allowable values of the enum
@@ -407,6 +421,19 @@ class Param implements ModelInterface, ArrayAccess, \JsonSerializable
             self::CLASSIFICATION_RIFLE,
             self::CLASSIFICATION_CANNON,
             self::CLASSIFICATION_FIRE,
+            self::CLASSIFICATION_HAND2MOUTH,
+            self::CLASSIFICATION_POINT2NOSE,
+            self::CLASSIFICATION_RELAXED,
+            self::CLASSIFICATION_POINT2CHIN,
+            self::CLASSIFICATION_HAND2CHEEK,
+            self::CLASSIFICATION_EXCELLENT,
+            self::CLASSIFICATION_NICE,
+            self::CLASSIFICATION_THINKING,
+            self::CLASSIFICATION_THUMB_UP,
+            self::CLASSIFICATION_VICTORY,
+            self::CLASSIFICATION_LOOKOUT,
+            self::CLASSIFICATION_FINGER_UP,
+            self::CLASSIFICATION_MIDDLE_FINGER,
             self::CLASSIFICATION_NUDITY_CHECK,
             self::CLASSIFICATION_AGE_VERIFICATION,
             self::CLASSIFICATION_AGE_ESTIMATION,
@@ -417,6 +444,7 @@ class Param implements ModelInterface, ArrayAccess, \JsonSerializable
             self::CLASSIFICATION_NIPPLE_CHECK,
             self::CLASSIFICATION_UNWANTED_SUBSTANCES,
             self::CLASSIFICATION_VIOLENCE_CHECK,
+            self::CLASSIFICATION_SELFIE_CHECK,
         ];
     }
 
@@ -552,7 +580,7 @@ class Param implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets classification
      *
-     * @param string $classification The classification of the object, that the element refers to. The following is a tree representation of the prototypes and their containing classifications. Default parameter values are defined per classification object. The default values of 'min', 'max' and 'drawMode' are witten after the name of the classification object in that order. Use the prototype names to set parameters to all of the containing classifications. ##### nudityCheck > _A prototype containing classifications for basic human attributes and sexual contents. This prototype and the containing classifications are activated by default_ * _face_ _(1, 3, 0)_ * _hand_ _(0, -1, 0)_ * _foot_ _(0, -1, 0)_ * _footwear_ _(0, -1, 0)_ * _chest_ _(0, -1, 0)_ * _breast_ _(0, 0, 2)_ * _vulva_ _(0, 0, 2)_ * _penis_ _(0, 0, 2)_ * _vagina_ _(0, 0, 2)_ * _buttocks_ _(0, 0, 2)_ * _anus_ _(0, 0, 2)_ * _toy_ _(0, -1, 0)_ * _oral_ _(0, 0, 2)_ * _penetration_ _(0, 0, 2)_ * _bondage_ _(0, -1, 0)_ * _gag_ _(0, -1, 0)_ ##### ageEstimation > _Contains classification objects for estimating the age of a human face. This prototype activates nudityCheck_ * _child (*)_ _(0, 0, 6)_ * _adult (*)_ _(0, -1, 0)_ * _senior (*)_ _(0, -1, 0)_ * _pose_ _(0, 0, 0)_ - The age can not be estimated, due to a pose that hides facial features. ##### attributesCheck > _Contains classification objects for various attributes of the human face. This prototype activates nudityCheck_ * _female (*)_ _(0, -1, 0)_ * _male (*)_ _(0, -1, 0)_ * _hair_ _(0, -1, 0)_ * _hairless_ _(0, -1, 0)_ * _beard_ _(0, -1, 0)_ * _moustache_ _(0, -1, 0)_ * _headpiece_ _(0, -1, 0)_ * _glasses_ _(0, -1, 0)_ * _sunglasses_ _(0, -1, 0)_ * _mask_ _(0, -1, 0)_ * _slimSizedFace (*)_ _(0, -1, 0)_ * _realSizedFace (*)_ _(0, -1, 0)_ * _plusSizedFace (*)_ _(0, -1, 0)_ ##### nippleCheck > _Contains classifications for determining if the object recognized as breast has a nipple. This prototype activates nudityCheck_ * _noNipple_ _(0, -1, 0)_ * _hasNipple_ _(0, 0, 0)_ ##### bodyAttributes > _Contains classification objects for determining the body size._ * _slimSized_ _(0, -1, 0)_ * _realSized_ _(0, -1, 0)_ * _plusSized_ _(0, -1, 0)_ ##### illegalSymbols > _Contains various classification objects of symbols that are prohibited in Germany (e.g. Hakenkreuz, SS, etc). These are grouped under a single name_ * _illegalSymbols_ _(0, 0, 1)_ ##### unwantedSubstances > _Contains classification objects for different substances._ * _beer_ _(0, -1, 0)_ * _beerBottle_ _(0, -1, 0)_ * _beerCan_ _(0, -1, 0)_ * _wine_ _(0, -1, 0)_ * _wineBottle_ _(0, -1, 0)_ * _cocktail_ _(0, -1, 0)_ * _alcohol_ _(0, -1, 0)_ * _cannabis_ _(0, 0, 0)_ * _cigarette_ _(0, 0, 0)_ * _cocaine_ _(0, 0, 0)_ * _heroine_ _(0, 0, 0)_ * _coffee_ _(0, -1, 0)_ ##### violenceCheck > _Contains classification objects for violent items or acts._ * _camouflage_ _(0, -1, 0)_ * _club_ _(0, -1, 0)_ * _knife_ _(0, 0, 0)_ * _sword_ _(0, 0, 0)_ * _pistol_ _(0, 0, 0)_ * _rifle_ _(0, 0, 0)_ * _cannon_ _(0, 0, 0)_ * _fire_ _(0, -1, 0)_ ##### textRecognition > _Contains letters, numbers and some symbols (e.g. @, #, etc) as classification objects. These are grouped under a single name_ * _textRecognition_ _(0, 6, 6)_  _Classification objects that are marked with (*) are sub-classifications of face. Both face and the marked classification are affected by the given parameter values._  _Please be aware that the default values can be subject to change. This is due to the difficulty of recognizing certain objects e.g. objects that are classified as toy._
+     * @param string $classification The classification of the object, that the element refers to. The following is a tree representation of the prototypes and their containing classifications. Default parameter values are defined per classification object. The default values of 'min', 'max' and 'drawMode' are witten after the name of the classification object in that order. Use the prototype names to set parameters to all of the containing classifications. ##### nudityCheck > _A prototype containing classifications for basic human attributes and sexual contents. This prototype and the containing classifications are activated by default_ * _face_ _(1, 3, 0)_ * _hand_ _(0, -1, 0)_ * _foot_ _(0, -1, 0)_ * _footwear_ _(0, -1, 0)_ * _chest_ _(0, -1, 0)_ * _breast_ _(0, 0, 2)_ * _vulva_ _(0, 0, 2)_ * _penis_ _(0, 0, 2)_ * _vagina_ _(0, 0, 2)_ * _buttocks_ _(0, 0, 2)_ * _anus_ _(0, 0, 2)_ * _toy_ _(0, -1, 0)_ * _oral_ _(0, 0, 2)_ * _penetration_ _(0, 0, 2)_ * _bondage_ _(0, -1, 0)_ * _gag_ _(0, -1, 0)_ ##### ageEstimation > _Contains classification objects for estimating the age of a human face. This prototype activates nudityCheck_ * _child (*)_ _(0, 0, 6)_ * _adult (*)_ _(0, -1, 0)_ * _senior (*)_ _(0, -1, 0)_ * _pose_ _(0, 0, 0)_ - The age can not be estimated, due to a pose that hides facial features. ##### attributesCheck > _Contains classification objects for various attributes of the human face. This prototype activates nudityCheck_ * _female (*)_ _(0, -1, 0)_ * _male (*)_ _(0, -1, 0)_ * _hair_ _(0, -1, 0)_ * _hairless_ _(0, -1, 0)_ * _beard_ _(0, -1, 0)_ * _moustache_ _(0, -1, 0)_ * _headpiece_ _(0, -1, 0)_ * _glasses_ _(0, -1, 0)_ * _sunglasses_ _(0, -1, 0)_ * _mask_ _(0, -1, 0)_ * _slimSizedFace (*)_ _(0, -1, 0)_ * _realSizedFace (*)_ _(0, -1, 0)_ * _plusSizedFace (*)_ _(0, -1, 0)_ ##### nippleCheck > _Contains classifications for determining if the object recognized as breast has a nipple. This prototype activates nudityCheck_ * _noNipple_ _(0, -1, 0)_ * _hasNipple_ _(0, 0, 0)_ ##### bodyAttributes > _Contains classification objects for determining the body size._ * _slimSized_ _(0, -1, 0)_ * _realSized_ _(0, -1, 0)_ * _plusSized_ _(0, -1, 0)_ ##### illegalSymbols > _Contains various classification objects of symbols that are prohibited in Germany (e.g. Hakenkreuz, SS, etc). These are grouped under a single name_ * _illegalSymbols_ _(0, 0, 1)_ ##### unwantedSubstances > _Contains classification objects for different substances._ * _beer_ _(0, -1, 0)_ * _beerBottle_ _(0, -1, 0)_ * _beerCan_ _(0, -1, 0)_ * _wine_ _(0, -1, 0)_ * _wineBottle_ _(0, -1, 0)_ * _cocktail_ _(0, -1, 0)_ * _alcohol_ _(0, -1, 0)_ * _cannabis_ _(0, 0, 0)_ * _cigarette_ _(0, 0, 0)_ * _cocaine_ _(0, 0, 0)_ * _heroine_ _(0, 0, 0)_ * _coffee_ _(0, -1, 0)_ ##### violenceCheck > _Contains classification objects for violent items or acts._ * _camouflage_ _(0, -1, 0)_ * _club_ _(0, -1, 0)_ * _knife_ _(0, 0, 0)_ * _sword_ _(0, 0, 0)_ * _pistol_ _(0, 0, 0)_ * _rifle_ _(0, 0, 0)_ * _cannon_ _(0, 0, 0)_ * _fire_ _(0, -1, 0)_ ##### selfieCheck > _Classification objects representing various pre-defined poses for the selfie task._ * _hand2mouth_ _(0, 1, 0)_ * _point2nose_ _(0, 1, 0)_ * _relaxed_ _(0, 1, 0)_ * _point2chin_ _(0, 1, 0)_ * _hand2cheek_ _(0, 1, 0)_ * _excellent_ _(0, 1, 0)_ * _nice_ _(0, 1, 0)_ * _thinking_ _(0, 1, 0)_ * _thumbUp_ _(0, 1, 0)_ * _victory_ _(0, 1, 0)_ * _lookout_ _(0, 1, 0)_ * _fingerUp_ _(0, 1, 0)_ * _middleFinger_ _(0, 0, 0)_ ##### textRecognition > _Contains letters, numbers and some symbols (e.g. @, #, etc) as classification objects. These are grouped under a single name_ * _textRecognition_ _(0, 6, 6)_  _Classification objects that are marked with (*) are sub-classifications of face. Both face and the marked classification are affected by the given parameter values._  _Please be aware that the default values can be subject to change. This is due to the difficulty of recognizing certain objects e.g. objects that are classified as toy._
      *
      * @return self
      */

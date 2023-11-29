@@ -246,6 +246,7 @@ class Config implements ModelInterface, ArrayAccess, \JsonSerializable
     public const PROTOTYPES_NIPPLE_CHECK = 'nippleCheck';
     public const PROTOTYPES_UNWANTED_SUBSTANCES = 'unwantedSubstances';
     public const PROTOTYPES_VIOLENCE_CHECK = 'violenceCheck';
+    public const PROTOTYPES_SELFIE_CHECK = 'selfieCheck';
 
     /**
      * Gets allowable values of the enum
@@ -265,6 +266,7 @@ class Config implements ModelInterface, ArrayAccess, \JsonSerializable
             self::PROTOTYPES_NIPPLE_CHECK,
             self::PROTOTYPES_UNWANTED_SUBSTANCES,
             self::PROTOTYPES_VIOLENCE_CHECK,
+            self::PROTOTYPES_SELFIE_CHECK,
         ];
     }
 

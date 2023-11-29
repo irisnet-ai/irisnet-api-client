@@ -143,7 +143,7 @@ class AICheckOperationsApi
      *
      * @throws \Irisnet\APIV2\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\CheckResult
+     * @return \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\CheckResult|\Irisnet\APIV2\Client\Model\ApiNotice
      */
     public function checkImage($config_id, $url = null, $data = null, $detail = 1, $image_encode = false, string $contentType = self::contentTypes['checkImage'][0])
     {
@@ -165,7 +165,7 @@ class AICheckOperationsApi
      *
      * @throws \Irisnet\APIV2\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\CheckResult, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\CheckResult|\Irisnet\APIV2\Client\Model\ApiNotice, HTTP status code, HTTP response headers (array of strings)
      */
     public function checkImageWithHttpInfo($config_id, $url = null, $data = null, $detail = 1, $image_encode = false, string $contentType = self::contentTypes['checkImage'][0])
     {
@@ -222,21 +222,6 @@ class AICheckOperationsApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 402:
-                    if ('\Irisnet\APIV2\Client\Model\ApiNotice' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Irisnet\APIV2\Client\Model\ApiNotice' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\ApiNotice', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 200:
                     if ('\Irisnet\APIV2\Client\Model\CheckResult' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -249,6 +234,21 @@ class AICheckOperationsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\CheckResult', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 402:
+                    if ('\Irisnet\APIV2\Client\Model\ApiNotice' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Irisnet\APIV2\Client\Model\ApiNotice' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\ApiNotice', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -280,18 +280,18 @@ class AICheckOperationsApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 402:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Irisnet\APIV2\Client\Model\ApiNotice',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Irisnet\APIV2\Client\Model\CheckResult',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Irisnet\APIV2\Client\Model\ApiNotice',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -543,7 +543,7 @@ class AICheckOperationsApi
      *
      * @throws \Irisnet\APIV2\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\CheckResult[]
+     * @return \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\CheckResult[]|\Irisnet\APIV2\Client\Model\ApiNotice
      */
     public function checkStream($config_id, $in_url, $out_url = null, $cycle_length = 500, $check_rate = 0, string $contentType = self::contentTypes['checkStream'][0])
     {
@@ -565,7 +565,7 @@ class AICheckOperationsApi
      *
      * @throws \Irisnet\APIV2\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\CheckResult[], HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Irisnet\APIV2\Client\Model\ApiNotice|\Irisnet\APIV2\Client\Model\CheckResult[]|\Irisnet\APIV2\Client\Model\ApiNotice, HTTP status code, HTTP response headers (array of strings)
      */
     public function checkStreamWithHttpInfo($config_id, $in_url, $out_url = null, $cycle_length = 500, $check_rate = 0, string $contentType = self::contentTypes['checkStream'][0])
     {
@@ -622,21 +622,6 @@ class AICheckOperationsApi
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
-                case 402:
-                    if ('\Irisnet\APIV2\Client\Model\ApiNotice' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                        if ('\Irisnet\APIV2\Client\Model\ApiNotice' !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\ApiNotice', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
                 case 200:
                     if ('\Irisnet\APIV2\Client\Model\CheckResult[]' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
@@ -649,6 +634,21 @@ class AICheckOperationsApi
 
                     return [
                         ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\CheckResult[]', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 402:
+                    if ('\Irisnet\APIV2\Client\Model\ApiNotice' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                        if ('\Irisnet\APIV2\Client\Model\ApiNotice' !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\Irisnet\APIV2\Client\Model\ApiNotice', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
@@ -680,18 +680,18 @@ class AICheckOperationsApi
                     );
                     $e->setResponseObject($data);
                     break;
-                case 402:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Irisnet\APIV2\Client\Model\ApiNotice',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
                         '\Irisnet\APIV2\Client\Model\CheckResult[]',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Irisnet\APIV2\Client\Model\ApiNotice',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
