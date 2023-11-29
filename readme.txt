@@ -83,26 +83,10 @@ However, the uploaded files are always session-bound and will be permanently del
 == Upgrade Notice ==
 
 = 2.0.0 =
-Updated api backend to v2
-Rules will be migrated automatically
-
-= 1.8.13 =
-adjust rules for new classification objects (Unwanted Substances and Violence Check)
-
-= 1.6.11 =
-adjust rules for new classification objects (Nipple Check)
-
-= 1.6.10 =
-adjust rules for new classification objects (Attributes Check)
-
-= 1.4.6 =
-adjust rules for new classification objects and simplified view
-
-= 1.1.3 =
-adjust rules for new classification objects
-
-= 1.0.2 =
-First official release of the Irisnet API Client for WordPress
+Breaking changes:
+The API backend has been updated to v2. This means that the API calls have changed. Please check the documentation for the new calls.
+Rules will be migrated automatically, but please check your settings after the update. 
+Rules are now bound to the lincense key and will break if the license key is changed or removed.
 
 == Changelog ==
 
