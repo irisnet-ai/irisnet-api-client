@@ -3,8 +3,8 @@ Contributors: irisnet
 Tags: ai, artificial intelligence, irisnet, porn blocker, youth protection, AI privacy protection, content moderation, moderation ai, image moderation, nudity blocker
 Requires at least: 5.1
 Requires PHP: 7.4
-Tested up to: 6.1.1
-Stable tag: 1.8.13
+Tested up to: 6.4.1
+Stable tag: 2.0.0
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -82,25 +82,17 @@ However, the uploaded files are always session-bound and will be permanently del
 
 == Upgrade Notice ==
 
-= 1.8.13 =
-adjust rules for new classification objects (Unwanted Substances and Violence Check)
-
-= 1.6.11 =
-adjust rules for new classification objects (Nipple Check)
-
-= 1.6.10 =
-adjust rules for new classification objects (Attributes Check)
-
-= 1.4.6 =
-adjust rules for new classification objects and simplified view
-
-= 1.1.3 =
-adjust rules for new classification objects
-
-= 1.0.2 =
-First official release of the Irisnet API Client for WordPress
+= 2.0.0 =
+Breaking changes:
+The API backend has been updated to v2. This means that the API calls have changed. Please check the documentation for the new calls.
+Rules will be migrated automatically, but please check your settings after the update. 
+Rules are now bound to the lincense key and will break if the license key is changed or removed.
 
 == Changelog ==
+
+= 2.0.0 =
+Updated api backend to v2
+Added new classification objects (Selfie Check and Body Attributes)
 
 = 1.8.13 =
 PHP compatibility

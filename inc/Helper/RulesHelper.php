@@ -17,7 +17,7 @@ class RulesHelper
     );
 
     private static $classObjectGroups = array(
-        'Base Parameters' => array (
+        'Nudity Check' => array (
             'face' => array(
                 'plural' => 'many faces',
                 'allowMinMax' => true
@@ -157,20 +157,20 @@ class RulesHelper
                 'allowMinMax' => false
             ),
         ),
-        // 'Body Attributes' => array(
-        //     'slimSized' => array(
-        //         'plural' => 'slimSized bodies',
-        //         'allowMinMax' => false
-        //     ),
-        //     'realSized' => array(
-        //         'plural' => 'realSized bodies',
-        //         'allowMinMax' => false
-        //     ),
-        //     'plusSized' => array(
-        //         'plural' => 'plusSized bodies',
-        //         'allowMinMax' => false
-        //     ),
-        // ),
+        'Body Attributes' => array(
+            'slimSized' => array(
+                'plural' => 'slimSized bodies',
+                'allowMinMax' => true
+            ),
+            'realSized' => array(
+                'plural' => 'realSized bodies',
+                'allowMinMax' => true
+            ),
+            'plusSized' => array(
+                'plural' => 'plusSized bodies',
+                'allowMinMax' => true
+            ),
+        ),
         'Illegal Symbols' => array(
             'illegalSymbols' => array(
                 'plural' => 'illegal symbols',
@@ -261,6 +261,56 @@ class RulesHelper
                 'allowMinMax' => false
             ),
         ),
+        'Selfie Check' => array(
+            'hand2mouth' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'point2nose' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'relaxed' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'point2chin' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'hand2cheek' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'excellent' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'thinking' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'thumbUp' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'victory' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'lookout' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'fingerUp' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+            'middleFinger' => array(
+                'plural' => 'this selfie pose',
+                'allowMinMax' => true
+            ),
+        ),
         'Text Recognition' => array(
             'textRecognition' => array(
                 'plural' => 'letters',
@@ -293,7 +343,7 @@ class RulesHelper
 
     /**
      * Converts a group key to an identifiable string 
-     * e.g. "Base Parameters" -> "baseParameters"
+     * e.g. "Nudity Check" -> "nudityCheck"
      */ 
     public static function getIdentifiableGroupKey($key)
     {

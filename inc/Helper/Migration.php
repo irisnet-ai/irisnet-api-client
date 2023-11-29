@@ -4,6 +4,8 @@
  */
 namespace Inc\Helper;
 
+use Migrations\From_1_8_13;
+
 class Migration
 {
 	/**
@@ -17,7 +19,7 @@ class Migration
 	const MODE_DOWN = 'DOWN';
 
 	/**
-	 * Performs an upgrade (Currently not in use).
+	 * Performs an upgrade.
 	 *
 	 * @param int $oldDatabaseVersion
 	 */
@@ -25,11 +27,15 @@ class Migration
     {
 		$migrationMode = self::MODE_UP;
 
-        // Do something
+        switch ($oldDatabaseVersion) {
+			case "1.8.13":
+				From_1_8_13::up();
+				break;
+		}
     }
 
 	/**
-	 * Performs a downgrade (Currently not in use).
+	 * Performs a downgrade.
 	 *
 	 * @param $oldDatabaseVersion
 	 */
@@ -37,6 +43,10 @@ class Migration
     {
 		$migrationMode = self::MODE_DOWN;
 
-        // Do something
+        switch ($oldDatabaseVersion) {
+			case "1.8.13":
+				From_1_8_13::down();
+				break;
+		}
 	}
 }

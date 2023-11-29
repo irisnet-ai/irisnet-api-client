@@ -2,6 +2,7 @@
 /**
  * @package IrisnetAPIClient
  */
+namespace Inc;
 
 class IrisnetException extends \Exception
 {

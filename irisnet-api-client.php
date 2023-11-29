@@ -1,6 +1,6 @@
 <?php
 
-define('IRISNET_API_CLIENT_VERSION', '1.8.13');
+define('IRISNET_API_CLIENT_VERSION', '2.0.0');
 
 /**
  * @package IrisnetAPIClient
@@ -11,7 +11,7 @@ Plugin URI: https://github.com/irisnet-ai/irisnet-api-client
 Description: Irisnet is a new tech startup, that specializes in the development of Artificial Intelligence (AI) systems based on neural networks for image-processing in realtime. This plugin facilitates the usage of the irisnet API. 
 Author: Irisnet
 Author URI: https://irisnet.de/
-Version: 1.8.13
+Version: 2.0.0
 License: GPLv3 or later
 */
 
@@ -68,5 +68,4 @@ if (class_exists('Inc\\Init')) {
     Inc\Init::register_services();
 }
 
-require_once(plugin_dir_path(__FILE__) . 'inc/IrisnetException.php');
-require_once(plugin_dir_path(__FILE__) . 'inc/IrisnetAPIConnector.php');
+require_once(plugin_dir_path(__FILE__) . 'inc/AI.php');

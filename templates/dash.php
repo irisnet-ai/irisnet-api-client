@@ -13,7 +13,7 @@
 
 			<?php
 				if (isset($_POST["refresh_credits"]) && $_POST["refresh_credits"] === 'refresh') {
-					IrisnetAPIConnector::refreshCredits();
+					Inc\IrisnetAPIConnector::refreshCredits();
 				}
 
 				$licenses = get_option( 'irisnet_plugin_licenses' ) ?: array();
@@ -81,7 +81,7 @@
 		</div>
 
 		<div id="tab-2" class="tab-pane">
-			<p>To make use of the irisnet API use the IrisnetAPIConnector helper class. The class can be called from any Wordpress- or plugin hook that fits your need. Go to Design -> Theme-Editor. Select your current Theme and use one of the following example snippets to get you started.</p>
+			<p>To make use of the irisnet API use the AI helper class. The class can be called from any Wordpress- or plugin hook that fits your need. Go to Design -> Theme-Editor. Select your current Theme and use one of the following example snippets to get you started.</p>
 			<p>The following examples are meant to get you started. We do not guarantee that these examples will work for you. In any case the examples listed below require you to make some changes to fit your case.</p>
 			
 			<div class="panel">
@@ -92,15 +92,15 @@ function check_compliant($atts, $content = null) {
 	$image_path = $atts['image'];
 
 	try {
-		// Check the image using the IrisnetAPIConnector class.
+		// Check the image using the AI class.
 		// See Documentation tab for more details.
-		$aiResult = IrisnetAPIConnector::processImage($image_path, 1, 'given_ruleset_name');
+		$aiResult = AI::checkImage($image_path, 'given_ruleset_name', 1);
 	} catch(IrisnetException $e) {
 		// Check for possible errors according to the Documentation tab.
 	}
 
 	// do your custom check on $aiResult (example)
-	$failed = !(isset($aiResult) && $aiResult->getRulesBroken() == 0);
+	$failed = !(isset($aiResult) && $aiResult->getSummary()->getBrokenRulesCount() == 0);
 
 	if ($failed) {
 		return sprintf($content, '/path/to/placeholder/image.png');
@@ -121,24 +121,18 @@ add_shortcode('show_image_if_compliant', 'check_compliant');
 <div class="panel">
 	<h3>Checking multiple pictures with the same rule set (eg. for a gallery upload)</h3>
 	<pre class="prettyprint">
-function check_compliant($imageArray) {
-	
-	// Set the rules outside of the loop
-	IrisnetAPIConnector::setRules('given_ruleset_name');
-	
+function check_compliant($imageArray) {	
 	// Iterate over all images an make the check
 	foreach($imageArray as $image) {
 		try {
-			// Call to processImage function w/o passing the rule set name.
-			// This way you can minimize the number of api calls.
-			// The AI always takes the last given set of rules to make the check.
-			$aiResult = IrisnetAPIConnector::processImage($image);
+			// Call to checkImage function.
+			$aiResult = AI::checkImage($image, 'given_ruleset_name');
 		} catch(IrisnetException $e) {
 			// Check for possible errors according to the Documentation tab.
 		}
 
 		// do your custom check on $aiResult (example)
-		$failed = !(isset($aiResult) && $aiResult->getRulesBroken() == 0);
+		$failed = !(isset($aiResult) && $aiResult->getSummary()->getBrokenRulesCount() == 0);
 
 		if ($failed) {
 			// Image is not compliant. Delete image form server...
@@ -164,15 +158,15 @@ function ai_image_check_after_submission( $entry, $form ) {
 	$image_path = str_replace($upload_url, $upload_path, $entry[ $id ]);
 	
 	try {
-		// Check the image using the IrisnetAPIConnector class.
+		// Check the image using the AI class.
 		// See Documentation tab for more details.
-		$aiResult = IrisnetAPIConnector::processImage($image_path, 1, 'given_ruleset_name');
+		$aiResult = AI::checkImage($image_path, 'given_ruleset_name');
 	} catch(IrisnetException $e) {
 		// Check for possible errors according to the Documentation tab.
 	}
 
 	// do your custom check on $aiResult (example)
-	$failed = !(isset($aiResult) && $aiResult->getRulesBroken() == 0);
+	$failed = !(isset($aiResult) && $aiResult->getSummary()->getBrokenRulesCount() == 0);
 
 	if ($failed) {
 		// One or more rules were broken in the uploaded image :(
