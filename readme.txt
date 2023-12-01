@@ -86,7 +86,7 @@ However, the uploaded files are always session-bound and will be permanently del
 Breaking changes:
 The API backend has been updated to v2. This means that the API calls have changed. Please check the documentation for the new calls.
 Rules will be migrated automatically, but please check your settings after the update. 
-Rules are now bound to the lincense key and will break if the license key is changed or removed.
+Rules are now bound to the license key and will break if the license key is changed or removed.
 
 == Changelog ==
 
