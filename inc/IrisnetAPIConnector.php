@@ -35,7 +35,7 @@ class IrisnetAPIConnector
      * @throws IrisnetException is thrown in case that there are no active licenses or if the API request fails (will contain the status code and the message returned from the failed API request).
      * @return array the 'id' of the created configuration and the 'license' used to create the configuration.
      */
-    public static function setConfig(string|array $rule, $license = null) : array
+    public static function setConfig($rule, $license = null) : array
     {
         if ($license == null) {
             $licenses = self::getActiveLicenses();

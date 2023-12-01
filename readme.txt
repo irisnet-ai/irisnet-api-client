@@ -4,7 +4,7 @@ Tags: ai, artificial intelligence, irisnet, porn blocker, youth protection, AI p
 Requires at least: 5.1
 Requires PHP: 7.4
 Tested up to: 6.4.1
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -87,8 +87,13 @@ Breaking changes:
 The API backend has been updated to v2. This means that the API calls have changed. Please check the documentation for the new calls.
 Rules will be migrated automatically, but please check your settings after the update. 
 Rules are now bound to the license key and will break if the license key is changed or removed.
+Ask for more configuration storage, if you currently have more than 10 rules.
 
 == Changelog ==
+
+= 2.0.1 =
+fixed php compatibility issue
+New logo
 
 = 2.0.0 =
 Updated api backend to v2
