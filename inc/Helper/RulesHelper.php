@@ -134,18 +134,18 @@ class RulesHelper
                 'plural' => 'persons with a mask',
                 'allowMinMax' => true
             ),
-            // 'slimSized' => array(
-            //     'plural' => 'slimSized faces',
-            //     'allowMinMax' => false
-            // ),
-            // 'realSized' => array(
-            //     'plural' => 'realSized faces',
-            //     'allowMinMax' => false
-            // ),
-            // 'plusSized' => array(
-            //     'plural' => 'plusSized faces',
-            //     'allowMinMax' => false
-            // ),
+            'slimSizedFace' => array(
+                'plural' => 'slimSized faces',
+                'allowMinMax' => false
+            ),
+            'realSizedFace' => array(
+                'plural' => 'realSized faces',
+                'allowMinMax' => false
+            ),
+            'plusSizedFace' => array(
+                'plural' => 'plusSized faces',
+                'allowMinMax' => false
+            ),
         ),
         'Nipple Check' => array(
             'noNipple' => array(
